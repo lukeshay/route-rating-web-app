@@ -1,3 +1,4 @@
+
 build: clean
 	docker build -t rest-api . || exit 1
 

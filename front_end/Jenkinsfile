@@ -49,6 +49,7 @@ pipeline {
   post {
     success {
       setBuildStatus('Build succeeded', 'SUCCESS');
+      sh 'rm -rf dist/ node_modules/'
     }
     failure {
       setBuildStatus('Build failed', 'FAILURE');
