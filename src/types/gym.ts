@@ -1,17 +1,17 @@
 import { Wall } from ".";
 
 export interface Gym {
-  id: string;
-  name: string;
   address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  website: string;
-  email: string;
-  phoneNumber: string;
   authorizedEditors: string[];
-  walls: Wall[] | null;
-  photoUrl: string;
+  city: string;
+  email: string;
+  id: string;
   logoUrl: string;
+  name: string;
+  phoneNumber: string;
+  photoUrl: string;
+  state: string;
+  walls: Wall[] | null;
+  website: string;
+  zipCode: string;
 }

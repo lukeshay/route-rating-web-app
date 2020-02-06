@@ -1,7 +1,4 @@
-export interface ButtonEvent {
-  target: HTMLButtonElement;
-}
+import React from "react";
 
-export interface InputEvent {
-  target: HTMLInputElement;
-}
+export type ButtonEvent = React.TouchEvent<HTMLButtonElement>;
+export type InputEvent = React.ChangeEvent<HTMLInputElement>;

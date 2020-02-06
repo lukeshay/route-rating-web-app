@@ -1,16 +1,17 @@
 import { Session } from "./session";
 
 export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
+  authority: string;
+  city: string;
   country: string;
-  state: string;
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
   password: string;
   phoneNumber: string;
-  authority: string;
   role: string;
   session: Session | null;
+  state: string;
+  username: string;
 }

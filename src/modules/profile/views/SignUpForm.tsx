@@ -2,12 +2,13 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React from "react";
 import * as UserActions from "../../../context/user/userActions";
 import { useUserContext } from "../../../context/user/userStore";
-import { User } from "../../../types";
+import { ButtonEvent, InputEvent, User } from "../../../types";
 import * as RegexUtils from "../../../utils/regexUtils";
 import * as ResponseUtils from "../../../utils/responseUtils";
 import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
+import { ErrorResponse } from "../../../types/responses";
 
 export interface IPropsSignUpForm {
   handleSignInClick(event: any): void;
@@ -21,16 +22,22 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [lastName, setLastName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
   const [emailMessage, setEmailMessage] = React.useState<string>("");
+  const [city, setCity] = React.useState<string>("");
+  const [cityMessage] = React.useState<string>("");
+  const [state, setState] = React.useState<string>("");
+  const [stateMessage] = React.useState<string>("");
+  const [username, setUsername] = React.useState<string>("");
+  const [usernameMessage, setUsernameMessage] = React.useState<string>("");
+  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
+  const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
+    ""
+  );
   const [password, setPassword] = React.useState<string>("");
   const [passwordMessage, setPasswordMessage] = React.useState<string>("");
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
   const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
     string
   >("");
-  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
-  const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
-    ""
-  );
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
@@ -107,7 +114,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   }, [password, repeatPassword]);
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
@@ -117,31 +124,53 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
       setLastName(value);
     } else if (id === "email") {
       setEmail(value);
-    } else if (id === "password") {
-      setPassword(value);
+    } else if (id === "username") {
+      setUsername(value);
     } else if (id === "phoneNumber") {
       setPhoneNumber(value);
+    } else if (id === "city") {
+      setCity(value);
+    } else if (id === "state") {
+      setState(value);
+    } else if (id === "password") {
+      setPassword(value);
     } else if (id === "repeatPassword") {
       setRepeatPassword(value);
     }
   };
 
-  async function handleSubmit(event: any): Promise<void> {
+  async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
 
-    if (validatePhoneNumber() && validateEmail()) {
+    if (validatePhoneNumber() && validateEmail() && validatePassword()) {
       const response = await UserActions.createUser(dispatch, {
-        country: "",
-        email,
+        city,
+        country: "United States",
+        email: email.toLowerCase(),
         firstName,
         lastName,
         password,
         phoneNumber,
-        state: "",
-        username: email
+        state,
+        username
       } as User);
 
-      ResponseUtils.toastIfNotOk(response, "Error creating user.");
+      if (!response) {
+        ResponseUtils.toastIfNotOk(
+          response,
+          "Error creating user. Please try again."
+        );
+      } else if (!ResponseUtils.isOk(response)) {
+        const errorBody: ErrorResponse = await response.json();
+
+        if (ResponseUtils.isEmailTaken(errorBody)) {
+          setEmailMessage("Email is taken.");
+        }
+
+        if (ResponseUtils.isUsernameTaken(errorBody)) {
+          setUsernameMessage("Username is taken.");
+        }
+      }
     }
   }
 
@@ -175,6 +204,15 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         autoComplete="email"
       />
       <Input
+        placeholder="Username"
+        id="username"
+        value={username}
+        onChange={handleChange}
+        helpText={usernameMessage}
+        type="text"
+        autoComplete="phone-number"
+      />
+      <Input
         placeholder="Phone Number"
         id="phoneNumber"
         value={phoneNumber}
@@ -182,6 +220,24 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         helpText={phoneNumberMessage}
         type="text"
         autoComplete="phone-number"
+      />
+      <Input
+        placeholder="City"
+        id="city"
+        value={city}
+        onChange={handleChange}
+        helpText={cityMessage}
+        type="text"
+        autoComplete="city"
+      />
+      <Input
+        placeholder="State"
+        id="state"
+        value={state}
+        onChange={handleChange}
+        helpText={stateMessage}
+        type="text"
+        autoComplete="state"
       />
       <Input
         placeholder="Password"
@@ -222,13 +278,16 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   );
 
   return (
-    <Form
-      buttonText="Create Account"
-      formInputs={formInputs}
-      handleSubmit={handleSubmit}
-      icon={<LockOutlinedIcon />}
-      title={title}
-    />
+    <React.Fragment>
+      <Form
+        buttonText="Create Account"
+        formInputs={formInputs}
+        handleSubmit={handleSubmit}
+        icon={<LockOutlinedIcon />}
+        title={title}
+      />
+      <div style={{ height: "50px" }} />
+    </React.Fragment>
   );
 };
 

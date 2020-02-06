@@ -1,5 +1,5 @@
 export interface RouteRatingJwt {
-  jwtToken: string;
   expiresIn: number;
+  jwtToken: string;
   refreshToken: string;
 }
