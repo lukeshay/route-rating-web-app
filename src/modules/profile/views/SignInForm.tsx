@@ -6,6 +6,7 @@ import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import CheckBox from "../../common/inputs/CheckBox";
 import Input from "../../common/inputs/Input";
+import { ButtonEvent, InputEvent } from "../../../types";
 
 export interface IPropsLogInForm {
   handleSignUpClick(event: any): void;
@@ -13,16 +14,16 @@ export interface IPropsLogInForm {
 
 const SignInForm: React.FC<IPropsLogInForm> = (props): JSX.Element => {
   const { dispatch: userDispatch } = useUserContext();
-  const [email, setEmail] = React.useState<string>("");
+  const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [passwordMessage, setPasswordMessage] = React.useState<string>("");
   const [rememberMe, setRememberMe] = React.useState<boolean>(false);
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
-    if (id === "email") {
-      setEmail(value);
+    if (id === "username") {
+      setUsername(value);
     } else if (id === "password") {
       setPassword(value);
     } else if (id === "rememberMe") {
@@ -30,10 +31,10 @@ const SignInForm: React.FC<IPropsLogInForm> = (props): JSX.Element => {
     }
   };
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: ButtonEvent): void => {
     event.preventDefault();
 
-    UserActions.signIn(userDispatch, email, password, rememberMe).then(
+    UserActions.signIn(userDispatch, username, password, rememberMe).then(
       (response) => {
         if (response instanceof Response && response.status === 401) {
           setPasswordMessage(
@@ -49,9 +50,9 @@ const SignInForm: React.FC<IPropsLogInForm> = (props): JSX.Element => {
   const formInputs: JSX.Element = (
     <React.Fragment>
       <Input
-        placeholder="Email"
-        id="email"
-        value={email}
+        placeholder="Username"
+        id="username"
+        value={username}
         onChange={handleChange}
         type="text"
         autoComplete="email"

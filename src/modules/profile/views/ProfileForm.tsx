@@ -2,7 +2,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import React from "react";
 import * as UserActions from "../../../context/user/userActions";
 import { useUserContext } from "../../../context/user/userStore";
-import { User } from "../../../types";
+import { ButtonEvent, InputEvent, User } from "../../../types";
 import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
@@ -33,6 +33,37 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
     ""
   );
+  const [password, setPassword] = React.useState<string>("");
+  const [passwordMessage, setPasswordMessage] = React.useState<string>("");
+  const [repeatPassword, setRepeatPassword] = React.useState<string>("");
+  const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
+    string
+  >("");
+
+  const validatePassword = (): boolean => {
+    if (password.length === 0) {
+      setPasswordMessage("");
+      return false;
+    } else if (password.length < 8) {
+      setPasswordMessage("Password must be at least 8 characters long.");
+      return false;
+    } else if (!RegexUtils.containsLowercase(password)) {
+      setPasswordMessage("Password must contain a lower case letter.");
+      return false;
+    } else if (!RegexUtils.containsUppercase(password)) {
+      setPasswordMessage("Password must contain an upper case letter.");
+      return false;
+    } else if (!RegexUtils.containsNumber(password)) {
+      setPasswordMessage("Password must contain a number.");
+      return false;
+    } else if (!RegexUtils.containsSpecialCharacter(password)) {
+      setPasswordMessage("Password must contain a special character.");
+      return false;
+    } else {
+      setPasswordMessage("");
+      return true;
+    }
+  };
 
   const validateEmail = (): boolean => {
     if (email.length === 0) {
@@ -65,6 +96,10 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   };
 
   React.useEffect(() => {
+    validatePassword();
+  }, [password]);
+
+  React.useEffect(() => {
     validateEmail();
   }, [email]);
 
@@ -76,40 +111,43 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
     await UserActions.signOut(userDispatch);
   }
 
-  async function handleSubmit(event: any): Promise<void> {
+  async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
 
-    const response = await UserActions.updateUser(userDispatch, {
-      city,
-      email: email.toLowerCase(),
-      firstName,
-      lastName,
-      phoneNumber,
-      state,
-      username
-    } as User);
+    if (validatePhoneNumber() && validateEmail() && validatePassword()) {
+      const response = await UserActions.updateUser(userDispatch, {
+        city,
+        email: email.toLowerCase(),
+        firstName,
+        lastName,
+        password,
+        phoneNumber,
+        state,
+        username
+      } as User);
 
-    if (!response) {
-      ResponseUtils.toastIfNotOk(
-        response,
-        "Error creating user. Please try again."
-      );
-    } else if (!ResponseUtils.isOk(response)) {
-      const errorBody: ErrorResponse = await response.json();
+      if (!response) {
+        ResponseUtils.toastIfNotOk(
+          response,
+          "Error creating user. Please try again."
+        );
+      } else if (!ResponseUtils.isOk(response)) {
+        const errorBody: ErrorResponse = await response.json();
 
-      if (ResponseUtils.isEmailTaken(errorBody)) {
-        setEmailMessage("Email is taken.");
+        if (ResponseUtils.isEmailTaken(errorBody)) {
+          setEmailMessage("Email is taken.");
+        }
+
+        if (ResponseUtils.isUsernameTaken(errorBody)) {
+          setUsernameMessage("Username is taken.");
+        }
+      } else {
+        toast.success("User updated.");
       }
-
-      if (ResponseUtils.isUsernameTaken(errorBody)) {
-        setUsernameMessage("Username is taken.");
-      }
-    } else {
-      toast.success("User updated.");
     }
   }
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
@@ -127,6 +165,10 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
       setCity(value);
     } else if (id === "state") {
       setState(value);
+    } else if (id === "password") {
+      setPassword(value);
+    } else if (id === "repeatPassword") {
+      setRepeatPassword(value);
     }
   };
 
@@ -194,6 +236,41 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
         placeholder="State"
         type="text"
         value={state}
+      />
+      <Input
+        autoComplete="state"
+        helpText={stateMessage}
+        id="state"
+        onChange={handleChange}
+        placeholder="State"
+        type="text"
+        value={state}
+      />
+      <Input
+        autoComplete="state"
+        helpText={stateMessage}
+        id="state"
+        onChange={handleChange}
+        placeholder="State"
+        type="text"
+        value={state}
+      />
+      <Input
+        placeholder="Password"
+        id="password"
+        value={password}
+        onChange={handleChange}
+        helpText={passwordMessage}
+        type="password"
+        autoComplete="password"
+      />
+      <Input
+        placeholder="Repeat Password"
+        id="repeatPassword"
+        value={repeatPassword}
+        onChange={handleChange}
+        helpText={repeatPasswordMessage}
+        type="password"
       />
     </React.Fragment>
   );
