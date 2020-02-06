@@ -8,4 +8,4 @@ RUN yarn global add serve
 
 EXPOSE 80
 
-ENTRYPOINT serve -p 80 -s ./dist
+ENTRYPOINT ./scripts/run.sh

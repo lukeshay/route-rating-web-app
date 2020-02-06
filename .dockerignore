@@ -11,5 +11,7 @@ lerna-debug.log*
 .DS_STORE
 LICENSE
 README.md
-**/*/__tests__
-**/*/__mocks__
+Jenkinsfile
+Dockerfile
+.gitignore
+Makefile
