@@ -6,6 +6,10 @@ import { User } from "../../../types";
 import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
+import * as ResponseUtils from "../../../utils/responseUtils";
+import { ErrorResponse } from "../../../types/responses";
+import { toast } from "react-toastify";
+import * as RegexUtils from "../../../utils/regexUtils";
 
 export interface IPropsProfileForm {
   user: User;
@@ -16,9 +20,57 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   const [firstName, setFirstName] = React.useState<string>(user.firstName);
   const [lastName, setLastName] = React.useState<string>(user.lastName);
   const [email, setEmail] = React.useState<string>(user.email);
+  const [emailMessage, setEmailMessage] = React.useState<string>("");
+  const [city, setCity] = React.useState<string>(user.city);
+  const [cityMessage, setCityMessage] = React.useState<string>("");
+  const [state, setState] = React.useState<string>(user.state);
+  const [stateMessage, setStateMessage] = React.useState<string>("");
+  const [username, setUsername] = React.useState<string>(user.username);
+  const [usernameMessage, setUsernameMessage] = React.useState<string>("");
   const [phoneNumber, setPhoneNumber] = React.useState<string>(
     user.phoneNumber
   );
+  const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
+    ""
+  );
+
+  const validateEmail = (): boolean => {
+    if (email.length === 0) {
+      setEmailMessage("");
+      return false;
+    } else if (!RegexUtils.validEmail(email)) {
+      setEmailMessage("Invalid email.");
+      return false;
+    } else {
+      setEmailMessage("");
+      return true;
+    }
+  };
+
+  const validatePhoneNumber = (): boolean => {
+    if (phoneNumber.length === 0) {
+      setPhoneNumberMessage("");
+      return false;
+    } else if (
+      !RegexUtils.containsOnlyNumbers(phoneNumber) ||
+      phoneNumber.length > 10 ||
+      phoneNumber.length < 10
+    ) {
+      setPhoneNumberMessage("Invalid phone number. Format: ##########");
+      return false;
+    } else {
+      setPhoneNumberMessage("");
+      return true;
+    }
+  };
+
+  React.useEffect(() => {
+    validateEmail();
+  }, [email]);
+
+  React.useEffect(() => {
+    validatePhoneNumber();
+  }, [phoneNumber]);
 
   async function handleSignOutClick(): Promise<void> {
     await UserActions.signOut(userDispatch);
@@ -27,13 +79,34 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   async function handleSubmit(event: any): Promise<void> {
     event.preventDefault();
 
-    await UserActions.updateUser(userDispatch, {
-      ...user,
-      email,
+    const response = await UserActions.updateUser(userDispatch, {
+      city,
+      email: email.toLowerCase(),
       firstName,
       lastName,
-      phoneNumber
+      phoneNumber,
+      state,
+      username
     } as User);
+
+    if (!response) {
+      ResponseUtils.toastIfNotOk(
+        response,
+        "Error creating user. Please try again."
+      );
+    } else if (!ResponseUtils.isOk(response)) {
+      const errorBody: ErrorResponse = await response.json();
+
+      if (ResponseUtils.isEmailTaken(errorBody)) {
+        setEmailMessage("Email is taken.");
+      }
+
+      if (ResponseUtils.isUsernameTaken(errorBody)) {
+        setUsernameMessage("Username is taken.");
+      }
+    } else {
+      toast.success("User updated.");
+    }
   }
 
   const handleChange = async (event: any): Promise<void> => {
@@ -46,48 +119,81 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
       setLastName(value);
     } else if (id === "email") {
       setEmail(value);
-      // } else if (id === "password") {
-      //   setPassword(value);
+    } else if (id === "username") {
+      setUsername(value);
     } else if (id === "phoneNumber") {
       setPhoneNumber(value);
+    } else if (id === "city") {
+      setCity(value);
+    } else if (id === "state") {
+      setState(value);
     }
   };
 
   const formInputs: JSX.Element = (
     <React.Fragment>
       <Input
-        value={firstName}
+        autoCapitalize="true"
+        autoComplete="first-name"
         id="firstName"
+        onChange={handleChange}
         placeholder="First Name"
         type="text"
-        onChange={handleChange}
-        autoComplete="first-name"
-        autoCapitalize="true"
+        value={firstName}
       />
       <Input
-        value={lastName}
+        autoCapitalize="true"
+        autoComplete="last-name"
         id="lastName"
+        onChange={handleChange}
         placeholder="Last Name"
         type="text"
-        onChange={handleChange}
-        autoComplete="last-name"
-        autoCapitalize="true"
+        value={lastName}
       />
       <Input
-        value={email}
+        autoComplete="email"
+        helpText={emailMessage}
         id="email"
+        onChange={handleChange}
         placeholder="Email"
         type="text"
-        onChange={handleChange}
-        autoComplete="email"
+        value={email}
       />
       <Input
-        value={phoneNumber}
+        autoComplete="phone-number"
+        helpText={usernameMessage}
+        id="username"
+        onChange={handleChange}
+        placeholder="Username"
+        type="text"
+        value={username}
+      />
+      <Input
+        autoComplete="phone-number"
+        helpText={phoneNumberMessage}
         id="phoneNumber"
+        onChange={handleChange}
         placeholder="Phone Number"
         type="text"
+        value={phoneNumber}
+      />
+      <Input
+        autoComplete="city"
+        helpText={cityMessage}
+        id="city"
         onChange={handleChange}
-        autoComplete="phone-number"
+        placeholder="City"
+        type="text"
+        value={city}
+      />
+      <Input
+        autoComplete="state"
+        helpText={stateMessage}
+        id="state"
+        onChange={handleChange}
+        placeholder="State"
+        type="text"
+        value={state}
       />
     </React.Fragment>
   );
@@ -113,10 +219,10 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   return (
     <Form
       buttonText="Update Account"
-      handleSubmit={handleSubmit}
       formInputs={formInputs}
-      title={title}
+      handleSubmit={handleSubmit}
       icon={<AccountCircleIcon />}
+      title={title}
     />
   );
 };

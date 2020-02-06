@@ -30,16 +30,16 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [stateMessage, setStateMessage] = React.useState<string>("");
   const [username, setUsername] = React.useState<string>("");
   const [usernameMessage, setUsernameMessage] = React.useState<string>("");
+  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
+  const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
+    ""
+  );
   const [password, setPassword] = React.useState<string>("");
   const [passwordMessage, setPasswordMessage] = React.useState<string>("");
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
   const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
     string
   >("");
-  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
-  const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
-    ""
-  );
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
