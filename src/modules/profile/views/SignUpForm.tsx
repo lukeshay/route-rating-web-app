@@ -9,8 +9,6 @@ import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
 import { ErrorResponse } from "../../../types/responses";
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 
 export interface IPropsSignUpForm {
   handleSignInClick(event: any): void;
@@ -25,9 +23,9 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [email, setEmail] = React.useState<string>("");
   const [emailMessage, setEmailMessage] = React.useState<string>("");
   const [city, setCity] = React.useState<string>("");
-  const [cityMessage, setCityMessage] = React.useState<string>("");
+  const [cityMessage] = React.useState<string>("");
   const [state, setState] = React.useState<string>("");
-  const [stateMessage, setStateMessage] = React.useState<string>("");
+  const [stateMessage] = React.useState<string>("");
   const [username, setUsername] = React.useState<string>("");
   const [usernameMessage, setUsernameMessage] = React.useState<string>("");
   const [phoneNumber, setPhoneNumber] = React.useState<string>("");

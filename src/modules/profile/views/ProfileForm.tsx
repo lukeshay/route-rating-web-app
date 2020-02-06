@@ -22,9 +22,9 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   const [email, setEmail] = React.useState<string>(user.email);
   const [emailMessage, setEmailMessage] = React.useState<string>("");
   const [city, setCity] = React.useState<string>(user.city);
-  const [cityMessage, setCityMessage] = React.useState<string>("");
+  const [cityMessage] = React.useState<string>("");
   const [state, setState] = React.useState<string>(user.state);
-  const [stateMessage, setStateMessage] = React.useState<string>("");
+  const [stateMessage] = React.useState<string>("");
   const [username, setUsername] = React.useState<string>(user.username);
   const [usernameMessage, setUsernameMessage] = React.useState<string>("");
   const [phoneNumber, setPhoneNumber] = React.useState<string>(
@@ -106,6 +106,14 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   React.useEffect(() => {
     validatePhoneNumber();
   }, [phoneNumber]);
+
+  React.useEffect(() => {
+    if (repeatPassword !== password) {
+      setRepeatPasswordMessage("Passwords do not match.");
+    } else {
+      setRepeatPasswordMessage("");
+    }
+  }, [password, repeatPassword]);
 
   async function handleSignOutClick(): Promise<void> {
     await UserActions.signOut(userDispatch);

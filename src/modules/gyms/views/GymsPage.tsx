@@ -4,8 +4,6 @@ import {
   CardMedia,
   createStyles,
   makeStyles,
-  TableCell,
-  TableRow,
   Typography
 } from "@material-ui/core";
 import React from "react";
@@ -15,7 +13,6 @@ import * as GymsActions from "../../../context/gyms/gymsActions";
 import { useGymsContext } from "../../../context/gyms/gymsStore";
 import { Routes } from "../../../routes";
 import { Gym } from "../../../types";
-import Table from "../../common/table/Table";
 import Input from "../../common/inputs/Input";
 import { useViewContext } from "../../../context/view/viewStore";
 
