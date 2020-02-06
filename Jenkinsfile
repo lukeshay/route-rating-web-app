@@ -16,19 +16,19 @@ pipeline {
       steps {
         echo 'Building...'
         setBuildStatus('Starting build', 'PENDING')
-        sh 'yarn build'
+        sh 'make'
       }
     }
     stage('Lint') {
-      steps {
+      steps {r
         echo 'Linting...'
-        sh 'yarn validate'
+        sh 'make lint'
       }
     }
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh 'yarn test'
+        sh 'make test'
       }
     }
     stage('Coverage') {
