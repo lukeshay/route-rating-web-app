@@ -1,8 +1,8 @@
 import { Route } from "./route";
 
 export interface Wall {
-  id: string;
   gymId: string;
+  id: string;
   name: string;
   routes: Route[];
   types: string[];
