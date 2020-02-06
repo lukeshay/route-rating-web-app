@@ -4,6 +4,7 @@ default: build
 
 clean:
 	rm -rf coverage
+	docker rmi web-app:${TAG} -f
 
 full-clean: clean
 	rm -rf node_modules

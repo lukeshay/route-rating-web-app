@@ -49,10 +49,11 @@ pipeline {
   post {
     success {
       setBuildStatus('Build succeeded', 'SUCCESS');
-      sh 'rm -rf dist/ node_modules/'
+      sh 'make full-clean'
     }
     failure {
       setBuildStatus('Build failed', 'FAILURE');
+      sh 'make full-clean'
     }
   }
 }
