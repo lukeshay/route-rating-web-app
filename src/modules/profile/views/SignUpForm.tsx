@@ -2,12 +2,15 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React from "react";
 import * as UserActions from "../../../context/user/userActions";
 import { useUserContext } from "../../../context/user/userStore";
-import { User } from "../../../types";
+import { ButtonEvent, InputEvent, User } from "../../../types";
 import * as RegexUtils from "../../../utils/regexUtils";
 import * as ResponseUtils from "../../../utils/responseUtils";
 import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
+import { ErrorResponse } from "../../../types/responses";
+import { Simulate } from "react-dom/test-utils";
+import error = Simulate.error;
 
 export interface IPropsSignUpForm {
   handleSignInClick(event: any): void;
@@ -113,7 +116,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   }, [password, repeatPassword]);
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
@@ -138,22 +141,38 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   };
 
-  async function handleSubmit(event: any): Promise<void> {
+  async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
 
-    if (validatePhoneNumber() && validateEmail()) {
+    if (validatePhoneNumber() && validateEmail() && validatePassword()) {
       const response = await UserActions.createUser(dispatch, {
-        country: "",
-        email,
+        city,
+        country: "United States",
+        email: email.toLowerCase(),
         firstName,
         lastName,
         password,
         phoneNumber,
-        state: "",
-        username: email
+        state,
+        username
       } as User);
 
-      ResponseUtils.toastIfNotOk(response, "Error creating user.");
+      if (!response) {
+        ResponseUtils.toastIfNotOk(
+          response,
+          "Error creating user. Please try again."
+        );
+      } else if (!ResponseUtils.isOk(response)) {
+        const errorBody: ErrorResponse = await response.json();
+
+        if (ResponseUtils.isEmailTaken(errorBody)) {
+          setEmailMessage("Email is taken.");
+        }
+
+        if (ResponseUtils.isUsernameTaken(errorBody)) {
+          setUsernameMessage("Username is taken.");
+        }
+      }
     }
   }
 
@@ -261,13 +280,16 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   );
 
   return (
-    <Form
-      buttonText="Create Account"
-      formInputs={formInputs}
-      handleSubmit={handleSubmit}
-      icon={<LockOutlinedIcon />}
-      title={title}
-    />
+    <React.Fragment>
+      <Form
+        buttonText="Create Account"
+        formInputs={formInputs}
+        handleSubmit={handleSubmit}
+        icon={<LockOutlinedIcon />}
+        title={title}
+      />
+      <div style={{ height: "50px" }} />
+    </React.Fragment>
   );
 };
 

@@ -1,6 +1,8 @@
 export const validEmail = (email: string): boolean =>
   email !== null &&
-  email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) !== null;
+  email.match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  ) !== null;
 
 export const containsLowercase = (str: string): boolean =>
   str !== null && str.match(/[a-z]/g) !== null;
