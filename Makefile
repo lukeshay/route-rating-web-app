@@ -13,16 +13,16 @@ tag:
 	docker tag web-app:${TAG} web-app:latest
 
 build:
-	docker build -t web-app:${TAG} .
+	docker build -t web-app:${TAG} . || exit 1
 
 test:
-	docker run --entrypoint ./scripts/test.sh web-app:${TAG}
+	docker run --entrypoint ./scripts/test.sh web-app:${TAG} || exit 1
 
 coverage:
-	docker run --entrypoint ./scripts/coverage.sh web-app:${TAG}
+	docker run --entrypoint ./scripts/coverage.sh web-app:${TAG} || exit 1
 
 run:
-	docker run -p 3000:80 -d web-app:latest
+	docker-compose up -d || exit 1
 
 lint:
-	docker run --entrypoint ./scripts/lint.sh web-app:${TAG}
+	docker run --entrypoint ./scripts/lint.sh web-app:${TAG} || exit 1

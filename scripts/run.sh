@@ -1,3 +1,4 @@
 #!/bin/bash
 
-serve -p 80 -s ./dist
+yarn deploy
+
