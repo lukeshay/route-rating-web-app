@@ -21,6 +21,12 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [lastName, setLastName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
   const [emailMessage, setEmailMessage] = React.useState<string>("");
+  const [city, setCity] = React.useState<string>("");
+  const [cityMessage, setCityMessage] = React.useState<string>("");
+  const [state, setState] = React.useState<string>("");
+  const [stateMessage, setStateMessage] = React.useState<string>("");
+  const [username, setUsername] = React.useState<string>("");
+  const [usernameMessage, setUsernameMessage] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [passwordMessage, setPasswordMessage] = React.useState<string>("");
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
@@ -117,10 +123,16 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
       setLastName(value);
     } else if (id === "email") {
       setEmail(value);
-    } else if (id === "password") {
-      setPassword(value);
+    } else if (id === "username") {
+      setUsername(value);
     } else if (id === "phoneNumber") {
       setPhoneNumber(value);
+    } else if (id === "city") {
+      setCity(value);
+    } else if (id === "state") {
+      setState(value);
+    } else if (id === "password") {
+      setPassword(value);
     } else if (id === "repeatPassword") {
       setRepeatPassword(value);
     }
@@ -175,6 +187,15 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         autoComplete="email"
       />
       <Input
+        placeholder="Username"
+        id="username"
+        value={username}
+        onChange={handleChange}
+        helpText={usernameMessage}
+        type="text"
+        autoComplete="phone-number"
+      />
+      <Input
         placeholder="Phone Number"
         id="phoneNumber"
         value={phoneNumber}
@@ -182,6 +203,24 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         helpText={phoneNumberMessage}
         type="text"
         autoComplete="phone-number"
+      />
+      <Input
+        placeholder="City"
+        id="city"
+        value={city}
+        onChange={handleChange}
+        helpText={cityMessage}
+        type="text"
+        autoComplete="city"
+      />
+      <Input
+        placeholder="State"
+        id="state"
+        value={state}
+        onChange={handleChange}
+        helpText={stateMessage}
+        type="text"
+        autoComplete="state"
       />
       <Input
         placeholder="Password"
