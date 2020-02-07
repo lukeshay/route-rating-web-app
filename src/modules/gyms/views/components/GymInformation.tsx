@@ -12,8 +12,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { AuthRoutes, Routes } from "../../../routes";
-import { Gym } from "../../../types";
+import { AuthRoutes, Routes } from "../../../../routes";
+import { Gym } from "../../../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

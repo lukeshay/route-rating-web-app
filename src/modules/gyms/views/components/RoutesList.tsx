@@ -9,9 +9,9 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
-import { Route } from "../../../types";
-import * as GradeUtils from "../../../utils/gradeUtils";
-import Table from "../../common/table/Table";
+import { Route } from "../../../../types";
+import * as GradeUtils from "../../../../utils/gradeUtils";
+import Table from "../../../common/table/Table";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -15,6 +15,7 @@ import { Routes } from "../../../routes";
 import { Gym } from "../../../types";
 import Input from "../../common/inputs/Input";
 import { useViewContext } from "../../../context/view/viewStore";
+import GymCard from "./components/GymCard";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -84,102 +85,34 @@ const useMobileStyles = makeStyles(() =>
   })
 );
 
-interface IGymCardProps {
-  gym: Gym;
-}
-
-const GymCard: React.FC<IGymCardProps> = ({ gym }): JSX.Element => {
-  const classes = useStyles();
-  const history = useHistory();
-
-  return (
-    <div className={classes.cardWrapper}>
-      <Card
-        className={classes.card}
-        onClick={(): void => history.push(Routes.GYMS + "/" + gym.id)}
-      >
-        <CardMedia className={classes.photoWrapper}>
-          <img
-            src={"https://" + gym.photoUrl}
-            alt="This gym does not have a photo."
-            className={classes.photo}
-          />
-        </CardMedia>
-        <CardContent>
-          <Typography variant="h4">{gym.name}</Typography>
-          <div className={classes.information}>
-            <Typography variant="body1">{gym.website}</Typography>
-            <Typography variant="body1">
-              {gym.address}
-              <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
-            </Typography>
-            <Typography variant="body1">{gym.email}</Typography>
-            <Typography variant="body1">{gym.phoneNumber}</Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
-const GymCardMobile: React.FC<IGymCardProps> = ({ gym }): JSX.Element => {
-  const classes = useMobileStyles();
-  const history = useHistory();
-
-  return (
-    <div onClick={(): void => history.push(Routes.GYMS + "/" + gym.id)}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.photoWrapper}
-          style={{
-            height: `${window.innerWidth * (2 / 3) - 10}px`
-          }}
-        >
-          <img
-            className={classes.photo}
-            src={"https://" + gym.photoUrl}
-            alt="This gym does not have a photo."
-          />
-        </CardMedia>
-        <CardContent>
-          <Typography variant="h4">{gym.name}</Typography>
-          <div>
-            <Typography variant="body1">{gym.website}</Typography>
-            <Typography variant="body1">
-              {gym.address}
-              <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
-            </Typography>
-            <Typography variant="body1">{gym.email}</Typography>
-            <Typography variant="body1">{gym.phoneNumber}</Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
 interface IGymsListProps {
   gyms: Gym[];
   mobile: boolean;
+  onClick(id: any): void;
 }
 
-const GymsList: React.FC<IGymsListProps> = ({ gyms, mobile }): JSX.Element => (
+const GymsList: React.FC<IGymsListProps> = ({
+  gyms,
+  mobile,
+  onClick
+}): JSX.Element => (
   <React.Fragment>
-    {gyms.map((gym) => {
-      return mobile ? (
-        <GymCardMobile key={gym.id} gym={gym} />
-      ) : (
-        <GymCard key={gym.id} gym={gym} />
-      );
-    })}
+    {gyms.map((gym) => (
+      <GymCard
+        key={gym.id}
+        mobile={mobile}
+        gym={gym}
+        onClick={(): void => onClick(gym.id)}
+      />
+    ))}
   </React.Fragment>
 );
 
 const GymsPage: React.FC = (): JSX.Element => {
   const { state: gymsState, dispatch: gymsDispatch } = useGymsContext();
   const { state: viewState } = useViewContext();
+
+  const history = useHistory();
 
   const [search, setSearch] = React.useState<string>("");
 
@@ -230,7 +163,11 @@ const GymsPage: React.FC = (): JSX.Element => {
           onKeyPress={handleKeyPress}
         />
       </div>
-      <GymsList gyms={gymsState.gyms} mobile={viewState.mobile} />
+      <GymsList
+        gyms={gymsState.gyms}
+        mobile={viewState.mobile}
+        onClick={(id: any) => history.push(Routes.GYMS + "/" + id)}
+      />
     </div>
   );
 };

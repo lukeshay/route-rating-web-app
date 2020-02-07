@@ -4,8 +4,8 @@ import TableRow from "@material-ui/core/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
-import { Wall } from "../../../types";
-import Table from "../../common/table/Table";
+import { Wall } from "../../../../types";
+import Table from "../../../common/table/Table";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

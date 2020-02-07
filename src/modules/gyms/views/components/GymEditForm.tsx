@@ -3,13 +3,13 @@ import Typography from "@material-ui/core/Typography";
 import PublishIcon from "@material-ui/icons/Publish";
 import React from "react";
 import * as ReactRouter from "react-router";
-import { Routes } from "../../../routes";
-import { Gym } from "../../../types";
-import * as RegexUtils from "../../../utils/regexUtils";
-import Button from "../../common/buttons/Button";
-import Form from "../../common/forms/Form";
-import ImageInput from "../../common/inputs/ImageInput";
-import Input from "../../common/inputs/Input";
+import { Routes } from "../../../../routes";
+import { Gym } from "../../../../types";
+import * as RegexUtils from "../../../../utils/regexUtils";
+import Button from "../../../common/buttons/Button";
+import Form from "../../../common/forms/Form";
+import ImageInput from "../../../common/inputs/ImageInput";
+import Input from "../../../common/inputs/Input";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

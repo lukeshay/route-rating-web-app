@@ -8,10 +8,10 @@ import {
   Theme
 } from "@material-ui/core";
 import React from "react";
-import { Route } from "../../../types";
-import Form from "../../common/forms/Form";
-import CheckBox from "../../common/inputs/CheckBox";
-import Input from "../../common/inputs/Input";
+import { Wall } from "../../../../types";
+import Form from "../../../common/forms/Form";
+import CheckBox from "../../../common/inputs/CheckBox";
+import Input from "../../../common/inputs/Input";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,18 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IRouteFormProps {
-  route: Route;
+export interface IWallFormProps {
+  wall: Wall;
   formHeadText: string;
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
   handleCancel(event: any): Promise<void> | void;
-  handleSubmit(route: Route): Promise<void> | void;
+  handleSubmit(wall: Wall): Promise<void> | void;
 }
 
-const RouteForm: React.FC<IRouteFormProps> = ({
-  route,
+const WallForm: React.FC<IWallFormProps> = ({
+  wall,
   formHeadText,
   nameMessage,
   submitButtonText,
@@ -43,28 +43,38 @@ const RouteForm: React.FC<IRouteFormProps> = ({
 }): JSX.Element => {
   const classes = useStyles();
 
-  const [name, setName] = React.useState<string>(route.name || "");
-  const [setter, setSetter] = React.useState<string>(route.setter || "");
-
+  const [name, setName] = React.useState<string>(wall.name);
   const [lead, setLead] = React.useState<boolean>(
-    route.types &&
-      route.types.filter((element) => element === "LEAD").length > 0
+    wall.types && wall.types.filter((element) => element === "LEAD").length > 0
   );
   const [topRope, setTopRope] = React.useState<boolean>(
-    route.types &&
-      route.types.filter((element) => element === "TOP_ROPE").length > 0
+    wall.types &&
+      wall.types.filter((element) => element === "TOP_ROPE").length > 0
   );
   const [autoBelay, setAutoBelay] = React.useState<boolean>(
-    route.types &&
-      route.types.filter((element) => element === "AUTO_BELAY").length > 0
+    wall.types &&
+      wall.types.filter((element) => element === "AUTO_BELAY").length > 0
   );
   const [boulder, setBoulder] = React.useState<boolean>(
-    route.types &&
-      route.types.filter((element) => element === "BOULDER").length > 0
+    wall.types &&
+      wall.types.filter((element) => element === "BOULDER").length > 0
   );
-  const [holdColor, setHoldColor] = React.useState<string>(
-    route.holdColor || ""
-  );
+
+  const handleChange = async (event: any): Promise<void> => {
+    const { id, value } = event.target;
+
+    if (id === "name") {
+      setName(value);
+    } else if (id === "topRope") {
+      setTopRope(!topRope);
+    } else if (id === "lead") {
+      setLead(!lead);
+    } else if (id === "autoBelay") {
+      setAutoBelay(!autoBelay);
+    } else if (id === "boulder") {
+      setBoulder(!boulder);
+    }
+  };
 
   const onSubmit = (event: any): void => {
     event.preventDefault();
@@ -87,27 +97,7 @@ const RouteForm: React.FC<IRouteFormProps> = ({
       types.push("BOULDER");
     }
 
-    handleSubmit({ name, setter, holdColor, types } as Route);
-  };
-
-  const handleChange = async (event: any): Promise<void> => {
-    const { id, value } = event.target;
-
-    if (id === "name") {
-      setName(value);
-    } else if (id === "topRope") {
-      setTopRope(!topRope);
-    } else if (id === "lead") {
-      setLead(!lead);
-    } else if (id === "autoBelay") {
-      setAutoBelay(!autoBelay);
-    } else if (id === "boulder") {
-      setBoulder(!boulder);
-    } else if (id === "setter") {
-      setSetter(value);
-    } else if (id === "holdColor") {
-      setHoldColor(value);
-    }
+    handleSubmit({ name, types } as Wall);
   };
 
   const FormHead: JSX.Element = (
@@ -131,26 +121,9 @@ const RouteForm: React.FC<IRouteFormProps> = ({
         value={name}
         onChange={handleChange}
         type="text"
-        autoComplete="title"
-        autoCapitalize="true"
-        helpText={nameMessage}
-      />
-      <Input
-        placeholder="Setter"
-        id="setter"
-        value={setter}
-        onChange={handleChange}
-        type="text"
         autoComplete="name"
         autoCapitalize="true"
-      />
-      <Input
-        placeholder="Hold Color"
-        id="holdColor"
-        value={holdColor}
-        onChange={handleChange}
-        type="text"
-        autoCapitalize="true"
+        helpText={nameMessage}
       />
       <FormLabel component="legend">Pick one</FormLabel>
       <FormGroup>
@@ -203,4 +176,4 @@ const RouteForm: React.FC<IRouteFormProps> = ({
   );
 };
 
-export default RouteForm;
+export default WallForm;
