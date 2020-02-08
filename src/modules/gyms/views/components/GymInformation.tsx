@@ -1,9 +1,4 @@
-import {
-  Button,
-  createStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core";
+import { Button, createStyles, makeStyles, Theme } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";

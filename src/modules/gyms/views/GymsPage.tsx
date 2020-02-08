@@ -1,7 +1,4 @@
-import {
-  createStyles,
-  makeStyles,
-} from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -58,25 +55,6 @@ const useStyles = makeStyles(() =>
     },
     searchMobile: {
       width: "96%"
-    }
-  })
-);
-
-const useMobileStyles = makeStyles(() =>
-  createStyles({
-    card: {
-      borderRadius: "5px"
-    },
-    photo: {
-      borderRadius: "10px",
-      height: "96%"
-    },
-    photoWrapper: {
-      alignItems: "center",
-      borderRadius: "10px",
-      display: "flex",
-      justifyContent: "center",
-      width: "100%"
     }
   })
 );
