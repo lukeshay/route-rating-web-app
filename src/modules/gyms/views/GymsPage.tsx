@@ -1,10 +1,6 @@
 import {
-  Card,
-  CardContent,
-  CardMedia,
   createStyles,
   makeStyles,
-  Typography
 } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -86,12 +82,14 @@ const useMobileStyles = makeStyles(() =>
 );
 
 interface IGymsListProps {
+  cardClass: string;
   gyms: Gym[];
   mobile: boolean;
   onClick(id: any): void;
 }
 
 const GymsList: React.FC<IGymsListProps> = ({
+  cardClass,
   gyms,
   mobile,
   onClick
@@ -102,6 +100,7 @@ const GymsList: React.FC<IGymsListProps> = ({
         key={gym.id}
         mobile={mobile}
         gym={gym}
+        desktopCardClass={cardClass}
         onClick={(): void => onClick(gym.id)}
       />
     ))}
@@ -164,9 +163,10 @@ const GymsPage: React.FC = (): JSX.Element => {
         />
       </div>
       <GymsList
+        cardClass={classes.card}
         gyms={gymsState.gyms}
         mobile={viewState.mobile}
-        onClick={(id: any) => history.push(Routes.GYMS + "/" + id)}
+        onClick={(id: any): void => history.push(Routes.GYMS + "/" + id)}
       />
     </div>
   );

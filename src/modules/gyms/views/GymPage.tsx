@@ -38,8 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
     icons: {
       paddingRight: theme.spacing(1)
     },
-    wallList: {
-      marginTop: theme.spacing(2)
+    list: {
+      marginTop: theme.spacing(2),
+      paddingBottom: "20px"
     }
   })
 );
@@ -356,7 +357,7 @@ const GymPage: React.FC = (): JSX.Element => {
     <React.Fragment>
       <GymInformation gym={gym} canEdit={canEdit} mobile={viewState.mobile} />
       <div
-        className={classes.wallList}
+        className={classes.list}
         style={StyleUtils.shouldDisplay(
           (gym.walls && gym.walls.length !== 0) || canEdit
         )}

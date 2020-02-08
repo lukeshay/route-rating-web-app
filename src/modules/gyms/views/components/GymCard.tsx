@@ -8,14 +8,11 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Gym } from "../../../../types";
-import { ButtonEvent } from "../../../../types";
 
 const useStyles = makeStyles(() =>
   createStyles({
     card: {
       borderRadius: "10px",
-      height: "233px",
-      width: "700px",
       display: "flex"
     },
     cardWrapper: {
@@ -40,9 +37,6 @@ const useStyles = makeStyles(() =>
       display: "flex",
       justifyContent: "center",
       width: "50%"
-    },
-    root: {
-      width: "100%"
     }
   })
 );
@@ -51,6 +45,11 @@ const useMobileStyles = makeStyles(() =>
   createStyles({
     card: {
       borderRadius: "5px"
+    },
+    cardWrapper: {
+      paddingBottom: "10px",
+      paddingTop: "10px",
+      width: "100%"
     },
     photo: {
       borderRadius: "10px",
@@ -67,11 +66,13 @@ const useMobileStyles = makeStyles(() =>
 );
 
 interface IGymCardVariantsProps {
+  cardClass?: string;
   gym: Gym;
   onClick?(even: any): void;
 }
 
 const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
+  cardClass,
   gym,
   onClick
 }): JSX.Element => {
@@ -79,7 +80,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
 
   return (
     <div className={classes.cardWrapper} onClick={onClick}>
-      <Card className={classes.card}>
+      <Card className={cardClass || classes.card}>
         <CardMedia className={classes.photoWrapper}>
           <img
             src={"https://" + gym.photoUrl}
@@ -112,7 +113,7 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
   const classes = useMobileStyles();
 
   return (
-    <div onClick={onClick}>
+    <div className={classes.cardWrapper} onClick={onClick}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.photoWrapper}
@@ -144,15 +145,26 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
   );
 };
 
-export interface IGymCardProps extends IGymCardVariantsProps {
+export interface IGymCardProps {
+  desktopCardClass?: string;
+  gym: Gym;
   mobile: boolean;
+  mobileCardClass?: string;
+  onClick?(even: any): void;
 }
 
-const GymCard: React.FC<IGymCardProps> = ({ gym, mobile, onClick }) =>
-  mobile ? (
-    <GymCardMobile gym={gym} onClick={onClick} />
+const GymCard: React.FC<IGymCardProps> = ({
+  desktopCardClass,
+  gym,
+  mobile,
+  mobileCardClass,
+  onClick
+}) => {
+  return mobile ? (
+    <GymCardMobile gym={gym} onClick={onClick} cardClass={mobileCardClass} />
   ) : (
-    <GymCardDesktop gym={gym} onClick={onClick} />
+    <GymCardDesktop gym={gym} onClick={onClick} cardClass={desktopCardClass} />
   );
+};
 
 export default GymCard;
