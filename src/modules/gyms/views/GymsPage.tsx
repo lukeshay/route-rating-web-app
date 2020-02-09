@@ -130,8 +130,11 @@ const GymsPage: React.FC = (): JSX.Element => {
     event: React.ChangeEvent<{}>,
     newValue: number
   ): void => {
-    setPage(page + newValue - 1);
-    loadGyms(search, page + newValue - 1);
+    const newPage = page + newValue - 1;
+    if (newPage >= 0 && newPage < gymsState.page.totalPages) {
+      setPage(newPage);
+      loadGyms(search, page + newValue - 1);
+    }
   };
 
   const handleKeyPress = (event: any): void => {

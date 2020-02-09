@@ -14,7 +14,7 @@ export const containsNumber = (str: string): boolean =>
   str !== null && str.match(/[0-9]/g) !== null;
 
 export const containsSpecialCharacter = (str: string): boolean =>
-  str !== null && str.match(/[!@#$%^&*)(+=._-]/g) !== null;
+  str !== null && str.match(/[!@#$%^&*()\[\],.?":{}|<>]/g) !== null;
 
 export const containsOnlyNumbers = (str: string): boolean =>
   str !== null &&
