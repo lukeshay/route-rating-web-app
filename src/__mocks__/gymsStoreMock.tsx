@@ -1,5 +1,5 @@
+import { GymsContext, IGymsContextState } from "../context/gyms/gymsStore";
 import React from "react";
-import { IGymsContextState, GymsContext } from "../context/gyms/gymsStore";
 
 export interface IGymsStoreMockProps {
   state: IGymsContextState;

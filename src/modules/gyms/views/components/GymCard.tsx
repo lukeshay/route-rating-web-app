@@ -2,9 +2,9 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Typography,
   createStyles,
-  makeStyles,
-  Typography
+  makeStyles
 } from "@material-ui/core";
 import React from "react";
 import { Gym } from "../../../../types";

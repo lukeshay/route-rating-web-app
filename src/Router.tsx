@@ -1,16 +1,16 @@
-import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router";
 import { AuthRoutes, Routes } from "./routes";
+import { Route, Switch } from "react-router";
+import React from "react";
 
-const HomePage = lazy(() => import("./modules/homepage/HomePage"));
-const NotFoundPage = lazy(() => import("./modules/NotFoundPage"));
-const ProfilePage = lazy(() => import("./modules/profile"));
-const GymsPage = lazy(() => import("./modules/gyms"));
-const AboutPage = lazy(() => import("./modules/about"));
+const HomePage = React.lazy(() => import("./modules/homepage/HomePage"));
+const NotFoundPage = React.lazy(() => import("./modules/NotFoundPage"));
+const ProfilePage = React.lazy(() => import("./modules/profile"));
+const GymsPage = React.lazy(() => import("./modules/gyms"));
+const AboutPage = React.lazy(() => import("./modules/about"));
 
 const Router: React.FC = (): JSX.Element => {
   return (
-    <Suspense fallback={<div />}>
+    <React.Suspense fallback={<div />}>
       <Switch>
         <Route exact={true} path="/" component={HomePage} />
         <Route exact={true} path="/index" component={HomePage} />
@@ -21,7 +21,7 @@ const Router: React.FC = (): JSX.Element => {
         <Route path={AuthRoutes.ROUTES} component={GymsPage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </Suspense>
+    </React.Suspense>
   );
 };
 

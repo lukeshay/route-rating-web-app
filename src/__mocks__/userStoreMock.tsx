@@ -1,5 +1,5 @@
-import React from "react";
 import { IUserContextState, UserContext } from "../context/user/userStore";
+import React from "react";
 
 export interface IUserStoreMockProps {
   state: IUserContextState;

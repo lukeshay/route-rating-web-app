@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Theme, createStyles, makeStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import PublishIcon from "@material-ui/icons/Publish";
 import React from "react";

@@ -1,11 +1,11 @@
 import {
   Button,
-  createStyles,
   FormGroup,
   FormHelperText,
   FormLabel,
-  makeStyles,
-  Theme
+  Theme,
+  createStyles,
+  makeStyles
 } from "@material-ui/core";
 import React from "react";
 import { Wall } from "../../../../types";

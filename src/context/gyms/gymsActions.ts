@@ -2,10 +2,10 @@ import * as GymsApi from "../../api/gymsApi";
 import * as RouteRatingsApi from "../../api/routeRatingsApi";
 import * as RoutesApi from "../../api/routesApi";
 import * as WallsApi from "../../api/wallsApi";
-import { Gym, GymPage, Route, RouteRating, Wall, WallPage } from "../../types";
-import Types from "./gymsActionTypes";
-import { IGymsContextAction } from "./gymsStore";
 import { Dispatch } from "react";
+import { Gym, GymPage, Route, RouteRating, Wall, WallPage } from "../../types";
+import { IGymsContextAction } from "./gymsStore";
+import Types from "./gymsActionTypes";
 
 export const loadGymsQuery = (
   dispatch: Dispatch<IGymsContextAction>,
@@ -33,8 +33,6 @@ export const loadGymV2 = (
   return GymsApi.getGymV2(gymId).then((response: Response) => {
     if (response instanceof Response && response.ok) {
       response.json().then((body: Gym) => {
-        console.log(body);
-
         dispatch({
           actionType: Types.UPDATE_GYM,
           gym: body

@@ -1,4 +1,4 @@
-import { Button, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Button, Theme, createStyles, makeStyles } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
