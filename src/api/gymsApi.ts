@@ -6,7 +6,10 @@ const baseUrl = process.env.BASE_URL;
 const gymsUrl = baseUrl + "gyms";
 const gymsV2Url = baseUrl + "v2/gyms";
 
-export const getGyms = async (query: string, page: number): Promise<void | Response> => {
+export const getGyms = async (
+  query: string,
+  page: number
+): Promise<void | Response> => {
   return fetch(gymsUrl + "?query=" + query + "&page=" + page)
     .then(
       (response: Response): Response => {
