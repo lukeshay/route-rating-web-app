@@ -183,7 +183,7 @@ const GymPage: React.FC = (): JSX.Element => {
       if (gymId) {
         GymsActions.deleteRoute(
           gymsDispatch,
-          { id: routeId, gymId } as Route,
+          { id: routeId, gymId, wallId } as Route,
           gym
         ).then((response: Response) => {
           ResponseUtils.toastIfNotOk(response, "Error deleting route.");
