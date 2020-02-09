@@ -6,7 +6,7 @@ import { useGymsContext } from "../../../context/gyms/gymsStore";
 import { useUserContext } from "../../../context/user/userStore";
 import { Routes } from "../../../routes";
 import { Gym } from "../../../types";
-import GymEditForm from "./GymEditForm";
+import GymEditForm from "./components/GymEditForm";
 
 const GymEditPage: React.FC = (): JSX.Element => {
   const history = ReactRouter.useHistory();
@@ -22,7 +22,7 @@ const GymEditPage: React.FC = (): JSX.Element => {
       .splice(-1)
       .pop();
 
-    const tempGym = gymsState.gyms
+    const tempGym = gymsState.page.content
       .filter((element) => element.id === gymId)
       .pop();
 

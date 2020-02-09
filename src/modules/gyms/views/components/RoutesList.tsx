@@ -1,17 +1,17 @@
 import {
   Button,
-  createStyles,
-  makeStyles,
   TableCell,
   TableRow,
-  Theme
+  Theme,
+  createStyles,
+  makeStyles
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
-import { Route } from "../../../types";
-import * as GradeUtils from "../../../utils/gradeUtils";
-import Table from "../../common/table/Table";
+import { Route } from "../../../../types";
+import * as GradeUtils from "../../../../utils/gradeUtils";
+import Table from "../../../common/table/Table";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,6 +64,18 @@ const RouteRow: React.FC<IRouteRowProps> = ({
     }
   });
 
+  const handleEditClick = (event: any): void => {
+    event.stopPropagation();
+
+    onEditClick(route);
+  };
+
+  const handleDeleteClick = (event: any): void => {
+    event.stopPropagation();
+
+    onDeleteClick(route.id);
+  };
+
   return (
     <TableRow
       hover
@@ -83,7 +95,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
       {canEdit && (
         <TableCell>
           <Button
-            onClick={(): void | Promise<void> => onEditClick(route)}
+            onClick={handleEditClick}
             variant="outlined"
             fullWidth={false}
             size="medium"
@@ -103,7 +115,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
             size="medium"
             type="button"
             color="primary"
-            onClick={(): void | Promise<void> => onDeleteClick(id)}
+            onClick={handleDeleteClick}
           >
             <DeleteIcon className={classes.icons} />
             Delete

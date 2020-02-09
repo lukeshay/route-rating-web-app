@@ -1,13 +1,16 @@
+import * as Cookies from "../utils/cookiesUtils";
 import { Gym } from "../types";
 import { handleError } from "./apiUtils";
-import * as Cookies from "../utils/cookiesUtils";
 
 const baseUrl = process.env.BASE_URL;
 const gymsUrl = baseUrl + "gyms";
 const gymsV2Url = baseUrl + "v2/gyms";
 
-export const getGyms = async (query: string): Promise<void | Response> => {
-  return fetch(gymsUrl + "?query=" + query)
+export const getGyms = async (
+  query: string,
+  page: number
+): Promise<void | Response> => {
+  return fetch(gymsUrl + "?query=" + query + "&page=" + page)
     .then(
       (response: Response): Response => {
         return response;

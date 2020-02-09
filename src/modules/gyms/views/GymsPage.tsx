@@ -1,20 +1,17 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  createStyles,
-  makeStyles,
-  Typography
-} from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as GymsActions from "../../../context/gyms/gymsActions";
 import { useGymsContext } from "../../../context/gyms/gymsStore";
 import { Routes } from "../../../routes";
-import { Gym } from "../../../types";
+import { Gym, InputEvent } from "../../../types";
 import Input from "../../common/inputs/Input";
 import { useViewContext } from "../../../context/view/viewStore";
+import GymCard from "./components/GymCard";
+import Tabs from "@material-ui/core/Tabs";
+import Paper from "@material-ui/core/Paper";
+import Tab from "@material-ui/core/Tab";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -65,115 +62,29 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const useMobileStyles = makeStyles(() =>
-  createStyles({
-    card: {
-      borderRadius: "5px"
-    },
-    photo: {
-      borderRadius: "10px",
-      height: "96%"
-    },
-    photoWrapper: {
-      alignItems: "center",
-      borderRadius: "10px",
-      display: "flex",
-      justifyContent: "center",
-      width: "100%"
-    }
-  })
-);
-
-interface IGymCardProps {
-  gym: Gym;
-}
-
-const GymCard: React.FC<IGymCardProps> = ({ gym }): JSX.Element => {
-  const classes = useStyles();
-  const history = useHistory();
-
-  return (
-    <div className={classes.cardWrapper}>
-      <Card
-        className={classes.card}
-        onClick={(): void => history.push(Routes.GYMS + "/" + gym.id)}
-      >
-        <CardMedia className={classes.photoWrapper}>
-          <img
-            src={"https://" + gym.photoUrl}
-            alt="This gym does not have a photo."
-            className={classes.photo}
-          />
-        </CardMedia>
-        <CardContent>
-          <Typography variant="h4">{gym.name}</Typography>
-          <div className={classes.information}>
-            <Typography variant="body1">{gym.website}</Typography>
-            <Typography variant="body1">
-              {gym.address}
-              <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
-            </Typography>
-            <Typography variant="body1">{gym.email}</Typography>
-            <Typography variant="body1">{gym.phoneNumber}</Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
-const GymCardMobile: React.FC<IGymCardProps> = ({ gym }): JSX.Element => {
-  const classes = useMobileStyles();
-  const history = useHistory();
-
-  return (
-    <div onClick={(): void => history.push(Routes.GYMS + "/" + gym.id)}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.photoWrapper}
-          style={{
-            height: `${window.innerWidth * (2 / 3) - 10}px`
-          }}
-        >
-          <img
-            className={classes.photo}
-            src={"https://" + gym.photoUrl}
-            alt="This gym does not have a photo."
-          />
-        </CardMedia>
-        <CardContent>
-          <Typography variant="h4">{gym.name}</Typography>
-          <div>
-            <Typography variant="body1">{gym.website}</Typography>
-            <Typography variant="body1">
-              {gym.address}
-              <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
-            </Typography>
-            <Typography variant="body1">{gym.email}</Typography>
-            <Typography variant="body1">{gym.phoneNumber}</Typography>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
 interface IGymsListProps {
+  cardClass: string;
   gyms: Gym[];
   mobile: boolean;
+  onClick(id: any): void;
 }
 
-const GymsList: React.FC<IGymsListProps> = ({ gyms, mobile }): JSX.Element => (
+const GymsList: React.FC<IGymsListProps> = ({
+  cardClass,
+  gyms,
+  mobile,
+  onClick
+}): JSX.Element => (
   <React.Fragment>
-    {gyms.map((gym) => {
-      return mobile ? (
-        <GymCardMobile key={gym.id} gym={gym} />
-      ) : (
-        <GymCard key={gym.id} gym={gym} />
-      );
-    })}
+    {gyms.map((gym) => (
+      <GymCard
+        key={gym.id}
+        mobile={mobile}
+        gym={gym}
+        desktopCardClass={cardClass}
+        onClick={(): void => onClick(gym.id)}
+      />
+    ))}
   </React.Fragment>
 );
 
@@ -181,35 +92,54 @@ const GymsPage: React.FC = (): JSX.Element => {
   const { state: gymsState, dispatch: gymsDispatch } = useGymsContext();
   const { state: viewState } = useViewContext();
 
+  const history = useHistory();
+
   const [search, setSearch] = React.useState<string>("");
+  const [page, setPage] = React.useState<number>(0);
 
   const classes = useStyles();
 
-  const loadGyms = (): void => {
-    if (gymsState.gyms.length === 0) {
-      GymsActions.loadGymsQuery(gymsDispatch, "").then((response) => {
-        if (!response || !(response instanceof Response) || !response.ok) {
-          toast.error("Error getting gyms.");
-        }
-      });
-    }
+  const loadGyms = (query, page): void => {
+    GymsActions.loadGymsQuery(gymsDispatch, "", page).then((response) => {
+      if (!response || !(response instanceof Response) || !response.ok) {
+        toast.error("Error getting gyms.");
+      }
+    });
   };
 
   React.useEffect(() => {
-    loadGyms();
+    if (
+      !gymsState.page ||
+      !gymsState.page.content ||
+      gymsState.page.content.length === 0
+    ) {
+      loadGyms("", page);
+    }
   }, []);
 
   const searchClass = (): string => {
     return viewState.mobile ? classes.searchMobile : classes.search;
   };
 
+  const handleSearchChange = (event: InputEvent): void => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  const handlePageChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: number
+  ): void => {
+    const newPage = page + newValue - 1;
+    if (newPage >= 0 && newPage < gymsState.page.totalPages) {
+      setPage(newPage);
+      loadGyms(search, page + newValue - 1);
+    }
+  };
+
   const handleKeyPress = (event: any): void => {
     if (event.key === "Enter") {
-      GymsActions.loadGymsQuery(gymsDispatch, search).then((response) => {
-        if (!response || !(response instanceof Response) || !response.ok) {
-          toast.error("Error getting gyms.");
-        }
-      });
+      loadGyms(search, page);
     }
   };
 
@@ -222,15 +152,32 @@ const GymsPage: React.FC = (): JSX.Element => {
           id="search"
           placeholder="Search"
           fullWidth={false}
-          onChange={(event: any): void => {
-            setSearch(event.target.value);
-          }}
+          onChange={handleSearchChange}
           value={search}
           name="search"
           onKeyPress={handleKeyPress}
         />
       </div>
-      <GymsList gyms={gymsState.gyms} mobile={viewState.mobile} />
+      <GymsList
+        cardClass={classes.card}
+        gyms={gymsState.page.content || []}
+        mobile={viewState.mobile}
+        onClick={(id: any): void => history.push(Routes.GYMS + "/" + id)}
+      />
+      <Paper>
+        <Tabs
+          value={1}
+          id="page"
+          onChange={handlePageChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="<" />
+          <Tab label={page + 1} />
+          <Tab label=">" />
+        </Tabs>
+      </Paper>
     </div>
   );
 };

@@ -1,14 +1,14 @@
-import React, { createContext, Dispatch, Reducer, useReducer } from "react";
-import { Gym } from "../../types";
+import React, { Dispatch, Reducer, createContext, useReducer } from "react";
+import { Gym, GymPage } from "../../types";
 import Types from "./gymsActionTypes";
 
 export interface IGymsContextState {
-  gyms: Gym[];
+  page: GymPage;
 }
 
 export interface IGymsContextAction {
   actionType: string;
-  gyms: Gym[];
+  page: GymPage;
   gym?: Gym;
 }
 
@@ -21,20 +21,22 @@ export const GymsContext = createContext<IContextProps>({} as IContextProps);
 
 const reducer: Reducer<IGymsContextState, IGymsContextAction> = (
   state: IGymsContextState,
-  { actionType, gyms, gym }: IGymsContextAction
+  { actionType, page, gym }: IGymsContextAction
 ): IGymsContextState => {
   switch (actionType) {
     case Types.LOAD_GYMS:
-      return { gyms };
+      return { page };
 
     case Types.UPDATE_GYM:
       if (!gym) {
         throw new Error("Action must have a gym.");
       } else {
+        const content = state.page.content.map((gymFromList: Gym) =>
+          gym.id === gymFromList.id ? gym : gymFromList
+        );
+        const newPage = { content, ...state.page };
         return {
-          gyms: state.gyms.map((gymFromList: Gym) =>
-            gym.id === gymFromList.id ? gym : gymFromList
-          )
+          page: newPage
         };
       }
 
@@ -44,7 +46,7 @@ const reducer: Reducer<IGymsContextState, IGymsContextAction> = (
 };
 
 const initialState: IGymsContextState = {
-  gyms: Array<Gym>()
+  page: {} as GymPage
 };
 
 export const GymsStore: React.FC = ({ children }): JSX.Element => {

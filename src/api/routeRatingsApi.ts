@@ -1,6 +1,6 @@
+import * as Cookies from "../utils/cookiesUtils";
 import { RouteRating } from "../types";
 import { handleError } from "./apiUtils";
-import * as Cookies from "../utils/cookiesUtils";
 
 const baseUrl = process.env.BASE_URL;
 const routeRatingsUrl = baseUrl + "ratings/routes";

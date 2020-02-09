@@ -1,13 +1,13 @@
 import React from "react";
 import { toast } from "react-toastify";
-import * as GymsActions from "../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../context/gyms/gymsStore";
-import { Route } from "../../../types";
-import TransitionModal from "../../common/modal/Modal";
+import * as GymsActions from "../../../../context/gyms/gymsActions";
+import { useGymsContext } from "../../../../context/gyms/gymsStore";
+import { Gym, Route } from "../../../../types";
+import TransitionModal from "../../../common/modal/Modal";
 import RouteForm from "./RouteForm";
 
 export interface IRouteEditPageProps {
-  gymId: string;
+  gym: Gym;
   open: boolean;
   route: Route;
   wallId: string;
@@ -15,7 +15,7 @@ export interface IRouteEditPageProps {
 }
 
 const RouteEditPage: React.FC<IRouteEditPageProps> = ({
-  gymId,
+  gym,
   open,
   route,
   wallId,
@@ -28,7 +28,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
   const { dispatch: gymsDispatch } = useGymsContext();
 
   const handleSubmit = async (returnRoute: Route): Promise<void> => {
-    const newRoute = { id: route.id, wallId, gymId, ...returnRoute };
+    const newRoute = { id: route.id, wallId, gymId: gym.id, ...returnRoute };
 
     setUpdatedRoute(newRoute);
 
@@ -45,7 +45,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
     }
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
-      GymsActions.updateRoute(gymsDispatch, newRoute, gymId).then(
+      GymsActions.updateRoute(gymsDispatch, newRoute, gym).then(
         (response: Response) => {
           if (response instanceof Response && response.ok) {
             handleClose();

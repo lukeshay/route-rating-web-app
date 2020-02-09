@@ -1,17 +1,17 @@
 import {
   Button,
-  createStyles,
   FormGroup,
   FormHelperText,
   FormLabel,
-  makeStyles,
-  Theme
+  Theme,
+  createStyles,
+  makeStyles
 } from "@material-ui/core";
 import React from "react";
-import { Wall } from "../../../types";
-import Form from "../../common/forms/Form";
-import CheckBox from "../../common/inputs/CheckBox";
-import Input from "../../common/inputs/Input";
+import { Route } from "../../../../types";
+import Form from "../../../common/forms/Form";
+import CheckBox from "../../../common/inputs/CheckBox";
+import Input from "../../../common/inputs/Input";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,18 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IWallFormProps {
-  wall: Wall;
+export interface IRouteFormProps {
+  route: Route;
   formHeadText: string;
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
   handleCancel(event: any): Promise<void> | void;
-  handleSubmit(wall: Wall): Promise<void> | void;
+  handleSubmit(route: Route): Promise<void> | void;
 }
 
-const WallForm: React.FC<IWallFormProps> = ({
-  wall,
+const RouteForm: React.FC<IRouteFormProps> = ({
+  route,
   formHeadText,
   nameMessage,
   submitButtonText,
@@ -43,38 +43,28 @@ const WallForm: React.FC<IWallFormProps> = ({
 }): JSX.Element => {
   const classes = useStyles();
 
-  const [name, setName] = React.useState<string>(wall.name);
+  const [name, setName] = React.useState<string>(route.name || "");
+  const [setter, setSetter] = React.useState<string>(route.setter || "");
+
   const [lead, setLead] = React.useState<boolean>(
-    wall.types && wall.types.filter((element) => element === "LEAD").length > 0
+    route.types &&
+      route.types.filter((element) => element === "LEAD").length > 0
   );
   const [topRope, setTopRope] = React.useState<boolean>(
-    wall.types &&
-      wall.types.filter((element) => element === "TOP_ROPE").length > 0
+    route.types &&
+      route.types.filter((element) => element === "TOP_ROPE").length > 0
   );
   const [autoBelay, setAutoBelay] = React.useState<boolean>(
-    wall.types &&
-      wall.types.filter((element) => element === "AUTO_BELAY").length > 0
+    route.types &&
+      route.types.filter((element) => element === "AUTO_BELAY").length > 0
   );
   const [boulder, setBoulder] = React.useState<boolean>(
-    wall.types &&
-      wall.types.filter((element) => element === "BOULDER").length > 0
+    route.types &&
+      route.types.filter((element) => element === "BOULDER").length > 0
   );
-
-  const handleChange = async (event: any): Promise<void> => {
-    const { id, value } = event.target;
-
-    if (id === "name") {
-      setName(value);
-    } else if (id === "topRope") {
-      setTopRope(!topRope);
-    } else if (id === "lead") {
-      setLead(!lead);
-    } else if (id === "autoBelay") {
-      setAutoBelay(!autoBelay);
-    } else if (id === "boulder") {
-      setBoulder(!boulder);
-    }
-  };
+  const [holdColor, setHoldColor] = React.useState<string>(
+    route.holdColor || ""
+  );
 
   const onSubmit = (event: any): void => {
     event.preventDefault();
@@ -97,7 +87,27 @@ const WallForm: React.FC<IWallFormProps> = ({
       types.push("BOULDER");
     }
 
-    handleSubmit({ name, types } as Wall);
+    handleSubmit({ name, setter, holdColor, types } as Route);
+  };
+
+  const handleChange = async (event: any): Promise<void> => {
+    const { id, value } = event.target;
+
+    if (id === "name") {
+      setName(value);
+    } else if (id === "topRope") {
+      setTopRope(!topRope);
+    } else if (id === "lead") {
+      setLead(!lead);
+    } else if (id === "autoBelay") {
+      setAutoBelay(!autoBelay);
+    } else if (id === "boulder") {
+      setBoulder(!boulder);
+    } else if (id === "setter") {
+      setSetter(value);
+    } else if (id === "holdColor") {
+      setHoldColor(value);
+    }
   };
 
   const FormHead: JSX.Element = (
@@ -121,9 +131,26 @@ const WallForm: React.FC<IWallFormProps> = ({
         value={name}
         onChange={handleChange}
         type="text"
-        autoComplete="name"
+        autoComplete="title"
         autoCapitalize="true"
         helpText={nameMessage}
+      />
+      <Input
+        placeholder="Setter"
+        id="setter"
+        value={setter}
+        onChange={handleChange}
+        type="text"
+        autoComplete="name"
+        autoCapitalize="true"
+      />
+      <Input
+        placeholder="Hold Color"
+        id="holdColor"
+        value={holdColor}
+        onChange={handleChange}
+        type="text"
+        autoCapitalize="true"
       />
       <FormLabel component="legend">Pick one</FormLabel>
       <FormGroup>
@@ -176,4 +203,4 @@ const WallForm: React.FC<IWallFormProps> = ({
   );
 };
 
-export default WallForm;
+export default RouteForm;

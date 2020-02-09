@@ -1,20 +1,20 @@
 import React from "react";
 import { toast } from "react-toastify";
-import * as GymsActions from "../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../context/gyms/gymsStore";
-import { Route } from "../../../types";
-import TransitionModal from "../../common/modal/Modal";
+import * as GymsActions from "../../../../context/gyms/gymsActions";
+import { useGymsContext } from "../../../../context/gyms/gymsStore";
+import { Gym, Route } from "../../../../types";
+import TransitionModal from "../../../common/modal/Modal";
 import RouteForm from "./RouteForm";
 
 export interface IRouteAddPageProps {
-  gymId: string;
+  gym: Gym;
   open: boolean;
   wallId: string;
   handleClose(): Promise<void> | void;
 }
 
 const RouteAddPage: React.FC<IRouteAddPageProps> = ({
-  gymId,
+  gym,
   open,
   wallId,
   handleClose
@@ -26,7 +26,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
   const { dispatch: gymsDispatch } = useGymsContext();
 
   const handleSubmit = async (returnRoute: Route): Promise<void> => {
-    const newRoute = { wallId, gymId, ...returnRoute };
+    const newRoute = { wallId, gymId: gym.id, ...returnRoute };
 
     setRoute(newRoute);
 
@@ -43,7 +43,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
     }
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
-      GymsActions.createRoute(gymsDispatch, newRoute, gymId).then(
+      GymsActions.createRoute(gymsDispatch, newRoute, gym).then(
         (response: Response) => {
           if (response instanceof Response && response.ok) {
             setRoute({} as Route);
@@ -56,7 +56,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
     }
   };
 
-  if (gymId !== "" && wallId !== "") {
+  if (gym.id !== "" && wallId !== "") {
     return (
       <TransitionModal
         open={open}

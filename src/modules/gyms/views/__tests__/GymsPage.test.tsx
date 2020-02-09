@@ -5,9 +5,10 @@ import { IGymsContextState } from "../../../../context/gyms/gymsStore";
 import * as TypeMocks from "../../../../__mocks__/typeMocks";
 import { shallow } from "../../../../../configs/setupEnzyme";
 import { shallowToJson } from "enzyme-to-json";
+import { GymPage } from "../../../../types";
 
 const mockGymsState: IGymsContextState = {
-  gyms: [TypeMocks.testGymOne, TypeMocks.testGymTwo]
+  page: { content: [TypeMocks.testGymOne, TypeMocks.testGymTwo] } as GymPage
 };
 
 describe("<GymsPage />", () => {
@@ -17,10 +18,6 @@ describe("<GymsPage />", () => {
         <GymsPage />
       </GymsStoreMock>
     );
-
     expect(shallowToJson(gymsPage)).toMatchSnapshot();
-
-
-
   });
 });

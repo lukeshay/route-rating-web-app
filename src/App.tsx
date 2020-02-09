@@ -1,23 +1,23 @@
+import "react-toastify/dist/ReactToastify.css";
+import * as UserActions from "./context/user/userActions";
 import {
   CssBaseline,
   FormControlLabel,
   ThemeProvider
 } from "@material-ui/core";
-import ToggleSwitch from "@material-ui/core/Switch";
-import React from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import * as UserActions from "./context/user/userActions";
-import { useUserContext } from "./context/user/userStore";
 import {
   DARK_THEME,
   LIGHT_THEME,
   Types,
   useViewContext
 } from "./context/view/viewStore";
-import NavigationBar from "./modules/navigation/NavigationBar";
-import Router from "./Router";
 import { darkTheme, getTheme, lightTheme } from "./theme";
+import { ToastContainer } from "react-toastify";
+import { useUserContext } from "./context/user/userStore";
+import NavigationBar from "./modules/navigation/NavigationBar";
+import React from "react";
+import Router from "./Router";
+import ToggleSwitch from "@material-ui/core/Switch";
 
 const App: React.FC = (): JSX.Element => {
   const { state: userState, dispatch: userDispatch } = useUserContext();

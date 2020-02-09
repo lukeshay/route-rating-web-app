@@ -1,9 +1,9 @@
 import React from "react";
 import { toast } from "react-toastify";
-import * as GymsActions from "../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../context/gyms/gymsStore";
-import { Wall } from "../../../types";
-import TransitionModal from "../../common/modal/Modal";
+import * as GymsActions from "../../../../context/gyms/gymsActions";
+import { useGymsContext } from "../../../../context/gyms/gymsStore";
+import { Wall } from "../../../../types";
+import TransitionModal from "../../../common/modal/Modal";
 import WallForm from "./WallForm";
 
 export interface IWallEditPageProps {

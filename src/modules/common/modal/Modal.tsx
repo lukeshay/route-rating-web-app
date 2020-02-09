@@ -1,10 +1,10 @@
 import {
   Backdrop,
-  createStyles,
   Fade,
-  makeStyles,
   Modal,
-  Theme
+  Theme,
+  createStyles,
+  makeStyles
 } from "@material-ui/core";
 import React from "react";
 

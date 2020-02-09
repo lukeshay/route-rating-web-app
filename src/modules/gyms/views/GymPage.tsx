@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Theme, createStyles, makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -13,15 +13,15 @@ import { Routes } from "../../../routes";
 import { Gym, Route, Wall } from "../../../types";
 import * as StyleUtils from "../../../utils/styleUtils";
 import * as GymUtils from "../../../utils/gymUtils";
-import GymInformation from "./GymInformation";
-import RatingAddModal from "./RatingAddModal";
+import GymInformation from "./components/GymInformation";
+import RatingAddModal from "./components/RatingAddModal";
 import RatingPage from "./RatingPage";
-import RouteAddModal from "./RouteAddModal";
-import RouteEditModal from "./RouteEditModal";
-import RoutesList from "./RoutesList";
-import WallAddModal from "./WallAddModal";
-import WallEditModal from "./WallEditModal";
-import WallList from "./WallList";
+import RouteAddModal from "./components/RouteAddModal";
+import RouteEditModal from "./components/RouteEditModal";
+import RoutesList from "./components/RoutesList";
+import WallAddModal from "./components/WallAddModal";
+import WallEditModal from "./components/WallEditModal";
+import WallList from "./components/WallList";
 import * as ResponseUtils from "../../../utils/responseUtils";
 import { useViewContext } from "../../../context/view/viewStore";
 
@@ -38,8 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
     icons: {
       paddingRight: theme.spacing(1)
     },
-    wallList: {
-      marginTop: theme.spacing(2)
+    list: {
+      marginTop: theme.spacing(2),
+      paddingBottom: "20px"
     }
   })
 );
@@ -69,64 +70,57 @@ const GymPage: React.FC = (): JSX.Element => {
   );
 
   React.useEffect(() => {
-    if (!gymId) {
-      return;
-    }
-    const tempGym = GymUtils.getGymById(gymsState.gyms, gymId);
-
-    if (!tempGym) {
+    if (!gymId || !gymsState.page || !gymsState.page.content) {
       history.push(Routes.GYMS);
-    } else if (!tempGym.walls) {
-      if (tempGym.id) {
-        GymsActions.loadGymV2(gymsDispatch, tempGym.id).then(
-          (response: Response) => {
-            ResponseUtils.toastIfNotOk(response, "Error getting gym.");
-          }
-        );
-      }
-    }
-  }, []);
+    } else {
+      const tempGym = GymUtils.getGymById(gymsState.page.content, gymId);
 
-  React.useEffect(() => {
-    const tempGym = gymsState.gyms
-      .filter((element) => element.id === gymId)
-      .pop();
-
-    if (tempGym) {
-      setGym(tempGym);
-
-      const { user } = userState;
-      const { authorizedEditors } = tempGym;
-
-      const tempWall = tempGym.walls
-        ? tempGym.walls.find((element: Wall) => element.id === wallId)
-        : null;
-
-      if (tempWall) {
-        setRoutes(tempWall.routes);
-        setWallId(tempWall.id);
-
-        if (route) {
-          const tempRoute = tempWall.routes
-            ? tempWall.routes.find((element: Route) => route.id === element.id)
-            : null;
-
-          if (tempRoute) {
-            setRoute(tempRoute);
-          }
+      if (!tempGym) {
+        history.push(Routes.GYMS);
+      } else if (!tempGym.walls) {
+        if (tempGym.id) {
+          GymsActions.loadWalls(gymsDispatch, tempGym).then(
+            (response: Response) => {
+              ResponseUtils.toastIfNotOk(response, "Error getting walls.");
+            }
+          );
         }
       }
 
-      if (
-        user &&
-        authorizedEditors &&
-        authorizedEditors.find((editorId: string) => editorId === user.id)
-      ) {
-        console.log(true);
-        setCanEdit(true);
-      } else {
-        console.log(false);
-        setCanEdit(false);
+      if (tempGym) {
+        setGym(tempGym);
+
+        const { user } = userState;
+        const { authorizedEditors } = tempGym;
+
+        const tempWall = GymUtils.getWallById(tempGym, wallId);
+
+        if (tempWall) {
+          setRoutes(tempWall.routes);
+          setWallId(tempWall.id);
+
+          if (route) {
+            const tempRoute = tempWall.routes
+              ? tempWall.routes.find(
+                  (element: Route) => route.id === element.id
+                )
+              : null;
+
+            if (tempRoute) {
+              setRoute(tempRoute);
+            }
+          }
+        }
+
+        if (
+          user &&
+          authorizedEditors &&
+          authorizedEditors.find((editorId: string) => editorId === user.id)
+        ) {
+          setCanEdit(true);
+        } else {
+          setCanEdit(false);
+        }
       }
     }
   }, [gymId, gymsState, userState]);
@@ -162,7 +156,7 @@ const GymPage: React.FC = (): JSX.Element => {
       )
     ) {
       if (gymId) {
-        GymsActions.deleteWall(gymsDispatch, rowWallId, gymId).then(
+        GymsActions.deleteWall(gymsDispatch, rowWallId, gym).then(
           (response: Response) => {
             if (!response || !(response instanceof Response) || !response.ok) {
               toast.error("Error deleting wall.");
@@ -189,8 +183,8 @@ const GymPage: React.FC = (): JSX.Element => {
       if (gymId) {
         GymsActions.deleteRoute(
           gymsDispatch,
-          { id: routeId, gymId } as Route,
-          gymId
+          { id: routeId, gymId, wallId } as Route,
+          gym
         ).then((response: Response) => {
           ResponseUtils.toastIfNotOk(response, "Error deleting route.");
         });
@@ -312,14 +306,14 @@ const GymPage: React.FC = (): JSX.Element => {
           <RouteAddModal
             open={view === "ROUTE" && openAdd}
             handleClose={handleCloseAdd}
-            gymId={gymId}
+            gym={gym}
             wallId={wallId}
           />
           {route && (
             <RouteEditModal
               open={view === "ROUTE" && openEdit}
               handleClose={handleCloseEdit}
-              gymId={gymId}
+              gym={gym}
               wallId={wallId}
               route={route}
             />
@@ -327,7 +321,7 @@ const GymPage: React.FC = (): JSX.Element => {
           <WallAddModal
             open={view === "WALL" && openAdd}
             handleClose={handleCloseAdd}
-            gymId={gymId}
+            gym={gym}
           />
           {wall && (
             <WallEditModal
@@ -342,7 +336,8 @@ const GymPage: React.FC = (): JSX.Element => {
               open={view === "RATING" && openAdd}
               handleClose={handleCloseAdd}
               routeId={route.id}
-              gymId={gymId}
+              gym={gym}
+              wallId={wallId}
             />
           )}
         </React.Fragment>
@@ -356,7 +351,7 @@ const GymPage: React.FC = (): JSX.Element => {
     <React.Fragment>
       <GymInformation gym={gym} canEdit={canEdit} mobile={viewState.mobile} />
       <div
-        className={classes.wallList}
+        className={classes.list}
         style={StyleUtils.shouldDisplay(
           (gym.walls && gym.walls.length !== 0) || canEdit
         )}

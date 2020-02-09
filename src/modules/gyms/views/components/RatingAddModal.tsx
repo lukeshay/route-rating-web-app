@@ -2,25 +2,27 @@ import { Button } from "@material-ui/core";
 import GradeIcon from "@material-ui/icons/Grade";
 import React from "react";
 import { toast } from "react-toastify";
-import * as GymsActions from "../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../context/gyms/gymsStore";
-import { RouteRating } from "../../../types";
-import Form from "../../common/forms/Form";
-import Input from "../../common/inputs/Input";
-import Selector from "../../common/inputs/Select";
-import TransitionModal from "../../common/modal/Modal";
+import * as GymsActions from "../../../../context/gyms/gymsActions";
+import { useGymsContext } from "../../../../context/gyms/gymsStore";
+import { Gym, RouteRating } from "../../../../types";
+import Form from "../../../common/forms/Form";
+import Input from "../../../common/inputs/Input";
+import Selector from "../../../common/inputs/Select";
+import TransitionModal from "../../../common/modal/Modal";
 
 export interface IRatingAddModalProps {
-  gymId: string;
-  routeId: string;
+  gym: Gym;
   open: boolean;
+  routeId: string;
+  wallId: string;
   handleClose(): Promise<void> | void;
 }
 
 const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
-  gymId,
-  routeId,
+  gym,
   open,
+  routeId,
+  wallId,
   handleClose
 }): JSX.Element => {
   const [rating, setRating] = React.useState<number>(0);
@@ -57,7 +59,8 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
           review,
           routeId
         } as RouteRating,
-        gymId
+        gym,
+        wallId
       ).then((response: Response) => {
         if (!(response instanceof Response) || !response.ok) {
           toast.error("Error creating review.");

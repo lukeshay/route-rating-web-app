@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, Reducer, useReducer } from "react";
+import React, { Dispatch, Reducer, createContext, useReducer } from "react";
 import * as Cookies from "../../utils/cookiesUtils";
 
 export const DARK_THEME = "DARK_THEME";
