@@ -2,18 +2,18 @@ import React from "react";
 import { toast } from "react-toastify";
 import * as GymsActions from "../../../../context/gyms/gymsActions";
 import { useGymsContext } from "../../../../context/gyms/gymsStore";
-import { Wall } from "../../../../types";
+import { Gym, Wall } from "../../../../types";
 import TransitionModal from "../../../common/modal/Modal";
 import WallForm from "./WallForm";
 
 export interface IWallAddPageProps {
-  gymId: string;
+  gym: Gym;
   open: boolean;
   handleClose(): Promise<void> | void;
 }
 
 const WallAddPage: React.FC<IWallAddPageProps> = ({
-  gymId,
+  gym,
   open,
   handleClose
 }): JSX.Element => {
@@ -24,7 +24,7 @@ const WallAddPage: React.FC<IWallAddPageProps> = ({
   const { dispatch: gymsDispatch } = useGymsContext();
 
   const handleSubmit = (returnWall: Wall): void => {
-    const newWall = { gymId, ...returnWall };
+    const newWall = { gymId: gym.id, ...returnWall };
 
     setWall(newWall);
 
@@ -43,7 +43,7 @@ const WallAddPage: React.FC<IWallAddPageProps> = ({
     if (newWall.types.length !== 0 && newWall.name.trim().length !== 0) {
       setTypesMessage("");
       setNameMessage("");
-      GymsActions.createWall(gymsDispatch, newWall, gymId).then((response) => {
+      GymsActions.createWall(gymsDispatch, newWall, gym).then((response) => {
         if (response instanceof Response && response.ok) {
           setWall({} as Wall);
           handleClose();
@@ -54,7 +54,7 @@ const WallAddPage: React.FC<IWallAddPageProps> = ({
     }
   };
 
-  if (gymId !== "") {
+  if (gym.id !== "") {
     return (
       <TransitionModal
         open={open}

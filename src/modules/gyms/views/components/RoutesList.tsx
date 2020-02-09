@@ -64,6 +64,18 @@ const RouteRow: React.FC<IRouteRowProps> = ({
     }
   });
 
+  const handleEditClick = (event: any): void => {
+    event.stopPropagation();
+
+    onEditClick(route);
+  };
+
+  const handleDeleteClick = (event: any): void => {
+    event.stopPropagation();
+
+    onDeleteClick(route.id);
+  };
+
   return (
     <TableRow
       hover
@@ -83,7 +95,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
       {canEdit && (
         <TableCell>
           <Button
-            onClick={(): void | Promise<void> => onEditClick(route)}
+            onClick={handleEditClick}
             variant="outlined"
             fullWidth={false}
             size="medium"
@@ -103,7 +115,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
             size="medium"
             type="button"
             color="primary"
-            onClick={(): void | Promise<void> => onDeleteClick(id)}
+            onClick={handleDeleteClick}
           >
             <DeleteIcon className={classes.icons} />
             Delete

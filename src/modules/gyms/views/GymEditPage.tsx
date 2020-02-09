@@ -22,7 +22,7 @@ const GymEditPage: React.FC = (): JSX.Element => {
       .splice(-1)
       .pop();
 
-    const tempGym = gymsState.gyms
+    const tempGym = gymsState.page.content
       .filter((element) => element.id === gymId)
       .pop();
 

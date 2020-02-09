@@ -70,64 +70,57 @@ const GymPage: React.FC = (): JSX.Element => {
   );
 
   React.useEffect(() => {
-    if (!gymId) {
-      return;
-    }
-    const tempGym = GymUtils.getGymById(gymsState.gyms, gymId);
-
-    if (!tempGym) {
+    if (!gymId || !gymsState.page || !gymsState.page.content) {
       history.push(Routes.GYMS);
-    } else if (!tempGym.walls) {
-      if (tempGym.id) {
-        GymsActions.loadGymV2(gymsDispatch, tempGym.id).then(
-          (response: Response) => {
-            ResponseUtils.toastIfNotOk(response, "Error getting gym.");
-          }
-        );
-      }
-    }
-  }, []);
+    } else {
+      const tempGym = GymUtils.getGymById(gymsState.page.content, gymId);
 
-  React.useEffect(() => {
-    const tempGym = gymsState.gyms
-      .filter((element) => element.id === gymId)
-      .pop();
-
-    if (tempGym) {
-      setGym(tempGym);
-
-      const { user } = userState;
-      const { authorizedEditors } = tempGym;
-
-      const tempWall = tempGym.walls
-        ? tempGym.walls.find((element: Wall) => element.id === wallId)
-        : null;
-
-      if (tempWall) {
-        setRoutes(tempWall.routes);
-        setWallId(tempWall.id);
-
-        if (route) {
-          const tempRoute = tempWall.routes
-            ? tempWall.routes.find((element: Route) => route.id === element.id)
-            : null;
-
-          if (tempRoute) {
-            setRoute(tempRoute);
-          }
+      if (!tempGym) {
+        history.push(Routes.GYMS);
+      } else if (!tempGym.walls) {
+        if (tempGym.id) {
+          GymsActions.loadWalls(gymsDispatch, tempGym).then(
+            (response: Response) => {
+              ResponseUtils.toastIfNotOk(response, "Error getting walls.");
+            }
+          );
         }
       }
 
-      if (
-        user &&
-        authorizedEditors &&
-        authorizedEditors.find((editorId: string) => editorId === user.id)
-      ) {
-        console.log(true);
-        setCanEdit(true);
-      } else {
-        console.log(false);
-        setCanEdit(false);
+      if (tempGym) {
+        setGym(tempGym);
+
+        const { user } = userState;
+        const { authorizedEditors } = tempGym;
+
+        const tempWall = GymUtils.getWallById(tempGym, wallId);
+
+        if (tempWall) {
+          setRoutes(tempWall.routes);
+          setWallId(tempWall.id);
+
+          if (route) {
+            const tempRoute = tempWall.routes
+              ? tempWall.routes.find(
+                  (element: Route) => route.id === element.id
+                )
+              : null;
+
+            if (tempRoute) {
+              setRoute(tempRoute);
+            }
+          }
+        }
+
+        if (
+          user &&
+          authorizedEditors &&
+          authorizedEditors.find((editorId: string) => editorId === user.id)
+        ) {
+          setCanEdit(true);
+        } else {
+          setCanEdit(false);
+        }
       }
     }
   }, [gymId, gymsState, userState]);
@@ -163,7 +156,7 @@ const GymPage: React.FC = (): JSX.Element => {
       )
     ) {
       if (gymId) {
-        GymsActions.deleteWall(gymsDispatch, rowWallId, gymId).then(
+        GymsActions.deleteWall(gymsDispatch, rowWallId, gym).then(
           (response: Response) => {
             if (!response || !(response instanceof Response) || !response.ok) {
               toast.error("Error deleting wall.");
@@ -191,7 +184,7 @@ const GymPage: React.FC = (): JSX.Element => {
         GymsActions.deleteRoute(
           gymsDispatch,
           { id: routeId, gymId } as Route,
-          gymId
+          gym
         ).then((response: Response) => {
           ResponseUtils.toastIfNotOk(response, "Error deleting route.");
         });
@@ -313,14 +306,14 @@ const GymPage: React.FC = (): JSX.Element => {
           <RouteAddModal
             open={view === "ROUTE" && openAdd}
             handleClose={handleCloseAdd}
-            gymId={gymId}
+            gym={gym}
             wallId={wallId}
           />
           {route && (
             <RouteEditModal
               open={view === "ROUTE" && openEdit}
               handleClose={handleCloseEdit}
-              gymId={gymId}
+              gym={gym}
               wallId={wallId}
               route={route}
             />
@@ -328,7 +321,7 @@ const GymPage: React.FC = (): JSX.Element => {
           <WallAddModal
             open={view === "WALL" && openAdd}
             handleClose={handleCloseAdd}
-            gymId={gymId}
+            gym={gym}
           />
           {wall && (
             <WallEditModal
@@ -343,7 +336,8 @@ const GymPage: React.FC = (): JSX.Element => {
               open={view === "RATING" && openAdd}
               handleClose={handleCloseAdd}
               routeId={route.id}
-              gymId={gymId}
+              gym={gym}
+              wallId={wallId}
             />
           )}
         </React.Fragment>

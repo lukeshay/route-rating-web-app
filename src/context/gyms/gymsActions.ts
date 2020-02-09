@@ -7,33 +7,17 @@ import Types from "./gymsActionTypes";
 import { IGymsContextAction } from "./gymsStore";
 import { Dispatch } from "react";
 
-export const loadGyms = (
-  dispatch: Dispatch<IGymsContextAction>
-): Promise<void | Response> => {
-  return GymsApi.getGyms("").then((response: Response) => {
-    if (response instanceof Response && response.ok) {
-      response.json().then((body: GymPage) => {
-        dispatch({
-          actionType: Types.LOAD_GYMS,
-          gyms: body.content
-        } as IGymsContextAction);
-      });
-
-      return response;
-    }
-  });
-};
-
 export const loadGymsQuery = (
   dispatch: Dispatch<IGymsContextAction>,
-  query: string
+  query: string,
+  page: number
 ): Promise<void | Response> => {
-  return GymsApi.getGyms(query).then((response: Response) => {
+  return GymsApi.getGyms(query, page).then((response: Response) => {
     if (response instanceof Response && response.ok) {
       response.json().then((body: GymPage) => {
         dispatch({
           actionType: Types.LOAD_GYMS,
-          gyms: body.content
+          page: body
         } as IGymsContextAction);
       });
 
@@ -170,11 +154,11 @@ export const updateGymLogo = async (
 export const createWall = async (
   dispatch: Dispatch<IGymsContextAction>,
   wall: Wall,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return WallsApi.createWall(wall).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadWalls(dispatch, gym);
     } else {
       return response;
     }
@@ -198,11 +182,11 @@ export const updateWall = async (
 export const deleteWall = async (
   dispatch: Dispatch<IGymsContextAction>,
   wallId: string,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return WallsApi.deleteWall(wallId).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadWalls(dispatch, gym);
     } else {
       return response;
     }
@@ -212,11 +196,11 @@ export const deleteWall = async (
 export const createRoute = async (
   dispatch: Dispatch<IGymsContextAction>,
   route: Route,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return RoutesApi.createRoute(route).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadRoutes(dispatch, gym, route.wallId);
     } else {
       return response;
     }
@@ -226,11 +210,11 @@ export const createRoute = async (
 export const updateRoute = async (
   dispatch: Dispatch<IGymsContextAction>,
   route: Route,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return RoutesApi.updateRoute(route).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadRoutes(dispatch, gym, route.wallId);
     } else {
       return response;
     }
@@ -240,11 +224,11 @@ export const updateRoute = async (
 export const deleteRoute = async (
   dispatch: Dispatch<IGymsContextAction>,
   route: Route,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return RoutesApi.deleteRoute(route).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadRoutes(dispatch, gym, route.wallId);
     } else {
       return response;
     }
@@ -254,12 +238,13 @@ export const deleteRoute = async (
 export const createRouteRating = async (
   dispatch: Dispatch<IGymsContextAction>,
   rating: RouteRating,
-  gymId: string
+  gym: Gym,
+  wallId: string
 ): Promise<void | Response> => {
   return RouteRatingsApi.createRouteRating(rating).then(
     (response: Response) => {
       if (response instanceof Response && response.ok) {
-        return loadGymV2(dispatch, gymId);
+        return loadRoutes(dispatch, gym, wallId);
       } else {
         return response;
       }

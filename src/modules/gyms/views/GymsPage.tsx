@@ -5,10 +5,13 @@ import { toast } from "react-toastify";
 import * as GymsActions from "../../../context/gyms/gymsActions";
 import { useGymsContext } from "../../../context/gyms/gymsStore";
 import { Routes } from "../../../routes";
-import { Gym } from "../../../types";
+import { Gym, InputEvent } from "../../../types";
 import Input from "../../common/inputs/Input";
 import { useViewContext } from "../../../context/view/viewStore";
 import GymCard from "./components/GymCard";
+import Tabs from "@material-ui/core/Tabs";
+import Paper from "@material-ui/core/Paper";
+import Tab from "@material-ui/core/Tab";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -92,34 +95,48 @@ const GymsPage: React.FC = (): JSX.Element => {
   const history = useHistory();
 
   const [search, setSearch] = React.useState<string>("");
+  const [page, setPage] = React.useState<number>(0);
 
   const classes = useStyles();
 
-  const loadGyms = (): void => {
-    if (gymsState.gyms.length === 0) {
-      GymsActions.loadGymsQuery(gymsDispatch, "").then((response) => {
-        if (!response || !(response instanceof Response) || !response.ok) {
-          toast.error("Error getting gyms.");
-        }
-      });
-    }
+  const loadGyms = (query, page): void => {
+    GymsActions.loadGymsQuery(gymsDispatch, "", page).then((response) => {
+      if (!response || !(response instanceof Response) || !response.ok) {
+        toast.error("Error getting gyms.");
+      }
+    });
   };
 
   React.useEffect(() => {
-    loadGyms();
+    if (
+      !gymsState.page ||
+      !gymsState.page.content ||
+      gymsState.page.content.length === 0
+    ) {
+      loadGyms("", page);
+    }
   }, []);
 
   const searchClass = (): string => {
     return viewState.mobile ? classes.searchMobile : classes.search;
   };
 
+  const handleSearchChange = (event: InputEvent): void => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  const handlePageChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: number
+  ): void => {
+    setPage(page + newValue - 1);
+    loadGyms(search, page + newValue - 1);
+  };
+
   const handleKeyPress = (event: any): void => {
     if (event.key === "Enter") {
-      GymsActions.loadGymsQuery(gymsDispatch, search).then((response) => {
-        if (!response || !(response instanceof Response) || !response.ok) {
-          toast.error("Error getting gyms.");
-        }
-      });
+      loadGyms(search, page);
     }
   };
 
@@ -132,9 +149,7 @@ const GymsPage: React.FC = (): JSX.Element => {
           id="search"
           placeholder="Search"
           fullWidth={false}
-          onChange={(event: any): void => {
-            setSearch(event.target.value);
-          }}
+          onChange={handleSearchChange}
           value={search}
           name="search"
           onKeyPress={handleKeyPress}
@@ -142,10 +157,24 @@ const GymsPage: React.FC = (): JSX.Element => {
       </div>
       <GymsList
         cardClass={classes.card}
-        gyms={gymsState.gyms}
+        gyms={gymsState.page.content || []}
         mobile={viewState.mobile}
         onClick={(id: any): void => history.push(Routes.GYMS + "/" + id)}
       />
+      <Paper>
+        <Tabs
+          value={1}
+          id="page"
+          onChange={handlePageChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="<" />
+          <Tab label={page + 1} />
+          <Tab label=">" />
+        </Tabs>
+      </Paper>
     </div>
   );
 };
