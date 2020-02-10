@@ -6,7 +6,7 @@ import React from "react";
 import Button from "../buttons/ButtonSecondary";
 import { IStandardProps } from "../standardProps";
 
-export interface IFormProps extends IStandardProps{
+export interface IFormProps extends IStandardProps {
   buttonText: string;
   formInputs: React.ReactNode;
   handleSubmit(event: any): Promise<void> | void;
@@ -59,7 +59,12 @@ const Form: React.FC<IFormProps> = ({
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           {formInputs}
-          <Button type="submit" fullWidth={true} variant="contained">
+          <Button
+            type="submit"
+            fullWidth={true}
+            variant="contained"
+            data-test-id="submit-button-test-id"
+          >
             {buttonText}
           </Button>
           <Grid container>

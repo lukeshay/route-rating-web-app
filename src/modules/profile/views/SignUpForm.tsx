@@ -270,6 +270,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
           onClick={props.handleSignInClick}
           type="button"
           variant="outlined"
+          testId="sign-in-button-test-id"
         >
           Sign in
         </Button>

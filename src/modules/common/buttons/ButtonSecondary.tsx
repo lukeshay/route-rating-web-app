@@ -11,6 +11,7 @@ const ButtonSecondary: React.FC<IButtonProps> = ({
   size,
   children,
   onClick,
+  testId,
   ...rest
 }): JSX.Element => {
   return (
@@ -23,6 +24,7 @@ const ButtonSecondary: React.FC<IButtonProps> = ({
       fullWidth={fullWidth}
       size={size}
       onClick={onClick}
+      data-test-id={testId}
       {...rest}
     >
       {children}
