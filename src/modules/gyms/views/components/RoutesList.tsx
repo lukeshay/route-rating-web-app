@@ -81,6 +81,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
       hover
       id={id}
       onClick={(): void | Promise<void> => onRowClick(route)}
+      data-test-id="route-row-test-id"
     >
       <TableCell>{name}</TableCell>
       <TableCell>{types}</TableCell>
@@ -167,6 +168,7 @@ const RoutesList: React.FC<IRoutesListProps> = ({
         />
       ))
     }
+    testId="route-list-test-id"
   />
 );
 

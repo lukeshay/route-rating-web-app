@@ -80,7 +80,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
 
   return (
     <div className={classes.cardWrapper} onClick={onClick}>
-      <Card className={cardClass || classes.card}>
+      <Card className={cardClass || classes.card} data-test-id="gym-card-test-id">
         <CardMedia className={classes.photoWrapper}>
           <img
             src={"https://" + gym.photoUrl}
@@ -114,7 +114,7 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
 
   return (
     <div className={classes.cardWrapper} onClick={onClick}>
-      <Card className={classes.card}>
+      <Card className={classes.card} data-test-id="gym-card-test-id">
         <CardMedia
           className={classes.photoWrapper}
           style={{

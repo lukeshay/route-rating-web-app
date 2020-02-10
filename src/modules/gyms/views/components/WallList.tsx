@@ -74,6 +74,7 @@ const WallRow: React.FC<IWallRowProps> = ({
       hover
       id={id}
       onClick={(): void | Promise<void> => onRowClick(id)}
+      data-test-id="wall-row-test-id"
     >
       <TableCell>{name}</TableCell>
       <TableCell>{routes ? routes.length : 0}</TableCell>
@@ -151,6 +152,7 @@ const WallList: React.FC<IWallListProps> = ({
           />
         ))
       }
+      testId="wall-list-test-id"
     />
   );
 };

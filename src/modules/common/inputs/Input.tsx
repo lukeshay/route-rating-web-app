@@ -1,57 +1,59 @@
 import TextField from "@material-ui/core/TextField";
 import React from "react";
+import { IStandardProps } from "../standardProps";
 
-export interface IPropsInput {
-  helpText?: string;
-  id?: string;
-  name?: string;
-  type: string;
-  value?: string;
-  placeholder?: string;
-  fullWidth?: boolean;
-  autoComplete?: string;
+export interface IPropsInput extends IStandardProps{
   autoCapitalize?: "true" | undefined;
-  rows?: number;
+  autoComplete?: string;
   error?: boolean;
-  className?: string;
+  fullWidth?: boolean;
+  helpText?: string;
   onChange?(event: any): void;
   onKeyPress?(even: any): void;
+  placeholder?: string;
+  rows?: number;
+  type: string;
+  value?: string;
 }
 
 const Input: React.FC<IPropsInput> = ({
+  autoCapitalize,
+  autoComplete,
+  className,
+  color,
+  error,
+  fullWidth,
   helpText,
   id,
   name,
+  onChange,
+  onKeyPress,
+  placeholder,
+  rows,
+  testId,
   type,
   value,
-  placeholder,
-  onChange,
-  autoComplete,
-  autoCapitalize,
-  error,
-  rows,
-  className,
-  fullWidth,
-  onKeyPress
 }): JSX.Element => (
   <TextField
-    id={id}
-    className={className}
-    type={type}
-    label={placeholder}
-    name={name}
-    variant="outlined"
-    margin="normal"
-    onChange={onChange}
-    value={(value || "").toString()}
-    fullWidth={fullWidth}
-    autoComplete={autoComplete}
     autoCapitalize={autoCapitalize}
-    helperText={helpText}
+    autoComplete={autoComplete}
+    className={className}
+    color={color !== "default" ? color : undefined}
+    data-test-id={testId}
     error={helpText !== "" && error}
-    rows={rows}
+    fullWidth={fullWidth}
+    helperText={helpText}
+    id={id}
+    label={placeholder}
+    margin="normal"
     multiline={rows !== undefined && rows > 1}
+    name={name}
+    onChange={onChange}
     onKeyPress={onKeyPress}
+    rows={rows}
+    type={type}
+    value={(value || "").toString()}
+    variant="outlined"
   />
 );
 

@@ -4,14 +4,15 @@ import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Button from "../buttons/ButtonSecondary";
+import { IStandardProps } from "../standardProps";
 
-export interface IFormProps {
+export interface IFormProps extends IStandardProps{
   buttonText: string;
   formInputs: React.ReactNode;
+  handleSubmit(event: any): Promise<void> | void;
   helpElements?: React.ReactNode[];
   icon?: React.ReactNode;
   title: React.ReactNode;
-  handleSubmit(event: any): Promise<void> | void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,12 +45,13 @@ const Form: React.FC<IFormProps> = ({
   handleSubmit,
   helpElements,
   icon,
+  testId,
   title
 }): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" data-test-id={testId}>
       <div className={classes.paper}>
         {icon}
         <Typography component="h1" variant="h5">
