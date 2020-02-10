@@ -61,6 +61,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
           text={averageRating > 0 && Math.round(averageRating * 10) / 10}
         />
       ]}
+      testId="rating-table-test-id"
     />
   );
 };

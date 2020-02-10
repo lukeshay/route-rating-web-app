@@ -80,6 +80,7 @@ const GymInformation: React.FunctionComponent<IGymInformationProps> = ({
             fullWidth={false}
             size="medium"
             type="button"
+            data-test-id="gym-edit-button-test-id"
           >
             <EditIcon className={classes.icons} />
             Edit

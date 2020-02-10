@@ -144,18 +144,19 @@ const GymsPage: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-test-id="gym-page-test-id">
       <div className={classes.div}>
         <Input
           className={searchClass()}
-          type="text"
-          id="search"
-          placeholder="Search"
           fullWidth={false}
-          onChange={handleSearchChange}
-          value={search}
+          id="search"
           name="search"
+          onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
+          placeholder="Search"
+          testId="gym-search-test-id"
+          type="text"
+          value={search}
         />
       </div>
       <GymsList
