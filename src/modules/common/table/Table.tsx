@@ -6,7 +6,7 @@ import TableHead from "@material-ui/core/TableHead";
 import React from "react";
 import { IStandardProps } from "../standardProps";
 
-export interface ISimpleTableProps extends IStandardProps{
+export interface ISimpleTableProps extends IStandardProps {
   head?: React.ReactNode;
   body: React.ReactNode[] | null;
 }

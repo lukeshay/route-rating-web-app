@@ -2,7 +2,7 @@ import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { IStandardProps } from "../standardProps";
 
-export interface IPropsInput extends IStandardProps{
+export interface IPropsInput extends IStandardProps {
   autoCapitalize?: "true" | undefined;
   autoComplete?: string;
   error?: boolean;
@@ -32,7 +32,7 @@ const Input: React.FC<IPropsInput> = ({
   rows,
   testId,
   type,
-  value,
+  value
 }): JSX.Element => (
   <TextField
     autoCapitalize={autoCapitalize}
