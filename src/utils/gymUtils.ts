@@ -11,10 +11,10 @@ export const getWallById = (gym: Gym, wallId: string): Wall | undefined =>
 export const getRouteById = (wall: Wall, routeId: string): Route | undefined =>
   wall.routes ? wall.routes.find((route) => route.id === routeId) : undefined;
 
-export const parseTypesToString = (route: Route): string => {
+export const parseTypesToString = (wallTypes: string[]): string => {
   let types = "";
 
-  route.types.forEach((value) => {
+  wallTypes.forEach((value) => {
     if (types.length !== 0) {
       types += ", ";
     }

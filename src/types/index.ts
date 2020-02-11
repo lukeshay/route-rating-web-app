@@ -1,8 +1,8 @@
 export { AuthBody } from "./authBody";
-export { ButtonEvent, InputEvent } from "./events";
+export { ButtonEvent, InputEvent, ElementEvent, HandlerReturn } from "./events";
 export { Gym } from "./gym";
 export {
-  GymPage,
+  GymPageType,
   Page,
   Pageable,
   RoutePage,

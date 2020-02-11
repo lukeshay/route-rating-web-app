@@ -92,6 +92,7 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
           button
           key={"home"}
           component={Link}
+          onClick={handleDrawerToggle}
           to={Routes.HOME}
           className={classes.listItem}
         >
@@ -102,6 +103,7 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
           button
           key={"gyms"}
           component={Link}
+          onClick={handleDrawerToggle}
           to={Routes.GYMS}
           className={classes.listItem}
         >
@@ -119,6 +121,7 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
           button
           key={"profile"}
           component={Link}
+          onClick={handleDrawerToggle}
           to={Routes.PROFILE}
           className={classes.listItem}
         >
@@ -129,6 +132,7 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
           button
           key={"about"}
           component={Link}
+          onClick={handleDrawerToggle}
           to={Routes.ABOUT}
           className={classes.listItem}
         >

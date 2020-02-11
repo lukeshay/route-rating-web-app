@@ -1,4 +1,7 @@
-import { Gym, Route, User, Wall } from "../types";
+import { Gym, GymPageType, Route, User, Wall } from "../types";
+import { IGymsContextState } from "../context/gyms/gymsStore";
+import { IViewContextState } from "../context/view/viewStore";
+import { IUserContextState } from "../context/user/userStore";
 
 export const testRouteOne: Route = {
   averageGrade: "GRADE_5_9",
@@ -72,7 +75,7 @@ export const testGymTwo: Gym = {
   zipCode: "50014"
 };
 
-export const testUser: User = {
+export const testUserEditor: User = {
   authority: "ADMIN",
   city: "Ames",
   country: "USA",
@@ -86,4 +89,17 @@ export const testUser: User = {
   session: null,
   state: "IA",
   username: "username"
+};
+
+export const mockGymsState: IGymsContextState = {
+  page: { content: [testGymOne, testGymTwo] } as GymPageType
+};
+
+export const mockViewState: IViewContextState = {
+  mobile: false,
+  theme: "DARK_THEME"
+};
+
+export const mockUserState: IUserContextState = {
+  user: testUserEditor
 };

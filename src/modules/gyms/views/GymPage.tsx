@@ -274,8 +274,8 @@ const GymPage: React.FC = (): JSX.Element => {
           walls={gym.walls}
           onRowClick={handleWallRowClick}
           canEdit={canEdit}
-          handleDeleteWall={handleDeleteWall}
-          handleEditClick={handleEditWall}
+          onDeleteWall={handleDeleteWall}
+          onEditClick={handleEditWall}
         />
       );
     }
@@ -284,10 +284,11 @@ const GymPage: React.FC = (): JSX.Element => {
       return (
         <RoutesList
           canEdit={canEdit}
-          routes={routes}
           handleDeleteRoute={handleDeleteRoute}
           handleEditRoute={handleEditRoute}
           handleRowClick={handleRouteRowClick}
+          mobile={viewState.mobile}
+          routes={routes}
         />
       );
     }

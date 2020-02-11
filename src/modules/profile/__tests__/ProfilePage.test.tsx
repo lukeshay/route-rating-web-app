@@ -45,7 +45,7 @@ describe("<ProfilePage /> ", () => {
 
   it("should render profile form.", () => {
     const mockState: IUserContextState = {
-      user: TypeMocks.testUser
+      user: TypeMocks.testUserEditor
     };
 
     const profilePage = mount(

@@ -4,11 +4,11 @@ import * as TypeMocks from "../../__mocks__/typeMocks";
 describe("GymUtils", () => {
   it("get whether user is authorized.", () => {
     expect(
-      GymUtils.isAuthorizedEditor(TypeMocks.testGymOne, TypeMocks.testUser)
+      GymUtils.isAuthorizedEditor(TypeMocks.testGymOne, TypeMocks.testUserEditor)
     ).toBeTruthy();
-    TypeMocks.testUser.id = "1";
+    TypeMocks.testUserEditor.id = "1";
     expect(
-      GymUtils.isAuthorizedEditor(TypeMocks.testGymOne, TypeMocks.testUser)
+      GymUtils.isAuthorizedEditor(TypeMocks.testGymOne, TypeMocks.testUserEditor)
     ).toBeFalsy();
   });
 

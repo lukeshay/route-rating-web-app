@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Gym } from "../../../../types";
+import * as Events from "../../../../types/events";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -69,12 +70,14 @@ interface IGymCardVariantsProps {
   cardClass?: string;
   gym: Gym;
   onClick?(even: any): void;
+  onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
 const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
   cardClass,
   gym,
-  onClick
+  onClick,
+  onRightClick
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -83,6 +86,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
       <Card
         className={cardClass || classes.card}
         data-test-id="gym-card-test-id"
+        onContextMenu={onRightClick}
       >
         <CardMedia className={classes.photoWrapper}>
           <img
@@ -111,13 +115,18 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
 
 const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
   gym,
-  onClick
+  onClick,
+  onRightClick
 }): JSX.Element => {
   const classes = useMobileStyles();
 
   return (
     <div className={classes.cardWrapper} onClick={onClick}>
-      <Card className={classes.card} data-test-id="gym-card-test-id">
+      <Card
+        className={classes.card}
+        data-test-id="gym-card-test-id"
+        onContextMenu={onRightClick}
+      >
         <CardMedia
           className={classes.photoWrapper}
           style={{
@@ -154,6 +163,7 @@ export interface IGymCardProps {
   mobile: boolean;
   mobileCardClass?: string;
   onClick?(even: any): void;
+  onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
 const GymCard: React.FC<IGymCardProps> = ({
@@ -161,12 +171,23 @@ const GymCard: React.FC<IGymCardProps> = ({
   gym,
   mobile,
   mobileCardClass,
-  onClick
+  onClick,
+  onRightClick
 }) => {
   return mobile ? (
-    <GymCardMobile gym={gym} onClick={onClick} cardClass={mobileCardClass} />
+    <GymCardMobile
+      gym={gym}
+      onClick={onClick}
+      cardClass={mobileCardClass}
+      onRightClick={onRightClick}
+    />
   ) : (
-    <GymCardDesktop gym={gym} onClick={onClick} cardClass={desktopCardClass} />
+    <GymCardDesktop
+      gym={gym}
+      onClick={onClick}
+      cardClass={desktopCardClass}
+      onRightClick={onRightClick}
+    />
   );
 };
 
