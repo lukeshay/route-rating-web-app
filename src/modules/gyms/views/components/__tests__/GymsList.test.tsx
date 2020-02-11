@@ -5,7 +5,6 @@ import { shallow } from "../../../../../../configs/setupEnzyme";
 import { Gym } from "../../../../../types";
 import { shallowToJson } from "enzyme-to-json";
 import GymCard from "../GymCard";
-import { on } from "cluster";
 
 const gymArray: Gym[] = [TypeMocks.testGymOne, TypeMocks.testGymTwo];
 

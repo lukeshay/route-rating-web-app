@@ -3,7 +3,14 @@ import * as RouteRatingsApi from "../../api/routeRatingsApi";
 import * as RoutesApi from "../../api/routesApi";
 import * as WallsApi from "../../api/wallsApi";
 import { Dispatch } from "react";
-import { Gym, GymPageType, Route, RouteRating, Wall, WallPage } from "../../types";
+import {
+  Gym,
+  GymPageType,
+  Route,
+  RouteRating,
+  Wall,
+  WallPage
+} from "../../types";
 import { IGymsContextAction } from "./gymsStore";
 import Types from "./gymsActionTypes";
 
