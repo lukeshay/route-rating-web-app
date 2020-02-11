@@ -6,25 +6,24 @@ import RRMenu from "../../../common/menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { ButtonEvent, ElementEvent } from "../../../../types";
-import { HandlerReturn } from "../../../../types";
+import * as Events from "../../../../types/events";
 
 export interface IListMenuProps {
-  onOptionsClick(event: ButtonEvent): HandlerReturn;
-  optionsAnchor: HTMLElement | null;
-  onOptionsClose(event: ElementEvent): HandlerReturn;
   iconClass?: string;
-  onEditClick(event: ElementEvent): HandlerReturn;
-  onDeleteClick(event: ElementEvent): HandlerReturn;
+  optionsAnchor: HTMLElement | null;
+  onDeleteClick(event: Events.ElementEvent): Events.HandlerReturn;
+  onEditClick(event: Events.ElementEvent): Events.HandlerReturn;
+  onOptionsClick(event: Events.ButtonEvent): Events.HandlerReturn;
+  onOptionsClose(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
 const ListMenu: React.FC<IListMenuProps> = ({
-  onOptionsClick,
-  optionsAnchor,
-  onOptionsClose,
   iconClass,
+  onDeleteClick,
   onEditClick,
-  onDeleteClick
+  onOptionsClick,
+  onOptionsClose,
+  optionsAnchor
 }): JSX.Element => (
   <TableCell>
     <Button

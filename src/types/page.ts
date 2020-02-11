@@ -4,7 +4,7 @@ export interface WallPage extends Page {
   content: Wall[];
 }
 
-export interface GymPage extends Page {
+export interface GymPageType extends Page {
   content: Gym[];
 }
 

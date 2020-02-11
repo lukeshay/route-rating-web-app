@@ -1,11 +1,11 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core";
-import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React from "react";
 import { ButtonEvent, ElementEvent, Wall } from "../../../../types";
 import Table from "../../../common/table/Table";
 import * as GymUtils from "../../../../utils/gymUtils";
 import ListMenu from "./ListMenu";
+import Cell from "../../../common/table/TableCell";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,13 +40,17 @@ const WallRow: React.FC<IWallRowProps> = ({
   );
   const types = GymUtils.parseTypesToString(wall.types);
 
-  const handleOptionsClick = (event: ButtonEvent): void => {
-    event.stopPropagation();
-
+  const handleRightClick = (event: ElementEvent): void => {
+    event.preventDefault();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClose = (event: ElementEvent) => {
+  const handleOptionsClick = (event: ButtonEvent): void => {
+    event.stopPropagation();
+    setOptionsAnchor(event.currentTarget);
+  };
+
+  const handleOptionsClose = (event: ElementEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(null);
   };
@@ -72,9 +76,15 @@ const WallRow: React.FC<IWallRowProps> = ({
       onClick={(): void | Promise<void> => onRowClick(id)}
       data-test-id="wall-row-test-id"
     >
-      <TableCell className={cellClass}>{name}</TableCell>
-      <TableCell className={cellClass}>{routes ? routes.length : 0}</TableCell>
-      <TableCell className={cellClass}>{types}</TableCell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {name}
+      </Cell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {routes ? routes.length : 0}
+      </Cell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {types}
+      </Cell>
       {canEdit && (
         <ListMenu
           onOptionsClick={handleOptionsClick}
@@ -112,16 +122,16 @@ const WallList: React.FC<IWallListProps> = ({
     <Table
       head={
         <TableRow>
-          <TableCell key="wall" className={cellClass}>
+          <Cell key="wall" className={cellClass}>
             Wall
-          </TableCell>
-          <TableCell key="routes" className={cellClass}>
+          </Cell>
+          <Cell key="routes" className={cellClass}>
             Routes
-          </TableCell>
-          <TableCell key="type" className={cellClass}>
+          </Cell>
+          <Cell key="type" className={cellClass}>
             Type
-          </TableCell>
-          {canEdit && <TableCell key="edit">Options</TableCell>}
+          </Cell>
+          {canEdit && <Cell key="edit">Options</Cell>}
         </TableRow>
       }
       body={

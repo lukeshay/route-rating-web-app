@@ -3,7 +3,7 @@ import * as RouteRatingsApi from "../../api/routeRatingsApi";
 import * as RoutesApi from "../../api/routesApi";
 import * as WallsApi from "../../api/wallsApi";
 import { Dispatch } from "react";
-import { Gym, GymPage, Route, RouteRating, Wall, WallPage } from "../../types";
+import { Gym, GymPageType, Route, RouteRating, Wall, WallPage } from "../../types";
 import { IGymsContextAction } from "./gymsStore";
 import Types from "./gymsActionTypes";
 
@@ -14,7 +14,7 @@ export const loadGymsQuery = (
 ): Promise<void | Response> => {
   return GymsApi.getGyms(query, page).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      response.json().then((body: GymPage) => {
+      response.json().then((body: GymPageType) => {
         dispatch({
           actionType: Types.LOAD_GYMS,
           page: body

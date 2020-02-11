@@ -1,14 +1,14 @@
 import React, { Dispatch, Reducer, createContext, useReducer } from "react";
-import { Gym, GymPage } from "../../types";
+import { Gym, GymPageType } from "../../types";
 import Types from "./gymsActionTypes";
 
 export interface IGymsContextState {
-  page: GymPage;
+  page: GymPageType;
 }
 
 export interface IGymsContextAction {
   actionType: string;
-  page: GymPage;
+  page: GymPageType;
   gym?: Gym;
 }
 
@@ -46,7 +46,7 @@ const reducer: Reducer<IGymsContextState, IGymsContextAction> = (
 };
 
 const initialState: IGymsContextState = {
-  page: {} as GymPage
+  page: {} as GymPageType
 };
 
 export const GymsStore: React.FC = ({ children }): JSX.Element => {

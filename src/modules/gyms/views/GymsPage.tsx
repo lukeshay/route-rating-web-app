@@ -5,13 +5,13 @@ import { toast } from "react-toastify";
 import * as GymsActions from "../../../context/gyms/gymsActions";
 import { useGymsContext } from "../../../context/gyms/gymsStore";
 import { Routes } from "../../../routes";
-import { Gym, InputEvent } from "../../../types";
+import { InputEvent } from "../../../types";
 import Input from "../../common/inputs/Input";
 import { useViewContext } from "../../../context/view/viewStore";
-import GymCard from "./components/GymCard";
 import Tabs from "@material-ui/core/Tabs";
 import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
+import GymsList from "./components/GymsList";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -60,32 +60,6 @@ const useStyles = makeStyles(() =>
       width: "96%"
     }
   })
-);
-
-interface IGymsListProps {
-  cardClass: string;
-  gyms: Gym[];
-  mobile: boolean;
-  onClick(id: any): void;
-}
-
-const GymsList: React.FC<IGymsListProps> = ({
-  cardClass,
-  gyms,
-  mobile,
-  onClick
-}): JSX.Element => (
-  <React.Fragment>
-    {gyms.map((gym) => (
-      <GymCard
-        key={gym.id}
-        mobile={mobile}
-        gym={gym}
-        desktopCardClass={cardClass}
-        onClick={(): void => onClick(gym.id)}
-      />
-    ))}
-  </React.Fragment>
 );
 
 const GymsPage: React.FC = (): JSX.Element => {
@@ -143,6 +117,9 @@ const GymsPage: React.FC = (): JSX.Element => {
     }
   };
 
+  const handleRowPress = (id: string): void =>
+    history.push(Routes.GYMS + "/" + id);
+
   return (
     <div className={classes.root} data-test-id="gym-page-test-id">
       <div className={classes.div}>
@@ -162,7 +139,7 @@ const GymsPage: React.FC = (): JSX.Element => {
         cardClass={classes.card}
         gyms={gymsState.page.content || []}
         mobile={viewState.mobile}
-        onClick={(id: any): void => history.push(Routes.GYMS + "/" + id)}
+        onClick={handleRowPress}
       />
       <Paper>
         <Tabs

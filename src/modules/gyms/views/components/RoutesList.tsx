@@ -1,13 +1,10 @@
 import {
-  Button,
   TableCell,
   TableRow,
   Theme,
   createStyles,
   makeStyles
 } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
 import {
   ButtonEvent,
@@ -19,6 +16,7 @@ import * as GradeUtils from "../../../../utils/gradeUtils";
 import Table from "../../../common/table/Table";
 import * as GymUtils from "../../../../utils/gymUtils";
 import ListMenu from "./ListMenu";
+import Cell from "../../../common/table/TableCell";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,13 +55,20 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   const { averageGrade, holdColor, id, name, averageRating, setter } = route;
   const types = GymUtils.parseTypesToString(route.types);
 
-  const handleOptionsClick = (event: ButtonEvent): void => {
-    event.stopPropagation();
+  const handleRightClick = (event: ElementEvent): void => {
+    event.preventDefault();
 
+    if (canEdit) {
+      setOptionsAnchor(event.currentTarget);
+    }
+  };
+
+  const handleOptionsOpen = (event: ButtonEvent): void => {
+    event.stopPropagation();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClose = (event: ElementEvent) => {
+  const handleOptionsClose = (event: ElementEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(null);
   };
@@ -89,28 +94,36 @@ const RouteRow: React.FC<IRouteRowProps> = ({
       onClick={(): HandlerReturn => onRowClick(route)}
       data-test-id="route-row-test-id"
     >
-      <TableCell className={cellClass}>{name}</TableCell>
-      <TableCell className={cellClass}>{types}</TableCell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {name}
+      </Cell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {types}
+      </Cell>
       {(!mobile || canEdit) && (
-        <TableCell className={cellClass}>{setter}</TableCell>
+        <Cell className={cellClass} onRightClick={handleRightClick}>
+          {setter}
+        </Cell>
       )}
-      <TableCell className={cellClass}>{holdColor}</TableCell>
-      <TableCell className={cellClass}>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
+        {holdColor}
+      </Cell>
+      <Cell className={cellClass} onRightClick={handleRightClick}>
         {averageGrade && GradeUtils.convertGradeToString(averageGrade)}
-      </TableCell>
+      </Cell>
       {(!mobile || canEdit) && (
-        <TableCell className={cellClass}>
+        <Cell className={cellClass} onRightClick={handleRightClick}>
           {averageRating > 0 && Math.round(averageRating * 10) / 10}
-        </TableCell>
+        </Cell>
       )}
       {canEdit && (
         <ListMenu
-          onOptionsClick={handleOptionsClick}
-          optionsAnchor={optionsAnchor}
-          onOptionsClose={handleOptionsClose}
-          onEditClick={handleEditClick}
-          onDeleteClick={handleDeleteClick}
           iconClass={classes.icons}
+          onDeleteClick={handleDeleteClick}
+          onEditClick={handleEditClick}
+          onOptionsClick={handleOptionsOpen}
+          onOptionsClose={handleOptionsClose}
+          optionsAnchor={optionsAnchor}
         />
       )}
     </TableRow>

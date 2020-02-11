@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePage /> should render correctly. 1`] = `
+<Fragment>
+  <WithStyles(ForwardRef(Typography))
+    variant="h2"
+  >
+    Climbing Routes Rating
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(Typography))
+    variant="h3"
+  >
+    Web application for gyms to post their routes and customers to rate them.
+  </WithStyles(ForwardRef(Typography))>
+</Fragment>
+`;
