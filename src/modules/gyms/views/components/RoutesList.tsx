@@ -9,20 +9,31 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
-import { Route } from "../../../../types";
+import {
+  ButtonEvent,
+  ElementEvent,
+  HandlerReturn,
+  Route
+} from "../../../../types";
 import * as GradeUtils from "../../../../utils/gradeUtils";
 import Table from "../../../common/table/Table";
+import * as GymUtils from "../../../../utils/gymUtils";
+import ListMenu from "./ListMenu";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icons: {
       paddingRight: theme.spacing(1)
+    },
+    editCellStyle: {
+      width: "15%"
     }
   })
 );
 
 export interface IRouteRowProps {
   canEdit: boolean;
+  mobile: boolean;
   route: Route;
   onDeleteClick(routeId: string): Promise<void> | void;
   onEditClick(route: Route): Promise<void> | void;
@@ -31,97 +42,76 @@ export interface IRouteRowProps {
 
 const RouteRow: React.FC<IRouteRowProps> = ({
   canEdit,
-  route,
+  mobile,
   onDeleteClick,
   onEditClick,
-  onRowClick
+  onRowClick,
+  route
 }): JSX.Element => {
   const classes = useStyles();
 
+  const [optionsAnchor, setOptionsAnchor] = React.useState<null | HTMLElement>(
+    null
+  );
+
   const { averageGrade, holdColor, id, name, averageRating, setter } = route;
+  const types = GymUtils.parseTypesToString(route.types);
 
-  let types = "";
-
-  route.types.forEach((value) => {
-    if (types.length !== 0) {
-      types += ", ";
-    }
-
-    if (value === "LEAD") {
-      types += "Lead";
-    }
-
-    if (value === "TOP_ROPE") {
-      types += "Top rope";
-    }
-
-    if (value === "BOULDER") {
-      types += "Boulder";
-    }
-
-    if (value === "AUTO_BELAY") {
-      types += "Auto belay";
-    }
-  });
-
-  const handleEditClick = (event: any): void => {
+  const handleOptionsClick = (event: ButtonEvent): void => {
     event.stopPropagation();
 
+    setOptionsAnchor(event.currentTarget);
+  };
+
+  const handleOptionsClose = (event: ElementEvent) => {
+    event.stopPropagation();
+    setOptionsAnchor(null);
+  };
+
+  const handleEditClick = (event: ElementEvent): void => {
+    event.stopPropagation();
+    handleOptionsClose(event);
     onEditClick(route);
   };
 
-  const handleDeleteClick = (event: any): void => {
+  const handleDeleteClick = (event: ElementEvent): void => {
     event.stopPropagation();
-
-    onDeleteClick(route.id);
+    handleOptionsClose(event);
+    onDeleteClick(id);
   };
+
+  const cellClass = canEdit ? classes.editCellStyle : undefined;
 
   return (
     <TableRow
       hover
       id={id}
-      onClick={(): void | Promise<void> => onRowClick(route)}
+      onClick={(): HandlerReturn => onRowClick(route)}
       data-test-id="route-row-test-id"
     >
-      <TableCell>{name}</TableCell>
-      <TableCell>{types}</TableCell>
-      <TableCell>{setter}</TableCell>
-      <TableCell>{holdColor}</TableCell>
-      <TableCell>
+      <TableCell className={cellClass}>{name}</TableCell>
+      <TableCell className={cellClass}>{types}</TableCell>
+      {(!mobile || canEdit) && (
+        <TableCell className={cellClass}>{setter}</TableCell>
+      )}
+      <TableCell className={cellClass}>{holdColor}</TableCell>
+      <TableCell className={cellClass}>
         {averageGrade && GradeUtils.convertGradeToString(averageGrade)}
       </TableCell>
-      <TableCell>
-        {averageRating > 0 && Math.round(averageRating * 10) / 10}
-      </TableCell>
-      {canEdit && (
-        <TableCell>
-          <Button
-            onClick={handleEditClick}
-            variant="outlined"
-            fullWidth={false}
-            size="medium"
-            type="button"
-            color="secondary"
-          >
-            <EditIcon className={classes.icons} />
-            Edit
-          </Button>
+      {(!mobile || canEdit) && (
+        <TableCell className={cellClass}>
+          {averageRating > 0 && Math.round(averageRating * 10) / 10}
         </TableCell>
       )}
       {canEdit && (
-        <TableCell>
-          <Button
-            variant="outlined"
-            fullWidth={false}
-            size="medium"
-            type="button"
-            color="primary"
-            onClick={handleDeleteClick}
-          >
-            <DeleteIcon className={classes.icons} />
-            Delete
-          </Button>
-        </TableCell>
+        <ListMenu
+          onOptionsClick={handleOptionsClick}
+          optionsAnchor={optionsAnchor}
+          onOptionsClose={handleOptionsClose}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+          iconClass={classes.icons}
+        />
       )}
     </TableRow>
   );
@@ -129,6 +119,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
 
 export interface IRoutesListProps {
   canEdit: boolean;
+  mobile: boolean;
   routes: Route[];
   handleDeleteRoute(routeId: string): Promise<void> | void;
   handleEditRoute(route: Route): Promise<void> | void;
@@ -137,39 +128,62 @@ export interface IRoutesListProps {
 
 const RoutesList: React.FC<IRoutesListProps> = ({
   canEdit,
-  routes,
   handleDeleteRoute,
   handleEditRoute,
-  handleRowClick
-}): JSX.Element => (
-  <Table
-    head={
-      <TableRow>
-        <TableCell key="route">Route</TableCell>
-        <TableCell key="types">Types</TableCell>
-        <TableCell key="setter">Setter</TableCell>
-        <TableCell key="color">Color</TableCell>
-        <TableCell key="grade">Grade</TableCell>
-        <TableCell key="rating">Rating</TableCell>
-        {canEdit && <TableCell key="edit">Edit</TableCell>}
-        {canEdit && <TableCell key="delete">Delete</TableCell>}
-      </TableRow>
-    }
-    body={
-      routes &&
-      routes.map((route: Route) => (
-        <RouteRow
-          canEdit={canEdit}
-          key={route.id}
-          route={route}
-          onDeleteClick={handleDeleteRoute}
-          onEditClick={handleEditRoute}
-          onRowClick={handleRowClick}
-        />
-      ))
-    }
-    testId="route-list-test-id"
-  />
-);
+  handleRowClick,
+  mobile,
+  routes
+}): JSX.Element => {
+  const classes = useStyles();
+
+  const cellClass = canEdit ? classes.editCellStyle : undefined;
+
+  return (
+    <Table
+      head={
+        <TableRow>
+          <TableCell key="route" className={cellClass}>
+            Route
+          </TableCell>
+          <TableCell key="types" className={cellClass}>
+            Types
+          </TableCell>
+          {(!mobile || canEdit) && (
+            <TableCell key="setter" className={cellClass}>
+              Setter
+            </TableCell>
+          )}
+          <TableCell key="color" className={cellClass}>
+            Color
+          </TableCell>
+          <TableCell key="grade" className={cellClass}>
+            Grade
+          </TableCell>
+          {(!mobile || canEdit) && (
+            <TableCell key="rating" className={cellClass}>
+              Rating
+            </TableCell>
+          )}
+          {canEdit && <TableCell key="edit">Options</TableCell>}
+        </TableRow>
+      }
+      body={
+        routes &&
+        routes.map((route: Route) => (
+          <RouteRow
+            mobile={mobile}
+            canEdit={canEdit}
+            key={route.id}
+            route={route}
+            onDeleteClick={handleDeleteRoute}
+            onEditClick={handleEditRoute}
+            onRowClick={handleRowClick}
+          />
+        ))
+      }
+      testId="route-list-test-id"
+    />
+  );
+};
 
 export default RoutesList;

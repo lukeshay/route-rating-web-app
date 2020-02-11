@@ -29,7 +29,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
 }): JSX.Element => {
   // const [ratings, setRatings] = React.useState<RouteRating[]>([]);
   const { name, averageGrade, averageRating, setter, holdColor } = route;
-  const types = GymUtils.parseTypesToString(route);
+  const types = GymUtils.parseTypesToString(route.types);
 
   // React.useEffect(() => {
   //   RouteRatingsApi.getRouteRatings(id).then((response: Response) => {

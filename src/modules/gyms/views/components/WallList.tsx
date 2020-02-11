@@ -1,16 +1,19 @@
-import { Button, Theme, createStyles, makeStyles } from "@material-ui/core";
+import { Theme, createStyles, makeStyles } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
-import { Wall } from "../../../../types";
+import { ButtonEvent, ElementEvent, Wall } from "../../../../types";
 import Table from "../../../common/table/Table";
+import * as GymUtils from "../../../../utils/gymUtils";
+import ListMenu from "./ListMenu";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icons: {
       paddingRight: theme.spacing(1)
+    },
+    editCellStyle: {
+      width: "30%"
     }
   })
 );
@@ -32,42 +35,35 @@ const WallRow: React.FC<IWallRowProps> = ({
 }): JSX.Element => {
   const classes = useStyles();
   const { id, routes, name } = wall;
+  const [optionsAnchor, setOptionsAnchor] = React.useState<null | HTMLElement>(
+    null
+  );
+  const types = GymUtils.parseTypesToString(wall.types);
 
-  let types = "";
-
-  wall.types?.forEach((value) => {
-    if (types.length !== 0) {
-      types += ", ";
-    }
-
-    if (value === "LEAD") {
-      types += "Lead";
-    }
-
-    if (value === "TOP_ROPE") {
-      types += "Top rope";
-    }
-
-    if (value === "BOULDER") {
-      types += "Boulder";
-    }
-
-    if (value === "AUTO_BELAY") {
-      types += "Auto belay";
-    }
-  });
-
-  const handleEditClick = (event: any): void => {
+  const handleOptionsClick = (event: ButtonEvent): void => {
     event.stopPropagation();
 
+    setOptionsAnchor(event.currentTarget);
+  };
+
+  const handleOptionsClose = (event: ElementEvent) => {
+    event.stopPropagation();
+    setOptionsAnchor(null);
+  };
+
+  const handleEditClick = (event: ElementEvent): void => {
+    event.stopPropagation();
+    handleOptionsClose(event);
     onEditClick(wall);
   };
 
-  const handleDeleteClick = (event: any): void => {
+  const handleDeleteClick = (event: ElementEvent): void => {
     event.stopPropagation();
-
+    handleOptionsClose(event);
     onDeleteClick(wall.id);
   };
+
+  const cellClass = canEdit ? classes.editCellStyle : undefined;
 
   return (
     <TableRow
@@ -76,38 +72,18 @@ const WallRow: React.FC<IWallRowProps> = ({
       onClick={(): void | Promise<void> => onRowClick(id)}
       data-test-id="wall-row-test-id"
     >
-      <TableCell>{name}</TableCell>
-      <TableCell>{routes ? routes.length : 0}</TableCell>
-      <TableCell>{types}</TableCell>
+      <TableCell className={cellClass}>{name}</TableCell>
+      <TableCell className={cellClass}>{routes ? routes.length : 0}</TableCell>
+      <TableCell className={cellClass}>{types}</TableCell>
       {canEdit && (
-        <TableCell>
-          <Button
-            onClick={handleEditClick}
-            variant="outlined"
-            fullWidth={false}
-            size="medium"
-            type="button"
-            color="secondary"
-          >
-            <EditIcon className={classes.icons} />
-            Edit
-          </Button>
-        </TableCell>
-      )}
-      {canEdit && (
-        <TableCell>
-          <Button
-            variant="outlined"
-            fullWidth={false}
-            size="medium"
-            type="button"
-            color="primary"
-            onClick={handleDeleteClick}
-          >
-            <DeleteIcon className={classes.icons} />
-            Delete
-          </Button>
-        </TableCell>
+        <ListMenu
+          onOptionsClick={handleOptionsClick}
+          optionsAnchor={optionsAnchor}
+          onOptionsClose={handleOptionsClose}
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+          iconClass={classes.icons}
+        />
       )}
     </TableRow>
   );
@@ -117,26 +93,35 @@ export interface IWallListProps {
   walls: Wall[] | null;
   canEdit: boolean;
   onRowClick(wallId: string): Promise<void>;
-  handleEditClick(wall: Wall): Promise<void> | void;
-  handleDeleteWall(wallId: string): Promise<void>;
+  onEditClick(wall: Wall): Promise<void> | void;
+  onDeleteWall(wallId: string): Promise<void>;
 }
 
 const WallList: React.FC<IWallListProps> = ({
   walls,
   onRowClick,
   canEdit,
-  handleDeleteWall,
-  handleEditClick
+  onDeleteWall,
+  onEditClick
 }): JSX.Element => {
+  const classes = useStyles();
+
+  const cellClass = canEdit ? classes.editCellStyle : undefined;
+
   return (
     <Table
       head={
         <TableRow>
-          <TableCell key="wall">Wall</TableCell>
-          <TableCell key="routes">Routes</TableCell>
-          <TableCell key="type">Type</TableCell>
-          {canEdit && <TableCell key="edit">Edit</TableCell>}
-          {canEdit && <TableCell key="delete">Delete</TableCell>}
+          <TableCell key="wall" className={cellClass}>
+            Wall
+          </TableCell>
+          <TableCell key="routes" className={cellClass}>
+            Routes
+          </TableCell>
+          <TableCell key="type" className={cellClass}>
+            Type
+          </TableCell>
+          {canEdit && <TableCell key="edit">Options</TableCell>}
         </TableRow>
       }
       body={
@@ -147,8 +132,8 @@ const WallList: React.FC<IWallListProps> = ({
             wall={wall}
             onRowClick={onRowClick}
             canEdit={canEdit}
-            onDeleteClick={handleDeleteWall}
-            onEditClick={handleEditClick}
+            onDeleteClick={onDeleteWall}
+            onEditClick={onEditClick}
           />
         ))
       }
