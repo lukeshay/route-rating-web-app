@@ -100,7 +100,7 @@ const GymsPage: React.FC = (): JSX.Element => {
   const classes = useStyles();
 
   const loadGyms = (query, page): void => {
-    GymsActions.loadGymsQuery(gymsDispatch, "", page).then((response) => {
+    GymsActions.loadGymsQuery(gymsDispatch, query, page).then((response) => {
       if (!response || !(response instanceof Response) || !response.ok) {
         toast.error("Error getting gyms.");
       }
@@ -154,7 +154,6 @@ const GymsPage: React.FC = (): JSX.Element => {
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
           placeholder="Search"
-          testId="gym-search-test-id"
           type="text"
           value={search}
         />
