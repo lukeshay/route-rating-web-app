@@ -3,6 +3,7 @@
 exports[`<RatingAddModal /> should render correctly 1`] = `
 <TransitionModal
   handleClose={[Function]}
+  id="ratingAdd"
   open={true}
   style={
     Object {
