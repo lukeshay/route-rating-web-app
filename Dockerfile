@@ -12,6 +12,4 @@ RUN yarn --disable-progress
 RUN yarn build --disable-progress
 RUN yarn global add serve --disable-progress
 
-RUN rm -rf node_modules
-
 ENTRYPOINT ./scripts/run.sh
