@@ -94,25 +94,49 @@ const RouteRow: React.FC<IRouteRowProps> = ({
       onClick={(): HandlerReturn => onRowClick(route)}
       data-test-id="route-row-test-id"
     >
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="routeName"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {name}
       </Cell>
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="routeTypes"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {types}
       </Cell>
       {(!mobile || canEdit) && (
-        <Cell className={cellClass} onRightClick={handleRightClick}>
+        <Cell
+          id="routeSetter"
+          className={cellClass}
+          onRightClick={handleRightClick}
+        >
           {setter}
         </Cell>
       )}
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="routeColor"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {holdColor}
       </Cell>
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="routeGrade"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {averageGrade && GradeUtils.convertGradeToString(averageGrade)}
       </Cell>
       {(!mobile || canEdit) && (
-        <Cell className={cellClass} onRightClick={handleRightClick}>
+        <Cell
+          id="routeRating"
+          className={cellClass}
+          onRightClick={handleRightClick}
+        >
           {averageRating > 0 && Math.round(averageRating * 10) / 10}
         </Cell>
       )}
@@ -153,6 +177,7 @@ const RoutesList: React.FC<IRoutesListProps> = ({
 
   return (
     <Table
+      id="routes"
       head={
         <TableRow>
           <TableCell key="route" className={cellClass}>

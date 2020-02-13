@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RatingAddModal /> should render correctly 1`] = `
+<TransitionModal
+  handleClose={[Function]}
+  id="ratingAdd"
+  open={true}
+  style={
+    Object {
+      "width": "475px",
+    }
+  }
+>
+  <Form
+    buttonText="Save"
+    formInputs={
+      <React.Fragment>
+        <Selector
+          handleChange={[Function]}
+          id="rating"
+          label="Rating"
+          name="rating-select"
+          native={true}
+          value={0}
+        >
+          <option
+            value=""
+          />
+          <option
+            value={1}
+          >
+            1
+          </option>
+          <option
+            value={2}
+          >
+            2
+          </option>
+          <option
+            value={3}
+          >
+            3
+          </option>
+          <option
+            value={4}
+          >
+            4
+          </option>
+          <option
+            value={5}
+          >
+            5
+          </option>
+        </Selector>
+        <Selector
+          handleChange={[Function]}
+          id="grade"
+          label="Grade"
+          name="grade-select"
+          native={true}
+          value=""
+        >
+          <option
+            value=""
+          />
+          <option
+            value="GRADE_5_5"
+          >
+            5.5
+          </option>
+          <option
+            value="GRADE_5_6"
+          >
+            5.6
+          </option>
+          <option
+            value="GRADE_5_7"
+          >
+            5.7
+          </option>
+          <option
+            value="GRADE_5_8"
+          >
+            5.8
+          </option>
+          <option
+            value="GRADE_5_9"
+          >
+            5.9
+          </option>
+          <option
+            value="GRADE_5_10ab"
+          >
+            5.10ab
+          </option>
+          <option
+            value="GRADE_5_10cd"
+          >
+            5.10cd
+          </option>
+          <option
+            value="GRADE_5_11ab"
+          >
+            5.11ab
+          </option>
+          <option
+            value="GRADE_5_11cd"
+          >
+            5.11cd
+          </option>
+          <option
+            value="GRADE_5_12ab"
+          >
+            5.12ab
+          </option>
+          <option
+            value="GRADE_5_12cd"
+          >
+            5.12cd
+          </option>
+          <option
+            value="GRADE_5_13ab"
+          >
+            5.13ab
+          </option>
+          <option
+            value="GRADE_5_13cd"
+          >
+            5.13cd
+          </option>
+          <option
+            value="GRADE_5_14ab"
+          >
+            5.14ab
+          </option>
+          <option
+            value="GRADE_5_14cd"
+          >
+            5.14cd
+          </option>
+          <option
+            value="GRADE_5_15ab"
+          >
+            5.15ab
+          </option>
+          <option
+            value="GRADE_5_15cd"
+          >
+            5.15cd
+          </option>
+        </Selector>
+        <Input
+          autoCapitalize="true"
+          error={false}
+          fullWidth={true}
+          helpText="0/140 characters used."
+          id="review"
+          name=""
+          onChange={[Function]}
+          placeholder=""
+          rows={4}
+          type="text"
+          value=""
+        />
+      </React.Fragment>
+    }
+    handleSubmit={[Function]}
+    icon={
+      <div
+        style={
+          Object {
+            "display": "inline",
+            "paddingBottom": "10px",
+          }
+        }
+      >
+        <Memo(GradeIcon)
+          fontSize="small"
+        />
+        <Memo(GradeIcon)
+          fontSize="small"
+        />
+        <Memo(GradeIcon)
+          fontSize="small"
+        />
+        <Memo(GradeIcon)
+          fontSize="small"
+        />
+        <Memo(GradeIcon)
+          fontSize="small"
+        />
+      </div>
+    }
+    id="ratingAdd"
+    title={
+      <div
+        style={
+          Object {
+            "display": "inline",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "float": "left",
+              "marginRight": "25px",
+              "marginTop": "5px",
+            }
+          }
+        >
+          Add rating
+        </div>
+        <div
+          style={
+            Object {
+              "float": "right",
+              "marginLeft": "25px",
+            }
+          }
+        >
+          <WithStyles(ForwardRef(Button))
+            onClick={[Function]}
+            type="button"
+            variant="outlined"
+          >
+            Cancel
+          </WithStyles(ForwardRef(Button))>
+        </div>
+      </div>
+    }
+  />
+</TransitionModal>
+`;

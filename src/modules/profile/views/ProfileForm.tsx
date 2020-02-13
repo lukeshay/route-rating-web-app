@@ -303,6 +303,7 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
 
   return (
     <Form
+      id="profile"
       buttonText="Update Account"
       formInputs={formInputs}
       handleSubmit={handleSubmit}

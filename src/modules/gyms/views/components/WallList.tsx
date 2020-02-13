@@ -76,13 +76,21 @@ const WallRow: React.FC<IWallRowProps> = ({
       onClick={(): void | Promise<void> => onRowClick(id)}
       data-test-id="wall-row-test-id"
     >
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell id="wallName" className={cellClass} onRightClick={handleRightClick}>
         {name}
       </Cell>
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="wallRoutes"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {routes ? routes.length : 0}
       </Cell>
-      <Cell className={cellClass} onRightClick={handleRightClick}>
+      <Cell
+        id="wallTypes"
+        className={cellClass}
+        onRightClick={handleRightClick}
+      >
         {types}
       </Cell>
       {canEdit && (
@@ -120,18 +128,23 @@ const WallList: React.FC<IWallListProps> = ({
 
   return (
     <Table
+      id="walls"
       head={
         <TableRow>
-          <Cell key="wall" className={cellClass}>
+          <Cell key="wall" id="wall" className={cellClass}>
             Wall
           </Cell>
-          <Cell key="routes" className={cellClass}>
+          <Cell key="routes" id="routes" className={cellClass}>
             Routes
           </Cell>
-          <Cell key="type" className={cellClass}>
+          <Cell key="type" id="type" className={cellClass}>
             Type
           </Cell>
-          {canEdit && <Cell key="edit">Options</Cell>}
+          {canEdit && (
+            <Cell key="edit" id="edit">
+              Options
+            </Cell>
+          )}
         </TableRow>
       }
       body={

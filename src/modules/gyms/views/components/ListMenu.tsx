@@ -36,6 +36,7 @@ const ListMenu: React.FC<IListMenuProps> = ({
       <OptionsIcon />
     </Button>
     <RRMenu
+      id="optionsMenu"
       anchor={optionsAnchor}
       onClose={onOptionsClose}
       open={Boolean(optionsAnchor)}

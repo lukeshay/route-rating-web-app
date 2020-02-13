@@ -57,6 +57,7 @@ const WallAddPage: React.FC<IWallAddPageProps> = ({
   if (gym.id !== "") {
     return (
       <TransitionModal
+        id="wallAdd"
         open={open}
         handleClose={handleClose}
         style={{ width: "475px" }}

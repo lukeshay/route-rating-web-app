@@ -168,6 +168,7 @@ const WallForm: React.FC<IWallFormProps> = ({
 
   return (
     <Form
+      id="wall"
       title={FormHead}
       formInputs={FormInputs}
       buttonText={submitButtonText}

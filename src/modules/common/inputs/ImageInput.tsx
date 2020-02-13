@@ -47,6 +47,7 @@ const ImageInput: React.FunctionComponent<IImageInputProps> = ({
           type="file"
           onChange={onChange}
           style={{ display: "none" }}
+          data-testid={`${id}-select-input-test-id`}
         />
         <label htmlFor={id}>{children}</label>
       </div>

@@ -14,10 +14,15 @@ export interface ISimpleTableProps extends IStandardProps {
 const SimpleTable: React.FC<ISimpleTableProps> = ({
   head,
   body,
-  testId
+  testId,
+  id
 }): JSX.Element => {
   return (
-    <TableContainer component={Paper} data-test-id={testId}>
+    <TableContainer
+      component={Paper}
+      data-test-id={testId}
+      data-testid={`${id}-table-test-id`}
+    >
       <Table>
         <TableHead>{head}</TableHead>
         <TableBody>{body}</TableBody>

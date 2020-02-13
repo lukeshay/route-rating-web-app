@@ -32,7 +32,8 @@ const Input: React.FC<IPropsInput> = ({
   rows,
   testId,
   type,
-  value
+  value,
+  ...rest
 }): JSX.Element => (
   <TextField
     autoCapitalize={autoCapitalize}
@@ -54,6 +55,8 @@ const Input: React.FC<IPropsInput> = ({
     type={type}
     value={(value || "").toString()}
     variant="outlined"
+    data-testid={`${id}-input-test-id`}
+    {...rest}
   />
 );
 
