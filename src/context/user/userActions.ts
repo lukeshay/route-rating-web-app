@@ -47,9 +47,10 @@ export async function signIn(
 
 export async function createUser(
   dispatch: Dispatch<IUserContextAction>,
-  newUser: User
+  newUser: User,
+  recaptcha: string
 ): Promise<void | Response> {
-  const createUserResponse = await UserApi.createUser(newUser);
+  const createUserResponse = await UserApi.createUser(newUser, recaptcha);
 
   return !(createUserResponse instanceof Response) || createUserResponse.ok
     ? await signIn(dispatch, newUser.username, newUser.password, false)

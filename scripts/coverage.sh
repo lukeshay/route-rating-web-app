@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yarn test:cov
+yarn test:cov --disable-progress

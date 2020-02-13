@@ -4,9 +4,9 @@ WORKDIR /app
 COPY . .
 
 RUN apk add --no-cache bash
-RUN yarn
-RUN yarn build
-RUN yarn global add serve
+RUN yarn --disable-progress
+RUN yarn build --disable-progress
+RUN yarn global add serve --disable-progress
 RUN chmod 755 scripts/*
 
 EXPOSE 80

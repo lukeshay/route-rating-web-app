@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yarn validate
+yarn validate --disable-progress

@@ -9,6 +9,9 @@ import Button from "../../common/buttons/ButtonSecondary";
 import Form from "../../common/forms/Form";
 import Input from "../../common/inputs/Input";
 import { ErrorResponse } from "../../../types/responses";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useViewContext } from "../../../context/view/viewStore";
+import { toast } from "react-toastify";
 
 export interface IPropsSignUpForm {
   handleSignInClick(event: any): void;
@@ -18,6 +21,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   props: IPropsSignUpForm
 ): JSX.Element => {
   const { dispatch } = useUserContext();
+  const { state: viewState } = useViewContext();
   const [firstName, setFirstName] = React.useState<string>("");
   const [lastName, setLastName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
@@ -38,6 +42,10 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
     string
   >("");
+  const [recaptchaColor, setRecaptchaColor] = React.useState<"dark" | "light">(
+    viewState.theme === "DARK_THEME" ? "dark" : "light"
+  );
+  const [recaptchResponse, setRecaptchResponse] = React.useState<string>("");
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
@@ -114,6 +122,10 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   }, [password, repeatPassword]);
 
+  React.useEffect(() => {
+    setRecaptchaColor(viewState.theme === "DARK_THEME" ? "dark" : "light");
+  }, [viewState]);
+
   const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
@@ -139,21 +151,29 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   };
 
+  const handleCaptchaChange = (key): void => {
+    setRecaptchResponse(key);
+  };
+
   async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
 
     if (validatePhoneNumber() && validateEmail() && validatePassword()) {
-      const response = await UserActions.createUser(dispatch, {
-        city,
-        country: "United States",
-        email: email.toLowerCase(),
-        firstName,
-        lastName,
-        password,
-        phoneNumber,
-        state,
-        username
-      } as User);
+      const response = await UserActions.createUser(
+        dispatch,
+        {
+          city,
+          country: "United States",
+          email: email.toLowerCase(),
+          firstName,
+          lastName,
+          password,
+          phoneNumber,
+          state,
+          username
+        } as User,
+        recaptchResponse
+      );
 
       if (!response) {
         ResponseUtils.toastIfNotOk(
@@ -161,7 +181,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
           "Error creating user. Please try again."
         );
       } else if (!ResponseUtils.isOk(response)) {
-        const errorBody: ErrorResponse = await response.json();
+        const errorBody: ErrorResponse & User = await response.json();
 
         if (ResponseUtils.isEmailTaken(errorBody)) {
           setEmailMessage("Email is taken.");
@@ -170,6 +190,8 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         if (ResponseUtils.isUsernameTaken(errorBody)) {
           setUsernameMessage("Username is taken.");
         }
+      } else {
+        toast.success("Your account has been created.");
       }
     }
   }
@@ -255,6 +277,12 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         onChange={handleChange}
         helpText={repeatPasswordMessage}
         type="password"
+      />
+      <ReCAPTCHA
+        id="recaptcha"
+        theme={recaptchaColor}
+        sitekey="6Le5a9gUAAAAAFEDmpv_rTn1GI01_nzkGFPkEd5Y"
+        onChange={handleCaptchaChange}
       />
     </React.Fragment>
   );
