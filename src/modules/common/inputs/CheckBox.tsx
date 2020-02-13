@@ -29,6 +29,7 @@ const CheckBox: React.FunctionComponent<ICheckBoxProps> = ({
           onChange={onChange}
           value={value}
           color={color}
+          data-testid={`${id}-checkbox-test-id`}
         />
       }
       label={label}

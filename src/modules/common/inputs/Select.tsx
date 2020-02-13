@@ -70,6 +70,7 @@ const Selector: React.FC<ISelectorProps> = ({
             id,
             name
           }}
+          data-testid={`${id}-select-test-id`}
         >
           {children}
         </Select>

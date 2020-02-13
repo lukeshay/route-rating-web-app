@@ -46,7 +46,8 @@ const Form: React.FC<IFormProps> = ({
   helpElements,
   icon,
   testId,
-  title
+  title,
+  id
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -57,9 +58,14 @@ const Form: React.FC<IFormProps> = ({
         <Typography component="h1" variant="h5">
           {title}
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmit}
+          data-testid={`${id}-form-test-id`}
+        >
           {formInputs}
           <Button
+            id="submit"
             type="submit"
             fullWidth={true}
             variant="contained"

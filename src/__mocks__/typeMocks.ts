@@ -95,11 +95,15 @@ export const mockGymsState: IGymsContextState = {
   page: { content: [testGymOne, testGymTwo] } as GymPageType
 };
 
-export const mockViewState: IViewContextState = {
+export const darkDesktopState: IViewContextState = {
   mobile: false,
   theme: "DARK_THEME"
 };
 
-export const mockUserState: IUserContextState = {
+export const signedInEditorState: IUserContextState = {
   user: testUserEditor
+};
+
+export const signedOutState: IUserContextState = {
+  user: null
 };

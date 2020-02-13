@@ -281,6 +281,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   return (
     <React.Fragment>
       <Form
+        id="signUp"
         buttonText="Create Account"
         formInputs={formInputs}
         handleSubmit={handleSubmit}

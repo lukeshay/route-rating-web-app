@@ -1,29 +1,27 @@
 import React from "react";
 import * as TypeMocks from "../../../../__mocks__/typeMocks";
-import { mountToJson } from "enzyme-to-json";
-import { mount } from "../../../../../configs/setupEnzyme";
+import { shallowToJson } from "enzyme-to-json";
+import { shallow } from "../../../../../configs/setupEnzyme";
 import GymPage from "../GymPage";
-import Wrapper from "../../../../__mocks__/Wrapper";
+import TestComponentWrapper from "../../../../__mocks__/TestComponentWrapper";
+
+let wrapper;
 
 describe("<GymPage />", () => {
-  it("should render correctly when editor.", () => {
-    const gymPage = mount(
-      <Wrapper
+  beforeEach(() => {
+    wrapper = shallow(
+      <TestComponentWrapper
         gymsState={TypeMocks.mockGymsState}
         location={`/gyms/${TypeMocks.testGymOne.id}`}
-        userState={TypeMocks.mockUserState}
-        viewState={TypeMocks.mockViewState}
+        userState={TypeMocks.signedInEditorState}
+        viewState={TypeMocks.darkDesktopState}
       >
         <GymPage />
-      </Wrapper>
+      </TestComponentWrapper>
     );
+  });
 
-    expect(mountToJson(gymPage)).toMatchSnapshot();
-
-    gymPage.find(`tr[id='${TypeMocks.testWallOne.id}']`).simulate("click");
-    expect(mountToJson(gymPage)).toMatchSnapshot();
-
-    gymPage.find(`tr[id='${TypeMocks.testRouteOne.id}']`).simulate("click");
-    expect(mountToJson(gymPage)).toMatchSnapshot();
+  it("should render correctly when editor.", () => {
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });

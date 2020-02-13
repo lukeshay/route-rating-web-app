@@ -45,6 +45,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
 
   return (
     <Table
+      id="rating"
       body={[
         <RouteInformationRow key="route" label="Route" text={name} />,
         <RouteInformationRow key="type" label="Type" text={types} />,

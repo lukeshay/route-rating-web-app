@@ -96,6 +96,7 @@ const SignInForm: React.FC<IPropsLogInForm> = (props): JSX.Element => {
 
   return (
     <Form
+      id="signIn"
       buttonText="Sign in"
       formInputs={formInputs}
       handleSubmit={handleSubmit}

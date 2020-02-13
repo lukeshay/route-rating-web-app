@@ -4,7 +4,7 @@ export interface IStandardProps {
   children?: React.ReactNode;
   className?: string;
   color?: "primary" | "secondary" | "default";
-  id?: string;
+  id: string;
   name?: string;
   testId?: string;
 }

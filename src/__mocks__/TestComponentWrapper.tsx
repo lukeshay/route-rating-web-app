@@ -8,7 +8,7 @@ import GymsStoreMock from "./gymsStoreMock";
 import ViewStoreMock from "./viewStoreMock";
 import UserStoreMock from "./userStoreMock";
 
-export interface IWrapperProps {
+export interface ITestComponentWrapperProps {
   children: React.ReactNode;
   gymsState: IGymsContextState;
   location: string;
@@ -16,7 +16,7 @@ export interface IWrapperProps {
   viewState: IViewContextState;
 }
 
-const Wrapper: React.FC<IWrapperProps> = ({
+const TestComponentWrapper: React.FC<ITestComponentWrapperProps> = ({
   children,
   gymsState,
   location,
@@ -36,4 +36,4 @@ const Wrapper: React.FC<IWrapperProps> = ({
   );
 };
 
-export default Wrapper;
+export default TestComponentWrapper;

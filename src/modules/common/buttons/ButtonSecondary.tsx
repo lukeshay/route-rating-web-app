@@ -25,6 +25,7 @@ const ButtonSecondary: React.FC<IButtonProps> = ({
       size={size}
       onClick={onClick}
       data-test-id={testId}
+      data-testid={`${id}-button-test-id`}
       {...rest}
     >
       {children}

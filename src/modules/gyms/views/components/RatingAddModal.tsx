@@ -148,6 +148,7 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
       style={{ width: "475px" }}
     >
       <Form
+        id="ratingAdd"
         title={FormHead}
         formInputs={FormBody}
         buttonText="Save"

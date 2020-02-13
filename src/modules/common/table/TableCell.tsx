@@ -14,7 +14,12 @@ const Cell: React.FC<ITableCellProps> = ({
   onRightClick
 }): JSX.Element => {
   return (
-    <TableCell id={id} className={className} onContextMenu={onRightClick}>
+    <TableCell
+      id={id}
+      className={className}
+      onContextMenu={onRightClick}
+      data-testid={`${id}-cell-test-id`}
+    >
       {children}
     </TableCell>
   );

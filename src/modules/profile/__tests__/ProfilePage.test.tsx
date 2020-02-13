@@ -1,63 +1,87 @@
 import React from "react";
 import ProfilePage from "../ProfilePage";
-import { IUserContextState } from "../../../context/user/userStore";
-import { mount, shallow } from "../../../../configs/setupEnzyme";
-import UserStoreMock from "../../../__mocks__/userStoreMock";
-import * as TypeMocks from "../../../__mocks__/typeMocks";
+import * as TestUtils from "../../../__mocks__/testUtils";
 
-describe("<ProfilePage /> ", () => {
-  it("should render sign up form.", function() {
-    const mockState: IUserContextState = { user: null };
+const validateFullUserForm = (wrapper: TestUtils.RenderResult) => {
+  expect(wrapper.queryAllByTestId("firstName-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("lastName-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("username-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("email-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("phoneNumber-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("city-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("state-input-test-id")).toBeDefined();
+  expect(wrapper.queryAllByTestId("password-input-test-id")).toBeDefined();
+  expect(
+    wrapper.queryAllByTestId("repeatPassword-input-test-id")
+  ).toBeDefined();
+};
 
-    const profilePage = shallow(
-      <UserStoreMock state={mockState} dispatch={() => {}}>
-        <ProfilePage />
-      </UserStoreMock>
-    );
+describe("<ProfilePage />", () => {
+  describe("when someone is logged in", () => {
+    let wrapper: TestUtils.RenderResult;
 
-    expect(profilePage.find("#signIn")).toBeDefined();
-    expect(profilePage.find("#firstName")).toBeDefined();
-    expect(profilePage.find("#lastName")).toBeDefined();
-    expect(profilePage.find("#email")).toBeDefined();
-    expect(profilePage.find("#phoneNumber")).toBeDefined();
-    expect(profilePage.find("#password")).toBeDefined();
-    expect(profilePage.find("#repeatPassword")).toBeDefined();
+    beforeEach(() => {
+      wrapper = TestUtils.renderSignedInDesktop(<ProfilePage />, {});
+    });
+
+    afterEach(() => {
+      TestUtils.cleanup();
+    });
+
+    it("should render profile form.", () => {
+      expect(wrapper.queryByTestId("profile-form-test-id")).toBeDefined();
+      expect(wrapper.queryByText("Your profile")).toBeDefined();
+      expect(wrapper.queryByText("Sign out")).toBeDefined();
+      validateFullUserForm(wrapper);
+    });
+
+    it("should render sign up form when signing out.", function() {
+      expect(wrapper.queryByTestId("profile-form-test-id")).toBeDefined();
+      expect(wrapper.queryByText("Your profile")).toBeDefined();
+
+      const signOutButton = wrapper.getByText("Sign out");
+
+      TestUtils.fireEvent.click(signOutButton);
+
+      expect(wrapper.queryByTestId("signUp-form-test-id")).toBeDefined();
+      expect(wrapper.queryByText("Sign up")).toBeDefined();
+      expect(wrapper.queryByText("Sign in")).toBeDefined();
+      validateFullUserForm(wrapper);
+    });
   });
 
-  it("should render sign in form.", () => {
-    const mockState: IUserContextState = {
-      user: null
-    };
+  describe("when no one is logged in", () => {
+    let wrapper: TestUtils.RenderResult;
 
-    const profilePage = mount(
-      <UserStoreMock state={mockState} dispatch={() => {}}>
-        <ProfilePage />
-      </UserStoreMock>
-    );
+    beforeEach(() => {
+      wrapper = TestUtils.renderSignedOutDesktop(<ProfilePage />, {});
+    });
 
-    profilePage.find("button[id='signIn']").simulate("click");
+    afterEach(() => {
+      TestUtils.cleanup();
+    });
 
-    expect(profilePage.find("#signUp")).toBeDefined();
-    expect(profilePage.find("#email")).toBeDefined();
-    expect(profilePage.find("#password")).toBeDefined();
-    expect(profilePage.find("#rememberMe")).toBeDefined();
-  });
+    it("should render sign up form.", function() {
+      expect(wrapper.queryByTestId("signUp-form-test-id")).toBeDefined();
+      expect(wrapper.queryByText("Sign up")).toBeDefined();
+      expect(wrapper.queryByText("Sign in")).toBeDefined();
+      validateFullUserForm(wrapper);
+    });
 
-  it("should render profile form.", () => {
-    const mockState: IUserContextState = {
-      user: TypeMocks.testUserEditor
-    };
+    it("should render sign in form.", function() {
+      expect(wrapper.queryByTestId("signUp-form-test-id")).toBeDefined();
+      expect(wrapper.queryByText("Sign up")).toBeDefined();
 
-    const profilePage = mount(
-      <UserStoreMock state={mockState} dispatch={() => {}}>
-        <ProfilePage />
-      </UserStoreMock>
-    );
+      const signInButton = wrapper.getByText("Sign in");
 
-    expect(profilePage.find("#signOut")).toBeDefined();
-    expect(profilePage.find("#firstName")).toBeDefined();
-    expect(profilePage.find("#lastName")).toBeDefined();
-    expect(profilePage.find("#email")).toBeDefined();
-    expect(profilePage.find("#phoneNumber")).toBeDefined();
+      TestUtils.fireEvent.click(signInButton);
+
+      expect(wrapper.queryByTestId("signIn-form-test-id")).toBeDefined();
+      expect(wrapper.queryAllByText("Sign in")).toHaveLength(2);
+      expect(wrapper.queryByText("Sign up")).toBeDefined();
+      expect(wrapper.queryByTestId("username-input-test-id")).toBeDefined();
+      expect(wrapper.queryByTestId("password-input-test-id")).toBeDefined();
+      expect(wrapper.queryByTestId("phoneNumber-input-test-id")).toBeNull();
+    });
   });
 });

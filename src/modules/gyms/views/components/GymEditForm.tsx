@@ -10,6 +10,7 @@ import Button from "../../../common/buttons/Button";
 import Form from "../../../common/forms/Form";
 import ImageInput from "../../../common/inputs/ImageInput";
 import Input from "../../../common/inputs/Input";
+import ToolTipBottom from "../../../common/tooltip/ToolTipBottom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -193,15 +194,20 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
         id="photo"
         onChange={handleChange}
       >
-        <Button
-          variant="contained"
-          component="span"
-          fullWidth={false}
-          color="primary"
+        <ToolTipBottom
+          text="The optimal image ration is 8Hx10W. This photo will be the primary image on your gym page."
+          id="gymLogo"
         >
-          <PublishIcon className={classes.icons} />
-          Upload Gym Photo
-        </Button>
+          <Button
+            variant="contained"
+            component="span"
+            fullWidth={false}
+            color="primary"
+          >
+            <PublishIcon className={classes.icons} />
+            Upload Gym Photo
+          </Button>
+        </ToolTipBottom>
       </ImageInput>
       <Typography variant="h6">Gym Logo</Typography>
       <ImageInput
@@ -213,15 +219,20 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
         id="logo"
         onChange={handleChange}
       >
-        <Button
-          variant="contained"
-          component="span"
-          fullWidth={false}
-          color="primary"
+        <ToolTipBottom
+          text="This is not currently being used but will be in the future!"
+          id="gymPhoto"
         >
-          <PublishIcon className={classes.icons} />
-          Upload Gym Logo
-        </Button>
+          <Button
+            variant="contained"
+            component="span"
+            fullWidth={false}
+            color="primary"
+          >
+            <PublishIcon className={classes.icons} />
+            Upload Gym Logo
+          </Button>
+        </ToolTipBottom>
       </ImageInput>
       <Input
         placeholder="Name"
@@ -319,6 +330,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
 
   return (
     <Form
+      id="gymEdit"
       buttonText={"Save"}
       formInputs={FormInputs}
       handleSubmit={handleSubmitWrapper}

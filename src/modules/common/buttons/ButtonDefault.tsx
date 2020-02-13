@@ -23,6 +23,7 @@ const ButtonDefault: React.FC<IButtonProps> = ({
       fullWidth={fullWidth}
       size={size}
       onClick={onClick}
+      data-testid={`${id}-button-test-id`}
       {...rest}
     >
       {children}

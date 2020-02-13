@@ -7,6 +7,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import React from "react";
+import { IStandardProps } from "../standardProps";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface ITransitionModalProps {
+export interface ITransitionModalProps extends IStandardProps {
   open: boolean;
   children: React.ReactNode;
   style?: any;
@@ -37,6 +38,7 @@ const TransitionModal: React.FC<ITransitionModalProps> = ({
   open,
   handleClose,
   style,
+  id,
   children
 }): JSX.Element => {
   const classes = useStyles();
@@ -50,6 +52,7 @@ const TransitionModal: React.FC<ITransitionModalProps> = ({
       BackdropProps={{
         timeout: 500
       }}
+      data-testid={`${id}-modal-test-id`}
     >
       <Fade in={open}>
         <div className={classes.paper} style={style}>

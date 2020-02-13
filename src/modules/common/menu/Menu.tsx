@@ -27,6 +27,7 @@ const RRMenu: React.FC<IMenuProps> = ({
         open={open}
         onClose={onClose}
         TransitionComponent={Fade}
+        data-testid={`${id}-menu-test-id`}
       >
         {children}
       </Menu>
