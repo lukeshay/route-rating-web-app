@@ -1,4 +1,4 @@
-import Button from "@material-ui/core/Button";
+import MUIButton from "@material-ui/core/Button";
 import React from "react";
 
 export interface IButtonProps {
@@ -14,7 +14,7 @@ export interface IButtonProps {
   onClick?(event: any): void | Promise<void>;
 }
 
-const ButtonDefault: React.FC<IButtonProps> = ({
+const Button: React.FC<IButtonProps> = ({
   children,
   color,
   component,
@@ -29,7 +29,7 @@ const ButtonDefault: React.FC<IButtonProps> = ({
 }): JSX.Element => {
   if (component) {
     return (
-      <Button
+      <MUIButton
         id={id}
         color={color}
         variant={variant}
@@ -42,11 +42,11 @@ const ButtonDefault: React.FC<IButtonProps> = ({
         {...rest}
       >
         {children}
-      </Button>
+      </MUIButton>
     );
   } else {
     return (
-      <Button
+      <MUIButton
         id={id}
         color={color}
         type={type}
@@ -58,12 +58,12 @@ const ButtonDefault: React.FC<IButtonProps> = ({
         {...rest}
       >
         {children}
-      </Button>
+      </MUIButton>
     );
   }
 };
 
-ButtonDefault.defaultProps = {
+Button.defaultProps = {
   color: "default",
   disabled: false,
   fullWidth: true,
@@ -72,4 +72,4 @@ ButtonDefault.defaultProps = {
   variant: "contained"
 };
 
-export default ButtonDefault;
+export default Button;
