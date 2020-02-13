@@ -59,6 +59,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
   if (gym.id !== "" && wallId !== "") {
     return (
       <TransitionModal
+        id="routeAdd"
         open={open}
         handleClose={handleClose}
         style={{ width: "475px" }}

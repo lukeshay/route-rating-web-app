@@ -143,6 +143,7 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
   );
   return (
     <TransitionModal
+      id="ratingAdd"
       open={open}
       handleClose={handleClose}
       style={{ width: "475px" }}

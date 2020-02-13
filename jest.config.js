@@ -1,7 +1,6 @@
 module.exports = {
   collectCoverageFrom: [
-    "**/src/**/*.{ts,tsx}",
-    "!**/node_modules/**",
+    "src/**/*.{ts,tsx}",
     "!**/*.d.ts",
     "!**/types/**",
     "!**/__mocks__/**",

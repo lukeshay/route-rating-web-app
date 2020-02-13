@@ -57,6 +57,7 @@ const WallEditPage: React.FC<IWallEditPageProps> = ({
 
   return (
     <TransitionModal
+      id="wallEdit"
       open={open}
       handleClose={handleClose}
       style={{ width: "475px" }}

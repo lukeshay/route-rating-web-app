@@ -59,6 +59,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
 
   return (
     <TransitionModal
+      id="routeEdit"
       open={open}
       handleClose={handleClose}
       style={{ width: "475px" }}
