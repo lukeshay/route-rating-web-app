@@ -46,9 +46,12 @@ export async function getUser(): Promise<void | Response> {
     .catch(handleError);
 }
 
-export async function createUser(user: User): Promise<void | Response> {
+export async function createUser(
+  user: User,
+  recaptcha: string
+): Promise<void | Response> {
   return fetch(baseUrl + "users/new", {
-    body: JSON.stringify(user),
+    body: JSON.stringify({ ...user, recaptcha }),
     headers: {
       "Content-Type": "application/json",
       Authorization: Cookies.getJwtToken(),

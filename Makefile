@@ -3,17 +3,19 @@ TAG=$(shell git rev-parse --short HEAD)
 default: build
 
 clean:
-	rm -rf coverage
 	docker rmi web-app:${TAG} -f
 
 full-clean: clean
-	rm -rf node_modules
+	rm -rf node_modules coverage dist
 
 tag:
 	docker tag web-app:${TAG} web-app:latest
 
 build:
 	docker build -t web-app:${TAG} . || exit 1
+
+build-prod:
+	docker build -f Dockerfile.prod -t web-app:${TAG} . || exit 1
 
 test:
 	docker run --entrypoint ./scripts/test.sh web-app:${TAG} || exit 1

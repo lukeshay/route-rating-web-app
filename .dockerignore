@@ -15,3 +15,7 @@ Jenkinsfile
 Dockerfile
 .gitignore
 Makefile
+junit.xml
+junit.xml
+docker-compose.yml
+Dockerfile.prod
