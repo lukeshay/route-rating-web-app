@@ -11,6 +11,10 @@ void setBuildStatus(String message, String state) {
 pipeline {
   agent any
 
+  environment {
+    GOOGLE_API_KEY= credentials('jenkins-google-api-key')
+  }
+
   stages {
     stage('Build') {
       steps {
