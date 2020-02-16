@@ -2,7 +2,7 @@ const { resolve } = require("path");
 const { CheckerPlugin } = require("awesome-typescript-loader");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ProvidePlugin } = require("webpack");
+const { ProvidePlugin, EnvironmentPlugin } = require("webpack");
 
 module.exports = {
   resolve: {
@@ -57,7 +57,8 @@ module.exports = {
     }),
     new ProvidePlugin({
       React: "react"
-    })
+    }),
+    new EnvironmentPlugin(["recaptchaKey"])
   ],
   externals: {
     react: "React",

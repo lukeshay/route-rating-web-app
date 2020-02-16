@@ -281,7 +281,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
       <ReCAPTCHA
         id="recaptcha"
         theme={recaptchaColor}
-        sitekey="6Le5a9gUAAAAAFEDmpv_rTn1GI01_nzkGFPkEd5Y"
+        sitekey={process.env.recaptchaKey}
         onChange={handleCaptchaChange}
       />
     </React.Fragment>
