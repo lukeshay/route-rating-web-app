@@ -211,15 +211,6 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
       />
       <Input
         autoComplete="phone-number"
-        helpText={usernameMessage}
-        id="username"
-        onChange={handleChange}
-        placeholder="Username"
-        type="text"
-        value={username}
-      />
-      <Input
-        autoComplete="phone-number"
         helpText={phoneNumberMessage}
         id="phoneNumber"
         onChange={handleChange}
@@ -235,24 +226,6 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
         placeholder="City"
         type="text"
         value={city}
-      />
-      <Input
-        autoComplete="state"
-        helpText={stateMessage}
-        id="state"
-        onChange={handleChange}
-        placeholder="State"
-        type="text"
-        value={state}
-      />
-      <Input
-        autoComplete="state"
-        helpText={stateMessage}
-        id="state"
-        onChange={handleChange}
-        placeholder="State"
-        type="text"
-        value={state}
       />
       <Input
         autoComplete="state"

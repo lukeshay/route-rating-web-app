@@ -18,6 +18,7 @@ import NavigationBar from "./modules/navigation/NavigationBar";
 import React from "react";
 import Router from "./Router";
 import ToggleSwitch from "@material-ui/core/Switch";
+import { User } from "./types";
 
 const App: React.FC = (): JSX.Element => {
   const { state: userState, dispatch: userDispatch } = useUserContext();
