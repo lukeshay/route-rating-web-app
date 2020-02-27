@@ -24,7 +24,7 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   const [city, setCity] = React.useState<string>(user.city);
   const [cityMessage] = React.useState<string>('');
   const [state, setState] = React.useState<string>(user.state);
-  const [stateMessage] = React.useState<string>('');
+  const [stateMessage, setStateMessage] = React.useState<string>('');
   const [username, setUsername] = React.useState<string>(user.username);
   const [usernameMessage, setUsernameMessage] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>(
@@ -39,6 +39,7 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
   const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
     string
   >('');
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
@@ -121,8 +122,9 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
 
   async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
+    setLoading(true);
 
-    if (validatePhoneNumber() && validateEmail() && validatePassword()) {
+    if (validatePhoneNumber() && validateEmail()) {
       const response = await UserActions.updateUser(userDispatch, {
         city,
         email: email.toLowerCase(),
@@ -137,22 +139,28 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
       if (!response) {
         ResponseUtils.toastIfNotOk(
           response,
-          'Error creating user. Please try again.'
+          'Error updating user. Please try again.'
         );
       } else if (!ResponseUtils.isOk(response)) {
-        const errorBody: ErrorResponse = await response.json();
+        const body: User = await response.json();
 
-        if (ResponseUtils.isEmailTaken(errorBody)) {
-          setEmailMessage('Email is taken.');
+        if (body.email) {
+          setEmailMessage(body.email);
         }
-
-        if (ResponseUtils.isUsernameTaken(errorBody)) {
-          setUsernameMessage('Username is taken.');
+        if (body.username) {
+          setUsernameMessage(body.username);
+        }
+        if (body.password) {
+          setPasswordMessage(body.password);
+        }
+        if (body.state) {
+          setStateMessage(body.state);
         }
       } else {
         toast.success('User updated.');
       }
     }
+    setLoading(false);
   }
 
   const handleChange = async (event: InputEvent): Promise<void> => {
@@ -208,6 +216,15 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
         placeholder="Email"
         type="text"
         value={email}
+      />
+      <Input
+        autoComplete="username"
+        helpText={usernameMessage}
+        id="username"
+        onChange={handleChange}
+        placeholder="Username"
+        type="text"
+        value={username}
       />
       <Input
         autoComplete="phone-number"

@@ -8,6 +8,7 @@ import { IStandardProps } from '../standardProps';
 
 export interface IFormProps extends IStandardProps {
   buttonText: string;
+  disabled?: boolean;
   formInputs: React.ReactNode;
   handleSubmit(event: any): Promise<void> | void;
   helpElements?: React.ReactNode[];
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Form: React.FC<IFormProps> = ({
   buttonText,
+  disabled,
   formInputs,
   handleSubmit,
   helpElements,
@@ -70,6 +72,7 @@ const Form: React.FC<IFormProps> = ({
             fullWidth={true}
             variant="contained"
             data-test-id="submit-button-test-id"
+            disabled={disabled}
           >
             {buttonText}
           </Button>

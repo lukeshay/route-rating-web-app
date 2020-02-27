@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserContext } from '../../context/user/userStore';
-import ProfileForm from './views/v2/ProfileForm';
+import ProfileForm from './views/ProfileForm';
 import SignInForm from './views/SignInForm';
 import SignUpForm from './views/SignUpForm';
 
