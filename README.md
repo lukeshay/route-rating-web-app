@@ -1,12 +1,15 @@
-<h1 align="center">Welcome to Route Rating Web App 👋</h1>
+<h1 align="center">Welcome to Route Rating Web Application 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/LukeShay/route-rating.wiki.git" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
   <a href="https://github.com/LukeShay/route-rating-web-app/blob/master/LICENSE" target="_blank">
     <img alt="License: LGPL" src="https://img.shields.io/badge/License-LGPL-yellow.svg" />
   </a>
 </p>
 
-> Web application repository for the Route Rating application.
+> Web application for Route Rating.
 
 ### 🏠 [Homepage](http://lukeshay.com)
 
@@ -37,7 +40,7 @@ yarn test
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/LukeShay/route-rating-web-app/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/LukeShay/route-rating-web-app/issues). You can also take a look at the [contributing guide](https://github.com/LukeShay/route-rating/wiki/Contribution).
 
 ## Show your support
 
