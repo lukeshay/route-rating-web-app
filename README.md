@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Route Rating Web Application 👋</h1>
 <p>
-  ![Build Status](https://jenkins.ops.lukeshay.com/job/Deploy/job/rest-api-deploy/badge/icon.svg)
+  ![Build Status](https://jenkins.ops.lukeshay.com/job/Deploy/job/web-app-deploy/badge/icon.svg)
   <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/LukeShay/route-rating.wiki.git" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
