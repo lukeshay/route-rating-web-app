@@ -8,7 +8,6 @@ import * as ResponseUtils from '../../../utils/responseUtils';
 import Button from '../../common/buttons/ButtonSecondary';
 import Form from '../../common/forms/Form';
 import Input from '../../common/inputs/Input';
-import { ErrorResponse } from '../../../types/responses';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useViewContext } from '../../../context/view/viewStore';
 import { toast } from 'react-toastify';
@@ -208,7 +207,6 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
       }
     }
     setLoading(false);
-
   }
 
   const formInputs: JSX.Element = (

@@ -7,7 +7,6 @@ import Button from '../../common/buttons/ButtonSecondary';
 import Form from '../../common/forms/Form';
 import Input from '../../common/inputs/Input';
 import * as ResponseUtils from '../../../utils/responseUtils';
-import { ErrorResponse } from '../../../types/responses';
 import { toast } from 'react-toastify';
 import * as RegexUtils from '../../../utils/regexUtils';
 

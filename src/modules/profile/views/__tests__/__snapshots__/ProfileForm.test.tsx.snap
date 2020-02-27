@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileForm should render correctly. 1`] = `
+<Form
+  buttonText="Update Account"
+  disabled={false}
+  formInputs={
+    <React.Fragment>
+      <Input
+        autoCapitalize="true"
+        autoComplete="first-name"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="firstName"
+        name=""
+        onChange={[Function]}
+        placeholder="First Name"
+        type="text"
+        value="Name"
+      />
+      <Input
+        autoCapitalize="true"
+        autoComplete="last-name"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="lastName"
+        name=""
+        onChange={[Function]}
+        placeholder="Last Name"
+        type="text"
+        value="Last"
+      />
+      <Input
+        autoComplete="email"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="email"
+        name=""
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+        value="email"
+      />
+      <Input
+        autoComplete="username"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="username"
+        name=""
+        onChange={[Function]}
+        placeholder="Username"
+        type="text"
+        value="username"
+      />
+      <Input
+        autoComplete="phone-number"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="phoneNumber"
+        name=""
+        onChange={[Function]}
+        placeholder="Phone Number"
+        type="text"
+        value="1111111111"
+      />
+      <Input
+        autoComplete="city"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="city"
+        name=""
+        onChange={[Function]}
+        placeholder="City"
+        type="text"
+        value="Ames"
+      />
+      <Input
+        autoComplete="state"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="state"
+        name=""
+        onChange={[Function]}
+        placeholder="State"
+        type="text"
+        value="IA"
+      />
+      <Input
+        autoComplete="password"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="password"
+        name=""
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+      <Input
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="repeatPassword"
+        name=""
+        onChange={[Function]}
+        placeholder="Repeat Password"
+        type="password"
+        value=""
+      />
+    </React.Fragment>
+  }
+  handleSubmit={[Function]}
+  icon={<Memo(AccountCircleIcon) />}
+  id="profile"
+  title={
+    <div
+      style={
+        Object {
+          "display": "inline",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "float": "left",
+            "marginRight": "25px",
+            "marginTop": "5px",
+          }
+        }
+      >
+        Your profile
+      </div>
+      <div
+        style={
+          Object {
+            "float": "right",
+            "marginLeft": "25px",
+          }
+        }
+      >
+        <ButtonSecondary
+          disabled={false}
+          fullWidth={true}
+          id="signOut"
+          onClick={[Function]}
+          size="medium"
+          type="button"
+          variant="outlined"
+        >
+          Sign out
+        </ButtonSecondary>
+      </div>
+    </div>
+  }
+/>
+`;
