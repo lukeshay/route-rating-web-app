@@ -150,6 +150,9 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
         if (body.username) {
           setUsernameMessage(body.username);
         }
+        if (body.phoneNumber) {
+          setPhoneNumberMessage(body.phoneNumber);
+        }
         if (body.password) {
           setPasswordMessage(body.password);
         }

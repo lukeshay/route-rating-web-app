@@ -2,7 +2,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import * as UserActions from '../../../context/user/userActions';
 import { useUserContext } from '../../../context/user/userStore';
-import { ButtonEvent, InputEvent, User } from '../../../types';
+import { ButtonEvent, InputEvent, RecaptchaUser, User } from '../../../types';
 import * as RegexUtils from '../../../utils/regexUtils';
 import * as ResponseUtils from '../../../utils/responseUtils';
 import Button from '../../common/buttons/ButtonSecondary';
@@ -29,7 +29,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   const [city, setCity] = React.useState<string>('');
   const [cityMessage] = React.useState<string>('');
   const [state, setState] = React.useState<string>('');
-  const [stateMessage] = React.useState<string>('');
+  const [stateMessage, setStateMessage] = React.useState<string>('');
   const [username, setUsername] = React.useState<string>('');
   const [usernameMessage, setUsernameMessage] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>('');
@@ -46,6 +46,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     viewState.theme === 'DARK_THEME' ? 'dark' : 'light'
   );
   const [recaptchResponse, setRecaptchResponse] = React.useState<string>('');
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
@@ -157,6 +158,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
 
   async function handleSubmit(event: ButtonEvent): Promise<void> {
     event.preventDefault();
+    setLoading(true);
 
     if (validatePhoneNumber() && validateEmail() && validatePassword()) {
       const response = await UserActions.createUser(
@@ -181,19 +183,32 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
           'Error creating user. Please try again.'
         );
       } else if (!ResponseUtils.isOk(response)) {
-        const errorBody: ErrorResponse & User = await response.json();
+        const body: RecaptchaUser = await response.json();
 
-        if (ResponseUtils.isEmailTaken(errorBody)) {
-          setEmailMessage('Email is taken.');
+        if (body.email) {
+          setEmailMessage(body.email);
         }
-
-        if (ResponseUtils.isUsernameTaken(errorBody)) {
-          setUsernameMessage('Username is taken.');
+        if (body.username) {
+          setUsernameMessage(body.username);
+        }
+        if (body.phoneNumber) {
+          setPhoneNumberMessage(body.phoneNumber);
+        }
+        if (body.password) {
+          setPasswordMessage(body.password);
+        }
+        if (body.state) {
+          setStateMessage(body.state);
+        }
+        if (body.recaptchaResponse) {
+          toast.error('Could not validate recaptcha.');
         }
       } else {
         toast.success('Your account has been created.');
       }
     }
+    setLoading(false);
+
   }
 
   const formInputs: JSX.Element = (
@@ -283,6 +298,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         theme={recaptchaColor}
         sitekey="6Le5a9gUAAAAAFEDmpv_rTn1GI01_nzkGFPkEd5Y"
         onChange={handleCaptchaChange}
+        key={loading}
       />
     </React.Fragment>
   );
@@ -315,6 +331,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         handleSubmit={handleSubmit}
         icon={<LockOutlinedIcon />}
         title={title}
+        disabled={loading}
       />
       <div style={{ height: '50px' }} />
     </React.Fragment>
