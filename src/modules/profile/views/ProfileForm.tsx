@@ -299,6 +299,7 @@ const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
       handleSubmit={handleSubmit}
       icon={<AccountCircleIcon />}
       title={title}
+      disabled={loading}
     />
   );
 };
