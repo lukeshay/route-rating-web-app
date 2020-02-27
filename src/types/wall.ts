@@ -1,4 +1,4 @@
-import { Route } from "./route";
+import { Route } from './route';
 
 export interface Wall {
   gymId: string;

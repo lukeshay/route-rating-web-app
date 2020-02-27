@@ -1,37 +1,54 @@
-# Table of Contents
+<h1 align="center">Welcome to Route Rating Web App 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/LukeShay/route-rating-web-app/blob/master/LICENSE" target="_blank">
+    <img alt="License: LGPL" src="https://img.shields.io/badge/License-LGPL-yellow.svg" />
+  </a>
+</p>
 
-- [Table of Contents](#table-of-contents)
-- [React Spring Web App](#react-spring-web-app)
-- [Directions](#directions)
-  - [Pre-requisites](#pre-requisites)
-  - [Front End](#front-end)
-- [Digital Ocean Referral](#digital-ocean-referral)
-- [Contributions](#contributions)
+> Web application repository for the Route Rating application.
 
-# React Spring Web App
+### 🏠 [Homepage](http://lukeshay.com)
 
-As I learn ReactJS, I am going to be working on this web app. I am creating a website for rating climbing routes at climbing gyms. Climbing gyms will be able to make a 'page' and add their walls and their routes/boulders to the corresponding walls. Customers will then be able to log into this application and rate the route/boulder and say what they would grade it. The application will then average those ratings and display them.
+### ✨ [Demo](http://lukeshay.com)
 
-# Directions
+## Install
 
-## Pre-requisites
+```sh
+yarn install
+```
 
--   Node
--   npm
--   linux machine
--   pm2
+## Usage
 
-## Front End
+```sh
+yarn start
+```
 
-1. After cloning the repository, cd into the front end folder
-2. Run `yarn start` to run the development server
-3. Run `yarn build` to generate the production build
-4. run `./pm2StartScript` to build and serve using pm2
+## Run tests
 
-# Digital Ocean Referral
+```sh
+yarn test
+```
 
-[Digital Ocean](https://m.do.co/c/17eeaaa0e7fb)
+## Author
 
-# Contributions
+👤 **Luke Shay**
 
-If you would like to contribute or do not have a github account please send me an email at shay.luke17@gmail.com. If you do not personally want to commit, but have a suggestion, please leave an [issue](https://github.com/LukeShay/react-spring-web-app/issues) using the correct template.
+* Github: [@LukeShay](https://github.com/LukeShay)
+* LinkedIn: [@luke-shay](https://linkedin.com/in/luke-shay)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/LukeShay/route-rating-web-app/issues). 
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2020 [Luke Shay](https://github.com/LukeShay).<br />
+This project is [LGPL](https://github.com/LukeShay/route-rating-web-app/blob/master/LICENSE) licensed.
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

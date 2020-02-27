@@ -4,26 +4,26 @@ import {
   Modal,
   Theme,
   createStyles,
-  makeStyles
-} from "@material-ui/core";
-import React from "react";
-import { IStandardProps } from "../standardProps";
+  makeStyles,
+} from '@material-ui/core';
+import React from 'react';
+import { IStandardProps } from '../standardProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      outline: 0
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      outline: 0,
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
+      border: '2px solid #000',
       boxShadow: theme.shadows[5],
       outline: 0,
-      padding: theme.spacing(2, 4, 3)
-    }
+      padding: theme.spacing(2, 4, 3),
+    },
   })
 );
 
@@ -39,7 +39,7 @@ const TransitionModal: React.FC<ITransitionModalProps> = ({
   handleClose,
   style,
   id,
-  children
+  children,
 }): JSX.Element => {
   const classes = useStyles();
   return (
@@ -50,7 +50,7 @@ const TransitionModal: React.FC<ITransitionModalProps> = ({
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500
+        timeout: 500,
       }}
       data-testid={`${id}-modal-test-id`}
     >

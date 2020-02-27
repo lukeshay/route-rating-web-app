@@ -6,6 +6,6 @@ export interface Route {
   id: string;
   name: string;
   setter: string;
-  types: Array<"BOULDER" | "TOP_ROPE" | "LEAD" | "AUTO_BELAY">;
+  types: Array<'BOULDER' | 'TOP_ROPE' | 'LEAD' | 'AUTO_BELAY'>;
   wallId: string;
 }

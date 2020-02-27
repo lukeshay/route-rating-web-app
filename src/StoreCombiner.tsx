@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export interface IStoreCombinerProps {
   stores: Array<React.JSXElementConstructor<React.PropsWithChildren<any>>>;
@@ -7,7 +7,7 @@ export interface IStoreCombinerProps {
 
 const StoreCombiner: React.FunctionComponent<IStoreCombinerProps> = ({
   stores,
-  children
+  children,
 }): JSX.Element => {
   return (
     <>

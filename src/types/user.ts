@@ -1,4 +1,4 @@
-import { Session } from "./session";
+import { Session } from './session';
 
 export interface User {
   authority: string;
@@ -14,4 +14,8 @@ export interface User {
   session: Session | null;
   state: string;
   username: string;
+}
+
+export interface RecaptchaUser extends User {
+  recaptchaResponse: string;
 }

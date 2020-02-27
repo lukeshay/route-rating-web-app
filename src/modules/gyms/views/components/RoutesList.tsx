@@ -3,29 +3,29 @@ import {
   TableRow,
   Theme,
   createStyles,
-  makeStyles
-} from "@material-ui/core";
-import React from "react";
+  makeStyles,
+} from '@material-ui/core';
+import React from 'react';
 import {
   ButtonEvent,
   ElementEvent,
   HandlerReturn,
-  Route
-} from "../../../../types";
-import * as GradeUtils from "../../../../utils/gradeUtils";
-import Table from "../../../common/table/Table";
-import * as GymUtils from "../../../../utils/gymUtils";
-import ListMenu from "./ListMenu";
-import Cell from "../../../common/table/TableCell";
+  Route,
+} from '../../../../types';
+import * as GradeUtils from '../../../../utils/gradeUtils';
+import Table from '../../../common/table/Table';
+import * as GymUtils from '../../../../utils/gymUtils';
+import ListMenu from './ListMenu';
+import Cell from '../../../common/table/TableCell';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icons: {
-      paddingRight: theme.spacing(1)
+      paddingRight: theme.spacing(1),
     },
     editCellStyle: {
-      width: "15%"
-    }
+      width: '15%',
+    },
   })
 );
 
@@ -44,7 +44,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   onDeleteClick,
   onEditClick,
   onRowClick,
-  route
+  route,
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -169,7 +169,7 @@ const RoutesList: React.FC<IRoutesListProps> = ({
   handleEditRoute,
   handleRowClick,
   mobile,
-  routes
+  routes,
 }): JSX.Element => {
   const classes = useStyles();
 

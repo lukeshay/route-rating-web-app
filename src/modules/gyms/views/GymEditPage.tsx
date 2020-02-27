@@ -1,12 +1,12 @@
-import React from "react";
-import * as ReactRouter from "react-router";
-import { toast } from "react-toastify";
-import * as GymsActions from "../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../context/gyms/gymsStore";
-import { useUserContext } from "../../../context/user/userStore";
-import { Routes } from "../../../routes";
-import { Gym } from "../../../types";
-import GymEditForm from "./components/GymEditForm";
+import React from 'react';
+import * as ReactRouter from 'react-router';
+import { toast } from 'react-toastify';
+import * as GymsActions from '../../../context/gyms/gymsActions';
+import { useGymsContext } from '../../../context/gyms/gymsStore';
+import { useUserContext } from '../../../context/user/userStore';
+import { Routes } from '../../../routes';
+import { Gym } from '../../../types';
+import GymEditForm from './components/GymEditForm';
 
 const GymEditPage: React.FC = (): JSX.Element => {
   const history = ReactRouter.useHistory();
@@ -18,7 +18,7 @@ const GymEditPage: React.FC = (): JSX.Element => {
 
   React.useEffect(() => {
     const gymId = history.location.pathname
-      .split("/")
+      .split('/')
       .splice(-1)
       .pop();
 
@@ -36,7 +36,7 @@ const GymEditPage: React.FC = (): JSX.Element => {
     ) {
       setGym(tempGym);
     } else {
-      history.push(Routes.GYMS + "/" + gymId);
+      history.push(Routes.GYMS + '/' + gymId);
     }
   }, [gymsState, history, userState]);
 
@@ -47,13 +47,13 @@ const GymEditPage: React.FC = (): JSX.Element => {
   ): void => {
     GymsActions.updateGym(gymsDispatch, {
       id: gym.id,
-      ...updatedGym
+      ...updatedGym,
     } as Gym).then((responseOne) => {
       if (!photo && !logo) {
         if (responseOne instanceof Response && responseOne.status === 200) {
-          toast.success("Gym updated.");
+          toast.success('Gym updated.');
         } else {
-          toast.error("Error updating gym.");
+          toast.error('Error updating gym.');
         }
       } else if (photo && logo) {
         GymsActions.updateGymPhoto(gymsDispatch, photo, gym).then(
@@ -64,7 +64,7 @@ const GymEditPage: React.FC = (): JSX.Element => {
               !(responseOne instanceof Response) ||
               responseOne.status !== 200
             ) {
-              toast.error("Error updating gym.");
+              toast.error('Error updating gym.');
             }
           }
         );
@@ -76,9 +76,9 @@ const GymEditPage: React.FC = (): JSX.Element => {
               responseOne instanceof Response &&
               responseOne.status === 200
             ) {
-              toast.success("Gym updated.");
+              toast.success('Gym updated.');
             } else {
-              toast.error("Error updating gym.");
+              toast.error('Error updating gym.');
             }
           }
         );
@@ -91,9 +91,9 @@ const GymEditPage: React.FC = (): JSX.Element => {
               responseOne instanceof Response &&
               responseOne.status === 200
             ) {
-              toast.success("Gym updated.");
+              toast.success('Gym updated.');
             } else {
-              toast.error("Error updating gym.");
+              toast.error('Error updating gym.');
             }
           }
         );
@@ -106,9 +106,9 @@ const GymEditPage: React.FC = (): JSX.Element => {
               responseOne instanceof Response &&
               responseOne.status === 200
             ) {
-              toast.success("Gym updated.");
+              toast.success('Gym updated.');
             } else {
-              toast.error("Error updating gym.");
+              toast.error('Error updating gym.');
             }
           }
         );

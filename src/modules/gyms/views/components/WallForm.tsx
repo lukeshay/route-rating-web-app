@@ -5,20 +5,20 @@ import {
   FormLabel,
   Theme,
   createStyles,
-  makeStyles
-} from "@material-ui/core";
-import React from "react";
-import { Wall } from "../../../../types";
-import Form from "../../../common/forms/Form";
-import CheckBox from "../../../common/inputs/CheckBox";
-import Input from "../../../common/inputs/Input";
+  makeStyles,
+} from '@material-ui/core';
+import React from 'react';
+import { Wall } from '../../../../types';
+import Form from '../../../common/forms/Form';
+import CheckBox from '../../../common/inputs/CheckBox';
+import Input from '../../../common/inputs/Input';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     helpText: {
       color: theme.palette.error.main,
-      padding: "5px"
-    }
+      padding: '5px',
+    },
   })
 );
 
@@ -39,39 +39,39 @@ const WallForm: React.FC<IWallFormProps> = ({
   submitButtonText,
   typesMessage,
   handleCancel,
-  handleSubmit
+  handleSubmit,
 }): JSX.Element => {
   const classes = useStyles();
 
   const [name, setName] = React.useState<string>(wall.name);
   const [lead, setLead] = React.useState<boolean>(
-    wall.types && wall.types.filter((element) => element === "LEAD").length > 0
+    wall.types && wall.types.filter((element) => element === 'LEAD').length > 0
   );
   const [topRope, setTopRope] = React.useState<boolean>(
     wall.types &&
-      wall.types.filter((element) => element === "TOP_ROPE").length > 0
+      wall.types.filter((element) => element === 'TOP_ROPE').length > 0
   );
   const [autoBelay, setAutoBelay] = React.useState<boolean>(
     wall.types &&
-      wall.types.filter((element) => element === "AUTO_BELAY").length > 0
+      wall.types.filter((element) => element === 'AUTO_BELAY').length > 0
   );
   const [boulder, setBoulder] = React.useState<boolean>(
     wall.types &&
-      wall.types.filter((element) => element === "BOULDER").length > 0
+      wall.types.filter((element) => element === 'BOULDER').length > 0
   );
 
   const handleChange = async (event: any): Promise<void> => {
     const { id, value } = event.target;
 
-    if (id === "name") {
+    if (id === 'name') {
       setName(value);
-    } else if (id === "topRope") {
+    } else if (id === 'topRope') {
       setTopRope(!topRope);
-    } else if (id === "lead") {
+    } else if (id === 'lead') {
       setLead(!lead);
-    } else if (id === "autoBelay") {
+    } else if (id === 'autoBelay') {
       setAutoBelay(!autoBelay);
-    } else if (id === "boulder") {
+    } else if (id === 'boulder') {
       setBoulder(!boulder);
     }
   };
@@ -82,30 +82,30 @@ const WallForm: React.FC<IWallFormProps> = ({
     const types: string[] = [];
 
     if (lead) {
-      types.push("LEAD");
+      types.push('LEAD');
     }
 
     if (topRope) {
-      types.push("TOP_ROPE");
+      types.push('TOP_ROPE');
     }
 
     if (autoBelay) {
-      types.push("AUTO_BELAY");
+      types.push('AUTO_BELAY');
     }
 
     if (boulder) {
-      types.push("BOULDER");
+      types.push('BOULDER');
     }
 
     handleSubmit({ name, types } as Wall);
   };
 
   const FormHead: JSX.Element = (
-    <div style={{ display: "inline" }}>
-      <div style={{ float: "left", marginRight: "25px", marginTop: "5px" }}>
+    <div style={{ display: 'inline' }}>
+      <div style={{ float: 'left', marginRight: '25px', marginTop: '5px' }}>
         {formHeadText}
       </div>
-      <div style={{ float: "right", marginLeft: "25px" }}>
+      <div style={{ float: 'right', marginLeft: '25px' }}>
         <Button onClick={handleCancel} type="button" variant="outlined">
           Cancel
         </Button>

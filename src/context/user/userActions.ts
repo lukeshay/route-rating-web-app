@@ -1,18 +1,18 @@
-import * as UserApi from "../../api/userApi";
-import { AuthBody, User } from "../../types";
-import * as Cookies from "../../utils/cookiesUtils";
-import Types from "./userActionTypes";
-import { Dispatch } from "react";
-import { IUserContextAction } from "./userStore";
+import * as UserApi from '../../api/userApi';
+import { AuthBody, User } from '../../types';
+import * as Cookies from '../../utils/cookiesUtils';
+import Types from './userActionTypes';
+import { Dispatch } from 'react';
+import { IUserContextAction } from './userStore';
 
 export async function signOut(
   dispatch: Dispatch<IUserContextAction>
 ): Promise<void> {
-  Cookies.setJwtToken("");
+  Cookies.setJwtToken('');
 
   dispatch({
     actionType: Types.SIGN_OUT,
-    user: null
+    user: null,
   });
 }
 
@@ -38,7 +38,7 @@ export async function signIn(
 
     dispatch({
       actionType: Types.SIGN_IN,
-      user
+      user,
     });
   }
 
@@ -68,7 +68,7 @@ export async function updateUser(
 
     dispatch({
       actionType: Types.UPDATE_USER,
-      user: updatedUserBody
+      user: updatedUserBody,
     });
   }
 
@@ -85,7 +85,7 @@ export const loadUserFromCookies = async (
 
     dispatch({
       actionType: Types.SIGN_IN,
-      user: getUserBody
+      user: getUserBody,
     });
   }
 

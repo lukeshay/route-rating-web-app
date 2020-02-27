@@ -1,17 +1,17 @@
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import React from "react";
-import * as UserActions from "../../../context/user/userActions";
-import { useUserContext } from "../../../context/user/userStore";
-import { ButtonEvent, InputEvent, User } from "../../../types";
-import * as RegexUtils from "../../../utils/regexUtils";
-import * as ResponseUtils from "../../../utils/responseUtils";
-import Button from "../../common/buttons/ButtonSecondary";
-import Form from "../../common/forms/Form";
-import Input from "../../common/inputs/Input";
-import { ErrorResponse } from "../../../types/responses";
-import ReCAPTCHA from "react-google-recaptcha";
-import { useViewContext } from "../../../context/view/viewStore";
-import { toast } from "react-toastify";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import React from 'react';
+import * as UserActions from '../../../context/user/userActions';
+import { useUserContext } from '../../../context/user/userStore';
+import { ButtonEvent, InputEvent, User } from '../../../types';
+import * as RegexUtils from '../../../utils/regexUtils';
+import * as ResponseUtils from '../../../utils/responseUtils';
+import Button from '../../common/buttons/ButtonSecondary';
+import Form from '../../common/forms/Form';
+import Input from '../../common/inputs/Input';
+import { ErrorResponse } from '../../../types/responses';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useViewContext } from '../../../context/view/viewStore';
+import { toast } from 'react-toastify';
 
 export interface IPropsSignUpForm {
   handleSignInClick(event: any): void;
@@ -22,82 +22,82 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
 ): JSX.Element => {
   const { dispatch } = useUserContext();
   const { state: viewState } = useViewContext();
-  const [firstName, setFirstName] = React.useState<string>("");
-  const [lastName, setLastName] = React.useState<string>("");
-  const [email, setEmail] = React.useState<string>("");
-  const [emailMessage, setEmailMessage] = React.useState<string>("");
-  const [city, setCity] = React.useState<string>("");
-  const [cityMessage] = React.useState<string>("");
-  const [state, setState] = React.useState<string>("");
-  const [stateMessage] = React.useState<string>("");
-  const [username, setUsername] = React.useState<string>("");
-  const [usernameMessage, setUsernameMessage] = React.useState<string>("");
-  const [phoneNumber, setPhoneNumber] = React.useState<string>("");
+  const [firstName, setFirstName] = React.useState<string>('');
+  const [lastName, setLastName] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('');
+  const [emailMessage, setEmailMessage] = React.useState<string>('');
+  const [city, setCity] = React.useState<string>('');
+  const [cityMessage] = React.useState<string>('');
+  const [state, setState] = React.useState<string>('');
+  const [stateMessage] = React.useState<string>('');
+  const [username, setUsername] = React.useState<string>('');
+  const [usernameMessage, setUsernameMessage] = React.useState<string>('');
+  const [phoneNumber, setPhoneNumber] = React.useState<string>('');
   const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
-    ""
+    ''
   );
-  const [password, setPassword] = React.useState<string>("");
-  const [passwordMessage, setPasswordMessage] = React.useState<string>("");
-  const [repeatPassword, setRepeatPassword] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>('');
+  const [passwordMessage, setPasswordMessage] = React.useState<string>('');
+  const [repeatPassword, setRepeatPassword] = React.useState<string>('');
   const [repeatPasswordMessage, setRepeatPasswordMessage] = React.useState<
     string
-  >("");
-  const [recaptchaColor, setRecaptchaColor] = React.useState<"dark" | "light">(
-    viewState.theme === "DARK_THEME" ? "dark" : "light"
+  >('');
+  const [recaptchaColor, setRecaptchaColor] = React.useState<'dark' | 'light'>(
+    viewState.theme === 'DARK_THEME' ? 'dark' : 'light'
   );
-  const [recaptchResponse, setRecaptchResponse] = React.useState<string>("");
+  const [recaptchResponse, setRecaptchResponse] = React.useState<string>('');
 
   const validatePassword = (): boolean => {
     if (password.length === 0) {
-      setPasswordMessage("");
+      setPasswordMessage('');
       return false;
     } else if (password.length < 8) {
-      setPasswordMessage("Password must be at least 8 characters long.");
+      setPasswordMessage('Password must be at least 8 characters long.');
       return false;
     } else if (!RegexUtils.containsLowercase(password)) {
-      setPasswordMessage("Password must contain a lower case letter.");
+      setPasswordMessage('Password must contain a lower case letter.');
       return false;
     } else if (!RegexUtils.containsUppercase(password)) {
-      setPasswordMessage("Password must contain an upper case letter.");
+      setPasswordMessage('Password must contain an upper case letter.');
       return false;
     } else if (!RegexUtils.containsNumber(password)) {
-      setPasswordMessage("Password must contain a number.");
+      setPasswordMessage('Password must contain a number.');
       return false;
     } else if (!RegexUtils.containsSpecialCharacter(password)) {
-      setPasswordMessage("Password must contain a special character.");
+      setPasswordMessage('Password must contain a special character.');
       return false;
     } else {
-      setPasswordMessage("");
+      setPasswordMessage('');
       return true;
     }
   };
 
   const validateEmail = (): boolean => {
     if (email.length === 0) {
-      setEmailMessage("");
+      setEmailMessage('');
       return false;
     } else if (!RegexUtils.validEmail(email)) {
-      setEmailMessage("Invalid email.");
+      setEmailMessage('Invalid email.');
       return false;
     } else {
-      setEmailMessage("");
+      setEmailMessage('');
       return true;
     }
   };
 
   const validatePhoneNumber = (): boolean => {
     if (phoneNumber.length === 0) {
-      setPhoneNumberMessage("");
+      setPhoneNumberMessage('');
       return false;
     } else if (
       !RegexUtils.containsOnlyNumbers(phoneNumber) ||
       phoneNumber.length > 10 ||
       phoneNumber.length < 10
     ) {
-      setPhoneNumberMessage("Invalid phone number. Format: ##########");
+      setPhoneNumberMessage('Invalid phone number. Format: ##########');
       return false;
     } else {
-      setPhoneNumberMessage("");
+      setPhoneNumberMessage('');
       return true;
     }
   };
@@ -116,37 +116,37 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
 
   React.useEffect(() => {
     if (repeatPassword !== password) {
-      setRepeatPasswordMessage("Passwords do not match.");
+      setRepeatPasswordMessage('Passwords do not match.');
     } else {
-      setRepeatPasswordMessage("");
+      setRepeatPasswordMessage('');
     }
   }, [password, repeatPassword]);
 
   React.useEffect(() => {
-    setRecaptchaColor(viewState.theme === "DARK_THEME" ? "dark" : "light");
+    setRecaptchaColor(viewState.theme === 'DARK_THEME' ? 'dark' : 'light');
   }, [viewState]);
 
   const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
-    if (id === "firstName") {
+    if (id === 'firstName') {
       setFirstName(value);
-    } else if (id === "lastName") {
+    } else if (id === 'lastName') {
       setLastName(value);
-    } else if (id === "email") {
+    } else if (id === 'email') {
       setEmail(value);
-    } else if (id === "username") {
+    } else if (id === 'username') {
       setUsername(value);
-    } else if (id === "phoneNumber") {
+    } else if (id === 'phoneNumber') {
       setPhoneNumber(value);
-    } else if (id === "city") {
+    } else if (id === 'city') {
       setCity(value);
-    } else if (id === "state") {
+    } else if (id === 'state') {
       setState(value);
-    } else if (id === "password") {
+    } else if (id === 'password') {
       setPassword(value);
-    } else if (id === "repeatPassword") {
+    } else if (id === 'repeatPassword') {
       setRepeatPassword(value);
     }
   };
@@ -163,14 +163,14 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         dispatch,
         {
           city,
-          country: "United States",
+          country: 'United States',
           email: email.toLowerCase(),
           firstName,
           lastName,
           password,
           phoneNumber,
           state,
-          username
+          username,
         } as User,
         recaptchResponse
       );
@@ -178,20 +178,20 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
       if (!response) {
         ResponseUtils.toastIfNotOk(
           response,
-          "Error creating user. Please try again."
+          'Error creating user. Please try again.'
         );
       } else if (!ResponseUtils.isOk(response)) {
         const errorBody: ErrorResponse & User = await response.json();
 
         if (ResponseUtils.isEmailTaken(errorBody)) {
-          setEmailMessage("Email is taken.");
+          setEmailMessage('Email is taken.');
         }
 
         if (ResponseUtils.isUsernameTaken(errorBody)) {
-          setUsernameMessage("Username is taken.");
+          setUsernameMessage('Username is taken.');
         }
       } else {
-        toast.success("Your account has been created.");
+        toast.success('Your account has been created.');
       }
     }
   }
@@ -288,11 +288,11 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
   );
 
   const title: JSX.Element = (
-    <div style={{ display: "inline" }}>
-      <div style={{ float: "left", marginRight: "25px", marginTop: "5px" }}>
+    <div style={{ display: 'inline' }}>
+      <div style={{ float: 'left', marginRight: '25px', marginTop: '5px' }}>
         Sign up
       </div>
-      <div style={{ float: "right", marginLeft: "25px" }}>
+      <div style={{ float: 'right', marginLeft: '25px' }}>
         <Button
           id="signIn"
           onClick={props.handleSignInClick}
@@ -316,7 +316,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         icon={<LockOutlinedIcon />}
         title={title}
       />
-      <div style={{ height: "50px" }} />
+      <div style={{ height: '50px' }} />
     </React.Fragment>
   );
 };

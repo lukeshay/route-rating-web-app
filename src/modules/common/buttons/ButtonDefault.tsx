@@ -1,6 +1,6 @@
-import Button from "@material-ui/core/Button";
-import React from "react";
-import { IButtonProps } from "./IButtonProps";
+import Button from '@material-ui/core/Button';
+import React from 'react';
+import { IButtonProps } from './IButtonProps';
 
 const ButtonDefault: React.FC<IButtonProps> = ({
   id,
@@ -34,9 +34,9 @@ const ButtonDefault: React.FC<IButtonProps> = ({
 ButtonDefault.defaultProps = {
   disabled: false,
   fullWidth: true,
-  size: "medium",
-  type: "button",
-  variant: "contained"
+  size: 'medium',
+  type: 'button',
+  variant: 'contained',
 };
 
 export default ButtonDefault;

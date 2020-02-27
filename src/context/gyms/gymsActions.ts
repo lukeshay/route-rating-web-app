@@ -1,18 +1,18 @@
-import * as GymsApi from "../../api/gymsApi";
-import * as RouteRatingsApi from "../../api/routeRatingsApi";
-import * as RoutesApi from "../../api/routesApi";
-import * as WallsApi from "../../api/wallsApi";
-import { Dispatch } from "react";
+import * as GymsApi from '../../api/gymsApi';
+import * as RouteRatingsApi from '../../api/routeRatingsApi';
+import * as RoutesApi from '../../api/routesApi';
+import * as WallsApi from '../../api/wallsApi';
+import { Dispatch } from 'react';
 import {
   Gym,
   GymPageType,
   Route,
   RouteRating,
   Wall,
-  WallPage
-} from "../../types";
-import { IGymsContextAction } from "./gymsStore";
-import Types from "./gymsActionTypes";
+  WallPage,
+} from '../../types';
+import { IGymsContextAction } from './gymsStore';
+import Types from './gymsActionTypes';
 
 export const loadGymsQuery = (
   dispatch: Dispatch<IGymsContextAction>,
@@ -24,7 +24,7 @@ export const loadGymsQuery = (
       response.json().then((body: GymPageType) => {
         dispatch({
           actionType: Types.LOAD_GYMS,
-          page: body
+          page: body,
         } as IGymsContextAction);
       });
 
@@ -42,7 +42,7 @@ export const loadGymV2 = (
       response.json().then((body: Gym) => {
         dispatch({
           actionType: Types.UPDATE_GYM,
-          gym: body
+          gym: body,
         } as IGymsContextAction);
       });
     }
@@ -62,7 +62,7 @@ export const loadWalls = (
 
         dispatch({
           actionType: Types.UPDATE_GYM,
-          gym
+          gym,
         } as IGymsContextAction);
       });
     }
@@ -90,7 +90,7 @@ export const loadRoutes = (
 
           dispatch({
             actionType: Types.UPDATE_GYM,
-            gym
+            gym,
           } as IGymsContextAction);
         }
       });
@@ -128,7 +128,7 @@ export const updateGymPhoto = async (
       response.json().then((body: Gym) => {
         dispatch({
           actionType: Types.UPDATE_GYM,
-          gym: { ...body, walls: gym.walls }
+          gym: { ...body, walls: gym.walls },
         } as IGymsContextAction);
       });
     }
@@ -147,7 +147,7 @@ export const updateGymLogo = async (
       response.json().then((body: Gym) => {
         dispatch({
           actionType: Types.UPDATE_GYM,
-          gym: { ...body, walls: gym.walls }
+          gym: { ...body, walls: gym.walls },
         } as IGymsContextAction);
       });
     }

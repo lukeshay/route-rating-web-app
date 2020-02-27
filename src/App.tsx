@@ -1,24 +1,24 @@
-import "react-toastify/dist/ReactToastify.css";
-import * as UserActions from "./context/user/userActions";
+import 'react-toastify/dist/ReactToastify.css';
+import * as UserActions from './context/user/userActions';
 import {
   CssBaseline,
   FormControlLabel,
-  ThemeProvider
-} from "@material-ui/core";
+  ThemeProvider,
+} from '@material-ui/core';
 import {
   DARK_THEME,
   LIGHT_THEME,
   Types,
-  useViewContext
-} from "./context/view/viewStore";
-import { darkTheme, getTheme, lightTheme } from "./theme";
-import { ToastContainer } from "react-toastify";
-import { useUserContext } from "./context/user/userStore";
-import NavigationBar from "./modules/navigation/NavigationBar";
-import React from "react";
-import Router from "./Router";
-import ToggleSwitch from "@material-ui/core/Switch";
-import { User } from "./types";
+  useViewContext,
+} from './context/view/viewStore';
+import { darkTheme, getTheme, lightTheme } from './theme';
+import { ToastContainer } from 'react-toastify';
+import { useUserContext } from './context/user/userStore';
+import NavigationBar from './modules/navigation/NavigationBar';
+import React from 'react';
+import Router from './Router';
+import ToggleSwitch from '@material-ui/core/Switch';
+import { User } from './types';
 
 const App: React.FC = (): JSX.Element => {
   const { state: userState, dispatch: userDispatch } = useUserContext();
@@ -48,8 +48,8 @@ const App: React.FC = (): JSX.Element => {
 
     handleResize();
 
-    window.addEventListener("resize", handleResize);
-    return (): void => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return (): void => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -57,14 +57,14 @@ const App: React.FC = (): JSX.Element => {
       style={
         isMobile
           ? {
-              marginLeft: "10px",
-              marginRight: "10px",
-              marginTop: "60px"
+              marginLeft: '10px',
+              marginRight: '10px',
+              marginTop: '60px',
             }
           : {
-              marginLeft: "180px",
-              marginRight: "10px",
-              marginTop: "0px"
+              marginLeft: '180px',
+              marginRight: '10px',
+              marginTop: '0px',
             }
       }
     >
@@ -85,16 +85,16 @@ const App: React.FC = (): JSX.Element => {
                     actionType: Types.UPDATE_VIEW,
                     mobile: viewState.mobile,
                     theme:
-                      viewState.theme === DARK_THEME ? LIGHT_THEME : DARK_THEME
+                      viewState.theme === DARK_THEME ? LIGHT_THEME : DARK_THEME,
                   })
                 }
               />
             }
             label="Dark Mode"
             style={{
-              bottom: "0",
-              marginLeft: "10px",
-              position: "absolute"
+              bottom: '0',
+              marginLeft: '10px',
+              position: 'absolute',
             }}
           />
         </NavigationBar>

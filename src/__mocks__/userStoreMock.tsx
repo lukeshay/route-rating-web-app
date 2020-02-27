@@ -1,5 +1,5 @@
-import { IUserContextState, UserContext } from "../context/user/userStore";
-import React from "react";
+import { IUserContextState, UserContext } from '../context/user/userStore';
+import React from 'react';
 
 export interface IUserStoreMockProps {
   state: IUserContextState;
@@ -9,7 +9,7 @@ export interface IUserStoreMockProps {
 const UserStoreMock: React.FC<IUserStoreMockProps> = ({
   state,
   dispatch,
-  children
+  children,
 }): JSX.Element => (
   <UserContext.Provider value={{ state, dispatch }}>
     {children}

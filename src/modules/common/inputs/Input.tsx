@@ -1,9 +1,9 @@
-import TextField from "@material-ui/core/TextField";
-import React from "react";
-import { IStandardProps } from "../standardProps";
+import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import { IStandardProps } from '../standardProps';
 
 export interface IPropsInput extends IStandardProps {
-  autoCapitalize?: "true" | undefined;
+  autoCapitalize?: 'true' | undefined;
   autoComplete?: string;
   error?: boolean;
   fullWidth?: boolean;
@@ -39,9 +39,9 @@ const Input: React.FC<IPropsInput> = ({
     autoCapitalize={autoCapitalize}
     autoComplete={autoComplete}
     className={className}
-    color={color !== "default" ? color : undefined}
+    color={color !== 'default' ? color : undefined}
     data-test-id={testId}
-    error={helpText !== "" && error}
+    error={helpText !== '' && error}
     fullWidth={fullWidth}
     helperText={helpText}
     id={id}
@@ -53,7 +53,7 @@ const Input: React.FC<IPropsInput> = ({
     onKeyPress={onKeyPress}
     rows={rows}
     type={type}
-    value={(value || "").toString()}
+    value={(value || '').toString()}
     variant="outlined"
     data-testid={`${id}-input-test-id`}
     {...rest}
@@ -63,10 +63,10 @@ const Input: React.FC<IPropsInput> = ({
 Input.defaultProps = {
   error: true,
   fullWidth: true,
-  helpText: "",
-  id: "",
-  name: "",
-  placeholder: ""
+  helpText: '',
+  id: '',
+  name: '',
+  placeholder: '',
 };
 
 export default Input;

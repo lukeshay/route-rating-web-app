@@ -1,9 +1,9 @@
-import { TableCell, TableRow } from "@material-ui/core";
-import React from "react";
-import { Route } from "../../../types";
-import * as GradeUtils from "../../../utils/gradeUtils";
-import * as GymUtils from "../../../utils/gymUtils";
-import Table from "../../common/table/Table";
+import { TableCell, TableRow } from '@material-ui/core';
+import React from 'react';
+import { Route } from '../../../types';
+import * as GradeUtils from '../../../utils/gradeUtils';
+import * as GymUtils from '../../../utils/gymUtils';
+import Table from '../../common/table/Table';
 
 interface IRouteInformationRowProps {
   label: React.ReactNode;
@@ -12,7 +12,7 @@ interface IRouteInformationRowProps {
 
 const RouteInformationRow: React.FC<IRouteInformationRowProps> = ({
   label,
-  text
+  text,
 }): JSX.Element => (
   <TableRow>
     <TableCell>{label}</TableCell>
@@ -25,7 +25,7 @@ export interface IRatingPageProps {
 }
 
 const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
-  route
+  route,
 }): JSX.Element => {
   // const [ratings, setRatings] = React.useState<RouteRating[]>([]);
   const { name, averageGrade, averageRating, setter, holdColor } = route;
@@ -60,7 +60,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
           key="rating"
           label="Average Rating"
           text={averageRating > 0 && Math.round(averageRating * 10) / 10}
-        />
+        />,
       ]}
       testId="rating-table-test-id"
     />

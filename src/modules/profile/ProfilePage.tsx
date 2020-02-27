@@ -1,8 +1,8 @@
-import React from "react";
-import { useUserContext } from "../../context/user/userStore";
-import ProfileForm from "./views/ProfileForm";
-import SignInForm from "./views/SignInForm";
-import SignUpForm from "./views/SignUpForm";
+import React from 'react';
+import { useUserContext } from '../../context/user/userStore';
+import ProfileForm from './views/v2/ProfileForm';
+import SignInForm from './views/SignInForm';
+import SignUpForm from './views/SignUpForm';
 
 const ProfilePage: React.FC = (): JSX.Element => {
   const { state } = useUserContext();

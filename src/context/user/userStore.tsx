@@ -1,6 +1,6 @@
-import React, { Dispatch, Reducer, createContext, useReducer } from "react";
-import { User } from "../../types";
-import Types from "./userActionTypes";
+import React, { Dispatch, Reducer, createContext, useReducer } from 'react';
+import { User } from '../../types';
+import Types from './userActionTypes';
 
 export interface IUserContextState {
   user: User | null;
@@ -33,12 +33,12 @@ const reducer: Reducer<IUserContextState, IUserContextAction> = (
       return { user: action.user };
 
     default:
-      throw new Error("Action type must be defined");
+      throw new Error('Action type must be defined');
   }
 };
 
 const initialState: IUserContextState = {
-  user: null
+  user: null,
 };
 
 export const UserStore: React.FC = ({ children }): JSX.Element => {

@@ -1,20 +1,20 @@
-import { Theme, createStyles, makeStyles } from "@material-ui/core";
-import TableRow from "@material-ui/core/TableRow";
-import React from "react";
-import { ButtonEvent, ElementEvent, Wall } from "../../../../types";
-import Table from "../../../common/table/Table";
-import * as GymUtils from "../../../../utils/gymUtils";
-import ListMenu from "./ListMenu";
-import Cell from "../../../common/table/TableCell";
+import { Theme, createStyles, makeStyles } from '@material-ui/core';
+import TableRow from '@material-ui/core/TableRow';
+import React from 'react';
+import { ButtonEvent, ElementEvent, Wall } from '../../../../types';
+import Table from '../../../common/table/Table';
+import * as GymUtils from '../../../../utils/gymUtils';
+import ListMenu from './ListMenu';
+import Cell from '../../../common/table/TableCell';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icons: {
-      paddingRight: theme.spacing(1)
+      paddingRight: theme.spacing(1),
     },
     editCellStyle: {
-      width: "30%"
-    }
+      width: '30%',
+    },
   })
 );
 
@@ -31,7 +31,7 @@ const WallRow: React.FC<IWallRowProps> = ({
   onRowClick,
   canEdit,
   onEditClick,
-  onDeleteClick
+  onDeleteClick,
 }): JSX.Element => {
   const classes = useStyles();
   const { id, routes, name } = wall;
@@ -120,7 +120,7 @@ const WallList: React.FC<IWallListProps> = ({
   onRowClick,
   canEdit,
   onDeleteWall,
-  onEditClick
+  onEditClick,
 }): JSX.Element => {
   const classes = useStyles();
 

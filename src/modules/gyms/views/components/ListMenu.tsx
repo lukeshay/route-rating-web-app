@@ -1,12 +1,12 @@
-import React from "react";
-import TableCell from "@material-ui/core/TableCell";
-import { Button } from "@material-ui/core";
-import OptionsIcon from "@material-ui/icons/MoreHoriz";
-import RRMenu from "../../../common/menu/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import * as Events from "../../../../types/events";
+import React from 'react';
+import TableCell from '@material-ui/core/TableCell';
+import { Button } from '@material-ui/core';
+import OptionsIcon from '@material-ui/icons/MoreHoriz';
+import RRMenu from '../../../common/menu/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import * as Events from '../../../../types/events';
 
 export interface IListMenuProps {
   iconClass?: string;
@@ -23,7 +23,7 @@ const ListMenu: React.FC<IListMenuProps> = ({
   onEditClick,
   onOptionsClick,
   onOptionsClose,
-  optionsAnchor
+  optionsAnchor,
 }): JSX.Element => (
   <TableCell>
     <Button

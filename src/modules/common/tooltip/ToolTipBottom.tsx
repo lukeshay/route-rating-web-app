@@ -1,12 +1,12 @@
-import React from "react";
-import Tooltip from "@material-ui/core/Tooltip";
-import IToolTipProps from "./toolTipProps";
+import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+import IToolTipProps from './toolTipProps';
 
 const ToolTipBottom: React.FC<IToolTipProps> = ({
   children,
   className,
   id,
-  text
+  text,
 }): JSX.Element => (
   <Tooltip
     title={text}

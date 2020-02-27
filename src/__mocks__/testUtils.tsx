@@ -1,14 +1,14 @@
-import { render, RenderResult } from "@testing-library/react";
-import React from "react";
-import TestComponentWrapperV2 from "./TestComponentWrapperV2";
-import * as TypeMocks from "./typeMocks";
+import { render, RenderResult } from '@testing-library/react';
+import React from 'react';
+import TestComponentWrapperV2 from './TestComponentWrapperV2';
+import * as TypeMocks from './typeMocks';
 
 interface IWrapperProps {
   children: React.ReactNode;
 }
 
 const SignedInDesktop: React.FC<IWrapperProps> = ({
-  children
+  children,
 }): JSX.Element => {
   return (
     <TestComponentWrapperV2
@@ -25,7 +25,7 @@ export const renderSignedInDesktop = (ui, options): RenderResult =>
   render(ui, { wrapper: SignedInDesktop, ...options });
 
 const SignedOutDesktop: React.FC<IWrapperProps> = ({
-  children
+  children,
 }): JSX.Element => {
   return (
     <TestComponentWrapperV2
@@ -41,4 +41,4 @@ const SignedOutDesktop: React.FC<IWrapperProps> = ({
 export const renderSignedOutDesktop = (ui, options): RenderResult =>
   render(ui, { wrapper: SignedOutDesktop, ...options });
 
-export * from "@testing-library/react";
+export * from '@testing-library/react';
