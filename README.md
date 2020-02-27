@@ -10,8 +10,6 @@
 
 ### 🏠 [Homepage](http://lukeshay.com)
 
-### ✨ [Demo](http://lukeshay.com)
-
 ## Install
 
 ```sh
@@ -37,7 +35,7 @@ yarn test
 * Github: [@LukeShay](https://github.com/LukeShay)
 * LinkedIn: [@luke-shay](https://linkedin.com/in/luke-shay)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/LukeShay/route-rating-web-app/issues). 
 
@@ -45,7 +43,7 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 Give a ⭐️ if this project helped you!
 
-## 📝 License
+## License
 
 Copyright © 2020 [Luke Shay](https://github.com/LukeShay).<br />
 This project is [LGPL](https://github.com/LukeShay/route-rating-web-app/blob/master/LICENSE) licensed.
