@@ -45,6 +45,8 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
     }
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
+      setTypesMessage('');
+      setNameMessage('');
       GymsActions.updateRoute(gymsDispatch, newRoute, gym).then(
         (response: Response) => {
           if (response instanceof Response && response.ok) {

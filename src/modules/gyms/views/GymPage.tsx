@@ -328,7 +328,7 @@ const GymPage: React.FC = (): JSX.Element => {
             <WallEditModal
               open={view === 'WALL' && openEdit}
               handleClose={handleCloseEdit}
-              gymId={gymId}
+              gym={gym}
               wall={wall}
             />
           )}

@@ -173,11 +173,11 @@ export const createWall = async (
 export const updateWall = async (
   dispatch: Dispatch<IGymsContextAction>,
   wall: Wall,
-  gymId: string
+  gym: Gym
 ): Promise<void | Response> => {
   return WallsApi.updateWall(wall).then((response: Response) => {
     if (response instanceof Response && response.ok) {
-      return loadGymV2(dispatch, gymId);
+      return loadWalls(dispatch, gym);
     } else {
       return response;
     }
