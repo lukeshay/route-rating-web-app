@@ -26,7 +26,7 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting...'
-        sh 'make lint'
+        sh 'yarn validate'
       }
     }
     stage('Test') {
@@ -53,11 +53,13 @@ pipeline {
   post {
     success {
       setBuildStatus('Build succeeded', 'SUCCESS');
-      sh 'make full-clean'
+      sh 'make clean'
+      sh 'rm -rf dist node_modules coverage'
     }
     failure {
       setBuildStatus('Build failed', 'FAILURE');
-      sh 'make full-clean'
+      sh 'make clean'
+      sh 'rm -rf dist node_modules coverage'
     }
   }
 }

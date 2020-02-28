@@ -8,5 +8,3 @@ services:
     ports:
       - 3000:80
     working_dir: /app
-    environment:
-      - GOOGLE_API_KEY=GOOGLE_API_KEY

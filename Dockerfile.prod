@@ -1,19 +1,10 @@
-FROM node:13-alpine as builder
-
-WORKDIR /app
-COPY . .
-
-RUN yarn global add node-pre-gyp --disable-progress
-RUN yarn --disable-progress
-RUN yarn build --disable-progress
-
 FROM nginx:alpine
 
 COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./dist /usr/share/nginx/html
 
 EXPOSE 80
 
