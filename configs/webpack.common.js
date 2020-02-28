@@ -1,31 +1,35 @@
 const { resolve } = require('path');
-const { CheckerPlugin } = require('awesome-typescript-loader');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { ProvidePlugin, EnvironmentPlugin, DefinePlugin } = require('webpack');
+const { ProvidePlugin, EnvironmentPlugin } = require('webpack');
 
-const SRC = resolve(__dirname, '../', 'src/');
-const NODE_MODULES = resolve(__dirname, '../', 'node_modules/');
+const SRC_DIR = resolve(__dirname, '../', 'src/');
+const NODE_DIR = resolve(__dirname, '../', 'node_modules/');
 
 module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-  context: SRC,
+  context: SRC_DIR,
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader', 'source-map-loader'],
-        exclude: /node_modules/,
+        use: ['babel-loader'],
+        exclude: NODE_DIR,
+        sideEffects: false,
       },
       {
         test: /\.tsx?$/,
-        use: ['babel-loader', 'awesome-typescript-loader'],
+        exclude: [NODE_DIR],
+        use: {
+          loader: 'ts-loader?configFile=tsconfig.webpack.json',
+        },
+        sideEffects: false,
       },
       {
         test: /\.css$/,
-        exclude: NODE_MODULES,
+        exclude: NODE_DIR,
         use: [
           'style-loader',
           {
@@ -43,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: SRC,
+        exclude: SRC_DIR,
         use: ['style-loader', 'css-loader'],
       },
       {
@@ -61,7 +65,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CheckerPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html.ejs',
       favicon: 'favicon.ico',

@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "sourceMap": true
+  },
+  "exclude": ["src/js/__tests__/**/*", "src/js/__mocks__/**/*", "node_modules"]
+}
