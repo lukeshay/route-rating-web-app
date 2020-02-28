@@ -12,7 +12,7 @@ pipeline {
   agent any
 
   environment {
-    GOOGLE_API_KEY= credentials('jenkins-google-api-key')
+    GOOGLE_API_KEY= credentials('jenkins-google-recaptcha-api-key')
   }
 
   stages {
