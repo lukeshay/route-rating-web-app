@@ -1,10 +1,10 @@
-import React from "react";
-import { toast } from "react-toastify";
-import * as GymsActions from "../../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../../context/gyms/gymsStore";
-import { Gym, Wall } from "../../../../types";
-import TransitionModal from "../../../common/modal/Modal";
-import WallForm from "./WallForm";
+import React from 'react';
+import { toast } from 'react-toastify';
+import * as GymsActions from '../../../../context/gyms/gymsActions';
+import { useGymsContext } from '../../../../context/gyms/gymsStore';
+import { Gym, Wall } from '../../../../types';
+import TransitionModal from '../../../common/modal/Modal';
+import WallForm from './WallForm';
 
 export interface IWallAddPageProps {
   gym: Gym;
@@ -15,11 +15,11 @@ export interface IWallAddPageProps {
 const WallAddPage: React.FC<IWallAddPageProps> = ({
   gym,
   open,
-  handleClose
+  handleClose,
 }): JSX.Element => {
   const [wall, setWall] = React.useState<Wall>({} as Wall);
-  const [typesMessage, setTypesMessage] = React.useState<string>("");
-  const [nameMessage, setNameMessage] = React.useState<string>("");
+  const [typesMessage, setTypesMessage] = React.useState<string>('');
+  const [nameMessage, setNameMessage] = React.useState<string>('');
 
   const { dispatch: gymsDispatch } = useGymsContext();
 
@@ -29,38 +29,38 @@ const WallAddPage: React.FC<IWallAddPageProps> = ({
     setWall(newWall);
 
     if (newWall.types.length === 0) {
-      setTypesMessage("Select a type.");
+      setTypesMessage('Select a type.');
     } else {
-      setTypesMessage("");
+      setTypesMessage('');
     }
 
     if (newWall.name.trim().length === 0) {
-      setNameMessage("Name cannot be blank.");
+      setNameMessage('Name cannot be blank.');
     } else {
-      setNameMessage("");
+      setNameMessage('');
     }
 
     if (newWall.types.length !== 0 && newWall.name.trim().length !== 0) {
-      setTypesMessage("");
-      setNameMessage("");
+      setTypesMessage('');
+      setNameMessage('');
       GymsActions.createWall(gymsDispatch, newWall, gym).then((response) => {
         if (response instanceof Response && response.ok) {
           setWall({} as Wall);
           handleClose();
         } else {
-          toast.error("Error updating wall.");
+          toast.error('Error updating wall.');
         }
       });
     }
   };
 
-  if (gym.id !== "") {
+  if (gym.id !== '') {
     return (
       <TransitionModal
         id="wallAdd"
         open={open}
         handleClose={handleClose}
-        style={{ width: "475px" }}
+        style={{ width: '475px' }}
       >
         <WallForm
           formHeadText="Add wall"

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpForm should render correctly. 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [MockFunction],
+      "state": Object {
+        "mobile": false,
+        "theme": "DARK_THEME",
+      },
+    }
+  }
+>
+  <SignUpForm
+    handleSignInClick={[MockFunction]}
+  />
+</ContextProvider>
+`;

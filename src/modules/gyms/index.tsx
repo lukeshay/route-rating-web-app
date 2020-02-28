@@ -1,5 +1,5 @@
-import React from "react";
-import GymsRouter from "./GymsRouter";
+import React from 'react';
+import GymsRouter from './GymsRouter';
 
 const GymsIndex: React.FC = (): JSX.Element => <GymsRouter />;
 

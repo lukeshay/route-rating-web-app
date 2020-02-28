@@ -4,22 +4,22 @@ import {
   InputLabel,
   Theme,
   createStyles,
-  makeStyles
-} from "@material-ui/core";
-import Select from "@material-ui/core/Select";
-import React from "react";
+  makeStyles,
+} from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 120
+      minWidth: 120,
     },
     wrapperOne: {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column"
-    }
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+    },
   })
 );
 
@@ -42,7 +42,7 @@ const Selector: React.FC<ISelectorProps> = ({
   value,
   handleChange,
   native,
-  children
+  children,
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -68,7 +68,7 @@ const Selector: React.FC<ISelectorProps> = ({
           labelWidth={labelWidth}
           inputProps={{
             id,
-            name
+            name,
           }}
           data-testid={`${id}-select-test-id`}
         >
@@ -81,7 +81,7 @@ const Selector: React.FC<ISelectorProps> = ({
 };
 
 Selector.defaultProps = {
-  native: false
+  native: false,
 };
 
 export default Selector;

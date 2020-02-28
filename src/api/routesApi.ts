@@ -1,13 +1,13 @@
-import * as Cookies from "../utils/cookiesUtils";
-import { Route } from "../types";
-import { handleError } from "./apiUtils";
+import * as Cookies from '../utils/cookiesUtils';
+import { Route } from '../types';
+import { handleError } from './apiUtils';
 
-const baseUrl = process.env.BASE_URL + "routes";
+const baseUrl = process.env.BASE_URL + 'routes';
 
 export const getRoutesOfWall = async (
   wallId: string
 ): Promise<void | Response> => {
-  return fetch(baseUrl + "/" + wallId)
+  return fetch(baseUrl + '/' + wallId)
     .then(
       (response: Response): Response => {
         return response;
@@ -20,11 +20,11 @@ export const createRoute = async (route: Route): Promise<void | Response> => {
   return fetch(baseUrl, {
     body: JSON.stringify(route),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "POST"
+    method: 'POST',
   })
     .then(
       (response: Response): Response => {
@@ -38,11 +38,11 @@ export const updateRoute = async (route: Route): Promise<void | Response> => {
   return fetch(baseUrl, {
     body: JSON.stringify(route),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "PUT"
+    method: 'PUT',
   })
     .then(
       (response: Response): Response => {
@@ -56,11 +56,11 @@ export const deleteRoute = async (route: Route): Promise<void | Response> => {
   return fetch(baseUrl, {
     body: JSON.stringify(route),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "DELETE"
+    method: 'DELETE',
   })
     .then(
       (response: Response): Response => {

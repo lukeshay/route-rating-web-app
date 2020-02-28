@@ -1,4 +1,4 @@
-import { Gym, Route, User, Wall } from ".";
+import { Gym, Route, User, Wall } from '.';
 
 export interface WallPage extends Page {
   content: Wall[];

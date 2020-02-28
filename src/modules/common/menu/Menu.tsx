@@ -1,8 +1,8 @@
-import React from "react";
-import { IStandardProps } from "../standardProps";
-import Menu from "@material-ui/core/Menu";
-import Fade from "@material-ui/core/Fade";
-import { ElementEvent } from "../../../types";
+import React from 'react';
+import { IStandardProps } from '../standardProps';
+import Menu from '@material-ui/core/Menu';
+import Fade from '@material-ui/core/Fade';
+import { ElementEvent } from '../../../types';
 
 export interface IMenuProps extends IStandardProps {
   anchor: HTMLElement | null;
@@ -16,7 +16,7 @@ const RRMenu: React.FC<IMenuProps> = ({
   children,
   id,
   onClose,
-  open
+  open,
 }): JSX.Element => {
   return (
     <div>

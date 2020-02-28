@@ -1,16 +1,16 @@
-import MUIButton from "@material-ui/core/Button";
-import React from "react";
+import MUIButton from '@material-ui/core/Button';
+import React from 'react';
 
 export interface IButtonProps {
   children?: React.ReactNode;
-  color?: "default" | "primary" | "secondary";
+  color?: 'default' | 'primary' | 'secondary';
   component?: React.ElementType;
   disabled?: boolean;
   fullWidth?: boolean;
   id?: string;
-  size?: "small" | "medium" | "large" | undefined;
-  type?: "button" | "submit" | "reset" | undefined;
-  variant?: "text" | "outlined" | "contained" | undefined;
+  size?: 'small' | 'medium' | 'large' | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  variant?: 'text' | 'outlined' | 'contained' | undefined;
   onClick?(event: any): void | Promise<void>;
 }
 
@@ -64,12 +64,12 @@ const Button: React.FC<IButtonProps> = ({
 };
 
 Button.defaultProps = {
-  color: "default",
+  color: 'default',
   disabled: false,
   fullWidth: true,
-  size: "medium",
-  type: "button",
-  variant: "contained"
+  size: 'medium',
+  type: 'button',
+  variant: 'contained',
 };
 
 export default Button;

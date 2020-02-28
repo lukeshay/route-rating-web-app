@@ -1,15 +1,15 @@
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import * as React from "react";
+import createStyles from '@material-ui/core/styles/createStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import * as React from 'react';
 
 const useStyles = makeStyles(() =>
   createStyles({
     uploadButtonWrapper: {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      width: "100%"
-    }
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+    },
   })
 );
 
@@ -32,7 +32,7 @@ const ImageInput: React.FunctionComponent<IImageInputProps> = ({
   id,
   multiple,
   src,
-  onChange
+  onChange,
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -46,7 +46,7 @@ const ImageInput: React.FunctionComponent<IImageInputProps> = ({
           multiple={multiple}
           type="file"
           onChange={onChange}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           data-testid={`${id}-select-input-test-id`}
         />
         <label htmlFor={id}>{children}</label>

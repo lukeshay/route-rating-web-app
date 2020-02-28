@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Switch } from "react-router";
-import { AuthRoutes, Routes } from "../../routes";
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import { AuthRoutes, Routes } from '../../routes';
 
-const GymsPage = React.lazy(() => import("./views/GymsPage"));
-const GymPage = React.lazy(() => import("./views/GymPage"));
-const GymEditPage = React.lazy(() => import("./views/GymEditPage"));
+const GymsPage = React.lazy(() => import('./views/GymsPage'));
+const GymPage = React.lazy(() => import('./views/GymPage'));
+const GymEditPage = React.lazy(() => import('./views/GymEditPage'));
 
 const GymRouter: React.FC = (): JSX.Element => (
   <React.Suspense fallback={<div />}>

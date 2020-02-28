@@ -1,5 +1,5 @@
-import { Checkbox, FormControlLabel } from "@material-ui/core";
-import React from "react";
+import { Checkbox, FormControlLabel } from '@material-ui/core';
+import React from 'react';
 
 export interface ICheckBoxProps {
   checked: boolean;
@@ -7,7 +7,7 @@ export interface ICheckBoxProps {
   id: string;
   label: string;
   value: string;
-  color?: "primary" | "secondary" | "default";
+  color?: 'primary' | 'secondary' | 'default';
   onChange?(event: any): Promise<void> | void;
 }
 
@@ -18,7 +18,7 @@ const CheckBox: React.FunctionComponent<ICheckBoxProps> = ({
   value,
   onChange,
   color,
-  label
+  label,
 }): JSX.Element => {
   return (
     <FormControlLabel
@@ -39,7 +39,7 @@ const CheckBox: React.FunctionComponent<ICheckBoxProps> = ({
 };
 
 CheckBox.defaultProps = {
-  color: "default"
+  color: 'default',
 };
 
 export default CheckBox;

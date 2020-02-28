@@ -1,16 +1,16 @@
-import * as Cookies from "../utils/cookiesUtils";
-import { Gym } from "../types";
-import { handleError } from "./apiUtils";
+import * as Cookies from '../utils/cookiesUtils';
+import { Gym } from '../types';
+import { handleError } from './apiUtils';
 
 const baseUrl = process.env.BASE_URL;
-const gymsUrl = baseUrl + "gyms";
-const gymsV2Url = baseUrl + "v2/gyms";
+const gymsUrl = baseUrl + 'gyms';
+const gymsV2Url = baseUrl + 'v2/gyms';
 
 export const getGyms = async (
   query: string,
   page: number
 ): Promise<void | Response> => {
-  return fetch(gymsUrl + "?query=" + query + "&page=" + page)
+  return fetch(gymsUrl + '?query=' + query + '&page=' + page)
     .then(
       (response: Response): Response => {
         return response;
@@ -20,7 +20,7 @@ export const getGyms = async (
 };
 
 export const getGymV2 = async (gymId: string): Promise<void | Response> => {
-  return fetch(gymsV2Url + "/" + gymId)
+  return fetch(gymsV2Url + '/' + gymId)
     .then(
       (response: Response): Response => {
         return response;
@@ -30,14 +30,14 @@ export const getGymV2 = async (gymId: string): Promise<void | Response> => {
 };
 
 export const updateGym = async (updatedGym: Gym): Promise<void | Response> => {
-  return fetch(gymsUrl + "/" + updatedGym.id, {
+  return fetch(gymsUrl + '/' + updatedGym.id, {
     body: JSON.stringify(updatedGym),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "PUT"
+    method: 'PUT',
   })
     .then(
       (response: Response): Response => {
@@ -52,16 +52,16 @@ export const updateGymPhoto = async (
   gymId: string
 ): Promise<void | Response> => {
   const data = new FormData();
-  data.append("file", file);
-  data.append("gymId", gymId);
+  data.append('file', file);
+  data.append('gymId', gymId);
 
-  return fetch(gymsUrl + "/image/gym", {
+  return fetch(gymsUrl + '/image/gym', {
     body: data,
     headers: {
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "POST"
+    method: 'POST',
   })
     .then(
       (response: Response): Response => {
@@ -76,16 +76,16 @@ export const updateGymLogo = async (
   gymId: string
 ): Promise<void | Response> => {
   const data = new FormData();
-  data.append("file", file);
-  data.append("gymId", gymId);
+  data.append('file', file);
+  data.append('gymId', gymId);
 
-  return fetch(gymsUrl + "/image/logo", {
+  return fetch(gymsUrl + '/image/logo', {
     body: data,
     headers: {
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "POST"
+    method: 'POST',
   })
     .then(
       (response: Response): Response => {

@@ -1,12 +1,12 @@
-import * as Cookies from "../utils/cookiesUtils";
-import { RouteRating } from "../types";
-import { handleError } from "./apiUtils";
+import * as Cookies from '../utils/cookiesUtils';
+import { RouteRating } from '../types';
+import { handleError } from './apiUtils';
 
 const baseUrl = process.env.BASE_URL;
-const routeRatingsUrl = baseUrl + "ratings/routes";
+const routeRatingsUrl = baseUrl + 'ratings/routes';
 
 export const getRouteRatings = (routeId: string): Promise<void | Response> => {
-  return fetch(routeRatingsUrl + "/" + routeId)
+  return fetch(routeRatingsUrl + '/' + routeId)
     .then(
       (response: Response): Response => {
         return response;
@@ -21,10 +21,10 @@ export const createRouteRating = (
   return fetch(routeRatingsUrl, {
     body: JSON.stringify(rating),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "POST"
+    method: 'POST',
   });
 };

@@ -1,6 +1,6 @@
-export { AuthBody } from "./authBody";
-export { ButtonEvent, InputEvent, ElementEvent, HandlerReturn } from "./events";
-export { Gym } from "./gym";
+export { AuthBody } from './authBody';
+export { ButtonEvent, InputEvent, ElementEvent, HandlerReturn } from './events';
+export { Gym } from './gym';
 export {
   GymPageType,
   Page,
@@ -8,11 +8,11 @@ export {
   RoutePage,
   Sort,
   UserPage,
-  WallPage
-} from "./page";
-export { Route } from "./route";
-export { RouteRating } from "./rating";
-export { RouteRatingJwt } from "./routeRatingJwt";
-export { Session } from "./session";
-export { User } from "./user";
-export { Wall } from "./wall";
+  WallPage,
+} from './page';
+export { Route } from './route';
+export { RouteRating } from './rating';
+export { RouteRatingJwt } from './routeRatingJwt';
+export { Session } from './session';
+export { RecaptchaUser, User } from './user';
+export { Wall } from './wall';
