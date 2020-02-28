@@ -1,22 +1,22 @@
-import React, { Dispatch, Reducer, createContext, useReducer } from "react";
-import * as Cookies from "../../utils/cookiesUtils";
+import React, { Dispatch, Reducer, createContext, useReducer } from 'react';
+import * as Cookies from '../../utils/cookiesUtils';
 
-export const DARK_THEME = "DARK_THEME";
-export const LIGHT_THEME = "LIGHT_THEME";
+export const DARK_THEME = 'DARK_THEME';
+export const LIGHT_THEME = 'LIGHT_THEME';
 
 export const Types = {
-  UPDATE_VIEW: "UPDATE_VIEW"
+  UPDATE_VIEW: 'UPDATE_VIEW',
 };
 
 export interface IViewContextState {
   mobile: boolean;
-  theme: "DARK_THEME" | "LIGHT_THEME";
+  theme: 'DARK_THEME' | 'LIGHT_THEME';
 }
 
 export interface IViewContextAction {
   actionType: string;
   mobile: boolean;
-  theme: "DARK_THEME" | "LIGHT_THEME";
+  theme: 'DARK_THEME' | 'LIGHT_THEME';
 }
 
 export interface IContextProps {
@@ -38,13 +38,13 @@ const reducer: Reducer<IViewContextState, IViewContextAction> = (
       return { mobile, theme };
 
     default:
-      throw new Error("Action type must be defined");
+      throw new Error('Action type must be defined');
   }
 };
 
 const initialState: IViewContextState = {
   mobile: false,
-  theme: Cookies.getTheme() || DARK_THEME
+  theme: Cookies.getTheme() || DARK_THEME,
 };
 
 export const ViewStore: React.FC = ({ children }): JSX.Element => {

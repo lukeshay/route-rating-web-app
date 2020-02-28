@@ -1,4 +1,4 @@
-import { Gym, Route, User, Wall } from "../types";
+import { Gym, Route, User, Wall } from '../types';
 
 export const isAuthorizedEditor = (gym: Gym, user: User): boolean =>
   gym.authorizedEditors !== undefined &&
@@ -12,27 +12,27 @@ export const getRouteById = (wall: Wall, routeId: string): Route | undefined =>
   wall.routes ? wall.routes.find((route) => route.id === routeId) : undefined;
 
 export const parseTypesToString = (wallTypes: string[]): string => {
-  let types = "";
+  let types = '';
 
   wallTypes.forEach((value) => {
     if (types.length !== 0) {
-      types += ", ";
+      types += ', ';
     }
 
-    if (value === "LEAD") {
-      types += "Lead";
+    if (value === 'LEAD') {
+      types += 'Lead';
     }
 
-    if (value === "TOP_ROPE") {
-      types += "Top rope";
+    if (value === 'TOP_ROPE') {
+      types += 'Top rope';
     }
 
-    if (value === "BOULDER") {
-      types += "Boulder";
+    if (value === 'BOULDER') {
+      types += 'Boulder';
     }
 
-    if (value === "AUTO_BELAY") {
-      types += "Auto belay";
+    if (value === 'AUTO_BELAY') {
+      types += 'Auto belay';
     }
   });
 

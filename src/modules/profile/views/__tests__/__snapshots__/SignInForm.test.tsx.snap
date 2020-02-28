@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignInForm should render correctly. 1`] = `
+<Form
+  buttonText="Sign in"
+  formInputs={
+    <React.Fragment>
+      <Input
+        autoComplete="email"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="username"
+        name=""
+        onChange={[Function]}
+        placeholder="Username"
+        type="text"
+        value=""
+      />
+      <Input
+        autoComplete="current-password"
+        error={true}
+        fullWidth={true}
+        helpText=""
+        id="password"
+        name=""
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+      <CheckBox
+        checked={false}
+        color="default"
+        id="rememberMe"
+        label="Remember Me"
+        onChange={[Function]}
+        value="REMEMBER_ME"
+      />
+    </React.Fragment>
+  }
+  handleSubmit={[Function]}
+  icon={<Memo(LockOutlinedIcon) />}
+  id="signIn"
+  title={
+    <div
+      style={
+        Object {
+          "display": "inline",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "float": "left",
+            "marginRight": "25px",
+            "marginTop": "5px",
+          }
+        }
+      >
+        Sign in
+      </div>
+      <div
+        style={
+          Object {
+            "float": "right",
+            "marginLeft": "25px",
+          }
+        }
+      >
+        <ButtonSecondary
+          disabled={false}
+          fullWidth={true}
+          id="signUp"
+          onClick={[MockFunction]}
+          size="medium"
+          type="button"
+          variant="outlined"
+        >
+          Sign up
+        </ButtonSecondary>
+      </div>
+    </div>
+  }
+/>
+`;

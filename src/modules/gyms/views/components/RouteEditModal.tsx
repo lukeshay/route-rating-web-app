@@ -1,10 +1,10 @@
-import React from "react";
-import { toast } from "react-toastify";
-import * as GymsActions from "../../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../../context/gyms/gymsStore";
-import { Gym, Route } from "../../../../types";
-import TransitionModal from "../../../common/modal/Modal";
-import RouteForm from "./RouteForm";
+import React from 'react';
+import { toast } from 'react-toastify';
+import * as GymsActions from '../../../../context/gyms/gymsActions';
+import { useGymsContext } from '../../../../context/gyms/gymsStore';
+import { Gym, Route } from '../../../../types';
+import TransitionModal from '../../../common/modal/Modal';
+import RouteForm from './RouteForm';
 
 export interface IRouteEditPageProps {
   gym: Gym;
@@ -19,11 +19,11 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
   open,
   route,
   wallId,
-  handleClose
+  handleClose,
 }): JSX.Element => {
   const [updatedRoute, setUpdatedRoute] = React.useState<Route>(route);
-  const [typesMessage, setTypesMessage] = React.useState<string>("");
-  const [nameMessage, setNameMessage] = React.useState<string>("");
+  const [typesMessage, setTypesMessage] = React.useState<string>('');
+  const [nameMessage, setNameMessage] = React.useState<string>('');
 
   const { dispatch: gymsDispatch } = useGymsContext();
 
@@ -33,24 +33,26 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
     setUpdatedRoute(newRoute);
 
     if (newRoute.types.length < 1) {
-      setTypesMessage("Must select a type.");
+      setTypesMessage('Must select a type.');
     } else {
-      setTypesMessage("");
+      setTypesMessage('');
     }
 
     if (newRoute.name.trim().length < 1) {
-      setNameMessage("Name cannot be blank");
+      setNameMessage('Name cannot be blank');
     } else {
-      setNameMessage("");
+      setNameMessage('');
     }
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
+      setTypesMessage('');
+      setNameMessage('');
       GymsActions.updateRoute(gymsDispatch, newRoute, gym).then(
         (response: Response) => {
           if (response instanceof Response && response.ok) {
             handleClose();
           } else {
-            toast.error("Error updating route.");
+            toast.error('Error updating route.');
           }
         }
       );
@@ -62,7 +64,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
       id="routeEdit"
       open={open}
       handleClose={handleClose}
-      style={{ width: "475px" }}
+      style={{ width: '475px' }}
     >
       <RouteForm
         formHeadText="Edit route"

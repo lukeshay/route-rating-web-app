@@ -1,10 +1,10 @@
-import React from "react";
-import { toast } from "react-toastify";
-import * as GymsActions from "../../../../context/gyms/gymsActions";
-import { useGymsContext } from "../../../../context/gyms/gymsStore";
-import { Gym, Route } from "../../../../types";
-import TransitionModal from "../../../common/modal/Modal";
-import RouteForm from "./RouteForm";
+import React from 'react';
+import { toast } from 'react-toastify';
+import * as GymsActions from '../../../../context/gyms/gymsActions';
+import { useGymsContext } from '../../../../context/gyms/gymsStore';
+import { Gym, Route } from '../../../../types';
+import TransitionModal from '../../../common/modal/Modal';
+import RouteForm from './RouteForm';
 
 export interface IRouteAddPageProps {
   gym: Gym;
@@ -17,11 +17,11 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
   gym,
   open,
   wallId,
-  handleClose
+  handleClose,
 }): JSX.Element => {
   const [route, setRoute] = React.useState<Route>({} as Route);
-  const [typesMessage, setTypesMessage] = React.useState<string>("");
-  const [nameMessage, setNameMessage] = React.useState<string>("");
+  const [typesMessage, setTypesMessage] = React.useState<string>('');
+  const [nameMessage, setNameMessage] = React.useState<string>('');
 
   const { dispatch: gymsDispatch } = useGymsContext();
 
@@ -31,15 +31,15 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
     setRoute(newRoute);
 
     if (newRoute.types.length < 1) {
-      setTypesMessage("Must select a type.");
+      setTypesMessage('Must select a type.');
     } else {
-      setTypesMessage("");
+      setTypesMessage('');
     }
 
     if (newRoute.name.trim().length < 1) {
-      setNameMessage("Name cannot be blank");
+      setNameMessage('Name cannot be blank');
     } else {
-      setNameMessage("");
+      setNameMessage('');
     }
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
@@ -49,20 +49,20 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
             setRoute({} as Route);
             handleClose();
           } else {
-            toast.error("Error adding route.");
+            toast.error('Error adding route.');
           }
         }
       );
     }
   };
 
-  if (gym.id !== "" && wallId !== "") {
+  if (gym.id !== '' && wallId !== '') {
     return (
       <TransitionModal
         id="routeAdd"
         open={open}
         handleClose={handleClose}
-        style={{ width: "475px" }}
+        style={{ width: '475px' }}
       >
         <RouteForm
           route={route}

@@ -1,6 +1,6 @@
-import { Typography } from "@material-ui/core";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Typography } from '@material-ui/core';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage: React.FC = (): JSX.Element => {
   return (

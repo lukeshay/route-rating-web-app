@@ -1,2 +1,2 @@
-export { AuthRoutes } from "./authRoutes";
-export { Routes } from "./routes";
+export { AuthRoutes } from './authRoutes';
+export { Routes } from './routes';

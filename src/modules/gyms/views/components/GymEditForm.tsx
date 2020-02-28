@@ -1,33 +1,33 @@
-import { Theme, createStyles, makeStyles } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import PublishIcon from "@material-ui/icons/Publish";
-import React from "react";
-import * as ReactRouter from "react-router";
-import { Routes } from "../../../../routes";
-import { Gym } from "../../../../types";
-import * as RegexUtils from "../../../../utils/regexUtils";
-import Button from "../../../common/buttons/Button";
-import Form from "../../../common/forms/Form";
-import ImageInput from "../../../common/inputs/ImageInput";
-import Input from "../../../common/inputs/Input";
-import ToolTipBottom from "../../../common/tooltip/ToolTipBottom";
+import { Theme, createStyles, makeStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import PublishIcon from '@material-ui/icons/Publish';
+import React from 'react';
+import * as ReactRouter from 'react-router';
+import { Routes } from '../../../../routes';
+import { Gym } from '../../../../types';
+import * as RegexUtils from '../../../../utils/regexUtils';
+import Button from '../../../common/buttons/Button';
+import Form from '../../../common/forms/Form';
+import ImageInput from '../../../common/inputs/ImageInput';
+import Input from '../../../common/inputs/Input';
+import ToolTipBottom from '../../../common/tooltip/ToolTipBottom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icons: {
-      paddingRight: theme.spacing(1)
+      paddingRight: theme.spacing(1),
     },
     photo: {
-      maxWidth: "100%",
+      maxWidth: '100%',
       paddingBottom: theme.spacing(1),
-      paddingTop: theme.spacing(1)
+      paddingTop: theme.spacing(1),
     },
     uploadButtonWrapper: {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      width: "100%"
-    }
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+    },
   })
 );
 
@@ -38,7 +38,7 @@ export interface IGymEditPageProps {
 
 const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
   gym,
-  handleSubmit
+  handleSubmit,
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -48,73 +48,73 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
   const [name, setName] = React.useState<string>(gym.name);
   const [website, setWebsite] = React.useState<string>(gym.website);
   const [address, setAddress] = React.useState<string>(gym.address);
-  const [addressMessage, setAddressMessage] = React.useState<string>("");
+  const [addressMessage, setAddressMessage] = React.useState<string>('');
   const [city, setCity] = React.useState<string>(gym.city);
-  const [cityMessage, setCityMessage] = React.useState<string>("");
+  const [cityMessage, setCityMessage] = React.useState<string>('');
   const [state, setState] = React.useState<string>(gym.state);
-  const [stateMessage, setStateMessage] = React.useState<string>("");
+  const [stateMessage, setStateMessage] = React.useState<string>('');
   const [zipCode, setZipCode] = React.useState<string>(gym.zipCode);
-  const [zipCodeMessage, setZipCodeMessage] = React.useState<string>("");
+  const [zipCodeMessage, setZipCodeMessage] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>(gym.email);
-  const [emailMessage, setEmailMessage] = React.useState<string>("");
+  const [emailMessage, setEmailMessage] = React.useState<string>('');
   const [phoneNumber, setPhoneNumber] = React.useState<string>(gym.phoneNumber);
   const [phoneNumberMessage, setPhoneNumberMessage] = React.useState<string>(
-    ""
+    ''
   );
   const [photo, setPhoto] = React.useState<File | null>(null);
   const [logo, setLogo] = React.useState<File | null>(null);
 
   React.useEffect(() => {
     if (RegexUtils.containsSpecialCharacter(address)) {
-      setAddressMessage("Addresses cannot contain special characters.");
+      setAddressMessage('Addresses cannot contain special characters.');
     } else {
-      setAddressMessage("");
+      setAddressMessage('');
     }
   }, [address]);
 
   React.useEffect(() => {
     if (RegexUtils.containsSpecialCharacter(city)) {
-      setCityMessage("Cities cannot contain special characters.");
+      setCityMessage('Cities cannot contain special characters.');
     } else if (RegexUtils.containsNumber(city)) {
-      setCityMessage("Cite cannot contain numbers.");
+      setCityMessage('Cite cannot contain numbers.');
     } else {
-      setCityMessage("");
+      setCityMessage('');
     }
   }, [city]);
 
   React.useEffect(() => {
     if (RegexUtils.containsSpecialCharacter(state)) {
-      setStateMessage("States cannot contain special characters.");
+      setStateMessage('States cannot contain special characters.');
     } else if (RegexUtils.containsNumber(state)) {
-      setStateMessage("States cannot contain numbers.");
+      setStateMessage('States cannot contain numbers.');
     } else {
-      setStateMessage("");
+      setStateMessage('');
     }
   }, [state]);
 
   React.useEffect(() => {
     if (!RegexUtils.containsOnlyNumbers(zipCode)) {
-      setZipCodeMessage("Zip codes can only have numbers.");
+      setZipCodeMessage('Zip codes can only have numbers.');
     } else {
-      setZipCodeMessage("");
+      setZipCodeMessage('');
     }
   }, [zipCode]);
 
   React.useEffect(() => {
     if (!RegexUtils.validEmail(email)) {
-      setEmailMessage("Invalid email format.");
+      setEmailMessage('Invalid email format.');
     } else {
-      setEmailMessage("");
+      setEmailMessage('');
     }
   }, [email]);
 
   React.useEffect(() => {
     if (!RegexUtils.containsOnlyNumbers(phoneNumber)) {
-      setPhoneNumberMessage("Phone numbers can only contain numbers");
+      setPhoneNumberMessage('Phone numbers can only contain numbers');
     } else if (phoneNumber.length < 10 || phoneNumber.length > 10) {
-      setPhoneNumberMessage("Phone number must be 10 digits long.");
+      setPhoneNumberMessage('Phone number must be 10 digits long.');
     } else {
-      setPhoneNumberMessage("");
+      setPhoneNumberMessage('');
     }
   }, [phoneNumber]);
 
@@ -123,34 +123,34 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
     const { id, value, files } = event.target;
 
     switch (id) {
-      case "name":
+      case 'name':
         setName(value);
         return;
-      case "website":
+      case 'website':
         setWebsite(value);
         return;
-      case "address":
+      case 'address':
         setAddress(value);
         return;
-      case "city":
+      case 'city':
         setCity(value);
         return;
-      case "state":
+      case 'state':
         setState(value);
         return;
-      case "zipCode":
+      case 'zipCode':
         setZipCode(value);
         return;
-      case "email":
+      case 'email':
         setEmail(value);
         return;
-      case "phoneNumber":
+      case 'phoneNumber':
         setPhoneNumber(value);
         return;
-      case "photo":
+      case 'photo':
         setPhoto(files[0]);
         return;
-      case "logo":
+      case 'logo':
         setLogo(files[0]);
         return;
 
@@ -171,7 +171,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
         phoneNumber,
         state,
         website,
-        zipCode
+        zipCode,
       } as Gym,
       photo,
       logo
@@ -179,14 +179,14 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
   };
 
   const handleCancel = (): void => {
-    history.push(Routes.GYMS + "/" + gymId);
+    history.push(Routes.GYMS + '/' + gymId);
   };
 
   const FormInputs: JSX.Element = (
     <React.Fragment>
       <Typography variant="h6">Gym Photo</Typography>
       <ImageInput
-        src={photo ? URL.createObjectURL(photo) : "https://" + gym.photoUrl}
+        src={photo ? URL.createObjectURL(photo) : 'https://' + gym.photoUrl}
         alt="No photo yet"
         imgClassName={classes.photo}
         accept="image/*,.jpg,.png,.jpeg"
@@ -211,7 +211,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
       </ImageInput>
       <Typography variant="h6">Gym Logo</Typography>
       <ImageInput
-        src={logo ? URL.createObjectURL(logo) : "https://" + gym.logoUrl}
+        src={logo ? URL.createObjectURL(logo) : 'https://' + gym.logoUrl}
         alt="No logo yet"
         imgClassName={classes.photo}
         accept="image/*,.jpg,.png,.jpeg"
@@ -311,11 +311,11 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
   );
 
   const FormHead: JSX.Element = (
-    <div style={{ display: "inline" }}>
-      <div style={{ float: "left", marginRight: "25px", marginTop: "5px" }}>
+    <div style={{ display: 'inline' }}>
+      <div style={{ float: 'left', marginRight: '25px', marginTop: '5px' }}>
         Edit Gym
       </div>
-      <div style={{ float: "right", marginLeft: "25px" }}>
+      <div style={{ float: 'right', marginLeft: '25px' }}>
         <Button
           onClick={handleCancel}
           type="button"
@@ -331,7 +331,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
   return (
     <Form
       id="gymEdit"
-      buttonText={"Save"}
+      buttonText={'Save'}
       formInputs={FormInputs}
       handleSubmit={handleSubmitWrapper}
       title={FormHead}

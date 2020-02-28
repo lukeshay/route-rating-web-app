@@ -8,65 +8,65 @@ import {
   ListItemText,
   SvgIcon,
   Toolbar,
-  Typography
-} from "@material-ui/core";
+  Typography,
+} from '@material-ui/core';
 import {
   Theme,
   createStyles,
   makeStyles,
-  useTheme
-} from "@material-ui/core/styles";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import CloseIcon from "@material-ui/icons/Close";
-import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info";
-import MenuIcon from "@material-ui/icons/Menu";
-import React from "react";
-import { Link } from "react-router-dom";
-import { LIGHT_THEME, useViewContext } from "../../context/view/viewStore";
-import ClimberIconBlack from "../../icons/climber_black.svg";
-import ClimberIconWhite from "../../icons/climber_white.svg";
-import { Routes } from "../../routes";
+  useTheme,
+} from '@material-ui/core/styles';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CloseIcon from '@material-ui/icons/Close';
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
+import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { LIGHT_THEME, useViewContext } from '../../context/view/viewStore';
+import ClimberIconBlack from '../../icons/climber_black.svg';
+import ClimberIconWhite from '../../icons/climber_white.svg';
+import { Routes } from '../../routes';
 
 const drawerWidth = 170;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
-      zIndex: theme.zIndex.drawer + 1
+      zIndex: theme.zIndex.drawer + 1,
     },
     closeMenuButton: {
       marginLeft: 0,
-      marginRight: "auto"
+      marginRight: 'auto',
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
     },
     drawer: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         flexShrink: 0,
-        width: drawerWidth
-      }
+        width: drawerWidth,
+      },
     },
     drawerPaper: {
-      width: drawerWidth
+      width: drawerWidth,
     },
     icons: {
-      paddingRight: theme.spacing(1)
+      paddingRight: theme.spacing(1),
     },
     listItem: {
-      paddingLeft: theme.spacing(3)
+      paddingLeft: theme.spacing(3),
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up("sm")]: {
-        display: "none"
-      }
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
+      },
     },
     root: {
-      display: "flex"
+      display: 'flex',
     },
-    toolbar: theme.mixins.toolbar
+    toolbar: theme.mixins.toolbar,
   })
 );
 
@@ -75,7 +75,7 @@ export interface INavigationBarProps {
 }
 
 const NavigationBar: React.FC<INavigationBarProps> = ({
-  children
+  children,
 }): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
@@ -90,18 +90,18 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
       <List>
         <ListItem
           button
-          key={"home"}
+          key={'home'}
           component={Link}
           onClick={handleDrawerToggle}
           to={Routes.HOME}
           className={classes.listItem}
         >
           <HomeIcon className={classes.icons} />
-          <ListItemText primary={"Home"} />
+          <ListItemText primary={'Home'} />
         </ListItem>
         <ListItem
           button
-          key={"gyms"}
+          key={'gyms'}
           component={Link}
           onClick={handleDrawerToggle}
           to={Routes.GYMS}
@@ -115,29 +115,29 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
             }
             className={classes.icons}
           />
-          <ListItemText primary={"Gyms"} />
+          <ListItemText primary={'Gyms'} />
         </ListItem>
         <ListItem
           button
-          key={"profile"}
+          key={'profile'}
           component={Link}
           onClick={handleDrawerToggle}
           to={Routes.PROFILE}
           className={classes.listItem}
         >
           <AccountCircleIcon className={classes.icons} />
-          <ListItemText primary={"Profile"} />
+          <ListItemText primary={'Profile'} />
         </ListItem>
         <ListItem
           button
-          key={"about"}
+          key={'about'}
           component={Link}
           onClick={handleDrawerToggle}
           to={Routes.ABOUT}
           className={classes.listItem}
         >
           <InfoIcon className={classes.icons} />
-          <ListItemText primary={"About"} />
+          <ListItemText primary={'About'} />
         </ListItem>
       </List>
     </React.Fragment>
@@ -169,14 +169,14 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
           <Hidden smUp implementation="css">
             <Drawer
               variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={mobileOpen}
               onClose={handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true, // Better open performance on mobile.
               }}
             >
               <IconButton
@@ -195,7 +195,7 @@ const NavigationBar: React.FC<INavigationBarProps> = ({
             className={classes.drawer}
             variant="permanent"
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
           >
             {drawer}

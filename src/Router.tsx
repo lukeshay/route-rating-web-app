@@ -1,12 +1,12 @@
-import { AuthRoutes, Routes } from "./routes";
-import { Route, Switch } from "react-router";
-import React from "react";
+import { AuthRoutes, Routes } from './routes';
+import { Route, Switch } from 'react-router';
+import React from 'react';
 
-const HomePage = React.lazy(() => import("./modules/homepage/HomePage"));
-const NotFoundPage = React.lazy(() => import("./modules/NotFoundPage"));
-const ProfilePage = React.lazy(() => import("./modules/profile"));
-const GymsPage = React.lazy(() => import("./modules/gyms"));
-const AboutPage = React.lazy(() => import("./modules/about"));
+const HomePage = React.lazy(() => import('./modules/homepage/HomePage'));
+const NotFoundPage = React.lazy(() => import('./modules/NotFoundPage'));
+const ProfilePage = React.lazy(() => import('./modules/profile'));
+const GymsPage = React.lazy(() => import('./modules/gyms'));
+const AboutPage = React.lazy(() => import('./modules/about'));
 
 const Router: React.FC = (): JSX.Element => {
   return (

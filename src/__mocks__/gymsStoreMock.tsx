@@ -1,5 +1,5 @@
-import { GymsContext, IGymsContextState } from "../context/gyms/gymsStore";
-import React from "react";
+import { GymsContext, IGymsContextState } from '../context/gyms/gymsStore';
+import React from 'react';
 
 export interface IGymsStoreMockProps {
   state: IGymsContextState;
@@ -9,7 +9,7 @@ export interface IGymsStoreMockProps {
 const GymsStoreMock: React.FC<IGymsStoreMockProps> = ({
   state,
   dispatch,
-  children
+  children,
 }): JSX.Element => (
   <GymsContext.Provider value={{ state, dispatch }}>
     {children}

@@ -1,6 +1,6 @@
-import { Gym } from "../../../../types";
-import React from "react";
-import GymCard from "./GymCard";
+import { Gym } from '../../../../types';
+import React from 'react';
+import GymCard from './GymCard';
 
 interface IGymsListProps {
   cardClass: string;
@@ -13,7 +13,7 @@ const GymsList: React.FC<IGymsListProps> = ({
   cardClass,
   gyms,
   mobile,
-  onClick
+  onClick,
 }): JSX.Element => (
   <React.Fragment>
     {gyms.map((gym) => (

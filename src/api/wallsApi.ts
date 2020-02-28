@@ -1,11 +1,11 @@
-import * as Cookies from "../utils/cookiesUtils";
-import { Wall } from "../types";
-import { handleError } from "./apiUtils";
+import * as Cookies from '../utils/cookiesUtils';
+import { Wall } from '../types';
+import { handleError } from './apiUtils';
 
-const baseUrl = process.env.BASE_URL + "wall";
+const baseUrl = process.env.BASE_URL + 'wall';
 
 export const getWalls = async (gymId: string): Promise<void | Response> => {
-  return fetch(baseUrl + "/" + gymId)
+  return fetch(baseUrl + '/' + gymId)
     .then((response: Response) => {
       return response;
     })
@@ -16,10 +16,10 @@ export const createWall = async (wall: Wall): Promise<void | Response> => {
   return fetch(baseUrl, {
     body: JSON.stringify(wall),
     headers: {
-      "Content-Type": "application/json",
-      Authorization: Cookies.getJwtToken()
+      'Content-Type': 'application/json',
+      Authorization: Cookies.getJwtToken(),
     },
-    method: "POST"
+    method: 'POST',
   })
     .then(
       (response: Response): Response => {
@@ -33,10 +33,10 @@ export const updateWall = async (wall: Wall): Promise<void | Response> => {
   return fetch(baseUrl, {
     body: JSON.stringify(wall),
     headers: {
-      "Content-Type": "application/json",
-      Authorization: Cookies.getJwtToken()
+      'Content-Type': 'application/json',
+      Authorization: Cookies.getJwtToken(),
     },
-    method: "PUT"
+    method: 'PUT',
   })
     .then(
       (response: Response): Response => {
@@ -47,13 +47,13 @@ export const updateWall = async (wall: Wall): Promise<void | Response> => {
 };
 
 export const deleteWall = async (wallId: string): Promise<void | Response> => {
-  return fetch(baseUrl + "/" + wallId, {
+  return fetch(baseUrl + '/' + wallId, {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: Cookies.getJwtToken(),
-      Refresh: Cookies.getRefreshToken()
+      Refresh: Cookies.getRefreshToken(),
     },
-    method: "DELETE"
+    method: 'DELETE',
   })
     .then(
       (response: Response): Response => {

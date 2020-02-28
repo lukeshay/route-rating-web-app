@@ -4,65 +4,65 @@ import {
   CardMedia,
   Typography,
   createStyles,
-  makeStyles
-} from "@material-ui/core";
-import React from "react";
-import { Gym } from "../../../../types";
-import * as Events from "../../../../types/events";
+  makeStyles,
+} from '@material-ui/core';
+import React from 'react';
+import { Gym } from '../../../../types';
+import * as Events from '../../../../types/events';
 
 const useStyles = makeStyles(() =>
   createStyles({
     card: {
-      borderRadius: "10px",
-      display: "flex"
+      borderRadius: '10px',
+      display: 'flex',
     },
     cardWrapper: {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      paddingBottom: "10px",
-      paddingTop: "10px",
-      width: "100%"
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      paddingBottom: '10px',
+      paddingTop: '10px',
+      width: '100%',
     },
     information: {
-      paddingBottom: "5px",
-      paddingLeft: "10px",
-      paddingTop: "5px"
+      paddingBottom: '5px',
+      paddingLeft: '10px',
+      paddingTop: '5px',
     },
     photo: {
-      borderRadius: "10px",
-      height: "96%"
+      borderRadius: '10px',
+      height: '96%',
     },
     photoWrapper: {
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "center",
-      width: "50%"
-    }
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '50%',
+    },
   })
 );
 
 const useMobileStyles = makeStyles(() =>
   createStyles({
     card: {
-      borderRadius: "5px"
+      borderRadius: '5px',
     },
     cardWrapper: {
-      paddingBottom: "10px",
-      paddingTop: "10px",
-      width: "100%"
+      paddingBottom: '10px',
+      paddingTop: '10px',
+      width: '100%',
     },
     photo: {
-      borderRadius: "10px",
-      height: "96%"
+      borderRadius: '10px',
+      height: '96%',
     },
     photoWrapper: {
-      alignItems: "center",
-      borderRadius: "10px",
-      display: "flex",
-      justifyContent: "center",
-      width: "100%"
-    }
+      alignItems: 'center',
+      borderRadius: '10px',
+      display: 'flex',
+      justifyContent: 'center',
+      width: '100%',
+    },
   })
 );
 
@@ -77,7 +77,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
   cardClass,
   gym,
   onClick,
-  onRightClick
+  onRightClick,
 }): JSX.Element => {
   const classes = useStyles();
 
@@ -90,7 +90,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
       >
         <CardMedia className={classes.photoWrapper}>
           <img
-            src={"https://" + gym.photoUrl}
+            src={'https://' + gym.photoUrl}
             alt="This gym does not have a photo."
             className={classes.photo}
           />
@@ -102,7 +102,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
             <Typography variant="body1">
               {gym.address}
               <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
+              {gym.city + ', ' + gym.state + ' ' + gym.zipCode}
             </Typography>
             <Typography variant="body1">{gym.email}</Typography>
             <Typography variant="body1">{gym.phoneNumber}</Typography>
@@ -116,7 +116,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
 const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
   gym,
   onClick,
-  onRightClick
+  onRightClick,
 }): JSX.Element => {
   const classes = useMobileStyles();
 
@@ -130,12 +130,12 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
         <CardMedia
           className={classes.photoWrapper}
           style={{
-            height: `${window.innerWidth * (2 / 3) - 10}px`
+            height: `${window.innerWidth * (2 / 3) - 10}px`,
           }}
         >
           <img
             className={classes.photo}
-            src={"https://" + gym.photoUrl}
+            src={'https://' + gym.photoUrl}
             alt="This gym does not have a photo."
           />
         </CardMedia>
@@ -146,7 +146,7 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
             <Typography variant="body1">
               {gym.address}
               <br />
-              {gym.city + ", " + gym.state + " " + gym.zipCode}
+              {gym.city + ', ' + gym.state + ' ' + gym.zipCode}
             </Typography>
             <Typography variant="body1">{gym.email}</Typography>
             <Typography variant="body1">{gym.phoneNumber}</Typography>
@@ -172,7 +172,7 @@ const GymCard: React.FC<IGymCardProps> = ({
   mobile,
   mobileCardClass,
   onClick,
-  onRightClick
+  onRightClick,
 }) => {
   return mobile ? (
     <GymCardMobile
