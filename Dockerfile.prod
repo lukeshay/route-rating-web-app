@@ -1,17 +1,11 @@
-FROM node:12-alpine
+FROM nginx:alpine
 
-WORKDIR /app
-COPY . .
+COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY ./dist /usr/share/nginx/html
 
 EXPOSE 80
 
-RUN apk add --no-cache bash
-RUN chmod 755 scripts/*
-
-RUN yarn --disable-progress
-RUN yarn build --disable-progress
-RUN yarn global add serve --disable-progress
-
-RUN rm -rf node_modules configs jest.* src yarn.lock tsconfig.json scripts/coverage.sh scripts/lint.sh scripts/test.sh
-
-ENTRYPOINT ./scripts/run.sh
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

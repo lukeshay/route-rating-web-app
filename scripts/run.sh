@@ -1,4 +1,4 @@
 #!/bin/bash
 
-yarn deploy
+yarn .nginx
 

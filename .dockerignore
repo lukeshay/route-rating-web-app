@@ -19,3 +19,6 @@ junit.xml
 junit.xml
 docker-compose.yml
 Dockerfile.prod
+.idea
+.project
+.classpath
