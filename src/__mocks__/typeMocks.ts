@@ -1,4 +1,4 @@
-import { Gym, GymPageType, Route, User, Wall } from '../types';
+import { Gym, GymPageType, Route, User, Wall, WallTypes } from '../types';
 import { IGymsContextState } from '../context/gyms/gymsStore';
 import { IViewContextState } from '../context/view/viewStore';
 import { IUserContextState } from '../context/user/userStore';
@@ -10,8 +10,8 @@ export const testRouteOne: Route = {
   holdColor: 'Blue',
   id: 'route1',
   name: 'RouteOne',
-  setter: 'Luke',
-  types: ['TOP_ROPE', 'LEAD'],
+  setter: 'LukeOne',
+  types: [WallTypes.TOP_ROPE, WallTypes.LEAD],
   wallId: 'wall1',
 };
 
@@ -19,11 +19,11 @@ export const testRouteTwo: Route = {
   averageGrade: 'GRADE_5_12ab',
   averageRating: 4,
   gymId: 'gym1',
-  holdColor: 'Blue',
+  holdColor: 'Red',
   id: 'route2',
   name: 'RouteTwo',
-  setter: 'Luke',
-  types: ['TOP_ROPE', 'LEAD'],
+  setter: 'LukeTwo',
+  types: [WallTypes.TOP_ROPE, WallTypes.LEAD],
   wallId: 'wall1',
 };
 
@@ -32,15 +32,15 @@ export const testWallOne: Wall = {
   id: 'wall1',
   name: 'Wall1',
   routes: [testRouteOne, testRouteTwo],
-  types: ['LEAD', 'TOP_ROPE'],
+  types: [WallTypes.LEAD, WallTypes.TOP_ROPE],
 };
 
 export const testWallTwo: Wall = {
   gymId: 'gym1',
   id: 'wall2',
-  name: 'Wall1',
+  name: 'Wall2',
   routes: [],
-  types: ['LEAD', 'TOP_ROPE'],
+  types: [WallTypes.LEAD, WallTypes.TOP_ROPE],
 };
 
 export const testGymOne: Gym = {

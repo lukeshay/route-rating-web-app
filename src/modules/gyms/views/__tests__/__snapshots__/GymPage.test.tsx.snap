@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GymPage /> should render correctly when editor. 1`] = `
+exports[`GymPage should render correctly when editor. 1`] = `
 <StaticRouter
   location="https://lukeshay.com//gyms/gym1"
 >
@@ -36,7 +36,7 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                       "holdColor": "Blue",
                       "id": "route1",
                       "name": "RouteOne",
-                      "setter": "Luke",
+                      "setter": "LukeOne",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -47,10 +47,10 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                       "averageGrade": "GRADE_5_12ab",
                       "averageRating": 4,
                       "gymId": "gym1",
-                      "holdColor": "Blue",
+                      "holdColor": "Red",
                       "id": "route2",
                       "name": "RouteTwo",
-                      "setter": "Luke",
+                      "setter": "LukeTwo",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -66,7 +66,7 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                 Object {
                   "gymId": "gym1",
                   "id": "wall2",
-                  "name": "Wall1",
+                  "name": "Wall2",
                   "routes": Array [],
                   "types": Array [
                     "LEAD",
@@ -103,7 +103,7 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                       "holdColor": "Blue",
                       "id": "route1",
                       "name": "RouteOne",
-                      "setter": "Luke",
+                      "setter": "LukeOne",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -114,10 +114,10 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                       "averageGrade": "GRADE_5_12ab",
                       "averageRating": 4,
                       "gymId": "gym1",
-                      "holdColor": "Blue",
+                      "holdColor": "Red",
                       "id": "route2",
                       "name": "RouteTwo",
-                      "setter": "Luke",
+                      "setter": "LukeTwo",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -133,7 +133,7 @@ exports[`<GymPage /> should render correctly when editor. 1`] = `
                 Object {
                   "gymId": "gym1",
                   "id": "wall2",
-                  "name": "Wall1",
+                  "name": "Wall2",
                   "routes": Array [],
                   "types": Array [
                     "LEAD",

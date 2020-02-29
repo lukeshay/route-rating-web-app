@@ -2,21 +2,21 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import * as GymsActions from '../../../../context/gyms/gymsActions';
 import { useGymsContext } from '../../../../context/gyms/gymsStore';
-import { Gym, Route } from '../../../../types';
+import { Gym, Route, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import RouteForm from './RouteForm';
 
 export interface IRouteAddPageProps {
   gym: Gym;
   open: boolean;
-  wallId: string;
+  wall: Wall;
   handleClose(): Promise<void> | void;
 }
 
 const RouteAddPage: React.FC<IRouteAddPageProps> = ({
   gym,
   open,
-  wallId,
+  wall,
   handleClose,
 }): JSX.Element => {
   const [route, setRoute] = React.useState<Route>({} as Route);
@@ -26,7 +26,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
   const { dispatch: gymsDispatch } = useGymsContext();
 
   const handleSubmit = async (returnRoute: Route): Promise<void> => {
-    const newRoute = { wallId, gymId: gym.id, ...returnRoute };
+    const newRoute = { wallId: wall.id, gymId: gym.id, ...returnRoute };
 
     setRoute(newRoute);
 
@@ -56,7 +56,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
     }
   };
 
-  if (gym.id !== '' && wallId !== '') {
+  if (gym.id !== '' && wall.id !== '') {
     return (
       <TransitionModal
         id="routeAdd"
@@ -72,6 +72,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
           submitButtonText="Add route"
           nameMessage={nameMessage}
           typesMessage={typesMessage}
+          typeOptions={wall.types}
         />
       </TransitionModal>
     );

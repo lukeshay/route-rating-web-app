@@ -1,13 +1,11 @@
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import React from 'react';
+import { IStandardProps } from '../standardProps';
 
-export interface ICheckBoxProps {
+export interface ICheckBoxProps extends IStandardProps {
   checked: boolean;
-  className?: any;
-  id: string;
   label: string;
   value: string;
-  color?: 'primary' | 'secondary' | 'default';
   onChange?(event: any): Promise<void> | void;
 }
 

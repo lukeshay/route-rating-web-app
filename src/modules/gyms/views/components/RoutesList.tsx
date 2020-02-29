@@ -14,7 +14,7 @@ import {
 } from '../../../../types';
 import * as GradeUtils from '../../../../utils/gradeUtils';
 import Table from '../../../common/table/Table';
-import * as GymUtils from '../../../../utils/gymUtils';
+import * as WallUtils from '../../../../utils/wallUtils';
 import ListMenu from './ListMenu';
 import Cell from '../../../common/table/TableCell';
 
@@ -53,7 +53,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   );
 
   const { averageGrade, holdColor, id, name, averageRating, setter } = route;
-  const types = GymUtils.parseTypesToString(route.types);
+  const types = WallUtils.typesAsString(route.types);
 
   const handleRightClick = (event: ElementEvent): void => {
     event.preventDefault();

@@ -1,12 +1,12 @@
-import React from "react";
-import RatingAddModal from "../RatingAddModal";
-import { shallow } from "../../../../../../configs/setupEnzyme";
-import * as TypeMocks from "../../../../../__mocks__/typeMocks";
-import { shallowToJson } from "enzyme-to-json";
+import React from 'react';
+import RatingAddModal from '../RatingAddModal';
+import { shallow } from '../../../../../../configs/setupEnzyme';
+import * as TypeMocks from '../../../../../__mocks__/typeMocks';
+import { shallowToJson } from 'enzyme-to-json';
 
 let view;
 
-describe("<RatingAddModal />", () => {
+describe('<RatingAddModal />', () => {
   beforeEach(() => {
     view = shallow(
       <RatingAddModal
@@ -19,14 +19,16 @@ describe("<RatingAddModal />", () => {
     );
   });
 
-  it("should render correctly", () => {
+  it('should render correctly', () => {
     expect(shallowToJson(view)).toMatchSnapshot();
   });
 
-  it("should have correct fields", () => {
+  it('should have correct fields', () => {
     expect(view.find("select[id='rating']")).toBeDefined();
     expect(view.find("select[id='grade']")).toBeDefined();
     expect(view.find("textarea[id='review']")).toBeDefined();
-    expect(view.find("button[data-test-id='submit-button-test-id']")).toBeDefined();
+    expect(
+      view.find("button[data-test-id='submit-button-test-id']")
+    ).toBeDefined();
   });
 });

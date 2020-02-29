@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import * as GymsActions from '../../../../context/gyms/gymsActions';
 import { useGymsContext } from '../../../../context/gyms/gymsStore';
-import { Gym, Route } from '../../../../types';
+import { Gym, Route, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import RouteForm from './RouteForm';
 
@@ -10,7 +10,7 @@ export interface IRouteEditPageProps {
   gym: Gym;
   open: boolean;
   route: Route;
-  wallId: string;
+  wall: Wall;
   handleClose(): Promise<void> | void;
 }
 
@@ -18,7 +18,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
   gym,
   open,
   route,
-  wallId,
+  wall,
   handleClose,
 }): JSX.Element => {
   const [updatedRoute, setUpdatedRoute] = React.useState<Route>(route);
@@ -28,7 +28,12 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
   const { dispatch: gymsDispatch } = useGymsContext();
 
   const handleSubmit = async (returnRoute: Route): Promise<void> => {
-    const newRoute = { id: route.id, wallId, gymId: gym.id, ...returnRoute };
+    const newRoute = {
+      id: route.id,
+      wallId: wall.id,
+      gymId: gym.id,
+      ...returnRoute,
+    };
 
     setUpdatedRoute(newRoute);
 
@@ -74,6 +79,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
         submitButtonText="Save"
         nameMessage={nameMessage}
         typesMessage={typesMessage}
+        typeOptions={wall.types}
       />
     </TransitionModal>
   );
