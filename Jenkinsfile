@@ -17,9 +17,11 @@ pipeline {
 
   stages {
     stage('Setup') {
+      steps {
         setBuildStatus('Starting build', 'PENDING')
         sh 's3cmd get s3://route-rating-data-backup/secrets/secrets.sh'
         sh 'secrets.sh'
+      }
     }
     stage('Build') {
       steps {
