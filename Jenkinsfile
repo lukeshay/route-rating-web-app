@@ -11,17 +11,22 @@ void setBuildStatus(String message, String state) {
 pipeline {
   agent any
 
+  environment {
+    GOOGLE_API_KEY=credentials('jenkins-google-recaptcha-api-key')
+  }
+
   stages {
-    stage('Setup') {
-      steps {
-        setBuildStatus('Starting build', 'PENDING')
-        sh 's3cmd get s3://route-rating-data-backup/secrets/secrets.sh'
-        sh 'secrets.sh'
-      }
-    }
+//     stage('Setup') {
+//       steps {
+//         setBuildStatus('Starting build', 'PENDING')
+//         sh 's3cmd get s3://route-rating-data-backup/secrets/secrets.sh'
+//         sh 'secrets.sh'
+//       }
+//     }
     stage('Build') {
       steps {
         echo 'Building...'
+        setBuildStatus('Starting build', 'PENDING')
         sh 'yarn'
         sh 'yarn build'
       }
