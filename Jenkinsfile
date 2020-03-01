@@ -12,14 +12,18 @@ pipeline {
   agent any
 
   environment {
-    GOOGLE_API_KEY= credentials('jenkins-google-recaptcha-api-key')
+    GOOGLE_API_KEY=credentials('jenkins-google-recaptcha-api-key')
   }
 
   stages {
+    stage('Setup') {
+        setBuildStatus('Starting build', 'PENDING')
+        sh 's3cmd get s3://route-rating-data-backup/secrets/secrets.sh'
+        sh 'secrets.sh'
+    }
     stage('Build') {
       steps {
         echo 'Building...'
-        setBuildStatus('Starting build', 'PENDING')
         sh 'yarn'
         sh 'yarn build'
       }
@@ -58,8 +62,8 @@ pipeline {
       }
       steps {
         echo 'Deploying...'
-//         build job: '', propagate: true, wait: true
-        sh 'make run'
+        // build job: '', propagate: true, wait: true
+        // Pass in the repository to get proper deploy files
       }
     }
   }
