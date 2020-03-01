@@ -41,6 +41,17 @@ pipeline {
         echo 'Getting coverage...'
       }
     }
+    stage('Build image') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Building image...'
+        sh 'make'
+        sh 'make push'
+        sh 'make push-latest'
+      }
+    }
     stage('Deploy') {
       when {
         branch 'master'
@@ -48,6 +59,7 @@ pipeline {
       steps {
         echo 'Deploying...'
 //         build job: '', propagate: true, wait: true
+        sh 'make run'
       }
     }
   }

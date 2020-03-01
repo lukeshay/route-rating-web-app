@@ -1,5 +1,5 @@
 #!/bin/bash
 
 make
-make tag
+make tag-latest
 make run
