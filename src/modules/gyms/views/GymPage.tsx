@@ -144,6 +144,7 @@ const GymPage: React.FC = (): JSX.Element => {
       setView('ROUTE');
       setRoutes(tempWall.routes);
       setWallId(tempWall.id);
+      setWall(tempWall);
     } else {
       toast.error('Could not find wall.');
     }
@@ -304,18 +305,20 @@ const GymPage: React.FC = (): JSX.Element => {
     if (gymId) {
       return (
         <React.Fragment>
-          <RouteAddModal
-            open={view === 'ROUTE' && openAdd}
-            handleClose={handleCloseAdd}
-            gym={gym}
-            wallId={wallId}
-          />
-          {route && (
+          {wall && (
+            <RouteAddModal
+              open={view === 'ROUTE' && openAdd}
+              handleClose={handleCloseAdd}
+              gym={gym}
+              wall={wall}
+            />
+          )}
+          {route && wall && (
             <RouteEditModal
               open={view === 'ROUTE' && openEdit}
               handleClose={handleCloseEdit}
               gym={gym}
-              wallId={wallId}
+              wall={wall}
               route={route}
             />
           )}

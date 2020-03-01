@@ -1,14 +1,14 @@
 import {
   Button,
+  createStyles,
   FormGroup,
   FormHelperText,
   FormLabel,
-  Theme,
-  createStyles,
   makeStyles,
+  Theme,
 } from '@material-ui/core';
 import React from 'react';
-import { Route } from '../../../../types';
+import { Route, WallTypes } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import CheckBox from '../../../common/inputs/CheckBox';
 import Input from '../../../common/inputs/Input';
@@ -28,6 +28,7 @@ export interface IRouteFormProps {
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
+  typeOptions: WallTypes[];
   handleCancel(event: any): Promise<void> | void;
   handleSubmit(route: Route): Promise<void> | void;
 }
@@ -38,6 +39,7 @@ const RouteForm: React.FC<IRouteFormProps> = ({
   nameMessage,
   submitButtonText,
   typesMessage,
+  typeOptions,
   handleCancel,
   handleSubmit,
 }): JSX.Element => {
@@ -154,38 +156,46 @@ const RouteForm: React.FC<IRouteFormProps> = ({
       />
       <FormLabel component="legend">Pick one</FormLabel>
       <FormGroup>
-        <CheckBox
-          id="topRope"
-          checked={topRope}
-          value="TOP_ROPE"
-          label="Top rope"
-          onChange={handleChange}
-          color="primary"
-        />
-        <CheckBox
-          id="lead"
-          checked={lead}
-          value="LEAD"
-          label="Lead"
-          onChange={handleChange}
-          color="primary"
-        />
-        <CheckBox
-          id="autoBelay"
-          checked={autoBelay}
-          value="AUTO_BELAY"
-          label="Auto belay"
-          onChange={handleChange}
-          color="primary"
-        />
-        <CheckBox
-          id="boulder"
-          checked={boulder}
-          value="BOULDER"
-          label="Boulder"
-          onChange={handleChange}
-          color="primary"
-        />
+        {typeOptions.includes(WallTypes.TOP_ROPE) && (
+          <CheckBox
+            id="topRope"
+            checked={topRope}
+            value={WallTypes.TOP_ROPE}
+            label="Top rope"
+            onChange={handleChange}
+            color="primary"
+          />
+        )}
+        {typeOptions.includes(WallTypes.LEAD) && (
+          <CheckBox
+            id="lead"
+            checked={lead}
+            value={WallTypes.LEAD}
+            label="Lead"
+            onChange={handleChange}
+            color="primary"
+          />
+        )}
+        {typeOptions.includes(WallTypes.AUTO_BELAY) && (
+          <CheckBox
+            id="autoBelay"
+            checked={autoBelay}
+            value={WallTypes.AUTO_BELAY}
+            label="Auto belay"
+            onChange={handleChange}
+            color="primary"
+          />
+        )}
+        {typeOptions.includes(WallTypes.BOULDER) && (
+          <CheckBox
+            id="boulder"
+            checked={boulder}
+            value={WallTypes.BOULDER}
+            label="Boulder"
+            onChange={handleChange}
+            color="primary"
+          />
+        )}
         <FormHelperText className={classes.helpText}>
           {typesMessage}
         </FormHelperText>

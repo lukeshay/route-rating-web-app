@@ -1,34 +1,35 @@
 module.exports = {
   collectCoverageFrom: [
-    "src/**/*.{ts,tsx}",
-    "!**/*.d.ts",
-    "!**/types/**",
-    "!**/__mocks__/**",
-    "!**/__tests__/**"
+    'src/**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/types/**',
+    '!**/__mocks__/**',
+    '!**/__tests__/**',
+    '!dist/**/*'
   ],
   coverageThreshold: {
     global: {
       branches: 40,
       functions: 60,
-      lines: 70
-    }
+      lines: 70,
+    },
   },
   transform: {
-    "^.+.(ts|tsx)$": "ts-jest",
-    "^.+.(js|jsx)$": "babel-jest"
+    '^.+.(ts|tsx)$': 'ts-jest',
+    '^.+.(js|jsx)$': 'babel-jest',
   },
-  coverageReporters: ["lcov"],
+  coverageReporters: ['lcov'],
   moduleNameMapper: {
-    "\\.(css)$": "identity-obj-proxy",
-    "\\.(svg)$": "<rootDir>/src/__mocks__/svgSpriteMock.ts"
+    '\\.(css)$': 'identity-obj-proxy',
+    '\\.(svg)$': '<rootDir>/src/__mocks__/svgSpriteMock.ts',
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  reporters: ["default", "jest-junit"],
-  testRegex: "__tests__/.*(js|ts|tsx)$",
-  setupFiles: ["./configs/setupEnzyme.ts", "jest-localstorage-mock"],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  reporters: ['default', 'jest-junit'],
+  testRegex: '__tests__/.*(js|ts|tsx)$',
+  setupFiles: ['./configs/setupEnzyme.ts'],
   globals: {
-    "ts-test": {
-      tsConfigFile: "./jest.tsconfig.json"
-    }
-  }
+    'ts-test': {
+      tsConfigFile: './jest.tsconfig.json',
+    },
+  },
 };

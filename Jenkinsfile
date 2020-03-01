@@ -20,7 +20,8 @@ pipeline {
       steps {
         echo 'Building...'
         setBuildStatus('Starting build', 'PENDING')
-        sh 'make'
+        sh 'yarn'
+        sh 'yarn build'
       }
     }
     stage('Lint') {
@@ -32,7 +33,7 @@ pipeline {
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh 'make test'
+        sh 'yarn test'
       }
     }
     stage('Coverage') {

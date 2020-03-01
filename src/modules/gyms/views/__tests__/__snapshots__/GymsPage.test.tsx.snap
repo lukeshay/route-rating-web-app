@@ -34,7 +34,7 @@ exports[`<GymsPage /> should render correctly 1`] = `
                       "holdColor": "Blue",
                       "id": "route1",
                       "name": "RouteOne",
-                      "setter": "Luke",
+                      "setter": "LukeOne",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -45,10 +45,10 @@ exports[`<GymsPage /> should render correctly 1`] = `
                       "averageGrade": "GRADE_5_12ab",
                       "averageRating": 4,
                       "gymId": "gym1",
-                      "holdColor": "Blue",
+                      "holdColor": "Red",
                       "id": "route2",
                       "name": "RouteTwo",
-                      "setter": "Luke",
+                      "setter": "LukeTwo",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -64,7 +64,7 @@ exports[`<GymsPage /> should render correctly 1`] = `
                 Object {
                   "gymId": "gym1",
                   "id": "wall2",
-                  "name": "Wall1",
+                  "name": "Wall2",
                   "routes": Array [],
                   "types": Array [
                     "LEAD",
@@ -101,7 +101,7 @@ exports[`<GymsPage /> should render correctly 1`] = `
                       "holdColor": "Blue",
                       "id": "route1",
                       "name": "RouteOne",
-                      "setter": "Luke",
+                      "setter": "LukeOne",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -112,10 +112,10 @@ exports[`<GymsPage /> should render correctly 1`] = `
                       "averageGrade": "GRADE_5_12ab",
                       "averageRating": 4,
                       "gymId": "gym1",
-                      "holdColor": "Blue",
+                      "holdColor": "Red",
                       "id": "route2",
                       "name": "RouteTwo",
-                      "setter": "Luke",
+                      "setter": "LukeTwo",
                       "types": Array [
                         "TOP_ROPE",
                         "LEAD",
@@ -131,7 +131,7 @@ exports[`<GymsPage /> should render correctly 1`] = `
                 Object {
                   "gymId": "gym1",
                   "id": "wall2",
-                  "name": "Wall1",
+                  "name": "Wall2",
                   "routes": Array [],
                   "types": Array [
                     "LEAD",

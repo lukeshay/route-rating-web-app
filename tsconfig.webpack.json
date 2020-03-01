@@ -3,5 +3,5 @@
   "compilerOptions": {
     "sourceMap": true
   },
-  "exclude": ["src/js/__tests__/**/*", "src/js/__mocks__/**/*", "node_modules"]
+  "exclude": ["src/**/*/__tests__/**/*.test.*", "src/__tests__/**/*", "src/__mocks__/**/*", "node_modules"]
 }

@@ -11,33 +11,5 @@ export const getWallById = (gym: Gym, wallId: string): Wall | undefined =>
 export const getRouteById = (wall: Wall, routeId: string): Route | undefined =>
   wall.routes ? wall.routes.find((route) => route.id === routeId) : undefined;
 
-export const parseTypesToString = (wallTypes: string[]): string => {
-  let types = '';
-
-  wallTypes.forEach((value) => {
-    if (types.length !== 0) {
-      types += ', ';
-    }
-
-    if (value === 'LEAD') {
-      types += 'Lead';
-    }
-
-    if (value === 'TOP_ROPE') {
-      types += 'Top rope';
-    }
-
-    if (value === 'BOULDER') {
-      types += 'Boulder';
-    }
-
-    if (value === 'AUTO_BELAY') {
-      types += 'Auto belay';
-    }
-  });
-
-  return types;
-};
-
 export const getGymById = (gyms: Gym[], gymId: string): Gym | undefined =>
   gyms.filter((element) => element.id === gymId).pop();

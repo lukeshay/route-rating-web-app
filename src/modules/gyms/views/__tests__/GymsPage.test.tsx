@@ -1,18 +1,20 @@
-import React from "react";
-import GymsPage from "../GymsPage";
-import GymsStoreMock from "../../../../__mocks__/gymsStoreMock";
-import { IGymsContextState } from "../../../../context/gyms/gymsStore";
-import * as TypeMocks from "../../../../__mocks__/typeMocks";
-import { shallow } from "../../../../../configs/setupEnzyme";
-import { shallowToJson } from "enzyme-to-json";
-import { GymPageType } from "../../../../types";
+import React from 'react';
+import GymsPage from '../GymsPage';
+import GymsStoreMock from '../../../../__mocks__/gymsStoreMock';
+import { IGymsContextState } from '../../../../context/gyms/gymsStore';
+import * as TypeMocks from '../../../../__mocks__/typeMocks';
+import { shallow } from '../../../../../configs/setupEnzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { GymPageType } from '../../../../types';
 
 const mockGymsState: IGymsContextState = {
-  page: { content: [TypeMocks.testGymOne, TypeMocks.testGymTwo] } as GymPageType
+  page: {
+    content: [TypeMocks.testGymOne, TypeMocks.testGymTwo],
+  } as GymPageType,
 };
 
-describe("<GymsPage />", () => {
-  it("should render correctly", () => {
+describe('<GymsPage />', () => {
+  it('should render correctly', () => {
     const gymsPage = shallow(
       <GymsStoreMock state={mockGymsState} dispatch={() => {}}>
         <GymsPage />

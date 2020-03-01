@@ -1,3 +1,5 @@
+import { WallTypes } from '.';
+
 export interface Route {
   averageGrade: string;
   averageRating: number;
@@ -6,6 +8,6 @@ export interface Route {
   id: string;
   name: string;
   setter: string;
-  types: Array<'BOULDER' | 'TOP_ROPE' | 'LEAD' | 'AUTO_BELAY'>;
+  types: WallTypes[];
   wallId: string;
 }

@@ -1,15 +1,11 @@
-FROM node:13-alpine
+FROM nginx:alpine
 
-WORKDIR /app
-COPY . .
+COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY ./dist /usr/share/nginx/html
 
 EXPOSE 80
 
-RUN apk add --no-cache bash
-RUN chmod 755 scripts/*
-
-RUN yarn global add node-pre-gyp serve --disable-progress
-RUN yarn --disable-progress
-RUN yarn build --disable-progress
-
-ENTRYPOINT ./scripts/run.sh
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

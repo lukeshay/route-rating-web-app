@@ -1,9 +1,9 @@
-import * as RegexUtils from "../regexUtils";
+import * as RegexUtils from '../regexUtils';
 
-describe("regexUtils", () => {
-  it("validate email.", () => {
-    const validEmail = "luke@test.com";
-    const invalidEmails = ["Luke@test", "test.com", "com@.luke"];
+describe('regexUtils', () => {
+  it('validate email.', () => {
+    const validEmail = 'luke@test.com';
+    const invalidEmails = ['Luke@test', 'test.com', 'com@.luke'];
 
     expect(RegexUtils.validEmail(validEmail)).toBe(true);
     expect(RegexUtils.validEmail(invalidEmails[0])).toBe(false);
@@ -11,12 +11,12 @@ describe("regexUtils", () => {
     expect(RegexUtils.validEmail(invalidEmails[2])).toBe(false);
   });
 
-  it("check for lowercase, uppercase, numbers, and special characters.", () => {
-    const uppercase = "KJH987&*(";
-    const lowercase = "124s[]";
-    const noNumbers = "kakh&(*&[";
-    const noSpecial = "asdfJHK123asafFD6d7";
-    const onlyNumbers = "12349871234";
+  it('check for lowercase, uppercase, numbers, and special characters.', () => {
+    const uppercase = 'KJH987&*(';
+    const lowercase = '124s[]';
+    const noNumbers = 'kakh&(*&[';
+    const noSpecial = 'asdfJHK123asafFD6d7';
+    const onlyNumbers = '12349871234';
 
     expect(RegexUtils.containsLowercase(lowercase)).toBe(true);
     expect(RegexUtils.containsLowercase(uppercase)).toBe(false);
@@ -32,5 +32,5 @@ describe("regexUtils", () => {
 
     expect(RegexUtils.containsOnlyNumbers(onlyNumbers)).toBe(true);
     expect(RegexUtils.containsOnlyNumbers(noSpecial)).toBe(false);
-  })
+  });
 });

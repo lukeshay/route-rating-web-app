@@ -2,7 +2,7 @@ import { TableCell, TableRow } from '@material-ui/core';
 import React from 'react';
 import { Route } from '../../../types';
 import * as GradeUtils from '../../../utils/gradeUtils';
-import * as GymUtils from '../../../utils/gymUtils';
+import * as WallUtils from '../../../utils/wallUtils';
 import Table from '../../common/table/Table';
 
 interface IRouteInformationRowProps {
@@ -29,7 +29,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
 }): JSX.Element => {
   // const [ratings, setRatings] = React.useState<RouteRating[]>([]);
   const { name, averageGrade, averageRating, setter, holdColor } = route;
-  const types = GymUtils.parseTypesToString(route.types);
+  const types = WallUtils.typesAsString(route.types);
 
   // React.useEffect(() => {
   //   RouteRatingsApi.getRouteRatings(id).then((response: Response) => {

@@ -38,8 +38,8 @@ yarn test
 
 👤 **Luke Shay**
 
-* Github: [@LukeShay](https://github.com/LukeShay)
-* LinkedIn: [@luke-shay](https://linkedin.com/in/luke-shay)
+- Github: [@LukeShay](https://github.com/LukeShay)
+- LinkedIn: [@luke-shay](https://linkedin.com/in/luke-shay)
 
 ## Contributing
 
@@ -54,5 +54,6 @@ Give a ⭐️ if this project helped you!
 Copyright © 2020 [Luke Shay](https://github.com/LukeShay).<br />
 This project is [LGPL](https://github.com/LukeShay/route-rating-web-app/blob/master/LICENSE) licensed.
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

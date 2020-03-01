@@ -15,4 +15,4 @@ export { RouteRating } from './rating';
 export { RouteRatingJwt } from './routeRatingJwt';
 export { Session } from './session';
 export { RecaptchaUser, User } from './user';
-export { Wall } from './wall';
+export { Wall, WallTypes } from './wall';

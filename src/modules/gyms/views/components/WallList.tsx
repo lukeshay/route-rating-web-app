@@ -3,7 +3,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import { ButtonEvent, ElementEvent, Wall } from '../../../../types';
 import Table from '../../../common/table/Table';
-import * as GymUtils from '../../../../utils/gymUtils';
+import * as WallUtils from '../../../../utils/wallUtils';
 import ListMenu from './ListMenu';
 import Cell from '../../../common/table/TableCell';
 
@@ -38,7 +38,7 @@ const WallRow: React.FC<IWallRowProps> = ({
   const [optionsAnchor, setOptionsAnchor] = React.useState<null | HTMLElement>(
     null
   );
-  const types = GymUtils.parseTypesToString(wall.types);
+  const types = WallUtils.typesAsString(wall.types);
 
   const handleRightClick = (event: ElementEvent): void => {
     event.preventDefault();
