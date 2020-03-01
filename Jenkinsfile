@@ -11,10 +11,6 @@ void setBuildStatus(String message, String state) {
 pipeline {
   agent any
 
-  environment {
-    GOOGLE_API_KEY=credentials('jenkins-google-recaptcha-api-key')
-  }
-
   stages {
     stage('Setup') {
       steps {
