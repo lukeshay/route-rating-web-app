@@ -26,4 +26,4 @@ build: prebuild
 	docker build -t ${IMAGE_NAME}:${TAG} . || exit 1
 
 run:
-	docker-compose up -d || exit 1
+	docker-compose -f deploy/docker-compose.yml up -d || exit 1
