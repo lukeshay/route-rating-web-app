@@ -17,14 +17,14 @@ prebuild:
 build: prebuild
 	docker build -t web-app:${TAG} . || exit 1
 
-build-prod: prebuild
+build-prod:
 	docker build -f Dockerfile.prod -t web-app:${TAG} .
 
-test:
-	docker run --entrypoint ./scripts/test.sh web-app:${TAG} || exit 1
+#test:
+	#docker run web-app:${TAG} || exit 1
 
-coverage:
-	docker run --entrypoint ./scripts/coverage.sh web-app:${TAG} || exit 1
+#coverage:
+	#docker run --entrypoint ./scripts/coverage.sh web-app:${TAG} || exit 1
 
 run:
 	docker-compose up -d || exit 1

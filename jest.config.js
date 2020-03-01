@@ -5,6 +5,7 @@ module.exports = {
     '!**/types/**',
     '!**/__mocks__/**',
     '!**/__tests__/**',
+    '!dist/**/*'
   ],
   coverageThreshold: {
     global: {

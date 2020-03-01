@@ -45,7 +45,7 @@ describe('GymPage', () => {
     );
   });
 
-  it('should render gym card.', async function() {
+  it('should render gym card.', function() {
     expect(view.queryByText(TypeMocks.testGymOne.address)).toBeDefined();
     expect(view.queryByText(TypeMocks.testGymOne.city)).toBeDefined();
     expect(view.queryByText(TypeMocks.testGymOne.state)).toBeDefined();
@@ -56,7 +56,7 @@ describe('GymPage', () => {
     expect(view.queryByText(TypeMocks.testGymOne.phoneNumber)).toBeDefined();
   });
 
-  it('should render wall list.', async function() {
+  it('should render wall list.', function() {
     if (TypeMocks.testGymOne.walls) {
       expect(
         view.queryByText(TypeMocks.testGymOne.walls[1].name)
@@ -74,7 +74,7 @@ describe('GymPage', () => {
     }
   });
 
-  it('should render route list when clicking on a wall', async function() {
+  it('should render route list when clicking on a wall', function() {
     if (TypeMocks.testGymOne.walls) {
       const wall = TypeMocks.testGymOne.walls[0];
       const routes = wall.routes;
@@ -86,7 +86,6 @@ describe('GymPage', () => {
         expect(view.queryByText(route.setter)).toBeDefined();
         expect(view.queryByText(route.name)).toBeDefined();
         expect(view.queryByText(route.averageGrade)).toBeDefined();
-        expect(view.queryByText(route.averageRating.toString())).toBeDefined();
       });
 
       expect(
