@@ -66,12 +66,10 @@ pipeline {
   post {
     success {
       setBuildStatus('Build succeeded', 'SUCCESS');
-      sh 'make clean'
       sh 'rm -rf dist node_modules coverage'
     }
     failure {
       setBuildStatus('Build failed', 'FAILURE');
-      sh 'make clean'
       sh 'rm -rf dist node_modules coverage'
     }
   }
