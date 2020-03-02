@@ -19,6 +19,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building...'
+        echo '$GOOGLE_API_KEY'
         setBuildStatus('Starting build', 'PENDING')
         sh 'yarn'
         sh 'yarn build'
