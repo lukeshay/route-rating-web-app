@@ -19,22 +19,21 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building...'
-        echo sh(returnStdout: true, script: 'env')
         setBuildStatus('Starting build', 'PENDING')
-        sh 'yarn'
-        sh 'yarn build'
+        sh 'npm i'
+        sh 'npm run build'
       }
     }
     stage('Lint') {
       steps {
         echo 'Linting...'
-        sh 'yarn validate'
+        sh 'npm run validate'
       }
     }
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh 'yarn test'
+        sh 'npm run test'
       }
     }
     stage('Coverage') {
