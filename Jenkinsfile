@@ -9,19 +9,16 @@ void setBuildStatus(String message, String state) {
 }
 
 pipeline {
-  agent any
-
-//   environment {
-//     GOOGLE_API_KEY=credentials('jenkins-google-recaptcha-api-key')
-//   }
+  agent { label 'master' }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building...'
         setBuildStatus('Starting build', 'PENDING')
-        sh 'npm i'
-        sh 'npm run build'
+        sh 'make prebuild'
+//         sh 'npm ci -f --disable-progress'
+//         sh 'npm run build'
       }
     }
     stage('Lint') {
@@ -57,19 +54,29 @@ pipeline {
         branch 'master'
       }
       steps {
-        echo 'Deploying...'
+        echo 'Triggering deploy job...'
         // build job: '', propagate: true, wait: true
         // Pass in the repository to get proper deploy files
+        build job: 'Deploy/deploy-from-image', propagate: true, wait: true, parameters: [[$class: 'StringParameterValue', name: 'GIT_REPO', value: 'route-rating-web-app'], [$class: 'StringParameterValue', name: 'DOCKER_REPO', value: 'route-rating-web-app']]
+      }
+    }
+    stage('Smoke test') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Running post deploy smoke test...'
+        build job: 'Test/post-release-app', propagate: true, wait: true
       }
     }
   }
   post {
     success {
-      setBuildStatus('Build succeeded', 'SUCCESS');
+      setBuildStatus('Pipeline succeeded', 'SUCCESS');
       sh 'rm -rf dist node_modules coverage'
     }
     failure {
-      setBuildStatus('Build failed', 'FAILURE');
+      setBuildStatus('Pipeline failed', 'FAILURE');
       sh 'rm -rf dist node_modules coverage'
     }
   }

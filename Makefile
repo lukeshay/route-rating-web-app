@@ -19,10 +19,10 @@ tag-latest:
 	docker tag ${IMAGE_NAME}:${TAG} ${IMAGE_NAME}:latest
 
 prebuild:
-	npm i -f --disable-progress
+	npm ci -f --disable-progress
 	npm run build --disable-progress
 
-build: prebuild
+build:
 	docker build -t ${IMAGE_NAME}:${TAG} . || exit 1
 
 run:
