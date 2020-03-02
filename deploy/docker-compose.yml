@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   webapp:
-    image: web-app:latest
+    image: lukeshaydocker/route-rating-web-app:latest
     restart: always
     container_name: web-app
     ports:

@@ -11,34 +11,45 @@ void setBuildStatus(String message, String state) {
 pipeline {
   agent any
 
-  environment {
-    GOOGLE_API_KEY= credentials('jenkins-google-recaptcha-api-key')
-  }
+//   environment {
+//     GOOGLE_API_KEY=credentials('jenkins-google-recaptcha-api-key')
+//   }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building...'
         setBuildStatus('Starting build', 'PENDING')
-        sh 'yarn'
-        sh 'yarn build'
+        sh 'npm i'
+        sh 'npm run build'
       }
     }
     stage('Lint') {
       steps {
         echo 'Linting...'
-        sh 'yarn validate'
+        sh 'npm run validate'
       }
     }
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh 'yarn test'
+        sh 'npm run test'
       }
     }
     stage('Coverage') {
       steps {
         echo 'Getting coverage...'
+      }
+    }
+    stage('Build image') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Building image...'
+        sh 'make'
+        sh 'make push'
+        sh 'make push-latest'
       }
     }
     stage('Deploy') {
@@ -47,19 +58,18 @@ pipeline {
       }
       steps {
         echo 'Deploying...'
-//         build job: '', propagate: true, wait: true
+        // build job: '', propagate: true, wait: true
+        // Pass in the repository to get proper deploy files
       }
     }
   }
   post {
     success {
       setBuildStatus('Build succeeded', 'SUCCESS');
-      sh 'make clean'
       sh 'rm -rf dist node_modules coverage'
     }
     failure {
       setBuildStatus('Build failed', 'FAILURE');
-      sh 'make clean'
       sh 'rm -rf dist node_modules coverage'
     }
   }
