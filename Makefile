@@ -6,7 +6,7 @@ IMAGE_NAME=lukeshaydocker/route-rating-web-app
 default: build
 
 clean:
-	docker images | awk 'NR != 1 && $1 = "${IMAGE_NAME}" { print $3 }' | xargs docker rmi -f
+	docker images | awk 'NR != 1 && $1 == "${IMAGE_NAME}" { print $3 }' | xargs docker rmi -f
 
 push:
 	docker push ${IMAGE_NAME}:${TAG}
