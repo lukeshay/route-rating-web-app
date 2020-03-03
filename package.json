@@ -10,7 +10,7 @@
     "start": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --open --hot --config configs/webpack.dev.js",
     "start:local": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --open --hot --config configs/webpack.local.js",
     "build": "recaptchaKey=$GOOGLE_API_KEY webpack -p --config=configs/webpack.prod.js",
-    "build:analyze": "yarn build -- --env.addon=bundleanalyze",
+    "build:analyze": "npm run build -- --env.addon=bundleanalyze",
     "deploy": "serve -p 80 -s ./dist",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
