@@ -9,7 +9,7 @@ void setBuildStatus(String message, String state) {
 }
 
 pipeline {
-  agent { label 'master' }
+  agent { label 'ops' }
 
   stages {
     stage('Build') {
@@ -17,8 +17,6 @@ pipeline {
         echo 'Building...'
         setBuildStatus('Starting build', 'PENDING')
         sh 'make prebuild'
-//         sh 'npm ci -f --disable-progress'
-//         sh 'npm run build'
       }
     }
     stage('Lint') {
