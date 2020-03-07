@@ -1,0 +1,10 @@
+{
+  "git_repository": "route-rating-web-app",
+  "secrets": [
+    "GOOGLE_API_KEY"
+  ],
+  "docker_compose": {
+    "repository": "lukeshaydocker/route-rating-web-app",
+    "compose_file": "deploy/docker-compose.yml"
+  }
+}

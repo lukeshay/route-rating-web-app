@@ -1,21 +1,10 @@
-void setBuildStatus(String message, String state) {
-  step([
-      $class: "GitHubCommitStatusSetter",
-      reposSource: [$class: "ManuallyEnteredRepositorySource", url: env.GIT_URL],
-      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "Jenkins/build-status"],
-      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
-      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
-  ]);
-}
-
 pipeline {
-  agent { label 'ops' }
+  agent { label 'master' }
 
   stages {
     stage('Build') {
       steps {
         echo 'Building...'
-        setBuildStatus('Starting build', 'PENDING')
         sh 'make prebuild'
       }
     }
@@ -55,7 +44,7 @@ pipeline {
         echo 'Triggering deploy job...'
         // build job: '', propagate: true, wait: true
         // Pass in the repository to get proper deploy files
-        build job: 'Deploy/deploy-from-image', propagate: true, wait: true, parameters: [[$class: 'StringParameterValue', name: 'GIT_REPO', value: 'route-rating-web-app'], [$class: 'StringParameterValue', name: 'DOCKER_REPO', value: 'route-rating-web-app']]
+        build job: 'Deploy/deploy', propagate: true, wait: true, parameters: [[$class: 'StringParameterValue', name: 'GIT_REPO', value: 'route-rating-web-app']
       }
     }
     stage('Smoke test') {
@@ -67,14 +56,22 @@ pipeline {
         build job: 'Test/post-release-app', propagate: true, wait: true
       }
     }
+    stage('Clean') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Cleaning hanging images...'
+        sh 'docker rmi $(docker images -q) || exit 0'
+        sh 'docker rm $(docker ps -aq) || exit 0'
+      }
+    }
   }
   post {
     success {
-      setBuildStatus('Pipeline succeeded', 'SUCCESS');
       sh 'rm -rf dist node_modules coverage'
     }
     failure {
-      setBuildStatus('Pipeline failed', 'FAILURE');
       sh 'rm -rf dist node_modules coverage'
     }
   }
