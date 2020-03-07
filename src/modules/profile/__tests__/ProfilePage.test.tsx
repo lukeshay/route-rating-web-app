@@ -2,7 +2,7 @@ import React from 'react';
 import ProfilePage from '../ProfilePage';
 import * as TestUtils from '../../../__mocks__/testUtils';
 
-const validateFullUserForm = (wrapper: TestUtils.RenderResult) => {
+const validateFullUserForm = (wrapper: TestUtils.RenderResult): void => {
   expect(wrapper.queryAllByTestId('firstName-input-test-id')).toBeDefined();
   expect(wrapper.queryAllByTestId('lastName-input-test-id')).toBeDefined();
   expect(wrapper.queryAllByTestId('username-input-test-id')).toBeDefined();
@@ -38,28 +38,28 @@ const validateFullUserForm = (wrapper: TestUtils.RenderResult) => {
     wrapper.queryByText('Invalid phone number. Format: ##########')
   ).toBeDefined();
 };
-describe('<ProfilePage />', () => {
-  describe('when someone is logged in', () => {
+describe('<ProfilePage />', (): void => {
+  describe('when someone is logged in', (): void => {
     let wrapper: TestUtils.RenderResult;
 
-    beforeEach(() => {
+    beforeEach((): void => {
       jest.resetModules();
       process.env.recaptchaKey = ' ';
       wrapper = TestUtils.renderSignedInDesktop(<ProfilePage />, {});
     });
 
-    afterEach(() => {
+    afterEach((): void => {
       TestUtils.cleanup();
     });
 
-    it('should render profile form and update fields.', () => {
+    it('should render profile form and update fields.', (): void => {
       expect(wrapper.queryByTestId('profile-form-test-id')).toBeDefined();
       expect(wrapper.queryByText('Your profile')).toBeDefined();
       expect(wrapper.queryByText('Sign out')).toBeDefined();
       validateFullUserForm(wrapper);
     });
 
-    it('should render sign up form when signing out.', function() {
+    it('should render sign up form when signing out.', function(): void {
       expect(wrapper.queryByTestId('profile-form-test-id')).toBeDefined();
       expect(wrapper.queryByText('Your profile')).toBeDefined();
 
@@ -74,27 +74,27 @@ describe('<ProfilePage />', () => {
     });
   });
 
-  describe('when no one is logged in', () => {
+  describe('when no one is logged in', (): void => {
     let wrapper: TestUtils.RenderResult;
 
-    beforeEach(() => {
+    beforeEach((): void => {
       jest.resetModules();
       process.env.recaptchaKey = ' ';
       wrapper = TestUtils.renderSignedOutDesktop(<ProfilePage />, {});
     });
 
-    afterEach(() => {
+    afterEach((): void => {
       TestUtils.cleanup();
     });
 
-    it('should render sign up form.', function() {
+    it('should render sign up form.', function(): void {
       expect(wrapper.queryByTestId('signUp-form-test-id')).toBeDefined();
       expect(wrapper.queryByText('Sign up')).toBeDefined();
       expect(wrapper.queryByText('Sign in')).toBeDefined();
       validateFullUserForm(wrapper);
     });
 
-    it('should render sign in form.', function() {
+    it('should render sign in form.', function(): void {
       expect(wrapper.queryByTestId('signUp-form-test-id')).toBeDefined();
       expect(wrapper.queryByText('Sign up')).toBeDefined();
 
