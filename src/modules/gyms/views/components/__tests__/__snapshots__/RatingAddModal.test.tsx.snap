@@ -2,7 +2,7 @@
 
 exports[`<RatingAddModal /> should render correctly 1`] = `
 <TransitionModal
-  handleClose={[Function]}
+  handleClose={[MockFunction]}
   id="ratingAdd"
   open={true}
   style={
@@ -220,7 +220,7 @@ exports[`<RatingAddModal /> should render correctly 1`] = `
           }
         >
           <WithStyles(ForwardRef(Button))
-            onClick={[Function]}
+            onClick={[MockFunction]}
             type="button"
             variant="outlined"
           >

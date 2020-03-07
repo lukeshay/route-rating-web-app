@@ -4,7 +4,7 @@ exports[`<GymsPage /> should render correctly 1`] = `
 <ContextProvider
   value={
     Object {
-      "dispatch": [Function],
+      "dispatch": [MockFunction],
       "state": Object {
         "page": Object {
           "content": Array [
