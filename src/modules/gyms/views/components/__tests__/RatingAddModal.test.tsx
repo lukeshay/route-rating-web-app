@@ -6,7 +6,7 @@ import { shallowToJson } from 'enzyme-to-json';
 
 let view;
 
-describe('<RatingAddModal />', () => {
+describe('<RatingAddModal />', (): void => {
   beforeEach(() => {
     view = shallow(
       <RatingAddModal
@@ -14,16 +14,16 @@ describe('<RatingAddModal />', () => {
         open={true}
         routeId={TypeMocks.testRouteOne.id}
         wallId={TypeMocks.testWallOne.id}
-        handleClose={() => {}}
+        handleClose={jest.fn()}
       />
     );
   });
 
-  it('should render correctly', () => {
+  it('should render correctly', (): void => {
     expect(shallowToJson(view)).toMatchSnapshot();
   });
 
-  it('should have correct fields', () => {
+  it('should have correct fields', (): void => {
     expect(view.find("select[id='rating']")).toBeDefined();
     expect(view.find("select[id='grade']")).toBeDefined();
     expect(view.find("textarea[id='review']")).toBeDefined();

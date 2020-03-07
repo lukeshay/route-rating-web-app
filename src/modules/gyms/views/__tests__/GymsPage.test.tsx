@@ -13,10 +13,10 @@ const mockGymsState: IGymsContextState = {
   } as GymPageType,
 };
 
-describe('<GymsPage />', () => {
-  it('should render correctly', () => {
+describe('<GymsPage />', (): void => {
+  it('should render correctly', (): void => {
     const gymsPage = shallow(
-      <GymsStoreMock state={mockGymsState} dispatch={() => {}}>
+      <GymsStoreMock state={mockGymsState} dispatch={jest.fn()}>
         <GymsPage />
       </GymsStoreMock>
     );

@@ -8,14 +8,14 @@ import GymCard from '../GymCard';
 
 const gymArray: Gym[] = [TypeMocks.testGymOne, TypeMocks.testGymTwo];
 
-describe('<GymsList />', () => {
-  it('should render correctly', () => {
+describe('<GymsList />', (): void => {
+  it('should render correctly', (): void => {
     const gymsPage = shallow(
       <GymsList
         cardClass={''}
         gyms={gymArray}
         mobile={false}
-        onClick={() => {}}
+        onClick={jest.fn()}
       />
     );
     expect(shallowToJson(gymsPage)).toMatchSnapshot();
