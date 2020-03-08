@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface IStandardProps {
+export interface StandardProps {
   children?: React.ReactNode;
   className?: string;
   color?: 'primary' | 'secondary' | 'default';

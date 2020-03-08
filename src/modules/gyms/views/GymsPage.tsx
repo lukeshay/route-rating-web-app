@@ -111,7 +111,7 @@ const GymsPage: React.FC = (): JSX.Element => {
     }
   };
 
-  const handleKeyPress = (event: any): void => {
+  const handleKeyPress = (event: KeyboardEvent): void => {
     if (event.key === 'Enter') {
       loadGyms(search, page);
     }

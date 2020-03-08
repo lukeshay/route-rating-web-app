@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { IButtonProps } from '../Button';
+import Button, { ButtonProps } from '../Button';
 import { mount } from '../../../../../configs/setupEnzyme';
 import MUIButton from '@material-ui/core/Button';
 
@@ -8,7 +8,7 @@ describe('Button', () => {
 
   const handleClick = jest.fn();
 
-  const buttonProps: IButtonProps = {
+  const buttonProps: ButtonProps = {
     id: 'wrapper',
     color: 'primary',
     size: 'medium',

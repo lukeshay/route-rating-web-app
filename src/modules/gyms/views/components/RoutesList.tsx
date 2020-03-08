@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IRouteRowProps {
+export interface RouteRowProps {
   canEdit: boolean;
   mobile: boolean;
   route: Route;
@@ -38,7 +38,7 @@ export interface IRouteRowProps {
   onRowClick(route: Route): Promise<void> | void;
 }
 
-const RouteRow: React.FC<IRouteRowProps> = ({
+const RouteRow: React.FC<RouteRowProps> = ({
   canEdit,
   mobile,
   onDeleteClick,
@@ -154,7 +154,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   );
 };
 
-export interface IRoutesListProps {
+export interface RoutesListProps {
   canEdit: boolean;
   mobile: boolean;
   routes: Route[];
@@ -163,7 +163,7 @@ export interface IRoutesListProps {
   handleRowClick(route: Route): Promise<void> | void;
 }
 
-const RoutesList: React.FC<IRoutesListProps> = ({
+const RoutesList: React.FC<RoutesListProps> = ({
   canEdit,
   handleDeleteRoute,
   handleEditRoute,

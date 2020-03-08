@@ -2,34 +2,35 @@ import React, { Dispatch, Reducer, createContext, useReducer } from 'react';
 import * as Cookies from '../../utils/cookiesUtils';
 
 export const DARK_THEME = 'DARK_THEME';
+
 export const LIGHT_THEME = 'LIGHT_THEME';
 
 export const Types = {
   UPDATE_VIEW: 'UPDATE_VIEW',
 };
 
-export interface IViewContextState {
+export interface ViewContextState {
   mobile: boolean;
   theme: 'DARK_THEME' | 'LIGHT_THEME';
 }
 
-export interface IViewContextAction {
+export interface ViewContextAction {
   actionType: string;
   mobile: boolean;
   theme: 'DARK_THEME' | 'LIGHT_THEME';
 }
 
-export interface IContextProps {
-  state: IViewContextState;
-  dispatch: Dispatch<IViewContextAction>;
+export interface ContextProps {
+  state: ViewContextState;
+  dispatch: Dispatch<ViewContextAction>;
 }
 
-export const ViewContext = createContext<IContextProps>({} as IContextProps);
+export const ViewContext = createContext<ContextProps>({} as ContextProps);
 
-const reducer: Reducer<IViewContextState, IViewContextAction> = (
-  state: IViewContextState,
-  action: IViewContextAction
-): IViewContextState => {
+const reducer: Reducer<ViewContextState, ViewContextAction> = (
+  state: ViewContextState,
+  action: ViewContextAction
+): ViewContextState => {
   const { mobile, theme, actionType } = action;
 
   switch (actionType) {
@@ -42,7 +43,7 @@ const reducer: Reducer<IViewContextState, IViewContextAction> = (
   }
 };
 
-const initialState: IViewContextState = {
+const initialState: ViewContextState = {
   mobile: false,
   theme: Cookies.getTheme() || DARK_THEME,
 };
@@ -57,5 +58,4 @@ export const ViewStore: React.FC = ({ children }): JSX.Element => {
   );
 };
 
-export const useViewContext = (): IContextProps =>
-  React.useContext(ViewContext);
+export const useViewContext = (): ContextProps => React.useContext(ViewContext);

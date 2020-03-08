@@ -1,22 +1,23 @@
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
+import { InputEvent } from '../../../types';
 
-export interface IPropsInput extends IStandardProps {
+export interface PropsInput extends StandardProps {
   autoCapitalize?: 'true' | undefined;
   autoComplete?: string;
   error?: boolean;
   fullWidth?: boolean;
   helpText?: string;
-  onChange?(event: any): void;
-  onKeyPress?(even: any): void;
   placeholder?: string;
   rows?: number;
   type: string;
   value?: string;
+  onChange?(event: InputEvent): void;
+  onKeyPress?(even: KeyboardEvent): void;
 }
 
-const Input: React.FC<IPropsInput> = ({
+const Input: React.FC<PropsInput> = ({
   autoCapitalize,
   autoComplete,
   className,

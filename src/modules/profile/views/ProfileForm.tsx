@@ -10,11 +10,11 @@ import * as ResponseUtils from '../../../utils/responseUtils';
 import { toast } from 'react-toastify';
 import * as RegexUtils from '../../../utils/regexUtils';
 
-export interface IPropsProfileForm {
+export interface PropsProfileForm {
   user: User;
 }
 
-const ProfileForm: React.FC<IPropsProfileForm> = ({ user }): JSX.Element => {
+const ProfileForm: React.FC<PropsProfileForm> = ({ user }): JSX.Element => {
   const { dispatch: userDispatch } = useUserContext();
   const [firstName, setFirstName] = React.useState<string>(user.firstName);
   const [lastName, setLastName] = React.useState<string>(user.lastName);

@@ -8,11 +8,11 @@ import CheckBox from '../../common/inputs/CheckBox';
 import Input from '../../common/inputs/Input';
 import { ButtonEvent, InputEvent } from '../../../types';
 
-export interface IPropsLogInForm {
-  handleSignUpClick(event: any): void;
+export interface PropsLogInForm {
+  handleSignUpClick(event: ButtonEvent): void;
 }
 
-const SignInForm: React.FC<IPropsLogInForm> = (props): JSX.Element => {
+const SignInForm: React.FC<PropsLogInForm> = (props): JSX.Element => {
   const { dispatch: userDispatch } = useUserContext();
   const [username, setUsername] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');

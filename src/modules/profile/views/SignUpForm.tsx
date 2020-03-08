@@ -12,12 +12,12 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useViewContext } from '../../../context/view/viewStore';
 import { toast } from 'react-toastify';
 
-export interface IPropsSignUpForm {
-  handleSignInClick(event: any): void;
+export interface PropsSignUpForm {
+  handleSignInClick(event: ButtonEvent): void;
 }
 
-const SignUpForm: React.FC<IPropsSignUpForm> = (
-  props: IPropsSignUpForm
+const SignUpForm: React.FC<PropsSignUpForm> = (
+  props: PropsSignUpForm
 ): JSX.Element => {
   const { dispatch } = useUserContext();
   const { state: viewState } = useViewContext();

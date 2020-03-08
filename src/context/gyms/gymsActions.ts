@@ -11,11 +11,11 @@ import {
   Wall,
   WallPage,
 } from '../../types';
-import { IGymsContextAction } from './gymsStore';
+import { GymsContextAction } from './gymsStore';
 import Types from './gymsActionTypes';
 
 export const loadGymsQuery = (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   query: string,
   page: number
 ): Promise<void | Response> => {
@@ -25,7 +25,7 @@ export const loadGymsQuery = (
         dispatch({
           actionType: Types.LOAD_GYMS,
           page: body,
-        } as IGymsContextAction);
+        } as GymsContextAction);
       });
 
       return response;
@@ -34,7 +34,7 @@ export const loadGymsQuery = (
 };
 
 export const loadGymV2 = (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   gymId: string
 ): Promise<void | Response> => {
   return GymsApi.getGymV2(gymId).then((response: Response) => {
@@ -43,7 +43,7 @@ export const loadGymV2 = (
         dispatch({
           actionType: Types.UPDATE_GYM,
           gym: body,
-        } as IGymsContextAction);
+        } as GymsContextAction);
       });
     }
 
@@ -52,7 +52,7 @@ export const loadGymV2 = (
 };
 
 export const loadWalls = (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   gym: Gym
 ): Promise<void | Response> => {
   return WallsApi.getWalls(gym.id).then((response: Response) => {
@@ -63,7 +63,7 @@ export const loadWalls = (
         dispatch({
           actionType: Types.UPDATE_GYM,
           gym,
-        } as IGymsContextAction);
+        } as GymsContextAction);
       });
     }
 
@@ -72,7 +72,7 @@ export const loadWalls = (
 };
 
 export const loadRoutes = (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   gym: Gym,
   wallId: string
 ): Promise<void | Response> => {
@@ -91,7 +91,7 @@ export const loadRoutes = (
           dispatch({
             actionType: Types.UPDATE_GYM,
             gym,
-          } as IGymsContextAction);
+          } as GymsContextAction);
         }
       });
     }
@@ -101,7 +101,7 @@ export const loadRoutes = (
 };
 
 export const updateGym = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   updatedGym: Gym
 ): Promise<void | Response> => {
   return GymsApi.updateGym(updatedGym).then((response: Response) => {
@@ -119,7 +119,7 @@ export const updateGym = async (
 };
 
 export const updateGymPhoto = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   file: File,
   gym: Gym
 ): Promise<void | Response> => {
@@ -129,7 +129,7 @@ export const updateGymPhoto = async (
         dispatch({
           actionType: Types.UPDATE_GYM,
           gym: { ...body, walls: gym.walls },
-        } as IGymsContextAction);
+        } as GymsContextAction);
       });
     }
 
@@ -138,7 +138,7 @@ export const updateGymPhoto = async (
 };
 
 export const updateGymLogo = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   file: File,
   gym: Gym
 ): Promise<void | Response> => {
@@ -148,7 +148,7 @@ export const updateGymLogo = async (
         dispatch({
           actionType: Types.UPDATE_GYM,
           gym: { ...body, walls: gym.walls },
-        } as IGymsContextAction);
+        } as GymsContextAction);
       });
     }
 
@@ -157,7 +157,7 @@ export const updateGymLogo = async (
 };
 
 export const createWall = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   wall: Wall,
   gym: Gym
 ): Promise<void | Response> => {
@@ -171,7 +171,7 @@ export const createWall = async (
 };
 
 export const updateWall = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   wall: Wall,
   gym: Gym
 ): Promise<void | Response> => {
@@ -185,7 +185,7 @@ export const updateWall = async (
 };
 
 export const deleteWall = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   wallId: string,
   gym: Gym
 ): Promise<void | Response> => {
@@ -199,7 +199,7 @@ export const deleteWall = async (
 };
 
 export const createRoute = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   route: Route,
   gym: Gym
 ): Promise<void | Response> => {
@@ -213,7 +213,7 @@ export const createRoute = async (
 };
 
 export const updateRoute = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   route: Route,
   gym: Gym
 ): Promise<void | Response> => {
@@ -227,7 +227,7 @@ export const updateRoute = async (
 };
 
 export const deleteRoute = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   route: Route,
   gym: Gym
 ): Promise<void | Response> => {
@@ -241,7 +241,7 @@ export const deleteRoute = async (
 };
 
 export const createRouteRating = async (
-  dispatch: Dispatch<IGymsContextAction>,
+  dispatch: Dispatch<GymsContextAction>,
   rating: RouteRating,
   gym: Gym,
   wallId: string

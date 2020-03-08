@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as Events from '../../../../types/events';
 
-export interface IListMenuProps {
+export interface ListMenuProps {
   iconClass?: string;
   optionsAnchor: HTMLElement | null;
   onDeleteClick(event: Events.ElementEvent): Events.HandlerReturn;
@@ -17,7 +17,7 @@ export interface IListMenuProps {
   onOptionsClose(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
-const ListMenu: React.FC<IListMenuProps> = ({
+const ListMenu: React.FC<ListMenuProps> = ({
   iconClass,
   onDeleteClick,
   onEditClick,

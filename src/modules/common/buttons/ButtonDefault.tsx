@@ -1,8 +1,8 @@
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import { IButtonProps } from './IButtonProps';
+import { ButtonProps } from './IButtonProps';
 
-const ButtonDefault: React.FC<IButtonProps> = ({
+const ButtonDefault: React.FC<ButtonProps> = ({
   id,
   type,
   variant,

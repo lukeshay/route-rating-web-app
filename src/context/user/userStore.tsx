@@ -2,26 +2,26 @@ import React, { Dispatch, Reducer, createContext, useReducer } from 'react';
 import { User } from '../../types';
 import Types from './userActionTypes';
 
-export interface IUserContextState {
+export interface UserContextState {
   user: User | null;
 }
 
-export interface IUserContextAction {
+export interface UserContextAction {
   actionType: string;
   user: User | null;
 }
 
-export interface IContextProps {
-  state: IUserContextState;
-  dispatch: Dispatch<IUserContextAction>;
+export interface ContextProps {
+  state: UserContextState;
+  dispatch: Dispatch<UserContextAction>;
 }
 
-export const UserContext = createContext<IContextProps>({} as IContextProps);
+export const UserContext = createContext<ContextProps>({} as ContextProps);
 
-const reducer: Reducer<IUserContextState, IUserContextAction> = (
-  state: IUserContextState,
-  action: IUserContextAction
-): IUserContextState => {
+const reducer: Reducer<UserContextState, UserContextAction> = (
+  state: UserContextState,
+  action: UserContextAction
+): UserContextState => {
   switch (action.actionType) {
     case Types.SIGN_IN:
       return { user: action.user };
@@ -37,7 +37,7 @@ const reducer: Reducer<IUserContextState, IUserContextAction> = (
   }
 };
 
-const initialState: IUserContextState = {
+const initialState: UserContextState = {
   user: null,
 };
 
@@ -51,5 +51,4 @@ export const UserStore: React.FC = ({ children }): JSX.Element => {
   );
 };
 
-export const useUserContext = (): IContextProps =>
-  React.useContext(UserContext);
+export const useUserContext = (): ContextProps => React.useContext(UserContext);

@@ -4,7 +4,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import React from 'react';
 import * as ReactRouter from 'react-router';
 import { Routes } from '../../../../routes';
-import { Gym } from '../../../../types';
+import { Gym, ButtonEvent, InputEvent } from '../../../../types';
 import * as RegexUtils from '../../../../utils/regexUtils';
 import Button from '../../../common/buttons/Button';
 import Form from '../../../common/forms/Form';
@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IGymEditPageProps {
+export interface GymEditPageProps {
   gym: Gym;
   handleSubmit(updatedGym: Gym, photo: File | null, logo: File | null): void;
 }
 
-const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
+const GymEditForm: React.FunctionComponent<GymEditPageProps> = ({
   gym,
   handleSubmit,
 }): JSX.Element => {
@@ -118,7 +118,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
     }
   }, [phoneNumber]);
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value, files } = event.target;
 
@@ -148,10 +148,10 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
         setPhoneNumber(value);
         return;
       case 'photo':
-        setPhoto(files[0]);
+        if (files) setPhoto(files[0]);
         return;
       case 'logo':
-        setLogo(files[0]);
+        if (files) setLogo(files[0]);
         return;
 
       default:
@@ -159,7 +159,7 @@ const GymEditForm: React.FunctionComponent<IGymEditPageProps> = ({
     }
   };
 
-  const handleSubmitWrapper = (event: any): void => {
+  const handleSubmitWrapper = (event: ButtonEvent): void => {
     event.preventDefault();
 
     handleSubmit(

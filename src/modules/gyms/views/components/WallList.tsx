@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IWallRowProps {
+export interface WallRowProps {
   wall: Wall;
   canEdit: boolean;
   onRowClick(wallId: string): Promise<void> | void;
@@ -26,7 +26,7 @@ export interface IWallRowProps {
   onDeleteClick(wallId: string): Promise<void> | void;
 }
 
-const WallRow: React.FC<IWallRowProps> = ({
+const WallRow: React.FC<WallRowProps> = ({
   wall,
   onRowClick,
   canEdit,
@@ -107,7 +107,7 @@ const WallRow: React.FC<IWallRowProps> = ({
   );
 };
 
-export interface IWallListProps {
+export interface WallListProps {
   walls: Wall[] | null;
   canEdit: boolean;
   onRowClick(wallId: string): Promise<void>;
@@ -115,7 +115,7 @@ export interface IWallListProps {
   onDeleteWall(wallId: string): Promise<void>;
 }
 
-const WallList: React.FC<IWallListProps> = ({
+const WallList: React.FC<WallListProps> = ({
   walls,
   onRowClick,
   canEdit,

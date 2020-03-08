@@ -1,12 +1,12 @@
-import { IUserContextState, UserContext } from '../context/user/userStore';
+import { UserContextState, UserContext } from '../context/user/userStore';
 import React from 'react';
 
-export interface IUserStoreMockProps {
-  state: IUserContextState;
-  dispatch: any;
+export interface UserStoreMockProps {
+  state: UserContextState;
+  dispatch: React.Dispatch<UserContextState>;
 }
 
-const UserStoreMock: React.FC<IUserStoreMockProps> = ({
+const UserStoreMock: React.FC<UserStoreMockProps> = ({
   state,
   dispatch,
   children,

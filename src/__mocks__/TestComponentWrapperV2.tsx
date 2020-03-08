@@ -1,20 +1,20 @@
 /* eslint @typescript-eslint/no-empty-function: 0, @typescript-eslint/explicit-function-return-type: 0 */
 import React from 'react';
-import { IGymsContextState } from '../context/gyms/gymsStore';
-import { IUserContextState } from '../context/user/userStore';
-import { IViewContextState } from '../context/view/viewStore';
+import { GymsContextState } from '../context/gyms/gymsStore';
+import { UserContextState } from '../context/user/userStore';
+import { ViewContextState } from '../context/view/viewStore';
 import GymsStoreMock from './gymsStoreMock';
 import ViewStoreMock from './viewStoreMock';
 import UserStoreMock from './userStoreMock';
 
-export interface ITestComponentWrapperV2Props {
+export interface TestComponentWrapperV2Props {
   children: React.ReactNode;
-  gymsState: IGymsContextState;
-  userState: IUserContextState;
-  viewState: IViewContextState;
+  gymsState: GymsContextState;
+  userState: UserContextState;
+  viewState: ViewContextState;
 }
 
-const TestComponentWrapperV2: React.FC<ITestComponentWrapperV2Props> = ({
+const TestComponentWrapperV2: React.FC<TestComponentWrapperV2Props> = ({
   children,
   gymsState,
   userState,

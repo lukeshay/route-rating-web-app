@@ -66,14 +66,14 @@ const useMobileStyles = makeStyles(() =>
   })
 );
 
-interface IGymCardVariantsProps {
+interface GymCardVariantsProps {
   cardClass?: string;
   gym: Gym;
-  onClick?(even: any): void;
+  onClick?(even: Events.ButtonEvent): void;
   onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
-const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
+const GymCardDesktop: React.FC<GymCardVariantsProps> = ({
   cardClass,
   gym,
   onClick,
@@ -113,7 +113,7 @@ const GymCardDesktop: React.FC<IGymCardVariantsProps> = ({
   );
 };
 
-const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
+const GymCardMobile: React.FC<GymCardVariantsProps> = ({
   gym,
   onClick,
   onRightClick,
@@ -157,16 +157,16 @@ const GymCardMobile: React.FC<IGymCardVariantsProps> = ({
   );
 };
 
-export interface IGymCardProps {
+export interface GymCardProps {
   desktopCardClass?: string;
   gym: Gym;
   mobile: boolean;
   mobileCardClass?: string;
-  onClick?(even: any): void;
+  onClick?(even: Events.ButtonEvent): void;
   onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
-const GymCard: React.FC<IGymCardProps> = ({
+const GymCard: React.FC<GymCardProps> = ({
   desktopCardClass,
   gym,
   mobile,

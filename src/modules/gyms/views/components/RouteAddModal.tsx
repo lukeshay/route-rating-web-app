@@ -6,14 +6,14 @@ import { Gym, Route, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import RouteForm from './RouteForm';
 
-export interface IRouteAddPageProps {
+export interface RouteAddPageProps {
   gym: Gym;
   open: boolean;
   wall: Wall;
   handleClose(): Promise<void> | void;
 }
 
-const RouteAddPage: React.FC<IRouteAddPageProps> = ({
+const RouteAddPage: React.FC<RouteAddPageProps> = ({
   gym,
   open,
   wall,

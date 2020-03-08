@@ -8,7 +8,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import React from 'react';
-import { Wall } from '../../../../types';
+import { Wall, ButtonEvent, InputEvent } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import CheckBox from '../../../common/inputs/CheckBox';
 import Input from '../../../common/inputs/Input';
@@ -22,17 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IWallFormProps {
+export interface WallFormProps {
   wall: Wall;
   formHeadText: string;
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
-  handleCancel(event: any): Promise<void> | void;
+  handleCancel(event: ButtonEvent): Promise<void> | void;
   handleSubmit(wall: Wall): Promise<void> | void;
 }
 
-const WallForm: React.FC<IWallFormProps> = ({
+const WallForm: React.FC<WallFormProps> = ({
   wall,
   formHeadText,
   nameMessage,
@@ -60,7 +60,7 @@ const WallForm: React.FC<IWallFormProps> = ({
       wall.types.filter((element) => element === 'BOULDER').length > 0
   );
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'name') {
@@ -76,7 +76,7 @@ const WallForm: React.FC<IWallFormProps> = ({
     }
   };
 
-  const onSubmit = (event: any): void => {
+  const onSubmit = (event: ButtonEvent): void => {
     event.preventDefault();
 
     const types: string[] = [];

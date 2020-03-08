@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import React from 'react';
+import { InputEvent } from '../../../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface ISelectorProps {
+export interface SelectorProps {
   id: string;
   name: string;
   helperText?: string;
@@ -31,10 +32,10 @@ export interface ISelectorProps {
   value: string | number;
   children: React.ReactNode;
   native?: boolean;
-  handleChange(event: any): Promise<void> | void;
+  handleChange(event: InputEvent): Promise<void> | void;
 }
 
-const Selector: React.FC<ISelectorProps> = ({
+const Selector: React.FC<SelectorProps> = ({
   id,
   name,
   helperText,

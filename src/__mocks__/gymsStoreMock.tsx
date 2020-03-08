@@ -1,12 +1,12 @@
-import { GymsContext, IGymsContextState } from '../context/gyms/gymsStore';
+import { GymsContext, GymsContextState } from '../context/gyms/gymsStore';
 import React from 'react';
 
-export interface IGymsStoreMockProps {
-  state: IGymsContextState;
-  dispatch: any;
+export interface GymsStoreMockProps {
+  state: GymsContextState;
+  dispatch: React.Dispatch<GymsContextState>;
 }
 
-const GymsStoreMock: React.FC<IGymsStoreMockProps> = ({
+const GymsStoreMock: React.FC<GymsStoreMockProps> = ({
   state,
   dispatch,
   children,

@@ -70,11 +70,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface INavigationBarProps {
+export interface NavigationBarProps {
   children: React.ReactNode;
 }
 
-const NavigationBar: React.FC<INavigationBarProps> = ({
+const NavigationBar: React.FC<NavigationBarProps> = ({
   children,
 }): JSX.Element => {
   const classes = useStyles();

@@ -3,13 +3,11 @@ import React from 'react';
 import TestComponentWrapperV2 from './TestComponentWrapperV2';
 import * as TypeMocks from './typeMocks';
 
-interface IWrapperProps {
+interface WrapperProps {
   children: React.ReactNode;
 }
 
-const SignedInDesktop: React.FC<IWrapperProps> = ({
-  children,
-}): JSX.Element => {
+const SignedInDesktop: React.FC<WrapperProps> = ({ children }): JSX.Element => {
   return (
     <TestComponentWrapperV2
       gymsState={TypeMocks.mockGymsState}
@@ -24,7 +22,7 @@ const SignedInDesktop: React.FC<IWrapperProps> = ({
 export const renderSignedInDesktop = (ui, options): RenderResult =>
   render(ui, { wrapper: SignedInDesktop, ...options });
 
-const SignedOutDesktop: React.FC<IWrapperProps> = ({
+const SignedOutDesktop: React.FC<WrapperProps> = ({
   children,
 }): JSX.Element => {
   return (

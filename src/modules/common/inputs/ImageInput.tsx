@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export interface IImageInputProps {
+export interface ImageInputProps {
   accept: string;
   alt: string;
   children: React.ReactNode;
@@ -21,10 +21,10 @@ export interface IImageInputProps {
   id: string;
   multiple: boolean;
   src: string;
-  onChange(event: any): void;
+  onChange(event: InputEvent): void;
 }
 
-const ImageInput: React.FunctionComponent<IImageInputProps> = ({
+const ImageInput: React.FunctionComponent<ImageInputProps> = ({
   accept,
   alt,
   children,

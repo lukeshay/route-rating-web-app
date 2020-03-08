@@ -1,17 +1,17 @@
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
 import Menu from '@material-ui/core/Menu';
 import Fade from '@material-ui/core/Fade';
 import { ElementEvent } from '../../../types';
 
-export interface IMenuProps extends IStandardProps {
+export interface MenuProps extends StandardProps {
   anchor: HTMLElement | null;
   children?: React.ReactNode;
-  onClose(event: ElementEvent): void;
   open: boolean;
+  onClose(event: ElementEvent): void;
 }
 
-const RRMenu: React.FC<IMenuProps> = ({
+const RRMenu: React.FC<MenuProps> = ({
   anchor,
   children,
   id,

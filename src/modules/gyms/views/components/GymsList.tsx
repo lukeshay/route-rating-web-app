@@ -2,14 +2,14 @@ import { Gym } from '../../../../types';
 import React from 'react';
 import GymCard from './GymCard';
 
-interface IGymsListProps {
+interface GymsListProps {
   cardClass: string;
   gyms: Gym[];
   mobile: boolean;
-  onClick(id: any): void;
+  onClick(id: string): void;
 }
 
-const GymsList: React.FC<IGymsListProps> = ({
+const GymsList: React.FC<GymsListProps> = ({
   cardClass,
   gyms,
   mobile,
