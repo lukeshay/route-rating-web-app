@@ -2,7 +2,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import * as UserActions from '../../../context/user/userActions';
 import { useUserContext } from '../../../context/user/userStore';
-import { ButtonEvent, InputEvent, RecaptchaUser, User } from '../../../types';
+import { Events, RecaptchaUser, User } from '../../../types';
 import * as RegexUtils from '../../../utils/regexUtils';
 import * as ResponseUtils from '../../../utils/responseUtils';
 import Button from '../../common/buttons/ButtonSecondary';
@@ -13,7 +13,7 @@ import { useViewContext } from '../../../context/view/viewStore';
 import { toast } from 'react-toastify';
 
 export interface PropsSignUpForm {
-  handleSignInClick(event: ButtonEvent): void;
+  handleSignInClick(event: Events.ButtonEvent): void;
 }
 
 const SignUpForm: React.FC<PropsSignUpForm> = (
@@ -126,7 +126,7 @@ const SignUpForm: React.FC<PropsSignUpForm> = (
     setRecaptchaColor(viewState.theme === 'DARK_THEME' ? 'dark' : 'light');
   }, [viewState]);
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
@@ -155,7 +155,7 @@ const SignUpForm: React.FC<PropsSignUpForm> = (
     setRecaptchResponse(key);
   };
 
-  async function handleSubmit(event: ButtonEvent): Promise<void> {
+  async function handleSubmit(event: Events.FormEvent): Promise<void> {
     event.preventDefault();
     setLoading(true);
 

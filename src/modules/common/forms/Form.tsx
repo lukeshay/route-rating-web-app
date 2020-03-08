@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import Button from '../buttons/ButtonSecondary';
 import { StandardProps } from '../standardProps';
-import { ButtonEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface FormProps extends StandardProps {
   buttonText: string;
@@ -14,7 +14,7 @@ export interface FormProps extends StandardProps {
   helpElements?: React.ReactNode[];
   icon?: React.ReactNode;
   title: React.ReactNode;
-  handleSubmit(event: ButtonEvent): Promise<void> | void;
+  handleSubmit(event: Events.FormEvent): Promise<void> | void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,7 +1,7 @@
 import { Theme, createStyles, makeStyles } from '@material-ui/core';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
-import { ButtonEvent, ElementEvent, Wall } from '../../../../types';
+import { Events, Wall } from '../../../../types';
 import Table from '../../../common/table/Table';
 import * as WallUtils from '../../../../utils/wallUtils';
 import ListMenu from './ListMenu';
@@ -40,28 +40,28 @@ const WallRow: React.FC<WallRowProps> = ({
   );
   const types = WallUtils.typesAsString(wall.types);
 
-  const handleRightClick = (event: ElementEvent): void => {
+  const handleRightClick = (event: Events.ElementEvent): void => {
     event.preventDefault();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClick = (event: ButtonEvent): void => {
+  const handleOptionsClick = (event: Events.ButtonEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClose = (event: ElementEvent): void => {
+  const handleOptionsClose = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(null);
   };
 
-  const handleEditClick = (event: ElementEvent): void => {
+  const handleEditClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onEditClick(wall);
   };
 
-  const handleDeleteClick = (event: ElementEvent): void => {
+  const handleDeleteClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onDeleteClick(wall.id);

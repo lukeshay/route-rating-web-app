@@ -2,7 +2,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import React from 'react';
 import * as UserActions from '../../../context/user/userActions';
 import { useUserContext } from '../../../context/user/userStore';
-import { ButtonEvent, InputEvent, User } from '../../../types';
+import { Events, User } from '../../../types';
 import Button from '../../common/buttons/ButtonSecondary';
 import Form from '../../common/forms/Form';
 import Input from '../../common/inputs/Input';
@@ -119,7 +119,7 @@ const ProfileForm: React.FC<PropsProfileForm> = ({ user }): JSX.Element => {
     await UserActions.signOut(userDispatch);
   }
 
-  async function handleSubmit(event: ButtonEvent): Promise<void> {
+  async function handleSubmit(event: Events.FormEvent): Promise<void> {
     event.preventDefault();
     setLoading(true);
 
@@ -165,7 +165,7 @@ const ProfileForm: React.FC<PropsProfileForm> = ({ user }): JSX.Element => {
     setLoading(false);
   }
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 

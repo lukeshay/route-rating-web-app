@@ -6,10 +6,10 @@ import Button from '../../common/buttons/ButtonSecondary';
 import Form from '../../common/forms/Form';
 import CheckBox from '../../common/inputs/CheckBox';
 import Input from '../../common/inputs/Input';
-import { ButtonEvent, InputEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface PropsLogInForm {
-  handleSignUpClick(event: ButtonEvent): void;
+  handleSignUpClick(event: Events.ButtonEvent): void;
 }
 
 const SignInForm: React.FC<PropsLogInForm> = (props): JSX.Element => {
@@ -19,7 +19,7 @@ const SignInForm: React.FC<PropsLogInForm> = (props): JSX.Element => {
   const [passwordMessage, setPasswordMessage] = React.useState<string>('');
   const [rememberMe, setRememberMe] = React.useState<boolean>(false);
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'username') {
@@ -31,7 +31,7 @@ const SignInForm: React.FC<PropsLogInForm> = (props): JSX.Element => {
     }
   };
 
-  const handleSubmit = (event: ButtonEvent): void => {
+  const handleSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     UserActions.signIn(userDispatch, username, password, rememberMe).then(

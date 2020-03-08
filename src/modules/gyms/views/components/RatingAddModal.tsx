@@ -4,7 +4,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import * as GymsActions from '../../../../context/gyms/gymsActions';
 import { useGymsContext } from '../../../../context/gyms/gymsStore';
-import { Gym, RouteRating, InputEvent, ButtonEvent } from '../../../../types';
+import { Gym, RouteRating, Events } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import Input from '../../../common/inputs/Input';
 import Selector from '../../../common/inputs/Select';
@@ -34,11 +34,11 @@ const RatingAddModal: React.FunctionComponent<RatingAddModalProps> = ({
 
   const { dispatch: gymsDispatch } = useGymsContext();
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'rating') {
-      setRating(value);
+      setRating(parseInt(value));
     } else if (id === 'grade') {
       setGrade(value);
     } else if (id === 'review' && value.length <= 140) {
@@ -47,7 +47,7 @@ const RatingAddModal: React.FunctionComponent<RatingAddModalProps> = ({
     }
   };
 
-  const handleSubmit = (event: ButtonEvent): void => {
+  const handleSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     if (rating !== 0 && grade !== '') {

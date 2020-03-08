@@ -1,6 +1,6 @@
 import React from 'react';
 import { StandardProps } from '../standardProps';
-import { ButtonEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface ButtonProps extends StandardProps {
   component?: React.ElementType;
@@ -9,5 +9,5 @@ export interface ButtonProps extends StandardProps {
   size?: 'small' | 'medium' | 'large' | undefined;
   type?: 'button' | 'submit' | 'reset' | undefined;
   variant?: 'text' | 'outlined' | 'contained' | undefined;
-  onClick?(event: ButtonEvent): void | Promise<void>;
+  onClick?(event: Events.ButtonEvent): void | Promise<void>;
 }

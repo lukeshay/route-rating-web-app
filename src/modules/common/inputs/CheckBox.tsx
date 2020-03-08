@@ -1,13 +1,13 @@
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import React from 'react';
 import { StandardProps } from '../standardProps';
-import { InputEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface CheckBoxProps extends StandardProps {
   checked: boolean;
   label: string;
   value: string;
-  onChange?(event: InputEvent): Promise<void> | void;
+  onChange?(event: Events.InputEvent): Promise<void> | void;
 }
 
 const CheckBox: React.FunctionComponent<CheckBoxProps> = ({

@@ -8,7 +8,7 @@ import {
   Theme,
 } from '@material-ui/core';
 import React from 'react';
-import { Route, WallTypes, ButtonEvent } from '../../../../types';
+import { Route, WallTypes, Events } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import CheckBox from '../../../common/inputs/CheckBox';
 import Input from '../../../common/inputs/Input';
@@ -29,7 +29,7 @@ export interface RouteFormProps {
   submitButtonText: string;
   typesMessage?: string;
   typeOptions: WallTypes[];
-  handleCancel(event: ButtonEvent): Promise<void> | void;
+  handleCancel(event: Events.ButtonEvent): Promise<void> | void;
   handleSubmit(route: Route): Promise<void> | void;
 }
 
@@ -68,7 +68,7 @@ const RouteForm: React.FC<RouteFormProps> = ({
     route.holdColor || ''
   );
 
-  const onSubmit = (event: ButtonEvent): void => {
+  const onSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     const types: string[] = [];
@@ -92,7 +92,7 @@ const RouteForm: React.FC<RouteFormProps> = ({
     handleSubmit({ name, setter, holdColor, types } as Route);
   };
 
-  const handleChange = async (event: ButtonEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'name') {

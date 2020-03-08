@@ -4,7 +4,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import React from 'react';
 import * as ReactRouter from 'react-router';
 import { Routes } from '../../../../routes';
-import { Gym, ButtonEvent, InputEvent } from '../../../../types';
+import { Gym, Events } from '../../../../types';
 import * as RegexUtils from '../../../../utils/regexUtils';
 import Button from '../../../common/buttons/Button';
 import Form from '../../../common/forms/Form';
@@ -118,7 +118,7 @@ const GymEditForm: React.FunctionComponent<GymEditPageProps> = ({
     }
   }, [phoneNumber]);
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value, files } = event.target;
 
@@ -159,7 +159,7 @@ const GymEditForm: React.FunctionComponent<GymEditPageProps> = ({
     }
   };
 
-  const handleSubmitWrapper = (event: ButtonEvent): void => {
+  const handleSubmitWrapper = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     handleSubmit(

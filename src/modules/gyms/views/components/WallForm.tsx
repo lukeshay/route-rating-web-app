@@ -8,7 +8,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import React from 'react';
-import { Wall, ButtonEvent, InputEvent } from '../../../../types';
+import { Wall, Events } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import CheckBox from '../../../common/inputs/CheckBox';
 import Input from '../../../common/inputs/Input';
@@ -28,7 +28,7 @@ export interface WallFormProps {
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
-  handleCancel(event: ButtonEvent): Promise<void> | void;
+  handleCancel(event: Events.ButtonEvent): Promise<void> | void;
   handleSubmit(wall: Wall): Promise<void> | void;
 }
 
@@ -60,7 +60,7 @@ const WallForm: React.FC<WallFormProps> = ({
       wall.types.filter((element) => element === 'BOULDER').length > 0
   );
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'name') {
@@ -76,7 +76,7 @@ const WallForm: React.FC<WallFormProps> = ({
     }
   };
 
-  const onSubmit = (event: ButtonEvent): void => {
+  const onSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     const types: string[] = [];

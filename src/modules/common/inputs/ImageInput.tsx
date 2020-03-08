@@ -1,6 +1,7 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import * as React from 'react';
+import { Events } from '../../../types';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,7 +22,7 @@ export interface ImageInputProps {
   id: string;
   multiple: boolean;
   src: string;
-  onChange(event: InputEvent): void;
+  onChange(event: Events.InputEvent): void;
 }
 
 const ImageInput: React.FunctionComponent<ImageInputProps> = ({

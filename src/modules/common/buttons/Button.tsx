@@ -1,6 +1,6 @@
 import MUIButton from '@material-ui/core/Button';
 import React from 'react';
-import { ButtonEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface ButtonProps {
   children?: React.ReactNode;
@@ -12,7 +12,7 @@ export interface ButtonProps {
   size?: 'small' | 'medium' | 'large' | undefined;
   type?: 'button' | 'submit' | 'reset' | undefined;
   variant?: 'text' | 'outlined' | 'contained' | undefined;
-  onClick?(event: ButtonEvent): void | Promise<void>;
+  onClick?(event: Events.ButtonEvent): void | Promise<void>;
 }
 
 const Button: React.FC<ButtonProps> = ({

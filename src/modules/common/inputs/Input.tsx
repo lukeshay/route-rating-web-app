@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import { StandardProps } from '../standardProps';
-import { InputEvent } from '../../../types';
+import { Events } from '../../../types';
 
 export interface PropsInput extends StandardProps {
   autoCapitalize?: 'true' | undefined;
@@ -13,8 +13,8 @@ export interface PropsInput extends StandardProps {
   rows?: number;
   type: string;
   value?: string;
-  onChange?(event: InputEvent): void;
-  onKeyPress?(even: KeyboardEvent): void;
+  onChange?(event: Events.InputEvent): void;
+  onKeyPress?(event: Events.KeyboardEvent): void;
 }
 
 const Input: React.FC<PropsInput> = ({

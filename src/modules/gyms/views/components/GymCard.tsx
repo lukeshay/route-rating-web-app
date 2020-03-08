@@ -69,7 +69,7 @@ const useMobileStyles = makeStyles(() =>
 interface GymCardVariantsProps {
   cardClass?: string;
   gym: Gym;
-  onClick?(even: Events.ButtonEvent): void;
+  onClick?(even: Events.ElementEvent): void;
   onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
