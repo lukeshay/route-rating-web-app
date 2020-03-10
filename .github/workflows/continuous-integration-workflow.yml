@@ -3,10 +3,10 @@ on: [push, pull_request]
 
 env:
   DOCKER_REPO: lukeshaydocker/route-rating-web-app
-  SHA: ${{ GITHUB_SHA::7 }}
-  DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  BRANCH: ${{ github.ref }}
+  SHA: ${GITHUB_SHA::7}
+  DOCKER_HUB_PASSWORD: ${secrets.DOCKER_HUB_PASSWORD}
+  DOCKER_HUB_USERNAME: ${secrets.DOCKER_HUB_USERNAME}
+  BRANCH: ${github.ref}
 
 jobs:
   build:
