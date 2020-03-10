@@ -11,13 +11,13 @@ pipeline {
     stage('Lint') {
       steps {
         echo 'Linting...'
-        sh 'npm run validate'
+        sh 'yarn validate'
       }
     }
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh 'npm run test'
+        sh 'yarn test'
       }
     }
     stage('Coverage') {
