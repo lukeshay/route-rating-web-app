@@ -4,6 +4,9 @@ on: [push, pull_request]
 env:
   DOCKER_REPO: lukeshaydocker/route-rating-web-app
   SHA: ${GITHUB_SHA::7}
+  DOCKER_HUB_PASSWORD: ${secrets.DOCKER_HUB_PASSWORD}
+  DOCKER_HUB_USERNAME: ${secrets.DOCKER_HUB_USERNAME}
+  BRANCH: ${github.ref}
 
 jobs:
   build:
@@ -50,7 +53,7 @@ jobs:
       - run: npm i -g yarn
       - run: yarn
       - run: yarn build
-      - run: echo "${secrets.DOCKER_HUB_PASSWORD}" | docker login -u ${secrets.DOCKER_HUB_USERNAME} --password-stdin
+      - run: echo "${env.DOCKER_HUB_PASSWORD}" | docker login -u ${env.DOCKER_HUB_USERNAME} --password-stdin
       - run: docker build -t ${env.DOCKER_REPO}:${env.SHA} ${env.DOCKER_REPO}:latest .
       - run: docker push ${env.DOCKER_REPO}:${env.SHA}
-      - run: test ${github.ref} = "master" && docker push ${env.DOCKER_REPO}:latest || exit 0
+      - run: test ${env.BRANCH} = "master" && docker push ${env.DOCKER_REPO}:latest || exit 0
