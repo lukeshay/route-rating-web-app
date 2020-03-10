@@ -3,10 +3,11 @@ import RatingAddModal from '../RatingAddModal';
 import { shallow } from '../../../../../../configs/setupEnzyme';
 import * as TypeMocks from '../../../../../__mocks__/typeMocks';
 import { shallowToJson } from 'enzyme-to-json';
+import { ShallowWrapper } from 'enzyme';
 
-let view;
+describe('RatingAddModal', (): void => {
+  let view: ShallowWrapper;
 
-describe('<RatingAddModal />', (): void => {
   beforeEach(() => {
     view = shallow(
       <RatingAddModal
