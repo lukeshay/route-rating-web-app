@@ -4,6 +4,7 @@ on: [push, pull_request]
 env:
   DOCKER_REPO: lukeshaydocker/route-rating-web-app
   SHA: ${GITHUB_SHA::7}
+  MASTER: $(test ${github.ref} = "master" && echo 0 || echo 1)
 
 jobs:
   build:
@@ -52,4 +53,4 @@ jobs:
       - run: echo "${secrets.DOCKER_HUB_PASSWORD}" | docker login -u ${secrets.DOCKER_HUB_USERNAME} --password-stdin
       - run: docker build -t ${env.DOCKER_REPO}:${env.SHA} ${env.DOCKER_REPO}:latest .
       - run: docker push ${env.DOCKER_REPO}:${env.SHA}
-      - run: test "${github.ref}" = "master" && docker push ${env.DOCKER_REPO}:latest || exit 0
+      - run: exit ${env.MASTER} && docker push ${env.DOCKER_REPO}:latest || exit 0
