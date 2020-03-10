@@ -6,6 +6,7 @@ on:
       - edited
       - ready_for_review
       - labeled
+      - unlabeled
   pull_request_review:
     types:
       - approved
