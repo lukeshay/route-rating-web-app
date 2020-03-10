@@ -61,7 +61,7 @@ const RatingAddModal: React.FunctionComponent<RatingAddModalProps> = ({
         } as RouteRating,
         gym,
         wallId
-      ).then((response: Response) => {
+      ).then((response: Response | void) => {
         if (!(response instanceof Response) || !response.ok) {
           toast.error('Error creating review.');
         } else {

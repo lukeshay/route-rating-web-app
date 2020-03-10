@@ -32,7 +32,7 @@ export interface SelectorProps {
   value: string | number;
   children: React.ReactNode;
   native?: boolean;
-  handleChange(event: Events.InputEvent): Promise<void> | void;
+  handleChange(event: Events.SelectChangeEvent): Promise<void> | void;
 }
 
 const Selector: React.FC<SelectorProps> = ({

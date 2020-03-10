@@ -151,8 +151,8 @@ const SignUpForm: React.FC<PropsSignUpForm> = (
     }
   };
 
-  const handleCaptchaChange = (key): void => {
-    setRecaptchResponse(key);
+  const handleCaptchaChange = (key: string | null): void => {
+    if (key) setRecaptchResponse(key);
   };
 
   async function handleSubmit(event: Events.FormEvent): Promise<void> {
@@ -292,11 +292,10 @@ const SignUpForm: React.FC<PropsSignUpForm> = (
         type="password"
       />
       <ReCAPTCHA
-        id="recaptcha"
         theme={recaptchaColor}
-        sitekey={process.env.recaptchaKey}
+        sitekey={process.env.recaptchaKey || ''}
         onChange={handleCaptchaChange}
-        key={loading}
+        key={loading.toString()}
       />
     </React.Fragment>
   );

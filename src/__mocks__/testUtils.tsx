@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, RenderResult } from '@testing-library/react';
 import React from 'react';
 import TestComponentWrapperV2 from './TestComponentWrapperV2';
@@ -19,8 +20,10 @@ const SignedInDesktop: React.FC<WrapperProps> = ({ children }): JSX.Element => {
   );
 };
 
-export const renderSignedInDesktop = (ui, options): RenderResult =>
-  render(ui, { wrapper: SignedInDesktop, ...options });
+export const renderSignedInDesktop = (
+  ui: React.ReactElement,
+  options: any
+): RenderResult => render(ui, { wrapper: SignedInDesktop, ...options });
 
 const SignedOutDesktop: React.FC<WrapperProps> = ({
   children,
@@ -36,7 +39,9 @@ const SignedOutDesktop: React.FC<WrapperProps> = ({
   );
 };
 
-export const renderSignedOutDesktop = (ui, options): RenderResult =>
-  render(ui, { wrapper: SignedOutDesktop, ...options });
+export const renderSignedOutDesktop = (
+  ui: React.ReactElement,
+  options: any
+): RenderResult => render(ui, { wrapper: SignedOutDesktop, ...options });
 
 export * from '@testing-library/react';

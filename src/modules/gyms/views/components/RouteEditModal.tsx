@@ -53,7 +53,7 @@ const RouteEditPage: React.FC<RouteEditPageProps> = ({
       setTypesMessage('');
       setNameMessage('');
       GymsActions.updateRoute(gymsDispatch, newRoute, gym).then(
-        (response: Response) => {
+        (response: Response | void) => {
           if (response instanceof Response && response.ok) {
             handleClose();
           } else {

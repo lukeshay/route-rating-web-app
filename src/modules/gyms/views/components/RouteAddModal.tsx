@@ -44,7 +44,7 @@ const RouteAddPage: React.FC<RouteAddPageProps> = ({
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
       GymsActions.createRoute(gymsDispatch, newRoute, gym).then(
-        (response: Response) => {
+        (response: Response | void) => {
           if (response instanceof Response && response.ok) {
             setRoute({} as Route);
             handleClose();

@@ -32,7 +32,7 @@ const RatingPage: React.FunctionComponent<RatingPageProps> = ({
   const types = WallUtils.typesAsString(route.types);
 
   // React.useEffect(() => {
-  //   RouteRatingsApi.getRouteRatings(id).then((response: Response) => {
+  //   RouteRatingsApi.getRouteRatings(id).then((response: Response | void) => {
   //     if (response instanceof Response && response.ok) {
   //       response.json().then((body: RouteRating[]) => {
   //         setRatings(body);

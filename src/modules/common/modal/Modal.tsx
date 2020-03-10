@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface TransitionModalProps extends StandardProps {
   open: boolean;
   children: React.ReactNode;
-  style?: any;
+  style?: React.CSSProperties;
   handleClose?(): Promise<void> | void;
 }
 

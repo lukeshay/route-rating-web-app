@@ -1,6 +1,10 @@
 name: route-rating-web-app continuous integration
 on: [push, pull_request]
 
+env:
+  DOCKER_REPO: lukeshaydocker/route-rating-web-app
+  SHA: ${GITHUB_SHA::7}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,3 +38,21 @@ jobs:
       - run: npm i -g yarn
       - run: yarn
       - run: yarn test
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn
+      - run: yarn build
+      - run: echo "${secrets.DOCKER_HUB_PASSWORD}" | docker login -u ${secrets.DOCKER_HUB_USERNAME} --password-stdin
+      - run: docker build -t ${env.DOCKER_REPO}:${env.SHA} .
+      - run: docker push ${env.DOCKER_REPO}:${env.SHA}
+      if: github.ref == "master"
+      - run: docker tag ${env.DOCKER_REPO}:${env.SHA} ${env.DOCKER_REPO}:latest
+      if: github.ref == "master"
+      - run: docker push ${env.DOCKER_REPO}:latest
