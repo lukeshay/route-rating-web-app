@@ -1059,39 +1059,42 @@
     "@babel/runtime" "^7.7.7"
     hoist-non-react-statics "^3.3.1"
 
-"@lukeshay/eslint-config-react-typescript@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config-react-typescript/-/eslint-config-react-typescript-0.0.2.tgz#76a299c3b0e5dffed97f8dfd74032e5faee92d58"
-  integrity sha512-9CtCp87PoC0+jMrKapVW25XQ9i+ml8GMqBqVZ/9NI1/7f3YH7bEsgt2ev7kbCIYfga5kd+GUi5GB3Zm8qJ/jqw==
+"@lukeshay/eslint-config-react-typescript@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config-react-typescript/-/eslint-config-react-typescript-0.0.3.tgz#4ec6e7ca8e3052c34c9fa4a09affaec485f7284f"
+  integrity sha512-moM1YZuW6gbViQOX+2FVQ718vj83sck0264sPRDXMP5GZQJjvyVsxs4jpTv9yIU1S2ib6Jo5XaIBx1Ll2HngDg==
   dependencies:
-    "@lukeshay/eslint-config-typescript" "^0.0.6"
+    "@lukeshay/eslint-config-typescript" "^0.0.7"
     eslint "^6.8.0"
+    eslint-plugin-prettier "^3.1.2"
     eslint-plugin-react "^7.19.0"
 
-"@lukeshay/eslint-config-typescript@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config-typescript/-/eslint-config-typescript-0.0.6.tgz#b599ab0ca0ae428efc9cd07b8f2981238c7393f7"
-  integrity sha512-dWFhAJHof6+b/x0fE81hIpLpkAJMmb34Y2FlSe5vykXaP3MiC5Hli9eP/xZM9KlXJ1ioRjMUumbY8IkeL/iHaQ==
+"@lukeshay/eslint-config-typescript@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config-typescript/-/eslint-config-typescript-0.0.7.tgz#e318650d35688bf6ff82182168d4501dce9fad1e"
+  integrity sha512-PN6YeQeDXMZerF8xavK47mDgiC/KRTUTerfXmFHwHXPqwQOmwD1VJkMtZ4vjhxerMD1/OQDumcesGZhgWOMN/Q==
   dependencies:
-    "@lukeshay/eslint-config" "0.0.4"
+    "@lukeshay/eslint-config" "0.0.5"
     "@typescript-eslint/eslint-plugin" "^2.22.0"
     "@typescript-eslint/parser" "^2.22.0"
     eslint "^6.8.0"
+    eslint-config-prettier "^6.10.0"
+    eslint-plugin-prettier "^3.1.2"
 
-"@lukeshay/eslint-config@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config/-/eslint-config-0.0.4.tgz#1223b29b55380f9f47f1bfd54c535a251728bd62"
-  integrity sha512-wTUOU2Ngbh0Ogg1PnrzyYVzAtF9FOMQUZXu3bkud+NO8VBsNDwQwNSTjHqvSVrNVevwh+VBi+YT7hTKF9gKWwA==
+"@lukeshay/eslint-config@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config/-/eslint-config-0.0.5.tgz#66472e1a89e0f5188f809f28493e4d6029a5152b"
+  integrity sha512-cADjItiHU0MHjV8UlrR92B06GRg3O5MmNjNUEdpEjf3zMOXyhY2GkZ1uSByKQD7z9qbKUqyrMeUuY+QNLSiw0A==
   dependencies:
     eslint "^6.8.0"
     eslint-config-prettier "^6.10.0"
     eslint-plugin-prettier "^3.1.2"
     prettier "^1.19.1"
 
-"@lukeshay/typescript-config@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-0.0.1.tgz#c2f0604704b5a1f31ec68e0cb399b8396561f961"
-  integrity sha512-gj3i5u1K+Urz0dldzmO6/WSrZ0omq+JGedNuBKC2OKZ3jF/Cb1rTR64hP0o+HzQCL+sYws9wqAK0wqL50D5H4w==
+"@lukeshay/typescript-config@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-0.0.2.tgz#df0cf157b132d05fbecebfe8fcee4a59c97a77e3"
+  integrity sha512-qXl3aU4sXYBggoo5izywCSj6YD70RBijj6/4v0JrEvgGLgpQCji37t7fCyAHzzzY0LIjo8aO9OcH1Eo/7D0V1Q==
 
 "@material-ui/core@^4.9.5":
   version "4.9.5"
