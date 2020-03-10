@@ -1,0 +1,21 @@
+name: route-rating-web-app push to dockerhub
+on:
+  push:
+    branches: [master]
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn
+      - run: yarn build
+      - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login  -u ${{ env.DOCKER_HUB_USERNAME }} --password-stdin
+      - run: docker build -t ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }} .
+      - run: docker push ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }}
+      - run: docker tag ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }} ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:latest
+      - run: docker push ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:latest
