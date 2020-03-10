@@ -14,8 +14,8 @@ jobs:
       - run: npm i -g yarn
       - run: yarn
       - run: yarn build
-      - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login  -u ${{ env.DOCKER_HUB_USERNAME }} --password-stdin
-      - run: docker build -t ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }} .
-      - run: docker push ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }}
-      - run: docker tag ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:${{ env.GITHUB_SHA:0:7 }} ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:latest
-      - run: docker push ${{ env.DOCKER_HUB }}/${{ env.GITHUB_REPOSITORY }}:latest
+      - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+      - run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:${{ github.sha:0:7 }} .
+      - run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:${{ github.sha:0:7 }}
+      - run: docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:${{ github.sha:0:7 }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:latest
+      - run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.repository }}:latest
