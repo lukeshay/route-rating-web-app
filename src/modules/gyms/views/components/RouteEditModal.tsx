@@ -6,7 +6,7 @@ import { Gym, Route, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import RouteForm from './RouteForm';
 
-export interface IRouteEditPageProps {
+export interface RouteEditPageProps {
   gym: Gym;
   open: boolean;
   route: Route;
@@ -14,7 +14,7 @@ export interface IRouteEditPageProps {
   handleClose(): Promise<void> | void;
 }
 
-const RouteEditPage: React.FC<IRouteEditPageProps> = ({
+const RouteEditPage: React.FC<RouteEditPageProps> = ({
   gym,
   open,
   route,
@@ -53,7 +53,7 @@ const RouteEditPage: React.FC<IRouteEditPageProps> = ({
       setTypesMessage('');
       setNameMessage('');
       GymsActions.updateRoute(gymsDispatch, newRoute, gym).then(
-        (response: Response) => {
+        (response: Response | void) => {
           if (response instanceof Response && response.ok) {
             handleClose();
           } else {

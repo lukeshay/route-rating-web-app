@@ -80,7 +80,7 @@ const GymPage: React.FC = (): JSX.Element => {
       } else if (!tempGym.walls) {
         if (tempGym.id) {
           GymsActions.loadWalls(gymsDispatch, tempGym).then(
-            (response: Response) => {
+            (response: Response | void) => {
               ResponseUtils.toastIfNotOk(response, 'Error getting walls.');
             }
           );
@@ -158,7 +158,7 @@ const GymPage: React.FC = (): JSX.Element => {
     ) {
       if (gymId) {
         GymsActions.deleteWall(gymsDispatch, rowWallId, gym).then(
-          (response: Response) => {
+          (response: Response | void) => {
             if (!response || !(response instanceof Response) || !response.ok) {
               toast.error('Error deleting wall.');
             }
@@ -186,7 +186,7 @@ const GymPage: React.FC = (): JSX.Element => {
           gymsDispatch,
           { id: routeId, gymId, wallId } as Route,
           gym
-        ).then((response: Response) => {
+        ).then((response: Response | void) => {
           ResponseUtils.toastIfNotOk(response, 'Error deleting route.');
         });
       } else {

@@ -4,13 +4,13 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import * as GymsActions from '../../../../context/gyms/gymsActions';
 import { useGymsContext } from '../../../../context/gyms/gymsStore';
-import { Gym, RouteRating } from '../../../../types';
+import { Gym, RouteRating, Events } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import Input from '../../../common/inputs/Input';
 import Selector from '../../../common/inputs/Select';
 import TransitionModal from '../../../common/modal/Modal';
 
-export interface IRatingAddModalProps {
+export interface RatingAddModalProps {
   gym: Gym;
   open: boolean;
   routeId: string;
@@ -18,7 +18,7 @@ export interface IRatingAddModalProps {
   handleClose(): Promise<void> | void;
 }
 
-const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
+const RatingAddModal: React.FunctionComponent<RatingAddModalProps> = ({
   gym,
   open,
   routeId,
@@ -34,11 +34,11 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
 
   const { dispatch: gymsDispatch } = useGymsContext();
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'rating') {
-      setRating(value);
+      setRating(parseInt(value));
     } else if (id === 'grade') {
       setGrade(value);
     } else if (id === 'review' && value.length <= 140) {
@@ -47,7 +47,7 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
     }
   };
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     if (rating !== 0 && grade !== '') {
@@ -61,7 +61,7 @@ const RatingAddModal: React.FunctionComponent<IRatingAddModalProps> = ({
         } as RouteRating,
         gym,
         wallId
-      ).then((response: Response) => {
+      ).then((response: Response | void) => {
         if (!(response instanceof Response) || !response.ok) {
           toast.error('Error creating review.');
         } else {

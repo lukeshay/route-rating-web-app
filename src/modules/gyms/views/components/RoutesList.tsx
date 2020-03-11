@@ -6,12 +6,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import React from 'react';
-import {
-  ButtonEvent,
-  ElementEvent,
-  HandlerReturn,
-  Route,
-} from '../../../../types';
+import { Events, Route } from '../../../../types';
 import * as GradeUtils from '../../../../utils/gradeUtils';
 import Table from '../../../common/table/Table';
 import * as WallUtils from '../../../../utils/wallUtils';
@@ -29,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IRouteRowProps {
+export interface RouteRowProps {
   canEdit: boolean;
   mobile: boolean;
   route: Route;
@@ -38,7 +33,7 @@ export interface IRouteRowProps {
   onRowClick(route: Route): Promise<void> | void;
 }
 
-const RouteRow: React.FC<IRouteRowProps> = ({
+const RouteRow: React.FC<RouteRowProps> = ({
   canEdit,
   mobile,
   onDeleteClick,
@@ -55,7 +50,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   const { averageGrade, holdColor, id, name, averageRating, setter } = route;
   const types = WallUtils.typesAsString(route.types);
 
-  const handleRightClick = (event: ElementEvent): void => {
+  const handleRightClick = (event: Events.ElementEvent): void => {
     event.preventDefault();
 
     if (canEdit) {
@@ -63,23 +58,23 @@ const RouteRow: React.FC<IRouteRowProps> = ({
     }
   };
 
-  const handleOptionsOpen = (event: ButtonEvent): void => {
+  const handleOptionsOpen = (event: Events.ButtonEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClose = (event: ElementEvent): void => {
+  const handleOptionsClose = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(null);
   };
 
-  const handleEditClick = (event: ElementEvent): void => {
+  const handleEditClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onEditClick(route);
   };
 
-  const handleDeleteClick = (event: ElementEvent): void => {
+  const handleDeleteClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onDeleteClick(id);
@@ -91,7 +86,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
     <TableRow
       hover
       id={id}
-      onClick={(): HandlerReturn => onRowClick(route)}
+      onClick={(): Events.HandlerReturn => onRowClick(route)}
       data-test-id="route-row-test-id"
     >
       <Cell
@@ -154,7 +149,7 @@ const RouteRow: React.FC<IRouteRowProps> = ({
   );
 };
 
-export interface IRoutesListProps {
+export interface RoutesListProps {
   canEdit: boolean;
   mobile: boolean;
   routes: Route[];
@@ -163,7 +158,7 @@ export interface IRoutesListProps {
   handleRowClick(route: Route): Promise<void> | void;
 }
 
-const RoutesList: React.FC<IRoutesListProps> = ({
+const RoutesList: React.FC<RoutesListProps> = ({
   canEdit,
   handleDeleteRoute,
   handleEditRoute,

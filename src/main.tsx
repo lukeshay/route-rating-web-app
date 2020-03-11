@@ -1,10 +1,11 @@
+import 'react-toastify';
+import App from './App';
 import React from 'react';
+import StoreCombiner from './StoreCombiner';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { GymsStore } from './context/gyms/gymsStore';
 import { UserStore } from './context/user/userStore';
 import { ViewStore } from './context/view/viewStore';
-import StoreCombiner from './StoreCombiner';
-import App from './App';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 const Main: React.FC = (): JSX.Element => {
   return process.env.NODE_ENV === 'development' ? (

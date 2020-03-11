@@ -6,13 +6,13 @@ import { Gym, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import WallForm from './WallForm';
 
-export interface IWallAddPageProps {
+export interface WallAddPageProps {
   gym: Gym;
   open: boolean;
   handleClose(): Promise<void> | void;
 }
 
-const WallAddPage: React.FC<IWallAddPageProps> = ({
+const WallAddPage: React.FC<WallAddPageProps> = ({
   gym,
   open,
   handleClose,

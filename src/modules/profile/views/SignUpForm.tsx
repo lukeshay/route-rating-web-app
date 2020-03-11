@@ -2,7 +2,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
 import * as UserActions from '../../../context/user/userActions';
 import { useUserContext } from '../../../context/user/userStore';
-import { ButtonEvent, InputEvent, RecaptchaUser, User } from '../../../types';
+import { Events, RecaptchaUser, User } from '../../../types';
 import * as RegexUtils from '../../../utils/regexUtils';
 import * as ResponseUtils from '../../../utils/responseUtils';
 import Button from '../../common/buttons/ButtonSecondary';
@@ -12,12 +12,12 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useViewContext } from '../../../context/view/viewStore';
 import { toast } from 'react-toastify';
 
-export interface IPropsSignUpForm {
-  handleSignInClick(event: any): void;
+export interface PropsSignUpForm {
+  handleSignInClick(event: Events.ButtonEvent): void;
 }
 
-const SignUpForm: React.FC<IPropsSignUpForm> = (
-  props: IPropsSignUpForm
+const SignUpForm: React.FC<PropsSignUpForm> = (
+  props: PropsSignUpForm
 ): JSX.Element => {
   const { dispatch } = useUserContext();
   const { state: viewState } = useViewContext();
@@ -126,7 +126,7 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     setRecaptchaColor(viewState.theme === 'DARK_THEME' ? 'dark' : 'light');
   }, [viewState]);
 
-  const handleChange = async (event: InputEvent): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     event.preventDefault();
     const { id, value } = event.target;
 
@@ -151,11 +151,11 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
     }
   };
 
-  const handleCaptchaChange = (key): void => {
-    setRecaptchResponse(key);
+  const handleCaptchaChange = (key: string | null): void => {
+    if (key) setRecaptchResponse(key);
   };
 
-  async function handleSubmit(event: ButtonEvent): Promise<void> {
+  async function handleSubmit(event: Events.FormEvent): Promise<void> {
     event.preventDefault();
     setLoading(true);
 
@@ -292,11 +292,10 @@ const SignUpForm: React.FC<IPropsSignUpForm> = (
         type="password"
       />
       <ReCAPTCHA
-        id="recaptcha"
         theme={recaptchaColor}
-        sitekey={process.env.recaptchaKey}
+        sitekey={process.env.recaptchaKey || ''}
         onChange={handleCaptchaChange}
-        key={loading}
+        key={loading.toString()}
       />
     </React.Fragment>
   );

@@ -44,13 +44,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IGymInformationProps {
+export interface GymInformationProps {
   gym: Gym;
   canEdit: boolean;
   mobile: boolean;
 }
 
-const GymInformation: React.FunctionComponent<IGymInformationProps> = ({
+const GymInformation: React.FunctionComponent<GymInformationProps> = ({
   gym,
   canEdit,
   mobile,

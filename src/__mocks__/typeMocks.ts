@@ -1,7 +1,7 @@
 import { Gym, GymPageType, Route, User, Wall, WallTypes } from '../types';
-import { IGymsContextState } from '../context/gyms/gymsStore';
-import { IViewContextState } from '../context/view/viewStore';
-import { IUserContextState } from '../context/user/userStore';
+import { GymsContextState } from '../context/gyms/gymsStore';
+import { ViewContextState } from '../context/view/viewStore';
+import { UserContextState } from '../context/user/userStore';
 
 export const testRouteOne: Route = {
   averageGrade: 'GRADE_5_9',
@@ -91,19 +91,19 @@ export const testUserEditor: User = {
   username: 'username',
 };
 
-export const mockGymsState: IGymsContextState = {
+export const mockGymsState: GymsContextState = {
   page: { content: [testGymOne, testGymTwo] } as GymPageType,
 };
 
-export const darkDesktopState: IViewContextState = {
+export const darkDesktopState: ViewContextState = {
   mobile: false,
   theme: 'DARK_THEME',
 };
 
-export const signedInEditorState: IUserContextState = {
+export const signedInEditorState: UserContextState = {
   user: testUserEditor,
 };
 
-export const signedOutState: IUserContextState = {
+export const signedOutState: UserContextState = {
   user: null,
 };

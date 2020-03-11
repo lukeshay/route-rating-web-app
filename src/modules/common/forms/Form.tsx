@@ -4,16 +4,17 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import Button from '../buttons/ButtonSecondary';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
+import { Events } from '../../../types';
 
-export interface IFormProps extends IStandardProps {
+export interface FormProps extends StandardProps {
   buttonText: string;
   disabled?: boolean;
   formInputs: React.ReactNode;
-  handleSubmit(event: any): Promise<void> | void;
   helpElements?: React.ReactNode[];
   icon?: React.ReactNode;
   title: React.ReactNode;
+  handleSubmit(event: Events.FormEvent): Promise<void> | void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Form: React.FC<IFormProps> = ({
+const Form: React.FC<FormProps> = ({
   buttonText,
   disabled,
   formInputs,

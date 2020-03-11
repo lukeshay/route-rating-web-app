@@ -1,22 +1,22 @@
-import { IViewContextState, ViewContext } from '../context/view/viewStore';
+import { ViewContext, ViewContextState } from '../context/view/viewStore';
 import React from 'react';
 
-export interface IViewStoreMockProps {
-  state: IViewContextState;
-  dispatch: any;
+export interface ViewStoreMockProps {
+  state: ViewContextState;
+  dispatch: React.Dispatch<ViewContextState>;
 }
 
-export const desktopViewState: IViewContextState = {
+export const desktopViewState: ViewContextState = {
   mobile: false,
   theme: 'DARK_THEME',
 };
 
-export const mobileViewState: IViewContextState = {
+export const mobileViewState: ViewContextState = {
   mobile: true,
   theme: 'DARK_THEME',
 };
 
-const ViewStoreMock: React.FC<IViewStoreMockProps> = ({
+const ViewStoreMock: React.FC<ViewStoreMockProps> = ({
   state,
   dispatch,
   children,

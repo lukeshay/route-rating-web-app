@@ -1,14 +1,13 @@
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
+import { Events } from '../../../types';
 
-export { ButtonProps } from '@material-ui/core/Button';
-
-export interface IButtonProps extends IStandardProps {
+export interface ButtonProps extends StandardProps {
   component?: React.ElementType;
   disabled?: boolean;
   fullWidth?: boolean;
-  onClick?(event: any): void | Promise<void>;
   size?: 'small' | 'medium' | 'large' | undefined;
   type?: 'button' | 'submit' | 'reset' | undefined;
   variant?: 'text' | 'outlined' | 'contained' | undefined;
+  onClick?(event: Events.ButtonEvent): void | Promise<void>;
 }

@@ -2,27 +2,27 @@ import React, { Dispatch, Reducer, createContext, useReducer } from 'react';
 import { Gym, GymPageType } from '../../types';
 import Types from './gymsActionTypes';
 
-export interface IGymsContextState {
+export interface GymsContextState {
   page: GymPageType;
 }
 
-export interface IGymsContextAction {
+export interface GymsContextAction {
   actionType: string;
   page: GymPageType;
   gym?: Gym;
 }
 
-export interface IContextProps {
-  state: IGymsContextState;
-  dispatch: Dispatch<IGymsContextAction>;
+export interface ContextProps {
+  state: GymsContextState;
+  dispatch: Dispatch<GymsContextAction>;
 }
 
-export const GymsContext = createContext<IContextProps>({} as IContextProps);
+export const GymsContext = createContext<ContextProps>({} as ContextProps);
 
-const reducer: Reducer<IGymsContextState, IGymsContextAction> = (
-  state: IGymsContextState,
-  { actionType, page, gym }: IGymsContextAction
-): IGymsContextState => {
+const reducer: Reducer<GymsContextState, GymsContextAction> = (
+  state: GymsContextState,
+  { actionType, page, gym }: GymsContextAction
+): GymsContextState => {
   switch (actionType) {
     case Types.LOAD_GYMS:
       return { page };
@@ -45,7 +45,7 @@ const reducer: Reducer<IGymsContextState, IGymsContextAction> = (
   }
 };
 
-const initialState: IGymsContextState = {
+const initialState: GymsContextState = {
   page: {} as GymPageType,
 };
 
@@ -59,5 +59,4 @@ export const GymsStore: React.FC = ({ children }): JSX.Element => {
   );
 };
 
-export const useGymsContext = (): IContextProps =>
-  React.useContext(GymsContext);
+export const useGymsContext = (): ContextProps => React.useContext(GymsContext);

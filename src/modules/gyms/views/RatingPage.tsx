@@ -5,12 +5,12 @@ import * as GradeUtils from '../../../utils/gradeUtils';
 import * as WallUtils from '../../../utils/wallUtils';
 import Table from '../../common/table/Table';
 
-interface IRouteInformationRowProps {
+interface RouteInformationRowProps {
   label: React.ReactNode;
   text: React.ReactNode;
 }
 
-const RouteInformationRow: React.FC<IRouteInformationRowProps> = ({
+const RouteInformationRow: React.FC<RouteInformationRowProps> = ({
   label,
   text,
 }): JSX.Element => (
@@ -20,11 +20,11 @@ const RouteInformationRow: React.FC<IRouteInformationRowProps> = ({
   </TableRow>
 );
 
-export interface IRatingPageProps {
+export interface RatingPageProps {
   route: Route;
 }
 
-const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
+const RatingPage: React.FunctionComponent<RatingPageProps> = ({
   route,
 }): JSX.Element => {
   // const [ratings, setRatings] = React.useState<RouteRating[]>([]);
@@ -32,7 +32,7 @@ const RatingPage: React.FunctionComponent<IRatingPageProps> = ({
   const types = WallUtils.typesAsString(route.types);
 
   // React.useEffect(() => {
-  //   RouteRatingsApi.getRouteRatings(id).then((response: Response) => {
+  //   RouteRatingsApi.getRouteRatings(id).then((response: Response | void) => {
   //     if (response instanceof Response && response.ok) {
   //       response.json().then((body: RouteRating[]) => {
   //         setRatings(body);

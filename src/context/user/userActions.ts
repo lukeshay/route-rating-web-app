@@ -3,10 +3,10 @@ import { AuthBody, User } from '../../types';
 import * as Cookies from '../../utils/cookiesUtils';
 import Types from './userActionTypes';
 import { Dispatch } from 'react';
-import { IUserContextAction } from './userStore';
+import { UserContextAction } from './userStore';
 
 export async function signOut(
-  dispatch: Dispatch<IUserContextAction>
+  dispatch: Dispatch<UserContextAction>
 ): Promise<void> {
   Cookies.setJwtToken('');
 
@@ -17,7 +17,7 @@ export async function signOut(
 }
 
 export async function signIn(
-  dispatch: Dispatch<IUserContextAction>,
+  dispatch: Dispatch<UserContextAction>,
   username: string,
   password: string,
   rememberMe: boolean
@@ -46,7 +46,7 @@ export async function signIn(
 }
 
 export async function createUser(
-  dispatch: Dispatch<IUserContextAction>,
+  dispatch: Dispatch<UserContextAction>,
   newUser: User,
   recaptcha: string
 ): Promise<void | Response> {
@@ -58,7 +58,7 @@ export async function createUser(
 }
 
 export async function updateUser(
-  dispatch: Dispatch<IUserContextAction>,
+  dispatch: Dispatch<UserContextAction>,
   updatedUser: User
 ): Promise<void | Response> {
   const updateUserResponse = await UserApi.updateUser(updatedUser);
@@ -76,7 +76,7 @@ export async function updateUser(
 }
 
 export const loadUserFromCookies = async (
-  dispatch: Dispatch<IUserContextAction>
+  dispatch: Dispatch<UserContextAction>
 ): Promise<void | Response> => {
   const getUserResponse = await UserApi.getUser();
 

@@ -1,0 +1,57 @@
+name: route-rating-web-app continuous integration
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn --disable-progress
+      - run: yarn build --disable-progress
+     
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn --disable-progress
+      - run: yarn validate
+     
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn --disable-progress
+      - run: yarn test
+
+  push-image:
+    runs-on: ubuntu-latest
+    needs: [build, lint, test]
+    env:
+      DOCKER_REPO: lukeshaydocker/route-rating-web-app
+      SHA: ${GITHUB_SHA::7}
+      BRANCH: ${GITHUB_REF:11:}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.16'
+      - run: npm i -g yarn
+      - run: yarn --disable-progress
+      - run: yarn build --disable-progress
+      - run: echo "${{ env.BRANCH }}"
+      - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+      - run: docker build -t ${{ env.DOCKER_REPO }}:${{ env.SHA }} -t ${{ env.DOCKER_REPO }}:latest .
+      - run: docker push ${{ env.DOCKER_REPO }}:${{ env.SHA }}
+      - run: test ${{ env.BRANCH }} = "master" && docker push ${{ env.DOCKER_REPO }}:latest || exit 0

@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
-export interface IStoreCombinerProps {
+export interface StoreCombinerProps {
   stores: Array<React.JSXElementConstructor<React.PropsWithChildren<any>>>;
   children: React.ReactNode;
 }
 
-const StoreCombiner: React.FunctionComponent<IStoreCombinerProps> = ({
+const StoreCombiner: React.FunctionComponent<StoreCombinerProps> = ({
   stores,
   children,
 }): JSX.Element => {

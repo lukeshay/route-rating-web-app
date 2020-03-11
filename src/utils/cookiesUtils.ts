@@ -6,7 +6,7 @@ const JWT_TOKEN = 'JWT_TOKEN';
 const REFRESH_TOKEN = 'REFRESH_TOKEN';
 const THEME = 'THEME';
 
-interface ICookieOptions {
+interface CookieOptions {
   path?: string;
   expires?: Date;
 }
@@ -14,7 +14,7 @@ interface ICookieOptions {
 export function setCookie(
   key: string,
   value: string,
-  options: ICookieOptions
+  options: CookieOptions
 ): void {
   cookies.set(key, value, options);
 }

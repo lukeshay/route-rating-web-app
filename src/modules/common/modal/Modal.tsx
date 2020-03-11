@@ -7,7 +7,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface ITransitionModalProps extends IStandardProps {
+export interface TransitionModalProps extends StandardProps {
   open: boolean;
   children: React.ReactNode;
-  style?: any;
+  style?: React.CSSProperties;
   handleClose?(): Promise<void> | void;
 }
 
-const TransitionModal: React.FC<ITransitionModalProps> = ({
+const TransitionModal: React.FC<TransitionModalProps> = ({
   open,
   handleClose,
   style,

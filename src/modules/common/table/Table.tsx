@@ -4,14 +4,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
 
-export interface ISimpleTableProps extends IStandardProps {
+export interface SimpleTableProps extends StandardProps {
   head?: React.ReactNode;
   body: React.ReactNode[] | null;
 }
 
-const SimpleTable: React.FC<ISimpleTableProps> = ({
+const SimpleTable: React.FC<SimpleTableProps> = ({
   head,
   body,
   testId,

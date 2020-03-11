@@ -6,14 +6,14 @@ import { Gym, Route, Wall } from '../../../../types';
 import TransitionModal from '../../../common/modal/Modal';
 import RouteForm from './RouteForm';
 
-export interface IRouteAddPageProps {
+export interface RouteAddPageProps {
   gym: Gym;
   open: boolean;
   wall: Wall;
   handleClose(): Promise<void> | void;
 }
 
-const RouteAddPage: React.FC<IRouteAddPageProps> = ({
+const RouteAddPage: React.FC<RouteAddPageProps> = ({
   gym,
   open,
   wall,
@@ -44,7 +44,7 @@ const RouteAddPage: React.FC<IRouteAddPageProps> = ({
 
     if (newRoute.types.length > 0 && newRoute.name.trim().length > 0) {
       GymsActions.createRoute(gymsDispatch, newRoute, gym).then(
-        (response: Response) => {
+        (response: Response | void) => {
           if (response instanceof Response && response.ok) {
             setRoute({} as Route);
             handleClose();

@@ -1,7 +1,7 @@
 import { Theme, createStyles, makeStyles } from '@material-ui/core';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
-import { ButtonEvent, ElementEvent, Wall } from '../../../../types';
+import { Events, Wall } from '../../../../types';
 import Table from '../../../common/table/Table';
 import * as WallUtils from '../../../../utils/wallUtils';
 import ListMenu from './ListMenu';
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IWallRowProps {
+export interface WallRowProps {
   wall: Wall;
   canEdit: boolean;
   onRowClick(wallId: string): Promise<void> | void;
@@ -26,7 +26,7 @@ export interface IWallRowProps {
   onDeleteClick(wallId: string): Promise<void> | void;
 }
 
-const WallRow: React.FC<IWallRowProps> = ({
+const WallRow: React.FC<WallRowProps> = ({
   wall,
   onRowClick,
   canEdit,
@@ -40,28 +40,28 @@ const WallRow: React.FC<IWallRowProps> = ({
   );
   const types = WallUtils.typesAsString(wall.types);
 
-  const handleRightClick = (event: ElementEvent): void => {
+  const handleRightClick = (event: Events.ElementEvent): void => {
     event.preventDefault();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClick = (event: ButtonEvent): void => {
+  const handleOptionsClick = (event: Events.ButtonEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(event.currentTarget);
   };
 
-  const handleOptionsClose = (event: ElementEvent): void => {
+  const handleOptionsClose = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     setOptionsAnchor(null);
   };
 
-  const handleEditClick = (event: ElementEvent): void => {
+  const handleEditClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onEditClick(wall);
   };
 
-  const handleDeleteClick = (event: ElementEvent): void => {
+  const handleDeleteClick = (event: Events.ElementEvent): void => {
     event.stopPropagation();
     handleOptionsClose(event);
     onDeleteClick(wall.id);
@@ -107,7 +107,7 @@ const WallRow: React.FC<IWallRowProps> = ({
   );
 };
 
-export interface IWallListProps {
+export interface WallListProps {
   walls: Wall[] | null;
   canEdit: boolean;
   onRowClick(wallId: string): Promise<void>;
@@ -115,7 +115,7 @@ export interface IWallListProps {
   onDeleteWall(wallId: string): Promise<void>;
 }
 
-const WallList: React.FC<IWallListProps> = ({
+const WallList: React.FC<WallListProps> = ({
   walls,
   onRowClick,
   canEdit,

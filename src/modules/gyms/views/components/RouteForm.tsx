@@ -8,7 +8,7 @@ import {
   Theme,
 } from '@material-ui/core';
 import React from 'react';
-import { Route, WallTypes } from '../../../../types';
+import { Route, WallTypes, Events } from '../../../../types';
 import Form from '../../../common/forms/Form';
 import CheckBox from '../../../common/inputs/CheckBox';
 import Input from '../../../common/inputs/Input';
@@ -22,18 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface IRouteFormProps {
+export interface RouteFormProps {
   route: Route;
   formHeadText: string;
   nameMessage?: string;
   submitButtonText: string;
   typesMessage?: string;
   typeOptions: WallTypes[];
-  handleCancel(event: any): Promise<void> | void;
+  handleCancel(event: Events.ButtonEvent): Promise<void> | void;
   handleSubmit(route: Route): Promise<void> | void;
 }
 
-const RouteForm: React.FC<IRouteFormProps> = ({
+const RouteForm: React.FC<RouteFormProps> = ({
   route,
   formHeadText,
   nameMessage,
@@ -68,7 +68,7 @@ const RouteForm: React.FC<IRouteFormProps> = ({
     route.holdColor || ''
   );
 
-  const onSubmit = (event: any): void => {
+  const onSubmit = (event: Events.FormEvent): void => {
     event.preventDefault();
 
     const types: string[] = [];
@@ -92,7 +92,7 @@ const RouteForm: React.FC<IRouteFormProps> = ({
     handleSubmit({ name, setter, holdColor, types } as Route);
   };
 
-  const handleChange = async (event: any): Promise<void> => {
+  const handleChange = async (event: Events.InputEvent): Promise<void> => {
     const { id, value } = event.target;
 
     if (id === 'name') {

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import * as GymsActions from '../../../context/gyms/gymsActions';
 import { useGymsContext } from '../../../context/gyms/gymsStore';
 import { Routes } from '../../../routes';
-import { InputEvent } from '../../../types';
+import { Events } from '../../../types';
 import Input from '../../common/inputs/Input';
 import { useViewContext } from '../../../context/view/viewStore';
 import Tabs from '@material-ui/core/Tabs';
@@ -73,7 +73,7 @@ const GymsPage: React.FC = (): JSX.Element => {
 
   const classes = useStyles();
 
-  const loadGyms = (query, page): void => {
+  const loadGyms = (query: string, page: number): void => {
     GymsActions.loadGymsQuery(gymsDispatch, query, page).then((response) => {
       if (!response || !(response instanceof Response) || !response.ok) {
         toast.error('Error getting gyms.');
@@ -95,7 +95,7 @@ const GymsPage: React.FC = (): JSX.Element => {
     return viewState.mobile ? classes.searchMobile : classes.search;
   };
 
-  const handleSearchChange = (event: InputEvent): void => {
+  const handleSearchChange = (event: Events.InputEvent): void => {
     const { value } = event.target;
     setSearch(value);
   };
@@ -111,7 +111,7 @@ const GymsPage: React.FC = (): JSX.Element => {
     }
   };
 
-  const handleKeyPress = (event: any): void => {
+  const handleKeyPress = (event: Events.KeyboardEvent): void => {
     if (event.key === 'Enter') {
       loadGyms(search, page);
     }

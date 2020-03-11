@@ -1,13 +1,13 @@
 import React from 'react';
-import { IStandardProps } from '../standardProps';
+import { StandardProps } from '../standardProps';
 import * as Events from '../../../types/events';
 import { TableCell } from '@material-ui/core';
 
-export interface ITableCellProps extends IStandardProps {
+export interface TableCellProps extends StandardProps {
   onRightClick?(event: Events.ElementEvent): Events.HandlerReturn;
 }
 
-const Cell: React.FC<ITableCellProps> = ({
+const Cell: React.FC<TableCellProps> = ({
   children,
   className,
   id,
