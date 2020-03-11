@@ -1,5 +1,5 @@
 name: route-rating-web-app continuous integration
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
