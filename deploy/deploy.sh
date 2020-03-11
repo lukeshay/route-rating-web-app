@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-make run
+rli -t deploy --repository route-rating-web-app
