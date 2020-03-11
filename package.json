@@ -7,9 +7,9 @@
   "author": "Luke Shay",
   "license": "LGPL",
   "scripts": {
-    "start": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --open --hot --config configs/webpack.dev.js",
-    "start:local": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --open --hot --config configs/webpack.local.js",
-    "build": "recaptchaKey=$GOOGLE_API_KEY webpack -p --config=configs/webpack.prod.js",
+    "start": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --hot",
+    "start:local": "yarn start --env.RR_ENV=local-dev",
+    "build": "webpack --env.RR_ENV=prod -p",
     "deploy": "serve -p 80 -s ./dist",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "format": "yarn lint --fix",
