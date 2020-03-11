@@ -22,7 +22,7 @@ jobs:
           node-version: '10.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
-      - run: yarn validate --disable-progress
+      - run: yarn validate
      
   test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
           node-version: '10.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
-      - run: yarn test --disable-progress
+      - run: yarn test
 
   push-image:
     runs-on: ubuntu-latest
