@@ -26,9 +26,6 @@ pipeline {
       }
     }
     stage('Build image') {
-      when {
-        branch 'master'
-      }
       steps {
         echo 'Building image...'
         sh 'make'
