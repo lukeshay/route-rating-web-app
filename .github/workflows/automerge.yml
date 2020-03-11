@@ -24,3 +24,4 @@ jobs:
           MERGE_LABELS: "automerge,!work in progress,!wip"
           MERGE_REMOVE_LABELS: "automerge"
           MERGE_RETRIES: "60"
+          MERGE_RETRY_SLEEP: "60000"
