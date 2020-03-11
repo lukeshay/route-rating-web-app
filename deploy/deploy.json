@@ -4,7 +4,7 @@
     "GOOGLE_API_KEY"
   ],
   "docker_compose": {
-    "repository": "lukeshaydocker/route-rating-web-app",
+    "repository": "route-rating-web-app",
     "compose_file": "deploy/docker-compose.yml"
   }
 }
