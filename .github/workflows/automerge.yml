@@ -23,4 +23,4 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "automerge,!work in progress,!wip"
           MERGE_REMOVE_LABELS: "automerge"
-          MERGE_RETRIES: "12"
+          MERGE_RETRIES: "60"
