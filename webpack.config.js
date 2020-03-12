@@ -9,22 +9,14 @@ const SRC_DIR = resolve(__dirname, '', 'src/');
 const NODE_DIR = resolve(__dirname, '', 'node_modules/');
 const RR_ENV = process.env.RR_ENV || 'dev';
 
-let baseUrl;
-let env;
-
-if (RR_ENV === 'dev') {
-  env = 'development';
-  baseUrl = 'https://restapi.lukeshay.com/';
-} else if (RR_ENV === 'local-dev') {
-  env = 'development';
-  baseUrl = 'http://localhost:5000/';
-} else {
-  env = 'prod';
-  baseUrl = 'https://restapi.lukeshay.com/';
-}
+const BASE_URL =
+  RR_ENV === 'local-dev'
+    ? 'http://localhost:5000/'
+    : 'https://restapi.lukeshay.com/';
+const ENVIRONMENT = RR_ENV === 'prod' ? 'production' : 'development';
 
 const COMMON = {
-  mode: env,
+  mode: ENVIRONMENT,
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
@@ -75,8 +67,8 @@ const COMMON = {
     new EnvironmentPlugin(['recaptchaKey']),
     new DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(env),
-        BASE_URL: JSON.stringify(baseUrl),
+        NODE_ENV: JSON.stringify(ENVIRONMENT),
+        BASE_URL: JSON.stringify(BASE_URL),
       },
     }),
   ],
@@ -147,7 +139,7 @@ const DEVELOPMENT = {
 
 const merged = COMMON;
 
-if (env === 'production') {
+if (ENVIRONMENT === 'production') {
   Object.keys(PRODUCTION).forEach((k) => (merged[k] = PRODUCTION[k]));
   PROD_PLUGINS.forEach((plugin) => merged.plugins.push(plugin));
 } else {
