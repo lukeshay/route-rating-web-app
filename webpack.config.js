@@ -2,11 +2,18 @@ const BrotliPlugin = require('brotli-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { ProvidePlugin, EnvironmentPlugin, DefinePlugin } = require('webpack');
+const {
+  DefinePlugin,
+  EnvironmentPlugin,
+  HotModuleReplacementPlugin,
+  NamedModulesPlugin,
+  ProvidePlugin,
+} = require('webpack');
 const { resolve } = require('path');
 
-const SRC_DIR = resolve(__dirname, '', 'src/');
 const NODE_DIR = resolve(__dirname, '', 'node_modules/');
+const SRC_DIR = resolve(__dirname, '', 'src/');
+
 const RR_ENV = process.env.RR_ENV || 'dev';
 
 const BASE_URL =
@@ -14,6 +21,44 @@ const BASE_URL =
     ? 'http://localhost:5000/'
     : 'https://restapi.lukeshay.com/';
 const ENVIRONMENT = RR_ENV === 'prod' ? 'production' : 'development';
+
+const plugins = [
+  new CleanWebpackPlugin(),
+  new HtmlWebpackPlugin({
+    template: 'index.html.ejs',
+    favicon: 'favicon.ico',
+  }),
+  new ProvidePlugin({
+    React: 'react',
+  }),
+  new EnvironmentPlugin(['recaptchaKey']),
+  new DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(ENVIRONMENT),
+      BASE_URL: JSON.stringify(BASE_URL),
+    },
+  }),
+];
+
+const DEV_PLUGINS = [
+  new HotModuleReplacementPlugin(),
+  new NamedModulesPlugin(),
+];
+
+const PROD_PLUGINS = [
+  new BrotliPlugin({
+    asset: '[path].br[query]',
+    test: /\.(ts|tsx|js|jsx|css|html|svg)$/,
+    threshold: 10240,
+    minRatio: 0.8,
+  }),
+];
+
+if (ENVIRONMENT === 'production') {
+  PROD_PLUGINS.forEach((plugin) => plugins.push(plugin));
+} else {
+  DEV_PLUGINS.forEach((plugin) => plugins.push(plugin));
+}
 
 const COMMON = {
   mode: ENVIRONMENT,
@@ -55,23 +100,7 @@ const COMMON = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'index.html.ejs',
-      favicon: 'favicon.ico',
-    }),
-    new ProvidePlugin({
-      React: 'react',
-    }),
-    new EnvironmentPlugin(['recaptchaKey']),
-    new DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(ENVIRONMENT),
-        BASE_URL: JSON.stringify(BASE_URL),
-      },
-    }),
-  ],
+  plugins: plugins,
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
@@ -111,15 +140,6 @@ const PRODUCTION = {
   },
 };
 
-const PROD_PLUGINS = [
-  new BrotliPlugin({
-    asset: '[path].br[query]',
-    test: /\.(ts|tsx|js|jsx|css|html|svg)$/,
-    threshold: 10240,
-    minRatio: 0.8,
-  }),
-];
-
 const DEVELOPMENT = {
   entry: [
     'react-hot-loader/patch',
@@ -141,7 +161,6 @@ const merged = COMMON;
 
 if (ENVIRONMENT === 'production') {
   Object.keys(PRODUCTION).forEach((k) => (merged[k] = PRODUCTION[k]));
-  PROD_PLUGINS.forEach((plugin) => merged.plugins.push(plugin));
 } else {
   Object.keys(DEVELOPMENT).forEach((k) => (merged[k] = DEVELOPMENT[k]));
 }

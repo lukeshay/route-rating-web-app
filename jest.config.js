@@ -5,13 +5,13 @@ module.exports = {
     '!**/types/**',
     '!**/__mocks__/**',
     '!**/__tests__/**',
-    '!dist/**/*'
+    '!dist/**/*',
   ],
   coverageThreshold: {
     global: {
-      branches: 40,
-      functions: 60,
-      lines: 70,
+      branches: 50,
+      functions: 70,
+      lines: 80,
     },
   },
   transform: {
@@ -25,8 +25,8 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   reporters: ['default', 'jest-junit'],
-  testRegex: '__tests__/.*(js|ts|tsx)$',
-  setupFiles: ['./configs/setupEnzyme.ts'],
+  testRegex: '**/*.(test|spec).(js|jsx|ts|tsx)$',
+  setupFiles: ['./src/__tests__/setupEnzyme.ts'],
   globals: {
     'ts-test': {
       tsConfigFile: './jest.tsconfig.json',
