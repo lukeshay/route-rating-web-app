@@ -165,4 +165,6 @@ if (ENVIRONMENT === 'production') {
   Object.keys(DEVELOPMENT).forEach((k) => (merged[k] = DEVELOPMENT[k]));
 }
 
+console.log(merged);
+
 module.exports = merged;
