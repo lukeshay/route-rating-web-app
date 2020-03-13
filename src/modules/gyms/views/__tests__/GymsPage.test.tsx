@@ -3,7 +3,7 @@ import GymsPage from '../GymsPage';
 import GymsStoreMock from '../../../../__mocks__/gymsStoreMock';
 import { GymsContextState } from '../../../../context/gyms/gymsStore';
 import * as TypeMocks from '../../../../__mocks__/typeMocks';
-import { shallow } from '../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../__mocks__/setupEnzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { GymPageType } from '../../../../types';
 

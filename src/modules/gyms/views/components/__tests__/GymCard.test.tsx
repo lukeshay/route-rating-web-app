@@ -1,6 +1,6 @@
 import React from 'react';
 import GymCard from '../GymCard';
-import { shallow } from '../../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../../__mocks__/setupEnzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import * as TypeMocks from '../../../../../__mocks__/typeMocks';
 

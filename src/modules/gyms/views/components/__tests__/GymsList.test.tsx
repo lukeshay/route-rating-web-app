@@ -1,7 +1,7 @@
 import GymsList from '../GymsList';
 import * as TypeMocks from '../../../../../__mocks__/typeMocks';
 import React from 'react';
-import { shallow } from '../../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../../__mocks__/setupEnzyme';
 import { Gym } from '../../../../../types';
 import { shallowToJson } from 'enzyme-to-json';
 import GymCard from '../GymCard';

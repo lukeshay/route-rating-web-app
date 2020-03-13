@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./deploy/nginx.conf /etc/nginx/nginx.conf
 
 RUN rm -rf /usr/share/nginx/html/*
 

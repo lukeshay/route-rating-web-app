@@ -1,6 +1,6 @@
 import React from 'react';
 import Button, { ButtonProps } from '../Button';
-import { mount } from '../../../../../configs/setupEnzyme';
+import { mount } from '../../../../__mocks__/setupEnzyme';
 import MUIButton from '@material-ui/core/Button';
 import { ReactWrapper } from 'enzyme';
 

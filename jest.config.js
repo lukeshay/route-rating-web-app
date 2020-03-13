@@ -1,35 +1,27 @@
-module.exports = {
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!**/*.d.ts',
-    '!**/types/**',
-    '!**/__mocks__/**',
-    '!**/__tests__/**',
-    '!dist/**/*',
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 50,
-      functions: 70,
-      lines: 80,
-    },
-  },
-  transform: {
-    '^.+.(ts|tsx)$': 'ts-jest',
-    '^.+.(js|jsx)$': 'babel-jest',
-  },
-  coverageReporters: ['lcov'],
-  moduleNameMapper: {
-    '\\.(css)$': 'identity-obj-proxy',
-    '\\.(svg)$': '<rootDir>/src/__mocks__/svgSpriteMock.ts',
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  reporters: ['default', 'jest-junit'],
-  testRegex: '**/*.(test|spec).(js|jsx|ts|tsx)$',
-  setupFiles: ['./src/__tests__/setupEnzyme.ts'],
-  globals: {
-    'ts-test': {
-      tsConfigFile: './jest.tsconfig.json',
-    },
+const config = require('@lukeshay/jest-config');
+
+config['globals'] = {
+  'ts-test': {
+    tsconfigfile: './jest.tsconfig.json',
   },
 };
+
+// TODO(Luke): Remove this when package is updated.
+config['moduleNameMapper'] = {
+  '\\.(css)$': 'identity-obj-proxy',
+};
+
+// TODO(Luke): Remove this when package is updated.
+config['transform'] = {
+  '^.+.(ts|tsx)$': 'ts-jest',
+  '^.+.(js|jsx)$': 'babel-jest',
+  '^.+.svg$': 'jest-svg-transformer',
+};
+
+config['setupFiles'] = ['./src/__mocks__/setupEnzyme.ts'];
+
+// eslint-disable-next-line prettier/prettier
+// TODO(Luke): Remove this when package is updated.
+config['testRegex'] = '(test|spec).(js|jsx|ts|tsx)$';
+
+module.exports = config;

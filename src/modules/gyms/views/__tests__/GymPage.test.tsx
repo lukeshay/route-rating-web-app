@@ -1,7 +1,7 @@
 import React from 'react';
 import * as TypeMocks from '../../../../__mocks__/typeMocks';
 import { shallowToJson } from 'enzyme-to-json';
-import { shallow } from '../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../__mocks__/setupEnzyme';
 import GymPage from '../GymPage';
 import TestComponentWrapper from '../../../../__mocks__/TestComponentWrapper';
 import * as TestUtils from '../../../../__mocks__/testUtils';
