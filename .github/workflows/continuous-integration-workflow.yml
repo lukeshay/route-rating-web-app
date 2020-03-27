@@ -9,10 +9,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn build --disable-progress
+      - uses: actions/upload-artifact@v1
+        with:
+          name: build-artifacts
+          path: dist
      
   lint:
     runs-on: ubuntu-latest
@@ -21,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn validate
@@ -33,7 +37,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn test
@@ -48,12 +52,10 @@ jobs:
     name: Docker image
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/download-artifact@v1
         with:
-          node-version: '10.16'
-      - run: npm i -g yarn
-      - run: yarn --disable-progress
-      - run: yarn build --disable-progress
+          name: build-artifacts
+          path: dist
       - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
       - run: docker build -f deploy/Dockerfile -t ${{ env.DOCKER_REPO }}:${{ env.SHA }} -t ${{ env.DOCKER_REPO }}:latest .
       - run: docker push ${{ env.DOCKER_REPO }}:${{ env.SHA }}
@@ -64,6 +66,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, lint, test]
     name: Branch deploy
+    env:
+      ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} -c
