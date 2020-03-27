@@ -1059,6 +1059,19 @@
     "@babel/runtime" "^7.7.7"
     hoist-non-react-statics "^3.3.1"
 
+"@lukeshay/babel-config-react-typescript@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@lukeshay/babel-config-react-typescript/-/babel-config-react-typescript-0.0.1.tgz#a2e1d71046be715636d4bdb1d5dfc5f3585bb211"
+  integrity sha512-Rc9Ag2fjoDjFaq4n+7YKtXVQWbeHJ5+vHAcuNxpbzDmzE7PZxHiqH0TWS/XP0ouZ7jTYeFd2z6HfrC90tJch5A==
+  dependencies:
+    "@babel/cli" "^7.8.4"
+    "@babel/core" "^7.8.7"
+    "@babel/preset-env" "^7.8.7"
+    "@babel/preset-react" "^7.8.3"
+    "@babel/preset-typescript" "^7.8.3"
+    babel-plugin-dynamic-import-node "^2.3.0"
+    react-hot-loader "^4.12.19"
+
 "@lukeshay/eslint-config-react-typescript@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@lukeshay/eslint-config-react-typescript/-/eslint-config-react-typescript-0.0.3.tgz#4ec6e7ca8e3052c34c9fa4a09affaec485f7284f"
@@ -1090,6 +1103,23 @@
     eslint-config-prettier "^6.10.0"
     eslint-plugin-prettier "^3.1.2"
     prettier "^1.19.1"
+
+"@lukeshay/jest-config@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lukeshay/jest-config/-/jest-config-0.0.2.tgz#4deb14e2c220acc8e60cb06a8974aa1c3ea43817"
+  integrity sha512-CQ846TrUenEOJtbhMFW5jlXQMcr41MixtwmbRdbXVASXtm8KLjEMeWAYRgTa06sQMCJHM7ThiUCRVvnVheaX2g==
+  dependencies:
+    babel-jest "^25.1.0"
+    identity-obj-proxy "^3.0.0"
+    jest "^25.1.0"
+    jest-junit "^10.0.0"
+    jest-svg-transformer "^1.0.0"
+    ts-jest "^25.2.1"
+
+"@lukeshay/prettier-config@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@lukeshay/prettier-config/-/prettier-config-0.0.1.tgz#90c6ad7c0ce0e045c1e017c48420843a78865fef"
+  integrity sha512-qv5aOwJxbFvrnxkgtawMqdFsKvHIVVkX+VHpFNus3+B4GDURy06MBiPKVY4Byqh90ZYOK9mBNkK54IavRyipkw==
 
 "@lukeshay/typescript-config@^0.0.2":
   version "0.0.2"
@@ -6517,6 +6547,11 @@ jest-snapshot@^25.1.0:
     natural-compare "^1.4.0"
     pretty-format "^25.1.0"
     semver "^7.1.1"
+
+jest-svg-transformer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-svg-transformer/-/jest-svg-transformer-1.0.0.tgz#e38884ca4cd8b2295cdfa2a0b24667920c3a8a6d"
+  integrity sha1-44iEykzYsilc36KgskZnkgw6im0=
 
 jest-util@^25.1.0:
   version "25.1.0"

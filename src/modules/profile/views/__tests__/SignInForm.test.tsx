@@ -1,6 +1,6 @@
 import React from 'react';
 import SignInForm from '../SignInForm';
-import { shallow } from '../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../__mocks__/setupEnzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
 describe('SignInForm', () => {

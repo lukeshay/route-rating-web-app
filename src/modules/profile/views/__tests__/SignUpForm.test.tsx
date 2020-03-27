@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpForm from '../SignUpForm';
 import * as TypeMocks from '../../../../__mocks__/typeMocks';
-import { shallow } from '../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../__mocks__/setupEnzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import ViewStoreMock from '../../../../__mocks__/viewStoreMock';
 

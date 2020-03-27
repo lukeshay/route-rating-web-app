@@ -1,6 +1,6 @@
 import React from 'react';
 import RatingAddModal from '../RatingAddModal';
-import { shallow } from '../../../../../../configs/setupEnzyme';
+import { shallow } from '../../../../../__mocks__/setupEnzyme';
 import * as TypeMocks from '../../../../../__mocks__/typeMocks';
 import { shallowToJson } from 'enzyme-to-json';
 import { ShallowWrapper } from 'enzyme';
