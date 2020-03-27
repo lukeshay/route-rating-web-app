@@ -66,7 +66,7 @@ jobs:
     name: Branch deploy
     steps:
       - uses: actions/checkout@v2
-      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF}
+      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} -c
       - uses: iam4x/now-deploy-preview-comment@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -79,4 +79,4 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/checkout@v2
-      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} --prod
+      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} --prod -c
