@@ -67,14 +67,14 @@ jobs:
     needs: [build, lint, test]
     name: Branch deploy
     env:
-      ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+      ZEIT_TOKEN: ${{ secrets.ZEIT_NOW_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} -c
       - uses: iam4x/now-deploy-preview-comment@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+          ZEIT_TOKEN: ${{ secrets.ZEIT_NOW_TOKEN }}
 
   deploy-master:
     if: github.ref == 'refs/heads/master'
