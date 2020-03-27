@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "public": false,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "github": {
+    "enabled": false
+  },
+  "build": {
+    "env": {
+      "GOOGLE_API_KEY": "@google-api-key"
+    }
+  },
+  "env": {
+    "GOOGLE_API_KEY": "@google-api-key"
+  }
+}

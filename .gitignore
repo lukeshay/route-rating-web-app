@@ -212,3 +212,6 @@ fabric.properties
 # End of https://www.gitignore.io/api/node,react,webstorm
 
 junit.xml
+.env.build
+
+.now

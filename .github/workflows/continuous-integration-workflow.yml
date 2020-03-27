@@ -1,36 +1,43 @@
-name: route-rating-web-app continuous integration
+name: CI
 on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn build --disable-progress
+      - uses: actions/upload-artifact@v1
+        with:
+          name: build-artifacts
+          path: dist
      
   lint:
     runs-on: ubuntu-latest
+    name: Lint
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn validate
      
   test:
     runs-on: ubuntu-latest
+    name: Test
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '10.16'
+          node-version: '12.16'
       - run: npm i -g yarn
       - run: yarn --disable-progress
       - run: yarn test
@@ -42,15 +49,38 @@ jobs:
       DOCKER_REPO: lukeshaydocker/route-rating-web-app
       SHA: ${GITHUB_SHA::7}
       BRANCH: ${GITHUB_REF}
+    name: Docker image
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/download-artifact@v1
         with:
-          node-version: '10.16'
-      - run: npm i -g yarn
-      - run: yarn --disable-progress
-      - run: yarn build --disable-progress
+          name: build-artifacts
+          path: dist
       - run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
       - run: docker build -f deploy/Dockerfile -t ${{ env.DOCKER_REPO }}:${{ env.SHA }} -t ${{ env.DOCKER_REPO }}:latest .
       - run: docker push ${{ env.DOCKER_REPO }}:${{ env.SHA }}
       - run: test `echo ${{ env.BRANCH }} | grep "master"` && docker push ${{ env.DOCKER_REPO }}:latest || echo "Not pushing latest because on branch"
+
+  deploy-branch:
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build, lint, test]
+    name: Branch deploy
+    env:
+      ZEIT_TOKEN: ${{ secrets.ZEIT_NOW_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} -c
+      - uses: iam4x/now-deploy-preview-comment@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ZEIT_TOKEN: ${{ secrets.ZEIT_NOW_TOKEN }}
+
+  deploy-master:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [build, lint, test]
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - run: now --no-clipboard -t ${{ secrets.ZEIT_NOW_TOKEN }} -e GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -b GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} -m commit=${GITHUB_SHA} -m branch=${GITHUB_REF} --prod -c
