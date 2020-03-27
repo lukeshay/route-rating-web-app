@@ -10,6 +10,7 @@
     "start": "recaptchaKey=$GOOGLE_API_KEY webpack-dev-server --hot",
     "start:local": "RR_ENV=local-dev yarn start",
     "build": "RR_ENV=prod recaptchaKey=$GOOGLE_API_KEY webpack -p",
+    "now-build": "yarn build",
     "deploy": "serve -p 80 -s ./dist",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "format": "yarn lint --fix",
