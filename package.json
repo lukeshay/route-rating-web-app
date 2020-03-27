@@ -63,7 +63,7 @@
     "image-webpack-loader": "^6.0.0",
     "jest": "^25.1.0",
     "node": "^13.10.1",
-    "react-hot-loader": "^4.12.19",
+    "react-hot-loader": "^4.12.20",
     "react-transition-group": "^4.3.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
