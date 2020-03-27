@@ -42,7 +42,6 @@
     "@lukeshay/babel-config-react-typescript": "^0.0.1",
     "@lukeshay/eslint-config-react-typescript": "^0.0.3",
     "@lukeshay/jest-config": "^0.0.2",
-    "@lukeshay/prettier-config": "^0.0.1",
     "@lukeshay/typescript-config": "^0.0.2",
     "@svgr/webpack": "^5.2.0",
     "@testing-library/react": "^9.5.0",
