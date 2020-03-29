@@ -19,7 +19,7 @@ const RR_ENV = process.env.RR_ENV || 'dev';
 const BASE_URL =
   RR_ENV === 'local-dev'
     ? 'http://localhost:5000/'
-    : 'https://restapi.lukeshay.com/';
+    : 'https://5vc8gdfu7e.execute-api.us-east-2.amazonaws.com/Prod/';
 const ENVIRONMENT = RR_ENV === 'prod' ? 'production' : 'development';
 
 const plugins = [

@@ -10,8 +10,8 @@ exports[`Main should render correctly 1`] = `
     ]
   }
 >
-  <BrowserRouter>
+  <HashRouter>
     <App />
-  </BrowserRouter>
+  </HashRouter>
 </Memo(StoreCombiner)>
 `;

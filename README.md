@@ -14,7 +14,7 @@
 
 > Web application for Route Rating.
 
-### 🏠 [Homepage](http://lukeshay.com)
+### 🏠 [Homepage](https://route-rating-web-app.now.sh)
 
 ## Install
 
