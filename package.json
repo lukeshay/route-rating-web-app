@@ -62,7 +62,7 @@
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^6.0.0",
-    "jest": "^25.1.0",
+    "jest": "^25.2.4",
     "react-hot-loader": "^4.12.20",
     "node": "^13.12.0",
     "react-transition-group": "^4.3.0",
