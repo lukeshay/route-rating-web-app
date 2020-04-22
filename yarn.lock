@@ -7943,10 +7943,10 @@ node-releases@^1.1.50:
   dependencies:
     semver "^6.3.0"
 
-node@^13.13.0:
-  version "13.13.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-13.13.0.tgz#5138b94de149b7ddfddb18f8691d4a00f5761f2f"
-  integrity sha512-Ptccrn5A3D3EEZ4xTC9HNhCro2KzCF1j6rCgeczFFe1A6Y0HclzbRHw0OxsEjAZcgvmgzN3OIxZpAIkkNe8LTw==
+node@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-14.0.0.tgz#8c3f29256baf46974de9a02908c098004c9b39c3"
+  integrity sha512-PtVcllTLQWZkrYKmdsgUyjXGC+ghdslsSpwYTjt44tUURT5hYPu+6y5ZuNT+U+JHuZPxHhzl4PQdHOAZOoEBtA==
   dependencies:
     node-bin-setup "^1.0.0"
 
