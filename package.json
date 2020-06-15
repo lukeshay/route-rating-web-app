@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@loadable/component": "^5.12.0",
-    "@lukeshay/babel-config-react-typescript": "^1.0.0",
+    "@lukeshay/babel-config-react-typescript": "^1.0.1",
     "@lukeshay/eslint-config-react-typescript": "^0.0.3",
     "@lukeshay/jest-config": "^1.0.2",
     "@lukeshay/typescript-config": "^0.0.2",
