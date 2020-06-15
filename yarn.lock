@@ -1270,10 +1270,10 @@
     eslint-plugin-prettier "^3.1.2"
     prettier "^1.19.1"
 
-"@lukeshay/jest-config@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@lukeshay/jest-config/-/jest-config-1.0.1.tgz#02decdf75aa0e4d50e5a4f73b6f4862bac1f3066"
-  integrity sha512-/QKRCG1RhAXMogkODI37vO5zEYocrHXqoIy9IlNmJAZ3N773ai8ei9zsJEh9ub6q84uDQgf8ztIqSv6+W8osTA==
+"@lukeshay/jest-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@lukeshay/jest-config/-/jest-config-1.0.2.tgz#0321139edd2c516ab7b832a26a63590336a04ab6"
+  integrity sha512-gMTwywhe9wj/nBMbP4aPGKyCBIu1n2WNWlMGLRO8J582SdFFngEbHZkLfMiuyMqyxOQ4lh5fqX2yn9g3npXYRg==
   dependencies:
     babel-jest "^25.1.0"
     identity-obj-proxy "^3.0.0"
