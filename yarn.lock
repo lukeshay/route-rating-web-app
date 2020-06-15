@@ -1225,10 +1225,10 @@
     "@babel/runtime" "^7.7.7"
     hoist-non-react-statics "^3.3.1"
 
-"@lukeshay/babel-config-react-typescript@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lukeshay/babel-config-react-typescript/-/babel-config-react-typescript-1.0.0.tgz#ec011d016ae853dac59fbf8bf090f0f788543874"
-  integrity sha512-UnYSwudiwymRG3ovp1nVqG4GUeVEBVr2fi/Ue7ssWHR+KsDdVpK+UJ3F/tY1hLFSi/TT0AelIx+vqbrqcw7MeQ==
+"@lukeshay/babel-config-react-typescript@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@lukeshay/babel-config-react-typescript/-/babel-config-react-typescript-1.0.1.tgz#5c5192ae72a40a33fd6f3ea41ca6e5960122c25d"
+  integrity sha512-hFt2HPgh7B8PtIQXrfoDJTKQQ9V3WtPSkhKDG3SP9EaVawKCsa4gDVw3MD/UqLhMn7mzGYXsrVRW73aY0YVcsw==
   dependencies:
     "@babel/cli" "^7.8.4"
     "@babel/core" "^7.9.6"
