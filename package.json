@@ -43,7 +43,7 @@
     "@lukeshay/babel-config-react-typescript": "^1.0.1",
     "@lukeshay/eslint-config-react-typescript": "^0.0.3",
     "@lukeshay/jest-config": "^1.0.2",
-    "@lukeshay/typescript-config": "^0.0.2",
+    "@lukeshay/typescript-config": "^1.0.1",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/react": "^10.4.1",
     "@types/enzyme": "^3.10.5",
