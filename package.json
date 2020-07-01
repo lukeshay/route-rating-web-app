@@ -64,7 +64,7 @@
     "image-webpack-loader": "^6.0.0",
     "jest": "^25.5.4",
     "react-hot-loader": "^4.12.21",
-    "node": "^14.4.0",
+    "node": "^14.5.0",
     "react-transition-group": "^4.4.1",
     "source-map-loader": "^1.0.0",
     "style-loader": "^1.2.1",
