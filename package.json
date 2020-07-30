@@ -36,7 +36,7 @@
     "react-router-dom": "^5.2.0",
     "react-toastify": "^6.0.8",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.44.0"
+    "webpack": "^4.44.1"
   },
   "devDependencies": {
     "@loadable/component": "^5.13.1",
