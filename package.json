@@ -70,7 +70,7 @@
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.4",
     "typescript": "^3.8.3",
-    "universal-cookie": "^4.0.3",
+    "universal-cookie": "^4.0.4",
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0",
