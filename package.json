@@ -39,7 +39,7 @@
     "webpack": "^4.44.2"
   },
   "devDependencies": {
-    "@loadable/component": "^5.13.2",
+    "@loadable/component": "^5.14.1",
     "@lukeshay/babel-config-react-typescript": "^1.0.2",
     "@lukeshay/eslint-config-react-typescript": "^0.0.3",
     "@lukeshay/jest-config": "^1.0.2",
