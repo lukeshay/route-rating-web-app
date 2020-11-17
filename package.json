@@ -45,7 +45,7 @@
     "@lukeshay/jest-config": "^1.0.2",
     "@lukeshay/typescript-config": "^0.0.2",
     "@svgr/webpack": "^5.4.0",
-    "@testing-library/react": "^11.1.1",
+    "@testing-library/react": "^11.1.2",
     "@types/enzyme": "^3.10.6",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.15",
