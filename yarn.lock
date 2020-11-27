@@ -1585,10 +1585,10 @@
     jest-svg-transformer "^1.0.0"
     ts-jest "^25.2.1"
 
-"@lukeshay/typescript-config@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-0.0.2.tgz#df0cf157b132d05fbecebfe8fcee4a59c97a77e3"
-  integrity sha512-qXl3aU4sXYBggoo5izywCSj6YD70RBijj6/4v0JrEvgGLgpQCji37t7fCyAHzzzY0LIjo8aO9OcH1Eo/7D0V1Q==
+"@lukeshay/typescript-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-1.0.2.tgz#75107348d82c6dede11ecc44ef23a0fe940d082e"
+  integrity sha512-FYipbfm1ErsYS9W39loltggJ4SRkGy2tE1a1K/odcqC40HuiF7+JMMJGO22JlRLnEE0jw4pkdnmOW1YapixOSQ==
 
 "@material-ui/core@^4.11.1":
   version "4.11.1"
