@@ -46,7 +46,7 @@
     "@lukeshay/typescript-config": "^0.0.2",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/react": "^11.2.2",
-    "@types/enzyme": "^3.10.6",
+    "@types/enzyme": "^3.10.9",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.15",
     "@types/universal-cookie": "^2.2.0",
